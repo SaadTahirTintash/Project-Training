@@ -7,12 +7,32 @@
 //
 
 import UIKit
+import FirebaseDatabase
+
+struct Person {
+    let firstName: String
+    let lastName: String
+}
 
 class ViewController: UIViewController {
 
+    var dbRef : DatabaseReference!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        dbRef = Database.database().reference()
+        
+        readDatabase()
+    }
+    
+    func readDatabase(){
+        dbRef.child("test").observeSingleEvent(of: .value) { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            let firstName = value?["firstName"] as? String ?? ""
+            let lastName = value?["lastName"] as? String ?? ""
+            let person = Person(firstName: firstName, lastName: lastName)
+            print(person)
+        }
     }
 
 
