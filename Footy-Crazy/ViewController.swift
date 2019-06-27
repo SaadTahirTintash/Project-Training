@@ -21,8 +21,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dbRef = Database.database().reference()
-        
         readDatabase()
+        
+        print("Checking the git hub repo is configured")
     }
     
     func readDatabase(){
