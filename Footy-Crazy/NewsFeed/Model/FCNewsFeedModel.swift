@@ -6,6 +6,6 @@
 //  Copyright © 2019 Tintash. All rights reserved.
 //
 
-struct NewsFeedM{
-    var object: [Any]? = [Any]()
+struct FCNewsFeedModel{
+    var objects: [Any]? = [Any]()
 }

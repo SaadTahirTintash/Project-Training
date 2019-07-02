@@ -10,21 +10,22 @@ import FirebaseDatabase
 
 class FCParseSnapshot{
     
-    func parseToNewsFeed(snapshot: DataSnapshot)->NewsFeedM{
-        var newsFeedObject = NewsFeedM()
+    func parseToNewsFeed(snapshot: DataSnapshot)->FCNewsFeedModel{
+        var newsFeedObject = FCNewsFeedModel()
         let enumerator = snapshot.children
         while let snap = enumerator.nextObject() as? DataSnapshot{
             if let value = snap.value as? [String: Any]{
+                let id = snap.key
                 switch value["type"] as? String{
                 case "video":
-                    let video = VideoM(url: value["url"] as? String ?? "", title: value["title"] as? String ?? "", description: value["description"] as? String ?? "")
-                    newsFeedObject.object?.append(video as VideoM)
+                    let video = FCVideoModel(id: id,url: value["url"] as? String ?? "", title: value["title"] as? String ?? "", description: value["description"] as? String ?? "")
+                    newsFeedObject.objects?.append(video as FCVideoModel)
                 case "news_link":
-                    let newsLink = NewsLinkM(url: value["url"] as? String ?? "", title: value["title"] as? String ?? "", description: value["description"] as? String ?? "")
-                    newsFeedObject.object?.append(newsLink as NewsLinkM)
+                    let newsLink = FCNewsLinkModel(id: id,url: value["url"] as? String ?? "", title: value["title"] as? String ?? "", description: value["description"] as? String ?? "")
+                    newsFeedObject.objects?.append(newsLink as FCNewsLinkModel)
                 default:
-                    let fact = FactM(imageUrl: value["url"] as? String ?? "", title: value["title"] as? String ?? "", fact: value["description"] as? String ?? "")
-                    newsFeedObject.object?.append(fact as FactM
+                    let fact = FCFactModel(id: id,imageUrl: value["url"] as? String ?? "", title: value["title"] as? String ?? "", fact: value["description"] as? String ?? "")
+                    newsFeedObject.objects?.append(fact as FCFactModel
                     )
                 }                
             }
