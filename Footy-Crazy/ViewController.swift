@@ -27,12 +27,23 @@ class ViewController: UIViewController {
     }
     
     func readDatabase(){
-        dbRef.child("test").observeSingleEvent(of: .value) { (snapshot) in
-            let value = snapshot.value as? NSDictionary
-            let firstName = value?["firstName"] as? String ?? ""
-            let lastName = value?["lastName"] as? String ?? ""
-            let person = Person(firstName: firstName, lastName: lastName)
-            print(person)
+//        dbRef.child("news_feed").observeSingleEvent(of: .value) { (snapshot) in
+//            let enumerator = snapshot.children
+//            while let value = enumerator.nextObject() as? DataSnapshot{
+//                if let object = value.value as? [String: Any]{
+//                    print("Object type: \(object["type"] ?? "")")
+//                }
+//
+//            }
+//        }
+        dbRef.child("news_feed").observe(.value) { (snapshot) in
+            let enumerator = snapshot.children
+            while let value = enumerator.nextObject() as? DataSnapshot{
+                if let object = value.value as? [String: Any]{
+                    print("Object type: \(object["type"] ?? "")")
+                }
+                
+            }
         }
     }
 

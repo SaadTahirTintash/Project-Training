@@ -6,8 +6,8 @@ target 'Footy-Crazy' do
   use_frameworks!
 
   # Pods for Footy-Crazy
-  pod ‘youtube-ios-player-helper’, ‘~> 0.1’
-  pod 'Firebase/Core'
+  pod ‘youtube-ios-player-helper’       , ‘~> 0.1’
+  pod 'Firebase/Core'                   , '~> 6.3.0'
   pod 'Firebase/RemoteConfig'
   pod 'Firebase/Analytics'
   pod 'Firebase/Database'
