@@ -7,7 +7,7 @@
 //
 struct FCFactModel{
     var id: String
-    var imageUrl: String?
+    var imageUrl: String
     var title: String
     var fact: String
 }

@@ -39,7 +39,7 @@ extension FCVideoTableViewCell: YTPlayerViewDelegate{
     }
     
     func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
-        print("Video is ready!")
+        print("Video is ready")
     }
     
     func playerView(_ playerView: YTPlayerView, didChangeTo state: YTPlayerState) {

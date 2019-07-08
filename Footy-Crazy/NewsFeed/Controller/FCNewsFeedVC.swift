@@ -8,8 +8,6 @@
 
 import UIKit
 
-//Integrate youtube-inline video player
-
 class FCNewsFeedVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
@@ -71,7 +69,7 @@ extension FCNewsFeedVC: UITableViewDataSource{
         }else if let fact = newsFeedModel.objects?[indexPath.row] as? FCFactModel{
             let cell = tableView.dequeueReusableCell(withIdentifier: "FactCell") as! FCFactTableViewCell
             cell.titleLabel.text = fact.title
-            //TODO: load image
+            cell.imgView?.loadImage(from: URL(string: fact.imageUrl)!)
             cell.factLabel.text = fact.fact
             return cell
         }else if let newsLink = newsFeedModel.objects?[indexPath.row] as? FCNewsLinkModel{

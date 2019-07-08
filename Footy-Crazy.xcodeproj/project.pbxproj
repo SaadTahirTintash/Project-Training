@@ -32,6 +32,7 @@
 		4AE3C10522D3121000282F29 /* FCTeams.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AE3C10422D3121000282F29 /* FCTeams.storyboard */; };
 		4AE3C10722D3121900282F29 /* FCPlayers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AE3C10622D3121900282F29 /* FCPlayers.storyboard */; };
 		4AE3C10922D3122100282F29 /* FCAbout.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AE3C10822D3122100282F29 /* FCAbout.storyboard */; };
+		4AE3C13122D34F3A00282F29 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE3C13022D34F3A00282F29 /* Extensions.swift */; };
 		4AFDD29822CA24EE0044B728 /* FCFactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFDD29622CA24EE0044B728 /* FCFactTableViewCell.swift */; };
 		4AFDD29922CA24EE0044B728 /* FCFactTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AFDD29722CA24EE0044B728 /* FCFactTableViewCell.xib */; };
 		4AFDD29C22CA24FC0044B728 /* FCNewsLinkTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFDD29A22CA24FC0044B728 /* FCNewsLinkTableViewCell.swift */; };
@@ -67,6 +68,7 @@
 		4AE3C10422D3121000282F29 /* FCTeams.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FCTeams.storyboard; sourceTree = "<group>"; };
 		4AE3C10622D3121900282F29 /* FCPlayers.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FCPlayers.storyboard; sourceTree = "<group>"; };
 		4AE3C10822D3122100282F29 /* FCAbout.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FCAbout.storyboard; sourceTree = "<group>"; };
+		4AE3C13022D34F3A00282F29 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		4AFDD29622CA24EE0044B728 /* FCFactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCFactTableViewCell.swift; sourceTree = "<group>"; };
 		4AFDD29722CA24EE0044B728 /* FCFactTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FCFactTableViewCell.xib; sourceTree = "<group>"; };
 		4AFDD29A22CA24FC0044B728 /* FCNewsLinkTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCNewsLinkTableViewCell.swift; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 		4A34871C22C4D7C4009436EB /* Footy-Crazy */ = {
 			isa = PBXGroup;
 			children = (
+				4AE3C12F22D34F1E00282F29 /* Extensions */,
 				4A0573F022CB94F8007BAE6E /* Constants */,
 				4A34872422C4D7C5009436EB /* Assets.xcassets */,
 				4AE3C0F022D310D500282F29 /* Launch */,
@@ -369,6 +372,14 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		4AE3C12F22D34F1E00282F29 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4AE3C13022D34F3A00282F29 /* Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		4AFDD29E22CA26840044B728 /* Nib */ = {
 			isa = PBXGroup;
 			children = (
@@ -547,6 +558,7 @@
 				4AFDD29822CA24EE0044B728 /* FCFactTableViewCell.swift in Sources */,
 				4A2B431022C5E39F00815318 /* FCNewsFeedType.swift in Sources */,
 				4A2B431222C5E3E400815318 /* FCFactModel.swift in Sources */,
+				4AE3C13122D34F3A00282F29 /* Extensions.swift in Sources */,
 				4A34871E22C4D7C4009436EB /* AppDelegate.swift in Sources */,
 				4A0573F222CB9506007BAE6E /* FCConstants.swift in Sources */,
 			);

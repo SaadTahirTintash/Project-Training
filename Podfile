@@ -11,6 +11,8 @@ target 'Footy-Crazy' do
   pod 'Firebase/RemoteConfig'
   pod 'Firebase/Analytics'
   pod 'Firebase/Database'
+  pod 'SwiftLinkPreview', '~> 3.0.1'
+
 
   
 

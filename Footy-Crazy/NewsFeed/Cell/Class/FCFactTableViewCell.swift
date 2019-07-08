@@ -19,4 +19,8 @@ class FCFactTableViewCell: UITableViewCell {
         // Initialization code
     }
     
+    override func prepareForReuse() {
+        self.imgView.image = nil
+    }
+    
 }
