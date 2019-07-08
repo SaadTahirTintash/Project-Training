@@ -20,11 +20,14 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="q5z-Il-mTK"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="About" id="M6p-HV-oBU"/>
+                    <tabBarItem key="tabBarItem" title="About" image="about_us" id="M6p-HV-oBU"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ByN-FJ-3jH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
     </scenes>
+    <resources>
+        <image name="about_us" width="32" height="32"/>
+    </resources>
 </document>

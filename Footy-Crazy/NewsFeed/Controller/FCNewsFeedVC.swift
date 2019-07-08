@@ -8,12 +8,7 @@
 
 import UIKit
 
-/*
- - This VC is loaded and creates its model and asks for data from DataManager i.e already loaded from network
- - Using its model, it creates its initial view
- - When it needs more data, it asks the dataManager to make a network call of this page size from this starting key and waits
- - On completion, it updates its model and do any respective changes in its view
- */
+//Integrate youtube-inline video player
 
 class FCNewsFeedVC: UIViewController {
     
@@ -70,7 +65,7 @@ extension FCNewsFeedVC: UITableViewDataSource{
         if let video = newsFeedModel.objects?[indexPath.row] as? FCVideoModel{
             let cell = tableView.dequeueReusableCell(withIdentifier: "VideoCell") as! FCVideoTableViewCell
             cell.titleLabel.text = video.title
-            //TODO: load inline video
+            cell.videoView.load(withVideoId: video.url, playerVars:["playsinline":1])
             cell.descriptionLabel.text = video.description
             return cell
         }else if let fact = newsFeedModel.objects?[indexPath.row] as? FCFactModel{
