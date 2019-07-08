@@ -16,7 +16,7 @@ import UIKit
 
 class FCSplashScreenVC: UIViewController {
 
-    let storyboardID = UIStoryboard(name: "Main", bundle: nil)
+    let storyboardID = UIStoryboard(name: "FCNewsFeed", bundle: nil)
     let startingKey = "1"
     
     override func viewDidLoad() {
@@ -28,7 +28,7 @@ class FCSplashScreenVC: UIViewController {
         //wait for data to be loaded        
         FCDataManager.shared.getNewsFeed(key: startingKey, pageSize: Constants.NEWS_FEED_PAGE_SIZE) { [weak self](success, _) in
             if success{
-                if let vc = self?.storyboardID.instantiateViewController(withIdentifier: "NewsFeedVC") as? FCNewsFeedVC{
+                if let vc = self?.storyboardID.instantiateViewController(withIdentifier: "NewsFeedTabBar") as? UITabBarController{
                     print("Successfully loaded data from Firebase")
                     self?.present(vc, animated: true, completion: nil)
                 }

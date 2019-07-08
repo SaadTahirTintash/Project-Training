@@ -128,7 +128,7 @@ extension FCNewsFeedVC: UITableViewDelegate{
             indexPathsArray.append(indexPath)
         }
         tableView.beginUpdates()
-        tableView.insertRows(at: indexPathsArray, with: .none)
+        tableView.insertRows(at: indexPathsArray, with: .fade)
         tableView.endUpdates()
     }
 }

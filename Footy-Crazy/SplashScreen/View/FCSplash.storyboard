@@ -38,13 +38,5 @@
             </objects>
             <point key="canvasLocation" x="116" y="44"/>
         </scene>
-        <!--NewsFeedVC-->
-        <scene sceneID="leC-eN-FO1">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="NewsFeedVC" id="xo2-ek-TOu" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="P6t-C7-hza" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="760" y="44"/>
-        </scene>
     </scenes>
 </document>
