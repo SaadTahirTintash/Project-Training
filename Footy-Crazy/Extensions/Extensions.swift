@@ -9,20 +9,21 @@ import Foundation
 import UIKit
 
 extension UIImageView{
-    func loadImage(from url: URL, completion: @escaping (_ success:Bool)->()){
+    
+    func loadImage(from url: URL, completion: ((_ success:Bool)->Void)?){
         DispatchQueue.global().async { [weak self] in
             if let data = try? Data(contentsOf: url){
                 print("Image loaded successfully")
                 if let image = UIImage(data: data){
                     DispatchQueue.main.async {
                         self?.image = image
-                        completion(true)
+                        completion?(true)
                     }
                 }
             }
             else{
                 print("Image Loading error")
-                completion(false)
+                completion?(false)
             }
         }
     }

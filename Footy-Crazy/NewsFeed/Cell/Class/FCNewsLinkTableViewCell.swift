@@ -10,13 +10,19 @@ import UIKit
 
 class FCNewsLinkTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var newsLinkView: UIView!
-    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var titleLbl: UILabel!
+    @IBOutlet weak var newsImg: UIImageView!
+    @IBOutlet weak var urlLbl: UILabel!
+    @IBOutlet weak var descriptionLbl: UILabel!    
+    @IBOutlet weak var insideStackView: UIView!
+    
+    var stackView = UIStackView()
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
+    
     
 }

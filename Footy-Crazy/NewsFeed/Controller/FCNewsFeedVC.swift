@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftLinkPreview
 
 class FCNewsFeedVC: UIViewController {
     
@@ -15,7 +16,8 @@ class FCNewsFeedVC: UIViewController {
     var newsFeedModel : FCNewsFeedModel = FCNewsFeedModel()
     var isFetchingData = false
     var factualImages: [Int:UIImage?] = [:]
-//    var factualImages : [UIImage?] = Array(repeating: Constants.EMPTY_IMAGE, count: Constants.NEWS_FEED_PAGE_SIZE)
+    let slp = SwiftLinkPreview()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +27,8 @@ class FCNewsFeedVC: UIViewController {
             newsFeedModel.objects?.append(contentsOf: objects)
         }
         registerCells()
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 200
     }
     
     func registerCells(){
@@ -86,10 +90,25 @@ extension FCNewsFeedVC: UITableViewDataSource{
             return cell
         }else if let newsLink = newsFeedModel.objects?[indexPath.row] as? FCNewsLinkModel{
             let cell = tableView.dequeueReusableCell(withIdentifier: "NewsLinkCell") as! FCNewsLinkTableViewCell
-            cell.titleLabel.text = newsLink.title
             //TODO: load news link
-            cell.configureNewsLinkView(newsLink.url)
-            cell.descriptionLabel.text = newsLink.description
+            slp.preview(newsLink.url, onSuccess: { (response) in
+                cell.titleLbl.text = response.title
+                cell.urlLbl.text = response.url?.absoluteString
+                if let imgURL = response.image{
+                    cell.newsImg.loadImage(from: URL(string: imgURL)!, completion: nil)
+                } else{
+                    cell.newsImg.image = Constants.EMPTY_IMAGE
+                }
+                cell.descriptionLbl.text = response.description
+                
+            }) { (error) in
+                print("Error: \(error)")
+            }
+            //create an empty news link till network data
+            cell.titleLbl.text = Constants.EMPTY_NEWS_TITLE
+            cell.newsImg.image = Constants.EMPTY_IMAGE
+            cell.urlLbl.text = Constants.EMPTY_NEWS_URL_STRING
+            cell.descriptionLbl.text = Constants.EMPTY_NEWS_DESCRIPTION
             return cell
         }else{
             //this should be an empty cell
