@@ -14,6 +14,8 @@ class FCNewsFeedVC: UIViewController {
     
     var newsFeedModel : FCNewsFeedModel = FCNewsFeedModel()
     var isFetchingData = false
+    var factualImages: [Int:UIImage?] = [:]
+//    var factualImages : [UIImage?] = Array(repeating: Constants.EMPTY_IMAGE, count: Constants.NEWS_FEED_PAGE_SIZE)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,13 +71,24 @@ extension FCNewsFeedVC: UITableViewDataSource{
         }else if let fact = newsFeedModel.objects?[indexPath.row] as? FCFactModel{
             let cell = tableView.dequeueReusableCell(withIdentifier: "FactCell") as! FCFactTableViewCell
             cell.titleLabel.text = fact.title
-            cell.imgView?.loadImage(from: URL(string: fact.imageUrl)!)
+            if !factualImages.isEmpty, let factImg = factualImages[indexPath.row]{
+                print("Image loaded from memory")
+                cell.imgView?.image = factImg
+            }
+            else if fact.imageUrl != ""{
+                cell.imgView?.loadImage(from: URL(string: fact.imageUrl)!){ [weak self] (success) in
+                    if success{
+                        self?.factualImages[indexPath.row] = cell.imgView.image
+                    }
+                }
+            }
             cell.factLabel.text = fact.fact
             return cell
         }else if let newsLink = newsFeedModel.objects?[indexPath.row] as? FCNewsLinkModel{
             let cell = tableView.dequeueReusableCell(withIdentifier: "NewsLinkCell") as! FCNewsLinkTableViewCell
             cell.titleLabel.text = newsLink.title
             //TODO: load news link
+            cell.configureNewsLinkView(newsLink.url)
             cell.descriptionLabel.text = newsLink.description
             return cell
         }else{
