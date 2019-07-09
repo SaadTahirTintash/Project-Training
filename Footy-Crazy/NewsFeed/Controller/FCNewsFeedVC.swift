@@ -7,25 +7,19 @@
 //
 
 import UIKit
-import SwiftLinkPreview
 
 class FCNewsFeedVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var newsFeedModel : FCNewsFeedModel = FCNewsFeedModel()
+    var newsFeedModelArray : [FCNewsFeedModel] = [FCNewsFeedModel]()
     var isFetchingData = false
-    var factualImages: [Int:UIImage?] = [:]
-    let slp = SwiftLinkPreview()
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
-        if let objects = FCDataManager.shared.newsFeedModel.objects{
-            newsFeedModel.objects?.append(contentsOf: objects)
-        }
+        newsFeedModelArray = FCDataManager.shared.newsFeedModelArray        
         registerCells()
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 200
@@ -44,74 +38,31 @@ class FCNewsFeedVC: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        unregisterObserver()
-    }
-    
-    func getKeyID(_ obj: Any?)->Int{
-        if let model = obj as? FCVideoModel{
-            return Int(model.id) ?? 0
-        } else if let model = obj as? FCFactModel{
-            return Int(model.id) ?? 0
-        } else if let model = obj as? FCNewsLinkModel{
-            return Int(model.id) ?? 0
-        }
-        return 0
     }
 }
 
 extension FCNewsFeedVC: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return newsFeedModel.objects?.count ?? 0
+        return newsFeedModelArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let video = newsFeedModel.objects?[indexPath.row] as? FCVideoModel{
+        let model = newsFeedModelArray[indexPath.row]
+        switch model.type {
+        case "video":
             let cell = tableView.dequeueReusableCell(withIdentifier: "VideoCell") as! FCVideoTableViewCell
-            cell.titleLabel.text = video.title
-            cell.videoView.load(withVideoId: video.url, playerVars:["playsinline":1])
-            cell.descriptionLabel.text = video.description
+            cell.setupCell(model)
             return cell
-        }else if let fact = newsFeedModel.objects?[indexPath.row] as? FCFactModel{
-            let cell = tableView.dequeueReusableCell(withIdentifier: "FactCell") as! FCFactTableViewCell
-            cell.titleLabel.text = fact.title
-            if !factualImages.isEmpty, let factImg = factualImages[indexPath.row]{
-                print("Image loaded from memory")
-                cell.imgView?.image = factImg
-            }
-            else if fact.imageUrl != ""{
-                cell.imgView?.loadImage(from: URL(string: fact.imageUrl)!){ [weak self] (success) in
-                    if success{
-                        self?.factualImages[indexPath.row] = cell.imgView.image
-                    }
-                }
-            }
-            cell.factLabel.text = fact.fact
-            return cell
-        }else if let newsLink = newsFeedModel.objects?[indexPath.row] as? FCNewsLinkModel{
+        case "news_link":
             let cell = tableView.dequeueReusableCell(withIdentifier: "NewsLinkCell") as! FCNewsLinkTableViewCell
-            //TODO: load news link
-            slp.preview(newsLink.url, onSuccess: { (response) in
-                cell.titleLbl.text = response.title
-                cell.urlLbl.text = response.url?.absoluteString
-                if let imgURL = response.image{
-                    cell.newsImg.loadImage(from: URL(string: imgURL)!, completion: nil)
-                } else{
-                    cell.newsImg.image = Constants.EMPTY_IMAGE
-                }
-                cell.descriptionLbl.text = response.description
-                
-            }) { (error) in
-                print("Error: \(error)")
-            }
-            //create an empty news link till network data
-            cell.titleLbl.text = Constants.EMPTY_NEWS_TITLE
-            cell.newsImg.image = Constants.EMPTY_IMAGE
-            cell.urlLbl.text = Constants.EMPTY_NEWS_URL_STRING
-            cell.descriptionLbl.text = Constants.EMPTY_NEWS_DESCRIPTION
+            cell.setupCell(model)
             return cell
-        }else{
-            //this should be an empty cell
+        case "fact":
+            let cell = tableView.dequeueReusableCell(withIdentifier: "FactCell") as! FCFactTableViewCell
+            cell.setupCell(model)
+            return cell
+        default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "EmptyCell") as! FCEmptyTableViewCell
             cell.label.text = "No Data!"
             return cell
@@ -129,15 +80,14 @@ extension FCNewsFeedVC: UITableViewDelegate{
             //reached end of table
             if !isFetchingData{
                 isFetchingData = true
-                var startingId = getKeyID(newsFeedModel.objects?.last)
+                var startingId = Int(newsFeedModelArray.last?.id ?? "0") ?? 0
                 if startingId != 0{
                     startingId += 1
-                    FCDataManager.shared.getNewsFeed(key: String(startingId), pageSize: Constants.NEWS_FEED_PAGE_SIZE) { [weak self] (success,newsFeedModel) in
-                        if let objects = newsFeedModel?.objects{
-                            self?.newsFeedModel.objects?.append(contentsOf: objects)
+                    FCDataManager.shared.getNewsFeed(key: String(startingId), pageSize: Constants.NEWS_FEED_PAGE_SIZE) { [weak self] (success,newsFeedModelArray) in
+                        if let modelArray = newsFeedModelArray{
+                            self?.newsFeedModelArray.append(contentsOf: modelArray)
                         }
-//                        self?.tableView.reloadData()
-                        self?.updateTableRows(newsFeedModel!)
+                        self?.updateTableRows(newsFeedModelArray!)
                         self?.isFetchingData = false
                     }
                 }
@@ -145,21 +95,15 @@ extension FCNewsFeedVC: UITableViewDelegate{
         }
     }
     
-    func updateTableRows(_ model: FCNewsFeedModel){
+    func updateTableRows(_ modelArray: [FCNewsFeedModel]){
         var indexPathsArray = [IndexPath]()
-        for obj in model.objects!{
-            let index = getKeyID(obj)
+        for obj in modelArray.enumerated(){
+            let index = Int(obj.element.id) ?? 1
             let indexPath = IndexPath(row: index - 1, section: 0)
             indexPathsArray.append(indexPath)
         }
         tableView.beginUpdates()
         tableView.insertRows(at: indexPathsArray, with: .fade)
         tableView.endUpdates()
-    }
-}
-
-//observers
-extension FCNewsFeedVC{
-    func unregisterObserver(){
     }
 }

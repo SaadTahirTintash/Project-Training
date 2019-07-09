@@ -23,12 +23,12 @@ class NetworkEngine{
     }
     
     //this func takes key id and page size to create a server request and returns a model
-    func loadNewsFeed(key id: String, pageSize limit: Int, completion: @escaping(_ success: Bool, _ newsFeedModel: FCNewsFeedModel?)->()){
+    func loadNewsFeed(key id: String, pageSize limit: Int, completion: @escaping(_ success: Bool, _ newsFeedModelArray: [FCNewsFeedModel]?)->()){
         rootQuery.child("news_feed").queryOrderedByKey().queryStarting(atValue: id).queryLimited(toFirst: UInt(limit)).observeSingleEvent(of: .value) { [weak self] (snapshot) in
             if snapshot.value != nil && snapshot.childrenCount > 0{
                 //we got result from the server
-                let newsFeedModel = self?.snapshotParser.parseToNewsFeed(snapshot: snapshot)
-                completion(true,newsFeedModel)
+                let newsFeedModelArray = self?.snapshotParser.parseToNewsFeed(snapshot: snapshot)
+                completion(true,newsFeedModelArray)
             } else{
                 //we got error
             }

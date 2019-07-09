@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftLinkPreview
 
 class FCNewsLinkTableViewCell: UITableViewCell {
 
@@ -14,15 +15,38 @@ class FCNewsLinkTableViewCell: UITableViewCell {
     @IBOutlet weak var newsImg: UIImageView!
     @IBOutlet weak var urlLbl: UILabel!
     @IBOutlet weak var descriptionLbl: UILabel!    
-    @IBOutlet weak var insideStackView: UIView!
-    
-    var stackView = UIStackView()
-    
-    
+    let slp = SwiftLinkPreview()
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
     
+    override func prepareForReuse() {
+        newsImg.image = nil
+    }
+    
+    func setupCell(_ model:  FCNewsFeedModel) {
+        titleLbl.text   = model.title
+        urlLbl.text     = model.url
+        descriptionLbl.text = model.description
+        newsImg.image       = model.image ?? Constants.EMPTY_IMAGE
+        loadLink(model.url)
+    }
+    
+    func loadLink(_ newsLink: String){
+        slp.preview(newsLink, onSuccess: { [weak self] (response) in
+            self?.titleLbl.text   = response.title
+            self?.urlLbl.text     = response.url?.absoluteString
+            self?.descriptionLbl.text = response.description
+            if let imgURL = response.image{
+                self?.newsImg.loadImage(from: URL(string: imgURL)!, completion: nil)
+            } else{
+                self?.newsImg.image = Constants.EMPTY_IMAGE
+            }
+        }) { [weak self](error) in
+            self?.newsImg.image = Constants.EMPTY_IMAGE
+        }
+    }
     
 }

@@ -19,6 +19,12 @@ class FCFactTableViewCell: UITableViewCell {
         // Initialization code
     }
     
+    func setupCell(_ model: FCNewsFeedModel){
+        titleLabel.text = model.title
+        factLabel.text = model.description
+        imgView.loadImage(from: URL(string: model.url)!, completion: nil)
+    }
+    
     override func prepareForReuse() {
         self.imgView.image = nil
     }

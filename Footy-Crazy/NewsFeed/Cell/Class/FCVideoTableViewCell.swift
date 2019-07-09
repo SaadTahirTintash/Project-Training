@@ -21,6 +21,12 @@ class FCVideoTableViewCell: UITableViewCell {
         videoView.delegate = self        
     }
     
+    func setupCell(_ model: FCNewsFeedModel){
+        titleLabel.text = model.title
+        videoView.load(withVideoId: model.url, playerVars:["playsinline":1])
+        descriptionLabel.text = model.description
+    }
+    
     func addActivityIndicator(_ to: UIView){
         let activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
         activityIndicator.center = CGPoint(x: to.frame.width/2, y: to.frame.height/2)

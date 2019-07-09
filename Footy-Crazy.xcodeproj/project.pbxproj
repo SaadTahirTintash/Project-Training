@@ -12,10 +12,7 @@
 		4A0CD2BE22CA27CC00A79D8F /* FCEmptyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0CD2BC22CA27CC00A79D8F /* FCEmptyTableViewCell.swift */; };
 		4A0CD2BF22CA27CC00A79D8F /* FCEmptyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A0CD2BD22CA27CC00A79D8F /* FCEmptyTableViewCell.xib */; };
 		4A2B430922C4DA2C00815318 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A2B430822C4DA2C00815318 /* GoogleService-Info.plist */; };
-		4A2B430D22C5E34200815318 /* FCVideoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2B430C22C5E34200815318 /* FCVideoModel.swift */; };
 		4A2B431022C5E39F00815318 /* FCNewsFeedType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2B430F22C5E39F00815318 /* FCNewsFeedType.swift */; };
-		4A2B431222C5E3E400815318 /* FCFactModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2B431122C5E3E400815318 /* FCFactModel.swift */; };
-		4A2B431422C5E41900815318 /* FCNewsLinkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2B431322C5E41900815318 /* FCNewsLinkModel.swift */; };
 		4A2B431822C5E4D800815318 /* FCNewsFeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2B431722C5E4D800815318 /* FCNewsFeedVC.swift */; };
 		4A2B431C22C5E8A800815318 /* FCVideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2B431A22C5E8A800815318 /* FCVideoTableViewCell.swift */; };
 		4A2B431D22C5E8A800815318 /* FCVideoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A2B431B22C5E8A800815318 /* FCVideoTableViewCell.xib */; };
@@ -46,10 +43,7 @@
 		4A0CD2BC22CA27CC00A79D8F /* FCEmptyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCEmptyTableViewCell.swift; sourceTree = "<group>"; };
 		4A0CD2BD22CA27CC00A79D8F /* FCEmptyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FCEmptyTableViewCell.xib; sourceTree = "<group>"; };
 		4A2B430822C4DA2C00815318 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		4A2B430C22C5E34200815318 /* FCVideoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCVideoModel.swift; sourceTree = "<group>"; };
 		4A2B430F22C5E39F00815318 /* FCNewsFeedType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCNewsFeedType.swift; sourceTree = "<group>"; };
-		4A2B431122C5E3E400815318 /* FCFactModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCFactModel.swift; sourceTree = "<group>"; };
-		4A2B431322C5E41900815318 /* FCNewsLinkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCNewsLinkModel.swift; sourceTree = "<group>"; };
 		4A2B431722C5E4D800815318 /* FCNewsFeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCNewsFeedVC.swift; sourceTree = "<group>"; };
 		4A2B431A22C5E8A800815318 /* FCVideoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCVideoTableViewCell.swift; sourceTree = "<group>"; };
 		4A2B431B22C5E8A800815318 /* FCVideoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FCVideoTableViewCell.xib; sourceTree = "<group>"; };
@@ -114,9 +108,6 @@
 			isa = PBXGroup;
 			children = (
 				4AFF91AD22C622C4004FEBB6 /* FCNewsFeedModel.swift */,
-				4A2B430C22C5E34200815318 /* FCVideoModel.swift */,
-				4A2B431122C5E3E400815318 /* FCFactModel.swift */,
-				4A2B431322C5E41900815318 /* FCNewsLinkModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -184,9 +175,9 @@
 		4A34871C22C4D7C4009436EB /* Footy-Crazy */ = {
 			isa = PBXGroup;
 			children = (
+				4A34872422C4D7C5009436EB /* Assets.xcassets */,
 				4AE3C12F22D34F1E00282F29 /* Extensions */,
 				4A0573F022CB94F8007BAE6E /* Constants */,
-				4A34872422C4D7C5009436EB /* Assets.xcassets */,
 				4AE3C0F022D310D500282F29 /* Launch */,
 				4A2B432022C5ED1B00815318 /* NetworkEngine */,
 				4A8CC76A22C9D69400E9483B /* DataManager */,
@@ -549,15 +540,12 @@
 				4A2B431822C5E4D800815318 /* FCNewsFeedVC.swift in Sources */,
 				4ABDAE2622C9E55B00E5C1C6 /* FCSplashScreenVC.swift in Sources */,
 				4A0CD2BE22CA27CC00A79D8F /* FCEmptyTableViewCell.swift in Sources */,
-				4A2B430D22C5E34200815318 /* FCVideoModel.swift in Sources */,
 				4A8CC76C22C9D6A900E9483B /* FCDataManager.swift in Sources */,
 				4AFF91AE22C622C4004FEBB6 /* FCNewsFeedModel.swift in Sources */,
 				4AFDD29C22CA24FC0044B728 /* FCNewsLinkTableViewCell.swift in Sources */,
-				4A2B431422C5E41900815318 /* FCNewsLinkModel.swift in Sources */,
 				4ABDAE1C22C9DAC800E5C1C6 /* FCParseSnapshot.swift in Sources */,
 				4AFDD29822CA24EE0044B728 /* FCFactTableViewCell.swift in Sources */,
 				4A2B431022C5E39F00815318 /* FCNewsFeedType.swift in Sources */,
-				4A2B431222C5E3E400815318 /* FCFactModel.swift in Sources */,
 				4AE3C13122D34F3A00282F29 /* Extensions.swift in Sources */,
 				4A34871E22C4D7C4009436EB /* AppDelegate.swift in Sources */,
 				4A0573F222CB9506007BAE6E /* FCConstants.swift in Sources */,

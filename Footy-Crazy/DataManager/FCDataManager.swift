@@ -17,19 +17,19 @@ class FCDataManager{
     static let shared = FCDataManager()
     private let networkEngine : NetworkEngine?
     
-    var newsFeedModel: FCNewsFeedModel = FCNewsFeedModel()
+    var newsFeedModelArray: [FCNewsFeedModel] = [FCNewsFeedModel]()
     
     private init(){
         networkEngine = NetworkEngine()
     }
     
     //this function requests data from server with appropriate key and page size, on response it appends data into its respective model and calls completion
-    func getNewsFeed(key id: String, pageSize limit: Int, completion: @escaping(_ success: Bool, _ newsFeedModel: FCNewsFeedModel?)->()){
-        networkEngine?.loadNewsFeed(key: id, pageSize: limit, completion: { [weak self] (success, newsFeedModel) in
-            if success, let objects = newsFeedModel?.objects{
-                self?.newsFeedModel.objects?.append(contentsOf: objects)
+    func getNewsFeed(key id: String, pageSize limit: Int, completion: @escaping(_ success: Bool, _ newsFeedModelArray: [FCNewsFeedModel]?)->()){
+        networkEngine?.loadNewsFeed(key: id, pageSize: limit, completion: { [weak self] (success, newsFeedModelArray) in            
+            if success, let array = newsFeedModelArray{
+                self?.newsFeedModelArray = array
             }
-            completion(success,newsFeedModel)
+            completion(success,newsFeedModelArray)
         })
     }
     

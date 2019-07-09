@@ -10,26 +10,15 @@ import FirebaseDatabase
 
 class FCParseSnapshot{
     
-    func parseToNewsFeed(snapshot: DataSnapshot)->FCNewsFeedModel{
-        var newsFeedObject = FCNewsFeedModel()
+    func parseToNewsFeed(snapshot: DataSnapshot)->[FCNewsFeedModel]{
+        var newsFeedModelArray = [FCNewsFeedModel]()
         let enumerator = snapshot.children
         while let snap = enumerator.nextObject() as? DataSnapshot{
             if let value = snap.value as? [String: Any]{
-                let id = snap.key
-                switch value["type"] as? String{
-                case "video":
-                    let video = FCVideoModel(id: id,url: value["url"] as? String ?? "", title: value["title"] as? String ?? "", description: value["description"] as? String ?? "")
-                    newsFeedObject.objects?.append(video as FCVideoModel)
-                case "news_link":
-                    let newsLink = FCNewsLinkModel(id: id,url: value["url"] as? String ?? "", title: value["title"] as? String ?? "", description: value["description"] as? String ?? "")
-                    newsFeedObject.objects?.append(newsLink as FCNewsLinkModel)
-                default:
-                    let fact = FCFactModel(id: id,imageUrl: value["imageUrl"] as? String ?? "", title: value["title"] as? String ?? "", fact: value["fact"] as? String ?? "")
-                    newsFeedObject.objects?.append(fact as FCFactModel
-                    )
-                }                
+                let newsFeedModel = FCNewsFeedModel(id: snap.key,url: value["url"] as? String ?? "", description: value["description"] as? String ?? "", title: value["title"] as? String ?? "", type: value["type"] as? String ?? "", image: Constants.EMPTY_IMAGE)
+                newsFeedModelArray.append(newsFeedModel)
             }
         }
-        return newsFeedObject
+        return newsFeedModelArray
     }
 }

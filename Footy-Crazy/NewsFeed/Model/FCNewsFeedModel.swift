@@ -6,6 +6,14 @@
 //  Copyright © 2019 Tintash. All rights reserved.
 //
 
+import UIKit
+
 struct FCNewsFeedModel{
-    var objects: [Any]? = [Any]()
+//    var objects: [Any]? = [Any]()    
+    var id: String
+    var url: String
+    var description: String
+    var title: String
+    var type: String
+    var image: UIImage?
 }
