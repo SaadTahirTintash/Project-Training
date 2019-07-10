@@ -10,10 +10,10 @@ import UIKit
 
 struct FCNewsFeedModel{
 //    var objects: [Any]? = [Any]()    
-    var id: String
-    var url: String
-    var description: String
-    var title: String
-    var type: String
+    var id: String = "0"
+    var url: String = "url"
+    var description: String = "description"
+    var title: String = "title"
+    var type: String = "default"
     var image: UIImage?
 }

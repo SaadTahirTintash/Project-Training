@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		00F0A7573F2B7A3840B0BFF0 /* Pods_Footy_Crazy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6CFC77DED640E777ED08EAB /* Pods_Footy_Crazy.framework */; };
+		4A01E35222D5D2A400929D10 /* FCNewsLinkDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A01E35122D5D2A400929D10 /* FCNewsLinkDetailVC.swift */; };
+		4A01E35422D5D2C100929D10 /* FCVideoDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A01E35322D5D2C100929D10 /* FCVideoDetailVC.swift */; };
 		4A0573F222CB9506007BAE6E /* FCConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0573F122CB9506007BAE6E /* FCConstants.swift */; };
 		4A0CD2BE22CA27CC00A79D8F /* FCEmptyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0CD2BC22CA27CC00A79D8F /* FCEmptyTableViewCell.swift */; };
 		4A0CD2BF22CA27CC00A79D8F /* FCEmptyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A0CD2BD22CA27CC00A79D8F /* FCEmptyTableViewCell.xib */; };
@@ -34,12 +36,14 @@
 		4AFDD29922CA24EE0044B728 /* FCFactTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AFDD29722CA24EE0044B728 /* FCFactTableViewCell.xib */; };
 		4AFDD29C22CA24FC0044B728 /* FCNewsLinkTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFDD29A22CA24FC0044B728 /* FCNewsLinkTableViewCell.swift */; };
 		4AFDD29D22CA24FC0044B728 /* FCNewsLinkTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AFDD29B22CA24FC0044B728 /* FCNewsLinkTableViewCell.xib */; };
-		4AFE969322D4CC6E00BBD074 /* FCNewsFeedDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFE969222D4CC6E00BBD074 /* FCNewsFeedDetailVC.swift */; };
+		4AFE969322D4CC6E00BBD074 /* FCFactDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFE969222D4CC6E00BBD074 /* FCFactDetailVC.swift */; };
 		4AFF91AE22C622C4004FEBB6 /* FCNewsFeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFF91AD22C622C4004FEBB6 /* FCNewsFeedModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		160CCF499E0512BE72B2BCA3 /* Pods-Footy-Crazy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Footy-Crazy.debug.xcconfig"; path = "Target Support Files/Pods-Footy-Crazy/Pods-Footy-Crazy.debug.xcconfig"; sourceTree = "<group>"; };
+		4A01E35122D5D2A400929D10 /* FCNewsLinkDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCNewsLinkDetailVC.swift; sourceTree = "<group>"; };
+		4A01E35322D5D2C100929D10 /* FCVideoDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCVideoDetailVC.swift; sourceTree = "<group>"; };
 		4A0573F122CB9506007BAE6E /* FCConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCConstants.swift; sourceTree = "<group>"; };
 		4A0CD2BC22CA27CC00A79D8F /* FCEmptyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCEmptyTableViewCell.swift; sourceTree = "<group>"; };
 		4A0CD2BD22CA27CC00A79D8F /* FCEmptyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FCEmptyTableViewCell.xib; sourceTree = "<group>"; };
@@ -68,7 +72,7 @@
 		4AFDD29722CA24EE0044B728 /* FCFactTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FCFactTableViewCell.xib; sourceTree = "<group>"; };
 		4AFDD29A22CA24FC0044B728 /* FCNewsLinkTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCNewsLinkTableViewCell.swift; sourceTree = "<group>"; };
 		4AFDD29B22CA24FC0044B728 /* FCNewsLinkTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FCNewsLinkTableViewCell.xib; sourceTree = "<group>"; };
-		4AFE969222D4CC6E00BBD074 /* FCNewsFeedDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCNewsFeedDetailVC.swift; sourceTree = "<group>"; };
+		4AFE969222D4CC6E00BBD074 /* FCFactDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCFactDetailVC.swift; sourceTree = "<group>"; };
 		4AFF91AD22C622C4004FEBB6 /* FCNewsFeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCNewsFeedModel.swift; sourceTree = "<group>"; };
 		677AE1B4CFC37760F711027B /* Pods-Footy-Crazy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Footy-Crazy.release.xcconfig"; path = "Target Support Files/Pods-Footy-Crazy/Pods-Footy-Crazy.release.xcconfig"; sourceTree = "<group>"; };
 		A6CFC77DED640E777ED08EAB /* Pods_Footy_Crazy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Footy_Crazy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,6 +90,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4A01E35522D5D99F00929D10 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		4A0573F022CB94F8007BAE6E /* Constants */ = {
 			isa = PBXGroup;
 			children = (
@@ -134,7 +145,9 @@
 			isa = PBXGroup;
 			children = (
 				4A2B431722C5E4D800815318 /* FCNewsFeedVC.swift */,
-				4AFE969222D4CC6E00BBD074 /* FCNewsFeedDetailVC.swift */,
+				4AFE969222D4CC6E00BBD074 /* FCFactDetailVC.swift */,
+				4A01E35322D5D2C100929D10 /* FCVideoDetailVC.swift */,
+				4A01E35122D5D2A400929D10 /* FCNewsLinkDetailVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -179,6 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				4A34872422C4D7C5009436EB /* Assets.xcassets */,
+				4A01E35522D5D99F00929D10 /* Utilities */,
 				4AE3C12F22D34F1E00282F29 /* Extensions */,
 				4A0573F022CB94F8007BAE6E /* Constants */,
 				4AE3C0F022D310D500282F29 /* Launch */,
@@ -541,14 +555,16 @@
 				4A2B431C22C5E8A800815318 /* FCVideoTableViewCell.swift in Sources */,
 				4A2B432222C5ED3500815318 /* FCNetworkEngine.swift in Sources */,
 				4A2B431822C5E4D800815318 /* FCNewsFeedVC.swift in Sources */,
+				4A01E35222D5D2A400929D10 /* FCNewsLinkDetailVC.swift in Sources */,
 				4ABDAE2622C9E55B00E5C1C6 /* FCSplashScreenVC.swift in Sources */,
 				4A0CD2BE22CA27CC00A79D8F /* FCEmptyTableViewCell.swift in Sources */,
 				4A8CC76C22C9D6A900E9483B /* FCDataManager.swift in Sources */,
 				4AFF91AE22C622C4004FEBB6 /* FCNewsFeedModel.swift in Sources */,
 				4AFDD29C22CA24FC0044B728 /* FCNewsLinkTableViewCell.swift in Sources */,
 				4ABDAE1C22C9DAC800E5C1C6 /* FCParseSnapshot.swift in Sources */,
+				4A01E35422D5D2C100929D10 /* FCVideoDetailVC.swift in Sources */,
 				4AFDD29822CA24EE0044B728 /* FCFactTableViewCell.swift in Sources */,
-				4AFE969322D4CC6E00BBD074 /* FCNewsFeedDetailVC.swift in Sources */,
+				4AFE969322D4CC6E00BBD074 /* FCFactDetailVC.swift in Sources */,
 				4A2B431022C5E39F00815318 /* FCNewsFeedType.swift in Sources */,
 				4AE3C13122D34F3A00282F29 /* Extensions.swift in Sources */,
 				4A34871E22C4D7C4009436EB /* AppDelegate.swift in Sources */,

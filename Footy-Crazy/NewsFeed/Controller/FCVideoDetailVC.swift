@@ -1,34 +1,37 @@
 //
-//  FCVideoTableViewCell.swift
+//  FCVideoDetailVC.swift
 //  Footy-Crazy
 //
-//  Created by Tintash on 28/06/2019.
+//  Created by Tintash on 10/07/2019.
 //  Copyright © 2019 Tintash. All rights reserved.
 //
 
 import UIKit
 import youtube_ios_player_helper
 
-class FCVideoTableViewCell: UITableViewCell {
+class FCVideoDetailVC: UIViewController {
 
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var videoView: YTPlayerView!
     @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var videoView: YTPlayerView!
+    var model = FCNewsFeedModel()
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-        videoView.delegate = self        
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        videoView.delegate = self
+        setupVC()        
     }
     
-    func setupCell(_ model: FCNewsFeedModel){
+    func setupVC(){
+        //initial setup
+        descriptionLabel.text = model.description
         titleLabel.text = model.title
         videoView.load(withVideoId: model.url, playerVars:["playsinline":1])
-        descriptionLabel.text = model.description
     }
+
 }
 
-extension FCVideoTableViewCell: YTPlayerViewDelegate{
+extension FCVideoDetailVC: YTPlayerViewDelegate{
     
     func addActivityIndicator(_ to: UIView){
         let activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
@@ -64,7 +67,7 @@ extension FCVideoTableViewCell: YTPlayerViewDelegate{
             print("Video is queued")
         default:
             print("Video is unknown")
-
+            
         }
     }
 }

@@ -29,9 +29,6 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="b2X-IY-7Fn" kind="show" identifier="NewsFeedDetailSegue" id="5ts-dv-wTH"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -48,16 +45,19 @@
                     <navigationItem key="navigationItem" title="News Feed" id="fLA-52-Rmm"/>
                     <connections>
                         <outlet property="tableView" destination="x9l-KN-nzS" id="0O3-xa-HwG"/>
+                        <segue destination="b2X-IY-7Fn" kind="show" identifier="FCFactDetailVC" id="fcd-fo-JFb"/>
+                        <segue destination="46C-hg-a4a" kind="show" identifier="FCVideoDetailVC" id="Qlo-gw-Bcn"/>
+                        <segue destination="LDx-HE-kDa" kind="show" identifier="FCNewsLinkDetailVC" id="CII-hw-jWu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1957.9710144927537" y="70.982142857142847"/>
         </scene>
-        <!--News Feed DetailVC-->
+        <!--Fact DetailVC-->
         <scene sceneID="I63-Fh-Y18">
             <objects>
-                <viewController storyboardIdentifier="NewsFeedDetailVC" id="b2X-IY-7Fn" customClass="FCNewsFeedDetailVC" customModule="Footy_Crazy" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewsFeedDetailVC" id="b2X-IY-7Fn" customClass="FCFactDetailVC" customModule="Footy_Crazy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CUb-Xn-d6V">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -71,16 +71,16 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="LY0-8K-bUB">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="1210"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1CG-7n-UT8">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1CG-7n-UT8">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="26.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="emptyImage" translatesAutoresizingMaskIntoConstraints="NO" id="jZt-wE-XP2">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="op8-w2-BvV">
                                                         <rect key="frame" x="0.0" y="26.5" width="414" height="250"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="250" id="RcO-8h-ita"/>
+                                                            <constraint firstAttribute="height" constant="250" id="AoJ-8U-qg4"/>
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H9S-5R-Pb0">
@@ -125,10 +125,185 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="mTY-mZ-TCA"/>
                     </view>
+                    <connections>
+                        <outlet property="descriptionLabel" destination="H9S-5R-Pb0" id="p6Y-vm-46m"/>
+                        <outlet property="imgView" destination="op8-w2-BvV" id="5nm-Fy-kz9"/>
+                        <outlet property="titleLabel" destination="1CG-7n-UT8" id="lL1-f7-QpO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gDF-73-0e4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2844.9275362318845" y="77.678571428571431"/>
+            <point key="canvasLocation" x="1204" y="931"/>
+        </scene>
+        <!--Video DetailVC-->
+        <scene sceneID="ldm-GP-1E2">
+            <objects>
+                <viewController id="46C-hg-a4a" customClass="FCVideoDetailVC" customModule="Footy_Crazy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="XK8-7R-ilV">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8tt-hY-qKj">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pFx-7a-dca">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1210"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="DBU-x8-OT0">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="1210"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kWr-bI-IzK">
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="26.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g0q-aT-rM5" customClass="YTPlayerView">
+                                                        <rect key="frame" x="0.0" y="26.5" width="414" height="250"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="250" id="N3E-R6-2pm"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ywx-uk-0NS" userLabel="Description">
+                                                        <rect key="frame" x="0.0" y="276.5" width="414" height="933.5"/>
+                                                        <mutableString key="text">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+</mutableString>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="DBU-x8-OT0" secondAttribute="bottom" id="GaF-Rs-eWq"/>
+                                            <constraint firstAttribute="trailing" secondItem="DBU-x8-OT0" secondAttribute="trailing" id="Jpr-vG-tfM"/>
+                                            <constraint firstItem="DBU-x8-OT0" firstAttribute="leading" secondItem="pFx-7a-dca" secondAttribute="leading" id="aiI-jH-3mI"/>
+                                            <constraint firstItem="DBU-x8-OT0" firstAttribute="top" secondItem="pFx-7a-dca" secondAttribute="top" id="mdG-gF-lWe"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="pFx-7a-dca" firstAttribute="width" secondItem="8tt-hY-qKj" secondAttribute="width" id="2Pb-G8-CmK"/>
+                                    <constraint firstAttribute="bottom" secondItem="pFx-7a-dca" secondAttribute="bottom" id="Nn0-yU-Yw8"/>
+                                    <constraint firstAttribute="trailing" secondItem="pFx-7a-dca" secondAttribute="trailing" id="QE4-89-t4s"/>
+                                    <constraint firstItem="pFx-7a-dca" firstAttribute="leading" secondItem="8tt-hY-qKj" secondAttribute="leading" id="RPh-5W-Kg1"/>
+                                    <constraint firstItem="pFx-7a-dca" firstAttribute="top" secondItem="8tt-hY-qKj" secondAttribute="top" id="wTx-na-16n"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="qT7-qq-SPk" firstAttribute="bottom" secondItem="8tt-hY-qKj" secondAttribute="bottom" id="3Xy-cI-ZBq"/>
+                            <constraint firstItem="qT7-qq-SPk" firstAttribute="trailing" secondItem="8tt-hY-qKj" secondAttribute="trailing" id="E0I-HX-WCX"/>
+                            <constraint firstItem="8tt-hY-qKj" firstAttribute="top" secondItem="qT7-qq-SPk" secondAttribute="top" id="SlK-Vx-5yf"/>
+                            <constraint firstItem="8tt-hY-qKj" firstAttribute="leading" secondItem="qT7-qq-SPk" secondAttribute="leading" id="c8Y-qs-aeO"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="qT7-qq-SPk"/>
+                    </view>
+                    <connections>
+                        <outlet property="descriptionLabel" destination="ywx-uk-0NS" id="iBe-g6-Ba7"/>
+                        <outlet property="titleLabel" destination="kWr-bI-IzK" id="hTX-QO-kst"/>
+                        <outlet property="videoView" destination="g0q-aT-rM5" id="gNE-Di-rOB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="z8I-jp-gsr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1986.9565217391305" y="930.80357142857133"/>
+        </scene>
+        <!--News Link DetailVC-->
+        <scene sceneID="JDp-XG-too">
+            <objects>
+                <viewController id="LDx-HE-kDa" customClass="FCNewsLinkDetailVC" customModule="Footy_Crazy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0BU-Kc-w5H">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uqp-1F-7NR">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K8l-ED-euU">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1230.5"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="3Ao-V9-0tA">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="1230.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FHz-Ki-Tqn">
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="26.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="M9o-K0-mq8">
+                                                        <rect key="frame" x="0.0" y="26.5" width="414" height="250"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="250" id="A6d-4G-FhI"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="https:\\google.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DI2-pc-gpr" userLabel="url">
+                                                        <rect key="frame" x="0.0" y="276.5" width="414" height="20.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <color key="textColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0G8-Ef-6wr" userLabel="description">
+                                                        <rect key="frame" x="0.0" y="297" width="414" height="933.5"/>
+                                                        <mutableString key="text">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+</mutableString>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="3Ao-V9-0tA" secondAttribute="trailing" id="0AG-mf-vuE"/>
+                                            <constraint firstItem="3Ao-V9-0tA" firstAttribute="top" secondItem="K8l-ED-euU" secondAttribute="top" id="6kt-9D-j5f"/>
+                                            <constraint firstItem="3Ao-V9-0tA" firstAttribute="leading" secondItem="K8l-ED-euU" secondAttribute="leading" id="Lx4-Bf-QpB"/>
+                                            <constraint firstAttribute="bottom" secondItem="3Ao-V9-0tA" secondAttribute="bottom" id="m8C-Me-1k6"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="K8l-ED-euU" firstAttribute="top" secondItem="Uqp-1F-7NR" secondAttribute="top" id="7V8-oH-kSZ"/>
+                                    <constraint firstAttribute="bottom" secondItem="K8l-ED-euU" secondAttribute="bottom" id="Bx7-l1-Ttg"/>
+                                    <constraint firstItem="K8l-ED-euU" firstAttribute="width" secondItem="Uqp-1F-7NR" secondAttribute="width" id="H0V-tF-2tB"/>
+                                    <constraint firstAttribute="trailing" secondItem="K8l-ED-euU" secondAttribute="trailing" id="MLU-K2-98U"/>
+                                    <constraint firstItem="K8l-ED-euU" firstAttribute="leading" secondItem="Uqp-1F-7NR" secondAttribute="leading" id="uRm-i0-7LR"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Uqp-1F-7NR" firstAttribute="leading" secondItem="0BU-Kc-w5H" secondAttribute="leading" id="2q2-rj-hjj"/>
+                            <constraint firstItem="Nt6-ko-gFI" firstAttribute="trailing" secondItem="Uqp-1F-7NR" secondAttribute="trailing" id="FGV-ay-gcc"/>
+                            <constraint firstItem="Nt6-ko-gFI" firstAttribute="bottom" secondItem="Uqp-1F-7NR" secondAttribute="bottom" id="bD8-pT-4bv"/>
+                            <constraint firstItem="Uqp-1F-7NR" firstAttribute="top" secondItem="Nt6-ko-gFI" secondAttribute="top" id="nPO-VV-WNb"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Nt6-ko-gFI"/>
+                    </view>
+                    <connections>
+                        <outlet property="descriptionLabel" destination="0G8-Ef-6wr" id="nki-rY-c6J"/>
+                        <outlet property="imgView" destination="M9o-K0-mq8" id="KNo-Sh-Vw6"/>
+                        <outlet property="titleLabel" destination="FHz-Ki-Tqn" id="6dU-bB-jEO"/>
+                        <outlet property="urlLabel" destination="DI2-pc-gpr" id="iyr-u7-bly"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IdQ-jY-Gji" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2794.202898550725" y="930.80357142857133"/>
         </scene>
         <!--GalleryVC-->
         <scene sceneID="s56-U6-1I3">
@@ -213,7 +388,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="emptyImage" width="300" height="300"/>
         <image name="news_feed" width="32" height="32"/>
     </resources>
 </document>

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class FCNewsFeedVC: UIViewController {
     
@@ -108,15 +109,44 @@ extension FCNewsFeedVC: UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //open detail page
-        performSegue(withIdentifier: "NewsFeedDetailSegue", sender: indexPath.row)
+        let model = newsFeedModelArray[indexPath.row]
+        switch model.type {
+        case "news_link":
+//            openLinkInSafari(model)
+            performSegue(withIdentifier: "FCNewsLinkDetailVC", sender: indexPath.row)
+        case "video":
+            performSegue(withIdentifier: "FCVideoDetailVC", sender: indexPath.row)
+        default:
+            performSegue(withIdentifier: "FCFactDetailVC", sender: indexPath.row)
+        }        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? FCNewsFeedDetailVC{
+        if let vc = segue.destination as? FCFactDetailVC{
             let index = sender as! Int
             let model = newsFeedModelArray[index]
-            vc.setupVC(model)
+            vc.model = model
         }
+        else if let vc = segue.destination as? FCVideoDetailVC{
+            let index = sender as! Int
+            let model = newsFeedModelArray[index]
+            vc.model = model
+        }
+        else if let vc = segue.destination as? FCNewsLinkDetailVC{
+            let index = sender as! Int
+            let model = newsFeedModelArray[index]
+            vc.model = model
+        }
+    }
+    
+    func openLinkInSafari(_ model: FCNewsFeedModel){
+        print("open news link")
+        let urlString = model.url
+        guard let url = URL(string: urlString) else{
+            print("Invalid URL")
+            return
+        }
+        let svc = SFSafariViewController(url: url)
+        navigationController?.present(svc, animated: true, completion: nil)
     }
 }
