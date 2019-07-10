@@ -6,11 +6,11 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Footy-Crazy/SplashScreen/Controller/FCSplashScreenVC.swift"
-            timestampString = "584366614.91129"
+            timestampString = "584371818.4506741"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "29"
@@ -19,14 +19,14 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "Footy_Crazy.FCSplashScreenVC.viewWillAppear(Swift.Bool) -&gt; ()"
                   moduleName = "Footy-Crazy"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/tintash/Documents/Project/Footy-Crazy/Footy-Crazy/SplashScreen/Controller/FCSplashScreenVC.swift"
-                  timestampString = "584366568.439512"
+                  timestampString = "584371749.61638"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "29"
@@ -34,14 +34,14 @@
                   offsetFromSymbolStart = "127">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "closure #1 (Swift.Bool, Swift.Optional&lt;Swift.Array&lt;Footy_Crazy.FCNewsFeedModel&gt;&gt;) -&gt; () in Footy_Crazy.FCSplashScreenVC.viewWillAppear(Swift.Bool) -&gt; ()"
                   moduleName = "Footy-Crazy"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/tintash/Documents/Project/Footy-Crazy/Footy-Crazy/SplashScreen/Controller/FCSplashScreenVC.swift"
-                  timestampString = "584366568.443585"
+                  timestampString = "584371749.6203229"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "29"
@@ -54,11 +54,11 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Footy-Crazy/NewsFeed/Controller/FCNewsFeedVC.swift"
-            timestampString = "584366614.912099"
+            timestampString = "584372600.02669"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "19"

@@ -106,4 +106,17 @@ extension FCNewsFeedVC: UITableViewDelegate{
         tableView.insertRows(at: indexPathsArray, with: .fade)
         tableView.endUpdates()
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //open detail page
+        performSegue(withIdentifier: "NewsFeedDetailSegue", sender: indexPath.row)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? FCNewsFeedDetailVC{
+            let index = sender as! Int
+            let model = newsFeedModelArray[index]
+            vc.setupVC(model)
+        }
+    }
 }
