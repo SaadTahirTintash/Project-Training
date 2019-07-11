@@ -14,7 +14,9 @@ class FCNewsLinkTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var newsImg: UIImageView!
     @IBOutlet weak var urlLbl: UILabel!
-    @IBOutlet weak var descriptionLbl: UILabel!    
+    @IBOutlet weak var descriptionLbl: UILabel!
+    var newsFeedModel = FCNewsFeedModel()
+    weak var shareBtnDelegate: FCNewsFeedShareButtonDelegate?
     let slp = SwiftLinkPreview()
 
     override func awakeFromNib() {
@@ -32,6 +34,17 @@ class FCNewsLinkTableViewCell: UITableViewCell {
         descriptionLbl.text = model.description
         newsImg.image       = model.image ?? Constants.EMPTY_IMAGE
         loadLink(model.url)
+        saveModel(model)
+    }
+    
+    @IBAction func share(_ sender: Any) {
+        shareBtnDelegate?.didPressShareButton(newsFeedModel)
+    }
+    
+    func saveModel(_ model: FCNewsFeedModel){
+        newsFeedModel.title = model.title
+        newsFeedModel.description = model.description
+        newsFeedModel.url = model.url
     }
     
     func loadLink(_ newsLink: String){

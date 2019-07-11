@@ -18,18 +18,28 @@ class FCDataManager{
     private let networkEngine : NetworkEngine?
     
     var newsFeedModelArray: [FCNewsFeedModel] = [FCNewsFeedModel]()
+    var galleryModelArray: [FCGalleryModel] = [FCGalleryModel]()
     
     private init(){
         networkEngine = NetworkEngine()
     }
     
     //this function requests data from server with appropriate key and page size, on response it appends data into its respective model and calls completion
-    func getNewsFeed(key id: String, pageSize limit: Int, completion: @escaping(_ success: Bool, _ newsFeedModelArray: [FCNewsFeedModel]?)->()){
-        networkEngine?.loadNewsFeed(key: id, pageSize: limit, completion: { [weak self] (success, newsFeedModelArray) in            
+    func getNewsFeed(startingKey id: String, pageSize limit: Int, completion: @escaping(_ success: Bool, _ newsFeedModelArray: [FCNewsFeedModel]?)->()){
+        networkEngine?.loadNewsFeed(startingKey: id, pageSize: limit, completion: { [weak self] (success, newsFeedModelArray) in            
             if success, let array = newsFeedModelArray{
                 self?.newsFeedModelArray = array
             }
             completion(success,newsFeedModelArray)
+        })
+    }
+    
+    func getGallery(startingKey id: String, pageSize limit: Int, completion: @escaping(_ success: Bool,_ galleryModelArray: [FCGalleryModel]?)->()){
+        networkEngine?.loadGallery(startingKey: id, pageSize: limit, completion: { [weak self](success, galleryModelArray) in
+            if success, let array = galleryModelArray{
+                self?.galleryModelArray = array
+            }
+            completion(success,galleryModelArray)
         })
     }
     

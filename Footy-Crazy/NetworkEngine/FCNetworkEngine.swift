@@ -23,14 +23,28 @@ class NetworkEngine{
     }
     
     //this func takes key id and page size to create a server request and returns a model
-    func loadNewsFeed(key id: String, pageSize limit: Int, completion: @escaping(_ success: Bool, _ newsFeedModelArray: [FCNewsFeedModel]?)->()){
+    func loadNewsFeed(startingKey id: String, pageSize limit: Int, completion: @escaping(_ success: Bool, _ newsFeedModelArray: [FCNewsFeedModel]?)->()){
         rootQuery.child("news_feed").queryOrderedByKey().queryStarting(atValue: id).queryLimited(toFirst: UInt(limit)).observeSingleEvent(of: .value) { [weak self] (snapshot) in
             if snapshot.value != nil && snapshot.childrenCount > 0{
-                //we got result from the server
+                //success
                 let newsFeedModelArray = self?.snapshotParser.parseToNewsFeed(snapshot: snapshot)
                 completion(true,newsFeedModelArray)
             } else{
-                //we got error
+                //error
+                completion(false,nil)
+            }
+        }
+    }
+    
+    func loadGallery(startingKey id: String, pageSize limit: Int, completion: @escaping(_ success: Bool,_ galleryModelArray: [FCGalleryModel]?)->()){
+        rootQuery.child("gallery").queryOrderedByKey().queryStarting(atValue: id).queryLimited(toFirst: UInt(limit)).observeSingleEvent(of: .value) { [weak self](snapshot) in
+            if snapshot.value != nil && snapshot.childrenCount > 0{
+                //success
+                let galleryModelArray = self?.snapshotParser.parseToGallary(snapshot: snapshot)
+                completion(true,galleryModelArray)
+            } else{
+                //error
+                completion(false,nil)
             }
         }
     }

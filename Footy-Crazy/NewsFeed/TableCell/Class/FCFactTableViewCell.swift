@@ -13,6 +13,9 @@ class FCFactTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var imgView: UIImageView!
     @IBOutlet weak var factLabel: UILabel!
+    var downloadedImg: UIImage?
+    weak var shareBtnDelegate: FCNewsFeedShareButtonDelegate?
+    var newsFeedModel = FCNewsFeedModel()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,6 +26,17 @@ class FCFactTableViewCell: UITableViewCell {
         titleLabel.text = model.title
         factLabel.text = model.description
         imgView.loadImage(from: URL(string: model.url)!, completion: nil)
+        saveModel(model)
+    }
+    
+    func saveModel(_ model: FCNewsFeedModel){
+        newsFeedModel.title = model.title
+        newsFeedModel.description = model.description
+        newsFeedModel.url = model.url
+    }
+    
+    @IBAction func share(_ sender: Any) {
+        shareBtnDelegate?.didPressShareButton(newsFeedModel)
     }
     
     override func prepareForReuse() {

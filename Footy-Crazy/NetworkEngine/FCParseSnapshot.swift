@@ -21,4 +21,14 @@ class FCParseSnapshot{
         }
         return newsFeedModelArray
     }
+    
+    func parseToGallary(snapshot: DataSnapshot)->[FCGalleryModel]{
+        var galleryModelArray = [FCGalleryModel]()
+        let enumerator = snapshot.children
+        while let snap = enumerator.nextObject() as? DataSnapshot{
+            let galleryModel = FCGalleryModel(id: Int(snap.key) ?? 0, imageUrl: snap.value as? String ?? nil, image: nil)
+            galleryModelArray.append(galleryModel)
+        }
+        return galleryModelArray
+    }
 }

@@ -26,7 +26,7 @@ class FCSplashScreenVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)        
         //wait for data to be loaded        
-        FCDataManager.shared.getNewsFeed(key: startingKey, pageSize: Constants.NEWS_FEED_PAGE_SIZE) { [weak self](success, _) in
+        FCDataManager.shared.getNewsFeed(startingKey: Constants.NEWS_FEED_STARTING_KEY, pageSize: Constants.NEWS_FEED_INITIAL_PAGE_SIZE) { [weak self](success, _) in
             if success{
                 if let vc = self?.storyboardID.instantiateViewController(withIdentifier: "NewsFeedTabBar") as? UITabBarController{
                     print("Successfully loaded data from Firebase")

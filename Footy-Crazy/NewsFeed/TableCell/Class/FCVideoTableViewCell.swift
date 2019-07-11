@@ -14,6 +14,8 @@ class FCVideoTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var videoView: YTPlayerView!
     @IBOutlet weak var descriptionLabel: UILabel!
+    weak var shareBtnDelegate: FCNewsFeedShareButtonDelegate?
+    var newsFeedModel = FCNewsFeedModel()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,10 +23,21 @@ class FCVideoTableViewCell: UITableViewCell {
         videoView.delegate = self        
     }
     
-    func setupCell(_ model: FCNewsFeedModel){
+    func setupCell(_ model: FCNewsFeedModel){        
         titleLabel.text = model.title
         videoView.load(withVideoId: model.url, playerVars:["playsinline":1])
         descriptionLabel.text = model.description
+        saveModel(model)
+    }
+    
+    func saveModel(_ model: FCNewsFeedModel){
+        newsFeedModel.title = model.title
+        newsFeedModel.url = model.url
+        newsFeedModel.description = model.description
+    }
+    
+    @IBAction func share(_ sender: Any) {
+        shareBtnDelegate?.didPressShareButton(newsFeedModel)
     }
 }
 

@@ -20,6 +20,7 @@ class FCNewsFeedVC: UIViewController {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
+        
         newsFeedModelArray = FCDataManager.shared.newsFeedModelArray        
         registerCells()
         tableView.rowHeight = UITableView.automaticDimension
@@ -53,14 +54,17 @@ extension FCNewsFeedVC: UITableViewDataSource{
         switch model.type {
         case "video":
             let cell = tableView.dequeueReusableCell(withIdentifier: "VideoCell") as! FCVideoTableViewCell
+            cell.shareBtnDelegate = self
             cell.setupCell(model)
             return cell
         case "news_link":
             let cell = tableView.dequeueReusableCell(withIdentifier: "NewsLinkCell") as! FCNewsLinkTableViewCell
+            cell.shareBtnDelegate = self
             cell.setupCell(model)
             return cell
         case "fact":
             let cell = tableView.dequeueReusableCell(withIdentifier: "FactCell") as! FCFactTableViewCell
+            cell.shareBtnDelegate = self
             cell.setupCell(model)
             return cell
         default:
@@ -84,12 +88,14 @@ extension FCNewsFeedVC: UITableViewDelegate{
                 var startingId = Int(newsFeedModelArray.last?.id ?? "0") ?? 0
                 if startingId != 0{
                     startingId += 1
-                    FCDataManager.shared.getNewsFeed(key: String(startingId), pageSize: Constants.NEWS_FEED_PAGE_SIZE) { [weak self] (success,newsFeedModelArray) in
-                        if let modelArray = newsFeedModelArray{
-                            self?.newsFeedModelArray.append(contentsOf: modelArray)
+                    FCDataManager.shared.getNewsFeed(startingKey: String(startingId), pageSize: Constants.NEWS_FEED_PAGE_SIZE) { [weak self] (success,newsFeedModelArray) in
+                        if success{
+                            if let modelArray = newsFeedModelArray{
+                                self?.newsFeedModelArray.append(contentsOf: modelArray)
+                            }
+                            self?.updateTableRows(newsFeedModelArray!)
+                            self?.isFetchingData = false
                         }
-                        self?.updateTableRows(newsFeedModelArray!)
-                        self?.isFetchingData = false
                     }
                 }
             }
@@ -112,7 +118,6 @@ extension FCNewsFeedVC: UITableViewDelegate{
         let model = newsFeedModelArray[indexPath.row]
         switch model.type {
         case "news_link":
-//            openLinkInSafari(model)
             performSegue(withIdentifier: "FCNewsLinkDetailVC", sender: indexPath.row)
         case "video":
             performSegue(withIdentifier: "FCVideoDetailVC", sender: indexPath.row)
@@ -120,7 +125,10 @@ extension FCNewsFeedVC: UITableViewDelegate{
             performSegue(withIdentifier: "FCFactDetailVC", sender: indexPath.row)
         }        
     }
-    
+}
+
+//segue
+extension FCNewsFeedVC{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? FCFactDetailVC{
             let index = sender as! Int
@@ -138,15 +146,12 @@ extension FCNewsFeedVC: UITableViewDelegate{
             vc.model = model
         }
     }
-    
-    func openLinkInSafari(_ model: FCNewsFeedModel){
-        print("open news link")
-        let urlString = model.url
-        guard let url = URL(string: urlString) else{
-            print("Invalid URL")
-            return
-        }
-        let svc = SFSafariViewController(url: url)
-        navigationController?.present(svc, animated: true, completion: nil)
+}
+
+//cell button press protocol
+extension FCNewsFeedVC: FCNewsFeedShareButtonDelegate{
+    func didPressShareButton(_ model: FCNewsFeedModel) {
+        let text = [model.title,model.url,model.description]
+        FCUtilities.shareContent(self, text)
     }
 }
