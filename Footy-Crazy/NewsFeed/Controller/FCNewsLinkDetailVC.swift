@@ -15,7 +15,7 @@ class FCNewsLinkDetailVC: UIViewController {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var urlButton: UIButton!
     @IBOutlet weak var imgView: UIImageView!
-    var model = FCNewsFeedModel()
+    var model: FCNewsFeedModel = FCNewsFeedModel()
     let slp = SwiftLinkPreview()
     
     override func viewDidLoad() {
@@ -29,11 +29,15 @@ class FCNewsLinkDetailVC: UIViewController {
         descriptionLabel.text = model.description
         titleLabel.text = model.title
         urlButton.setTitle(model.url, for: .normal)
-        loadLink(model.url)
+        if let urlString = model.url{
+            loadLink(urlString)
+        }
     }
     
     @IBAction func urlButtonAction(_ sender: Any) {
-        FCUtilities.openLinkInSafari(model.url, self.navigationController)
+        if let urlString = model.url {
+            FCUtilities.openLinkInSafari(urlString, self.navigationController)
+        }
     }
     
     func loadLink(_ newsLink: String){
@@ -41,10 +45,10 @@ class FCNewsLinkDetailVC: UIViewController {
             self?.titleLabel.text   = response.title
             self?.urlButton.setTitle(response.url?.absoluteString, for: .normal)
             self?.descriptionLabel.text = response.description
-            if let imgURL = response.image{
-                self?.imgView.loadImage(from: URL(string: imgURL)!, completion: nil)
-            } else{
-                self?.imgView.image = Constants.EMPTY_IMAGE
+            if let urlString = response.image{
+                if let url = URL(string: urlString){
+                    self?.imgView.loadImage(from: url, completion: nil)
+                }
             }
         }) { [weak self](error) in
             self?.imgView.image = Constants.EMPTY_IMAGE

@@ -15,7 +15,7 @@ class FCNewsLinkTableViewCell: UITableViewCell {
     @IBOutlet weak var newsImg: UIImageView!
     @IBOutlet weak var urlLbl: UILabel!
     @IBOutlet weak var descriptionLbl: UILabel!
-    var newsFeedModel = FCNewsFeedModel()
+    var newsFeedModel : FCNewsFeedModel = FCNewsFeedModel()
     weak var shareBtnDelegate: FCNewsFeedShareButtonDelegate?
     let slp = SwiftLinkPreview()
 
@@ -33,7 +33,9 @@ class FCNewsLinkTableViewCell: UITableViewCell {
         urlLbl.text     = model.url
         descriptionLbl.text = model.description
         newsImg.image       = model.image ?? Constants.EMPTY_IMAGE
-        loadLink(model.url)
+        if let urlString = model.url{
+            loadLink(urlString)
+        }
         saveModel(model)
     }
     

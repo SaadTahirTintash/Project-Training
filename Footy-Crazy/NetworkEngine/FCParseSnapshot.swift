@@ -15,7 +15,7 @@ class FCParseSnapshot{
         let enumerator = snapshot.children
         while let snap = enumerator.nextObject() as? DataSnapshot{
             if let value = snap.value as? [String: Any]{
-                let newsFeedModel = FCNewsFeedModel(id: snap.key,url: value["url"] as? String ?? "", description: value["description"] as? String ?? "", title: value["title"] as? String ?? "", type: value["type"] as? String ?? "", image: Constants.EMPTY_IMAGE)
+                let newsFeedModel = FCNewsFeedModel(id: Int(snap.key) ?? 0,url: value["url"] as? String ?? "", description: value["description"] as? String, title: value["title"] as? String, type: value["type"] as? String ?? "empty", image: nil)
                 newsFeedModelArray.append(newsFeedModel)
             }
         }

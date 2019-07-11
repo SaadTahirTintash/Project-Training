@@ -15,7 +15,7 @@ class FCFactTableViewCell: UITableViewCell {
     @IBOutlet weak var factLabel: UILabel!
     var downloadedImg: UIImage?
     weak var shareBtnDelegate: FCNewsFeedShareButtonDelegate?
-    var newsFeedModel = FCNewsFeedModel()
+    var newsFeedModel: FCNewsFeedModel = FCNewsFeedModel()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,7 +25,12 @@ class FCFactTableViewCell: UITableViewCell {
     func setupCell(_ model: FCNewsFeedModel){
         titleLabel.text = model.title
         factLabel.text = model.description
-        imgView.loadImage(from: URL(string: model.url)!, completion: nil)
+        if let urlString = model.url{
+            if let url = URL(string: urlString){
+                    imgView.loadImage(from: url, completion: nil)
+            }
+        }
+        
         saveModel(model)
     }
     

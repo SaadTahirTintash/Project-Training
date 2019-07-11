@@ -13,7 +13,7 @@ class FCFactDetailVC: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var imgView: UIImageView!
-    var model = FCNewsFeedModel()
+    var model: FCNewsFeedModel = FCNewsFeedModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +25,11 @@ class FCFactDetailVC: UIViewController {
         //initial setup
         descriptionLabel.text = model.description
         titleLabel.text = model.title
-        imgView.loadImage(from: URL(string: model.url)!, completion: nil)
+        if let urlString = model.url{
+            if let url = URL(string: urlString){
+                imgView.loadImage(from: url, completion: nil)
+            }
+        }        
     }
 
 }

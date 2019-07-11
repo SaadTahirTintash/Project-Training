@@ -85,7 +85,7 @@ extension FCNewsFeedVC: UITableViewDelegate{
             //reached end of table
             if !isFetchingData{
                 isFetchingData = true
-                var startingId = Int(newsFeedModelArray.last?.id ?? "0") ?? 0
+                var startingId = newsFeedModelArray.last?.id ?? 0
                 if startingId != 0{
                     startingId += 1
                     FCDataManager.shared.getNewsFeed(startingKey: String(startingId), pageSize: Constants.NEWS_FEED_PAGE_SIZE) { [weak self] (success,newsFeedModelArray) in
@@ -105,7 +105,7 @@ extension FCNewsFeedVC: UITableViewDelegate{
     func updateTableRows(_ modelArray: [FCNewsFeedModel]){
         var indexPathsArray = [IndexPath]()
         for obj in modelArray.enumerated(){
-            let index = Int(obj.element.id) ?? 1
+            let index = obj.element.id
             let indexPath = IndexPath(row: index - 1, section: 0)
             indexPathsArray.append(indexPath)
         }
@@ -121,8 +121,10 @@ extension FCNewsFeedVC: UITableViewDelegate{
             performSegue(withIdentifier: "FCNewsLinkDetailVC", sender: indexPath.row)
         case "video":
             performSegue(withIdentifier: "FCVideoDetailVC", sender: indexPath.row)
-        default:
+        case "fact":
             performSegue(withIdentifier: "FCFactDetailVC", sender: indexPath.row)
+        default:
+            print("Can't perform segue for empty cells")
         }        
     }
 }
