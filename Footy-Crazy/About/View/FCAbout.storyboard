@@ -10,21 +10,75 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--About-->
+        <!--About Us-->
         <scene sceneID="com-Eb-IKS">
             <objects>
-                <viewController storyboardIdentifier="AboutVC" id="fZJ-L0-qwf" sceneMemberID="viewController">
+                <viewController id="fZJ-L0-qwf" customClass="FCAboutVC" customModule="Footy_Crazy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="40g-Ql-cAQ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VoV-Rn-6sD">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="C0Y-62-bih">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="20.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="laT-uw-ltz">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="C0Y-62-bih" firstAttribute="width" secondItem="VoV-Rn-6sD" secondAttribute="width" id="QfJ-G1-4ug"/>
+                                    <constraint firstItem="C0Y-62-bih" firstAttribute="leading" secondItem="VoV-Rn-6sD" secondAttribute="leading" id="bfx-Ta-D2v"/>
+                                    <constraint firstAttribute="trailing" secondItem="C0Y-62-bih" secondAttribute="trailing" id="doT-kJ-jh8"/>
+                                    <constraint firstItem="C0Y-62-bih" firstAttribute="top" secondItem="VoV-Rn-6sD" secondAttribute="top" id="qQo-6L-lhj"/>
+                                    <constraint firstAttribute="bottom" secondItem="C0Y-62-bih" secondAttribute="bottom" id="wp0-39-CKw"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="q5z-Il-mTK" firstAttribute="trailing" secondItem="VoV-Rn-6sD" secondAttribute="trailing" id="Alt-3N-QDe"/>
+                            <constraint firstItem="VoV-Rn-6sD" firstAttribute="leading" secondItem="q5z-Il-mTK" secondAttribute="leading" id="r8p-c2-7de"/>
+                            <constraint firstItem="q5z-Il-mTK" firstAttribute="bottom" secondItem="VoV-Rn-6sD" secondAttribute="bottom" id="w3R-Ir-nS3"/>
+                            <constraint firstItem="VoV-Rn-6sD" firstAttribute="top" secondItem="q5z-Il-mTK" secondAttribute="top" id="y1q-je-2Lm"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="q5z-Il-mTK"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="About" image="about_us" id="M6p-HV-oBU"/>
+                    <navigationItem key="navigationItem" title="About Us" id="AVr-bq-A7n"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="aboutLabel" destination="laT-uw-ltz" id="7ua-vo-SEK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ByN-FJ-3jH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="968.11594202898561" y="34.821428571428569"/>
+        </scene>
+        <!--About-->
+        <scene sceneID="7Sf-3v-DZ2">
+            <objects>
+                <navigationController storyboardIdentifier="AboutVC" automaticallyAdjustsScrollViewInsets="NO" id="tzB-bX-N65" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="About" image="about_us" id="M6p-HV-oBU"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="uJd-OC-z1O">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="fZJ-L0-qwf" kind="relationship" relationship="rootViewController" id="J0y-r3-6Wn"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Cmr-6i-3kX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="143" y="35"/>
         </scene>
     </scenes>
     <resources>

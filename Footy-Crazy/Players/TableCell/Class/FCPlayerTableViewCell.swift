@@ -18,7 +18,8 @@ class FCPlayerTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        countryFlag.layer.masksToBounds = true
+        countryFlag.layer.cornerRadius = countryFlag.frame.width/2
     }
 
     func setupCell(_ model: FCPlayersModel){

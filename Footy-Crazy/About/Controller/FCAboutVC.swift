@@ -10,9 +10,14 @@ import UIKit
 
 class FCAboutVC: UIViewController {
 
+    @IBOutlet weak var aboutLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setupVC()
+    }
+    
+    func setupVC(){
+        aboutLabel.text = Constants.ABOUT_US
     }
 }

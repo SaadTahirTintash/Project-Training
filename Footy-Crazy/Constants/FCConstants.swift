@@ -34,4 +34,6 @@ class Constants{
     static let EMPTY_NEWS_URL_STRING = "https:\\google.com"
     static let EMPTY_NEWS_DESCRIPTION = "News Description"
     static let EMPTY_NEWS_TITLE = "News Title"
+    
+    static let ABOUT_US = "This text is about us"
 }

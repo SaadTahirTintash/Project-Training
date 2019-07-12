@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--PlayersVC-->
+        <!--Players-->
         <scene sceneID="dcr-8a-hSf">
             <objects>
                 <viewController id="NnE-Rk-2M9" customClass="FCPlayersVC" customModule="Footy_Crazy" customModuleProvider="target" sceneMemberID="viewController">
@@ -32,7 +32,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="anB-6o-hyh"/>
                     </view>
-                    <navigationItem key="navigationItem" id="pQU-BB-dl7"/>
+                    <navigationItem key="navigationItem" title="Players" id="pQU-BB-dl7"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="k2I-dp-dRd" id="TpY-gh-zXL"/>

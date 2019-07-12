@@ -17,7 +17,8 @@ class FCTeamTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        flagImage.layer.masksToBounds = true
+        flagImage.layer.cornerRadius = flagImage.frame.width/2        
     }
 
     func setupCell(_ model: FCTeamsModel){
