@@ -10,9 +10,10 @@ import UIKit
 
 struct FCTeamsModel{
     var id: Int = 0
-    var standing: Int?
-    var flag: UIImage?
-    var flagUrl: String?
     var name: String?
+    var standing: String?
+    var country: String?
+    var flag: UIImage?
+    var flagUrl: String?    
     var description: String?
 }

@@ -19,14 +19,15 @@ class FCDataManager{
     
     var newsFeedModelArray: [FCNewsFeedModel] = [FCNewsFeedModel]()
     var galleryModelArray: [FCGalleryModel] = [FCGalleryModel]()
+    var teamsModelArray: [FCTeamsModel] = [FCTeamsModel]()
+    var playersModelArray: [FCPlayersModel] = [FCPlayersModel]()
     
     private init(){
         networkEngine = NetworkEngine()
     }
     
-    //this function requests data from server with appropriate key and page size, on response it appends data into its respective model and calls completion
     func getNewsFeed(startingKey id: String, pageSize limit: Int, completion: @escaping(_ success: Bool, _ newsFeedModelArray: [FCNewsFeedModel]?)->()){
-        networkEngine?.loadNewsFeed(startingKey: id, pageSize: limit, completion: { [weak self] (success, newsFeedModelArray) in            
+        networkEngine?.loadNewsFeed(startingKey: id, pageSize: limit, completion: { [weak self] (success, newsFeedModelArray) in
             if success, let array = newsFeedModelArray{
                 self?.newsFeedModelArray = array
             }
@@ -40,6 +41,24 @@ class FCDataManager{
                 self?.galleryModelArray = array
             }
             completion(success,galleryModelArray)
+        })
+    }
+    
+    func getTeams(startingKey id: String, pageSize limit: Int, completion: ((_ success: Bool, _ teamsModelArray: [FCTeamsModel]?)->Void)?){
+        networkEngine?.loadTeams(startingKey: id, pageSize: limit, completion: { [weak self] (success, teamsModelArray) in
+            if success, let array = teamsModelArray{
+                self?.teamsModelArray = array
+            }
+            completion?(success,teamsModelArray)
+        })
+    }
+    
+    func getPlayers(startingKey id: String, pageSize limit: Int, completion: ((_ success: Bool, _ playersModelArray: [FCPlayersModel]?)->Void)?){
+        networkEngine?.loadPlayers(startingKey: id, pageSize: limit, completion: { [weak self] (success, playersModelArray) in
+            if success, let array = playersModelArray{
+                self?.playersModelArray = array
+            }
+            completion?(success,playersModelArray)
         })
     }
     

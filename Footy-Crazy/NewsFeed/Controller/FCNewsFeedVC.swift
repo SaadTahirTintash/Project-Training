@@ -154,6 +154,6 @@ extension FCNewsFeedVC{
 extension FCNewsFeedVC: FCNewsFeedShareButtonDelegate{
     func didPressShareButton(_ model: FCNewsFeedModel) {
         let text = [model.title,model.url,model.description]
-        FCUtilities.shareContent(self, text)
+        FCUtilities.shareContent(self, text as [Any])
     }
 }

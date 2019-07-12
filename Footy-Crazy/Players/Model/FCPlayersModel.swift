@@ -12,9 +12,9 @@ struct FCPlayersModel{
     var id: Int = 0
     var standing: String?
     var name: String?
-    var countryName: String?
-    var countryFlag: UIImage?
-    var countryFlagUrl: String?
-    var clubName: String?
+    var country: String?
+    var club: String?
+    var playerDP: UIImage?
+    var playerDPUrl: String?
     var description: String?
 }

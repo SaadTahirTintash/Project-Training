@@ -12,14 +12,64 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FCTeamTableViewCell" id="KGk-i7-Jjw" customClass="FCTeamTableViewCell" customModule="Footy_Crazy" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TeamCell" rowHeight="100" id="KGk-i7-Jjw" customClass="FCTeamTableViewCell" customModule="Footy_Crazy" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="470" height="100"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="470" height="99.5"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jN5-1g-1eL">
+                        <rect key="frame" x="0.0" y="0.0" width="470" height="100.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gKa-Iu-X8N">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="100.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="o0b-Db-5wP"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Cuu-Au-PLI">
+                                <rect key="frame" x="50" y="0.0" width="100" height="100.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="fuv-JC-FtJ"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Team Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IWB-uX-kcT">
+                                <rect key="frame" x="150" y="0.0" width="202.5" height="100.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Country" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7WE-5B-crx">
+                                <rect key="frame" x="352.5" y="0.0" width="117.5" height="100.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="100" id="Zy8-Wx-ubl"/>
+                        </constraints>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="jN5-1g-1eL" secondAttribute="bottom" id="5I1-an-cHw"/>
+                    <constraint firstItem="jN5-1g-1eL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Hyx-uA-Wk2"/>
+                    <constraint firstAttribute="trailing" secondItem="jN5-1g-1eL" secondAttribute="trailing" id="U3R-5S-QNY"/>
+                    <constraint firstItem="jN5-1g-1eL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="u4S-ac-wkR"/>
+                </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="country" destination="7WE-5B-crx" id="Qf6-HI-xsB"/>
+                <outlet property="flagImage" destination="Cuu-Au-PLI" id="OfM-zG-IyC"/>
+                <outlet property="standingLabel" destination="gKa-Iu-X8N" id="akT-hu-ysM"/>
+                <outlet property="teamName" destination="IWB-uX-kcT" id="68W-4Q-YLz"/>
+            </connections>
+            <point key="canvasLocation" x="-10.144927536231885" y="111.16071428571428"/>
         </tableViewCell>
     </objects>
 </document>

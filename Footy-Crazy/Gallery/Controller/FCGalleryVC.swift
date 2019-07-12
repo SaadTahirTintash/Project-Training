@@ -21,10 +21,12 @@ class FCGalleryVC: UIViewController {
         isFetchingData = true
         registerCells()
         FCDataManager.shared.getGallery(startingKey: Constants.GALLERY_STARTING_KEY, pageSize: Constants.GALLERY_INITIAL_PAGE_SIZE){[weak self](success, modelArray) in
-            if success, let array = modelArray{
-                self?.galleryModelArray.append(contentsOf: array)
-                self?.collectionView.reloadData()
+            guard success, let array = modelArray else{
+                self?.isFetchingData = false
+                return
             }
+            self?.galleryModelArray.append(contentsOf: array)
+            self?.collectionView.reloadData()
             self?.isFetchingData = false
         }
     }
@@ -86,15 +88,15 @@ extension FCGalleryVC: UICollectionViewDelegate{
             collectionView.insertItems(at: indexPathsArray)
         }, completion: nil)
     }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //perform segue
-        performSegue(withIdentifier: "GalleryImageDetailVCSegue", sender: indexPath.row)
-    }
 }
 
 //Segue
 extension FCGalleryVC{
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "GalleryImageDetailVCSegue", sender: indexPath.row)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? FCGalleryDetailVC{
             if let index = sender as? Int{

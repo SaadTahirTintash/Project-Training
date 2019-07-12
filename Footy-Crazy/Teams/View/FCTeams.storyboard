@@ -10,21 +10,140 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Teams-->
+        <!--TeamsVC-->
         <scene sceneID="3Lh-5Y-Ufq">
             <objects>
-                <viewController storyboardIdentifier="TeamsVC" id="lFH-tz-MYn" sceneMemberID="viewController">
+                <viewController id="lFH-tz-MYn" customClass="FCTeamsVC" customModule="Footy_Crazy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qc6-nH-Rpr">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="emI-sO-XEE">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="emI-sO-XEE" firstAttribute="top" secondItem="0eu-Bb-tGk" secondAttribute="top" id="64s-4t-hgr"/>
+                            <constraint firstItem="emI-sO-XEE" firstAttribute="leading" secondItem="0eu-Bb-tGk" secondAttribute="leading" id="NZj-6F-ktn"/>
+                            <constraint firstItem="0eu-Bb-tGk" firstAttribute="bottom" secondItem="emI-sO-XEE" secondAttribute="bottom" id="U68-vF-pBw"/>
+                            <constraint firstItem="0eu-Bb-tGk" firstAttribute="trailing" secondItem="emI-sO-XEE" secondAttribute="trailing" id="rvm-2r-70n"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="0eu-Bb-tGk"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Teams" image="teams" id="We1-pa-rWK"/>
+                    <navigationItem key="navigationItem" id="jfk-Rt-P9Y"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="tableView" destination="emI-sO-XEE" id="w8M-L2-8ok"/>
+                        <segue destination="MiB-NG-Pqh" kind="show" identifier="FCTeamsDetailVCSegue" id="38j-Jp-87u"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F3o-xn-SiP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1047.8260869565217" y="109.82142857142857"/>
+        </scene>
+        <!--Teams DetailVC-->
+        <scene sceneID="F3f-q0-Xbk">
+            <objects>
+                <viewController id="MiB-NG-Pqh" customClass="FCTeamsDetailVC" customModule="Footy_Crazy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="wgK-Sm-Gfd">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7JP-Hy-Hmi">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="2Lu-Kv-Q2O">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1245"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0yx-yx-rpj">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZvU-JO-nTb">
+                                                <rect key="frame" x="0.0" y="20.5" width="414" height="250"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="250" id="bbZ-vL-4uE"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team Standing" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AVk-7D-p9N">
+                                                <rect key="frame" x="0.0" y="270.5" width="414" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team Country" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fir-zJ-Ei8">
+                                                <rect key="frame" x="0.0" y="291" width="414" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q4C-Sf-k0A">
+                                                <rect key="frame" x="0.0" y="311.5" width="414" height="933.5"/>
+                                                <mutableString key="text">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+</mutableString>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="2Lu-Kv-Q2O" secondAttribute="bottom" id="48x-uy-9de"/>
+                                    <constraint firstAttribute="trailing" secondItem="2Lu-Kv-Q2O" secondAttribute="trailing" id="64L-wg-18q"/>
+                                    <constraint firstItem="2Lu-Kv-Q2O" firstAttribute="leading" secondItem="7JP-Hy-Hmi" secondAttribute="leading" id="wHz-Wa-hBz"/>
+                                    <constraint firstItem="2Lu-Kv-Q2O" firstAttribute="top" secondItem="7JP-Hy-Hmi" secondAttribute="top" id="wlp-wi-a5n"/>
+                                    <constraint firstItem="2Lu-Kv-Q2O" firstAttribute="width" secondItem="7JP-Hy-Hmi" secondAttribute="width" id="z9d-M5-BDh"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="7JP-Hy-Hmi" firstAttribute="top" secondItem="mem-bx-4r5" secondAttribute="top" id="R63-5O-9Ma"/>
+                            <constraint firstItem="7JP-Hy-Hmi" firstAttribute="trailing" secondItem="mem-bx-4r5" secondAttribute="trailing" id="bki-3N-ld7"/>
+                            <constraint firstItem="7JP-Hy-Hmi" firstAttribute="leading" secondItem="mem-bx-4r5" secondAttribute="leading" id="cfw-KE-790"/>
+                            <constraint firstItem="7JP-Hy-Hmi" firstAttribute="bottom" secondItem="mem-bx-4r5" secondAttribute="bottom" id="m9L-4u-ah9"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="mem-bx-4r5"/>
+                    </view>
+                    <connections>
+                        <outlet property="countryLabel" destination="Fir-zJ-Ei8" id="pm0-OF-Dys"/>
+                        <outlet property="descriptionLabel" destination="q4C-Sf-k0A" id="qnm-kf-CLR"/>
+                        <outlet property="flagImage" destination="ZvU-JO-nTb" id="k6O-Z3-Te6"/>
+                        <outlet property="nameLabel" destination="0yx-yx-rpj" id="6NJ-Vx-MAO"/>
+                        <outlet property="standingLabel" destination="AVk-7D-p9N" id="ske-0W-HNn"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BjU-TS-rTE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1905.7971014492755" y="109.82142857142857"/>
+        </scene>
+        <!--Teams-->
+        <scene sceneID="Wsc-lW-iKd">
+            <objects>
+                <navigationController storyboardIdentifier="TeamsVC" automaticallyAdjustsScrollViewInsets="NO" id="YWW-h4-ZUh" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Teams" image="teams" id="We1-pa-rWK"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="CcI-IK-3Cb">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="lFH-tz-MYn" kind="relationship" relationship="rootViewController" id="HBO-Lj-wcf"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EFt-M2-MON" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="96" y="110"/>
         </scene>
     </scenes>
     <resources>
