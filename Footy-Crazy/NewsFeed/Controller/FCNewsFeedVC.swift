@@ -24,7 +24,7 @@ class FCNewsFeedVC: UIViewController {
         newsFeedModelArray = FCDataManager.shared.newsFeedModelArray        
         registerCells()
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 200
+        tableView.estimatedRowHeight = 450
     }
     
     func registerCells(){

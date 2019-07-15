@@ -11,15 +11,13 @@ import UIKit
 class FCPlayerTableViewCell: UITableViewCell {
 
     @IBOutlet weak var standingLabel: UILabel!
-    @IBOutlet weak var countryFlag: UIImageView!
+    @IBOutlet weak var playerDPImage: UIImageView!
     @IBOutlet weak var playerName: UILabel!
     @IBOutlet weak var countryName: UILabel!
     @IBOutlet weak var clubName: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        countryFlag.layer.masksToBounds = true
-        countryFlag.layer.cornerRadius = countryFlag.frame.width/2
     }
 
     func setupCell(_ model: FCPlayersModel){
@@ -37,7 +35,7 @@ class FCPlayerTableViewCell: UITableViewCell {
         }
         if let imageUrl = model.playerDPUrl{
             if let url = URL(string: imageUrl){
-                countryFlag.loadImage(from: url, completion: nil)
+                playerDPImage.loadImage(from: url, completion: nil)
             }
         }
     }

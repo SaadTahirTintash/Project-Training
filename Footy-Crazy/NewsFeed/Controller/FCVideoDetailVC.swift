@@ -37,15 +37,16 @@ extension FCVideoDetailVC: YTPlayerViewDelegate{
     
     func addActivityIndicator(_ to: UIView){
         let activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
-        activityIndicator.center = CGPoint(x: to.frame.width/2, y: to.frame.height/2)
+        activityIndicator.center = to.center
         to.addSubview(activityIndicator)
+        to.layoutIfNeeded()
         activityIndicator.startAnimating()
     }
     
     func playerViewPreferredInitialLoading(_ playerView: YTPlayerView) -> UIView? {
-        let videoPreferredView = UIView.init(frame: videoView.frame)
+        let videoPreferredView = UIView.init(frame: playerView.frame)
         videoPreferredView.backgroundColor = .black
-        addActivityIndicator(videoPreferredView)
+        //addActivityIndicator(videoPreferredView)
         return videoPreferredView
     }
     

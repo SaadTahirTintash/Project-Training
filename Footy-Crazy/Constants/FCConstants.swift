@@ -18,7 +18,7 @@ class Constants{
     static let TEAMS_STARTING_KEY = "1"
     static let PLAYERS_STARTING_KEY = "1"
 
-    static let NEWS_FEED_INITIAL_PAGE_SIZE = 10
+    static let NEWS_FEED_INITIAL_PAGE_SIZE = 5
     static let GALLERY_INITIAL_PAGE_SIZE = 10
     static let TEAMS_INITIAL_PAGE_SIZE = 10
     static let PLAYERS_INITIAL_PAGE_SIZE = 10
@@ -36,4 +36,6 @@ class Constants{
     static let EMPTY_NEWS_TITLE = "News Title"
     
     static let ABOUT_US = "This text is about us"
+    
+    static let GALLERY_CELL_ROW_COUNT = 2
 }
