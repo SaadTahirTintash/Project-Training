@@ -11,6 +11,7 @@ import UIKit
 class FCGalleryCell: UICollectionViewCell {
     
     @IBOutlet weak var img: UIImageView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -20,9 +21,11 @@ class FCGalleryCell: UICollectionViewCell {
     func setupCell(_ model: FCGalleryModel){
         if let urlString = model.imageUrl{
             if let url = URL(string: urlString){
-                img.loadImage(from: url, completion: nil)
+                img.loadImage(from: url){
+                    [weak self](_,_) in
+                    self?.activityIndicator.stopAnimating()
+                }
             }
-        }
-    }
-    
+        }        
+    }    
 }
