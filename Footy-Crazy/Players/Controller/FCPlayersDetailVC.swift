@@ -28,16 +28,16 @@ class FCPlayersDetailVC: UIViewController {
             nameLabel.text = name
         }
         if let club = model.club{
-            clubLabel.text = club
+            clubLabel.text = "Club: \(club)"
         }
         if let country = model.country{
-            countryLabel.text = country
+            countryLabel.text = "Country: \(country)"
         }
         if let description = model.description{
             descriptionLabel.text = description
         }
         if let standing = model.standing{
-            standingLabel.text = standing
+            standingLabel.text = "Standing: \(standing)"
         }
         if let imgString = model.playerDPUrl{
             if let url = URL(string: imgString){

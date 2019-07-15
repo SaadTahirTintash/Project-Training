@@ -28,10 +28,10 @@ class FCTeamsDetailVC: UIViewController {
             nameLabel.text = name
         }
         if let standing = model.standing{
-            standingLabel.text = standing
+            standingLabel.text = "Standing: \(standing)"
         }        
         if let country = model.country{
-            countryLabel.text = country
+            countryLabel.text = "Country: \(country)"
         }
         if let description = model.description{
             descriptionLabel.text = description
