@@ -52,7 +52,9 @@ extension FCPlayersVC: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerCell") as! FCPlayerTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerCell") as? FCPlayerTableViewCell else{
+            return UITableViewCell(.clear)
+        }
         cell.viewModel = viewModel?.viewModelForDetail(at: indexPath.row)
         cell.configure()
         return cell

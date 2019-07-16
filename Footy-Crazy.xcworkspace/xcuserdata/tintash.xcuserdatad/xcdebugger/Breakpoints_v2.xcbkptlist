@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Footy-Crazy/SplashScreen/Controller/FCSplashScreenVC.swift"
-            timestampString = "584866584.921231"
+            timestampString = "584967863.113188"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "29"
@@ -58,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Footy-Crazy/NewsFeed/Controller/FCNewsFeedVC.swift"
-            timestampString = "584967354.832245"
+            timestampString = "584967863.113711"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "20"
@@ -74,13 +74,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Footy-Crazy/Gallery/Controller/FCGalleryVC.swift"
-            timestampString = "584954926.987939"
+            timestampString = "584967863.113819"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
-            landmarkName = "scrollViewDidScroll(_:)"
-            landmarkType = "7">
+            startingLineNumber = "66"
+            endingLineNumber = "66"
+            landmarkName = "FCGalleryVC"
+            landmarkType = "21">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

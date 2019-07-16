@@ -35,3 +35,10 @@ extension UITableViewCell {
         backgroundColor = bgColor
     }
 }
+
+extension UICollectionViewCell{
+    convenience init(_ bgColor: UIColor = .clear){
+        self.init()
+        backgroundColor = bgColor
+    }
+}

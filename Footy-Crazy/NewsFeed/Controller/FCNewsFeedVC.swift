@@ -53,12 +53,12 @@ extension FCNewsFeedVC: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let type = viewModel?.getType(of: indexPath.row) else{
-            return UITableViewCell()
+            return UITableViewCell(.clear)
         }
         switch type {
         case "video":
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "VideoCell") as? FCVideoTableViewCell else{
-                return UITableViewCell()
+                return UITableViewCell(.clear)
             }
             cell.shareBtnDelegate = self
             cell.viewModel = viewModel?.viewModelForDetail(at: indexPath.row)
@@ -66,7 +66,7 @@ extension FCNewsFeedVC: UITableViewDataSource{
             return cell
         case "news_link":
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "NewsLinkCell") as? FCNewsLinkTableViewCell else{
-                return UITableViewCell()
+                return UITableViewCell(.clear)
             }
             cell.shareBtnDelegate = self
             cell.viewModel = viewModel?.viewModelForDetail(at: indexPath.row)
@@ -74,14 +74,14 @@ extension FCNewsFeedVC: UITableViewDataSource{
             return cell
         case "fact":
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "FactCell") as? FCFactTableViewCell else{
-                return UITableViewCell()
+                return UITableViewCell(.clear)
             }
             cell.shareBtnDelegate = self
             cell.viewModel = viewModel?.viewModelForDetail(at: indexPath.row)
             cell.configure()
             return cell
         default:
-            return UITableViewCell()
+            return UITableViewCell(.clear)
         }
     }
 }
