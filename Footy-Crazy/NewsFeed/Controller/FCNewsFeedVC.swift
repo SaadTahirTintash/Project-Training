@@ -33,14 +33,17 @@ class FCNewsFeedVC: UIViewController {
     }
     
     func initializeCompletionHandlers(){
-        viewModel?.moreDataCompletionHandler = {[weak self](success, indexPathAray) in
-            if success{
-                if let indexPathArray = indexPathAray{
-                    self?.tableView.beginUpdates()
-                    self?.tableView.insertRows(at: indexPathArray, with: .fade)
-                    self?.tableView.endUpdates()
-                }
+        viewModel?.newDataFetched = { [weak self] success in
+            guard success else { return }
+            let rowCount    = (self?.tableView.numberOfRows(inSection: 0) ?? 0)
+            let range       = rowCount ..< (self?.viewModel?.itemCount ?? 0)
+            var indices     = [IndexPath]()
+            for i in range {
+                indices.append(IndexPath(row: i, section: 0))
             }
+            self?.tableView.beginUpdates()
+            self?.tableView.insertRows(at: indices, with: .fade)
+            self?.tableView.endUpdates()
         }
     }
 }
@@ -55,6 +58,7 @@ extension FCNewsFeedVC: UITableViewDataSource{
         guard let type = viewModel?.getType(of: indexPath.row) else{
             return UITableViewCell(.clear)
         }
+        checkForMoreData(at: indexPath.row)
         switch type {
         case "video":
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "VideoCell") as? FCVideoTableViewCell else{
@@ -84,20 +88,19 @@ extension FCNewsFeedVC: UITableViewDataSource{
             return UITableViewCell(.clear)
         }
     }
+    
+    func checkForMoreData(at displayingIndex: Int){
+        let totalItems = viewModel?.itemCount ?? 0
+        let index = totalItems - displayingIndex
+        if index <= 5 {
+            print("Need Update")
+            viewModel?.getMoreData()
+        }
+    }
 }
 
 //UITableView delegate
 extension FCNewsFeedVC: UITableViewDelegate{
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let height = scrollView.frame.size.height
-        let contentYOffset = scrollView.contentOffset.y
-        let distanceFromBottom = scrollView.contentSize.height - contentYOffset
-        if distanceFromBottom < height{
-            //reached end of table
-            viewModel?.getMoreData()
-        }
-    }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let type = viewModel?.getType(of: indexPath.row){
             switch type {

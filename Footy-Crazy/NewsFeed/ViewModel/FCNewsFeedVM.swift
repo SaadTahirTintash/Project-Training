@@ -12,9 +12,9 @@ class FCNewsFeedVM: FCViewModelProtocol{
     
     private var modelArray: [FCNewsFeedModel]
     var isFetchingData: Bool = false
-    var initialDataCompletionHandler: ((Bool) -> Void)?
-    var moreDataCompletionHandler: ((Bool, [IndexPath]?) -> Void)?
-    
+    var initialDataFetched: ((Bool) -> Void)?
+    var newDataFetched: ((Bool) -> Void)?
+
     init(_ modelArray: [FCNewsFeedModel]) {
         self.modelArray = modelArray
     }
@@ -45,27 +45,15 @@ class FCNewsFeedVM: FCViewModelProtocol{
                     if success{
                         guard success, let modelArray = modelArray else{
                             self?.isFetchingData = false
-                            self?.moreDataCompletionHandler?(false,nil)
+                            self?.newDataFetched?(false)
                             return
                         }
                         self?.modelArray.append(contentsOf: modelArray)
-                        self?.updateTableRows(modelArray)
                         self?.isFetchingData = false
+                        self?.newDataFetched?(true)
                     }
                 }
             }
         }
-    }
-    
-    func updateTableRows(_ modelArray: [FCNewsFeedModel]){
-        var indexPathsArray = [IndexPath]()
-        for obj in modelArray.enumerated(){
-            let index = obj.element.id
-            let indexPath = IndexPath(row: index - 1, section: 0)
-            indexPathsArray.append(indexPath)
-        }
-        moreDataCompletionHandler?(true,indexPathsArray)
-    }
-    
-    
+    }    
 }

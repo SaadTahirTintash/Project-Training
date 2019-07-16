@@ -28,19 +28,22 @@ class FCTeamsVC: UIViewController {
     }
     
     func initializeCompletionHandlers(){
-        viewModel?.initialDataCompletionHandler = {[weak self](success) in
+        viewModel?.initialDataFetched = {[weak self](success) in
             if success{
                 self?.tableView.reloadData()
             }
         }
-        viewModel?.moreDataCompletionHandler = {[weak self](success, indexPathArray) in
-            if success{
-                if let indexPathArray = indexPathArray{
-                    self?.tableView.beginUpdates()
-                    self?.tableView.insertRows(at: indexPathArray, with: .fade)
-                    self?.tableView.endUpdates()
-                }
+        viewModel?.newDataFetched = { [weak self] success in
+            guard success else { return }
+            let rowCount    = (self?.tableView.numberOfRows(inSection: 0) ?? 0)
+            let range       = rowCount ..< (self?.viewModel?.itemCount ?? 0)
+            var indices     = [IndexPath]()
+            for i in range {
+                indices.append(IndexPath(row: i, section: 0))
             }
+            self?.tableView.beginUpdates()
+            self?.tableView.insertRows(at: indices, with: .fade)
+            self?.tableView.endUpdates()
         }
     }
 }
@@ -52,6 +55,7 @@ extension FCTeamsVC: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        checkForMoreData(at: indexPath.row)
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "TeamCell") as? FCTeamTableViewCell else {
             return UITableViewCell(.clear)
         }
@@ -59,24 +63,18 @@ extension FCTeamsVC: UITableViewDataSource{
         cell.configure()
         return cell
     }
-}
-
-//Tableview Delegate
-extension FCTeamsVC: UITableViewDelegate{
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let height = scrollView.frame.size.height
-        let contentYOffset = scrollView.contentOffset.y
-        let distanceFromBottom = scrollView.contentSize.height - contentYOffset
-        if distanceFromBottom < height{
-            //reached end of table
+    func checkForMoreData(at displayingIndex: Int){
+        let totalItems = viewModel?.itemCount ?? 0
+        let index = totalItems - displayingIndex
+        if index <= 5 {
+            print("Need Update")
             viewModel?.getMoreData()
         }
     }
 }
-
 //Segue
-extension FCTeamsVC{
+extension FCTeamsVC: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "FCTeamsDetailVCSegue", sender: indexPath.row)
     }

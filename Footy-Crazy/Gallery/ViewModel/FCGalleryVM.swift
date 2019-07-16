@@ -12,8 +12,8 @@ class FCGalleryVM: FCViewModelProtocol{
     
     private var modelArray : [FCGalleryModel]
     var isFetchingData: Bool = false
-    var initialDataCompletionHandler: ((_ success: Bool)->Void)?
-    var moreDataCompletionHandler: ((_ success: Bool, _ indexPathArray: [IndexPath]?)->Void)?
+    var initialDataFetched: ((Bool)->Void)?
+    var newDataFetched: ((Bool)->Void)?
 
     init(_ modelArray: [FCGalleryModel]) {
         self.modelArray = modelArray
@@ -31,12 +31,12 @@ class FCGalleryVM: FCViewModelProtocol{
         FCDataManager.shared.getGallery(startingKey: Constants.GALLERY_STARTING_KEY, pageSize: Constants.GALLERY_INITIAL_PAGE_SIZE){[weak self](success, modelArray) in
             guard success, let array = modelArray else{
                 self?.isFetchingData = false
-                self?.initialDataCompletionHandler?(false)
+                self?.initialDataFetched?(false)
                 return
             }
             self?.modelArray.append(contentsOf: array)
             self?.isFetchingData = false
-            self?.initialDataCompletionHandler?(true)
+            self?.initialDataFetched?(true)
         }
     }
     
@@ -49,25 +49,14 @@ class FCGalleryVM: FCViewModelProtocol{
                 FCDataManager.shared.getGallery(startingKey: String(startingId), pageSize: Constants.GALLERY_PAGE_SIZE) { [weak self](success, modelArray) in
                     guard success, let modelArray = modelArray else{
                         self?.isFetchingData = false
-                        self?.moreDataCompletionHandler?(false, nil)
+                        self?.newDataFetched?(false)
                         return
                     }
                     self?.modelArray.append(contentsOf: modelArray)
                     self?.isFetchingData = false
-                    self?.updateRows(modelArray)
+                    self?.newDataFetched?(true)
                 }
             }
         }
     }
-    
-    func updateRows(_ modelArray: [FCGalleryModel]){
-        var indexPathsArray = [IndexPath]()
-        for obj in modelArray.enumerated(){
-            let index = obj.element.id
-            let indexPath = IndexPath(row: index - 1, section: 0)
-            indexPathsArray.append(indexPath)
-        }
-        moreDataCompletionHandler?(true,indexPathsArray)
-    }
-    
 }

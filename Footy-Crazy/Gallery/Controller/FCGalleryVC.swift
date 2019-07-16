@@ -29,16 +29,19 @@ class FCGalleryVC: UIViewController {
     
     func initializeCompletionHandlers(){
         
-        viewModel?.initialDataCompletionHandler = { [weak self](success) in
+        viewModel?.initialDataFetched = { [weak self](success) in
             self?.collectionView.reloadData()
         }
         
-        viewModel?.moreDataCompletionHandler = {[weak self](success, indexPathArray) in
-            if success{
-                if let indexPathArray = indexPathArray{
-                    self?.collectionView.insertItems(at: indexPathArray)
-                }
+        viewModel?.newDataFetched = { [weak self] success in
+            guard success else { return }
+            let rowCount    = (self?.collectionView.numberOfItems(inSection: 0) ?? 0)
+            let range       = rowCount ..< (self?.viewModel?.itemCount ?? 0)
+            var indices     = [IndexPath]()
+            for i in range {
+                indices.append(IndexPath(row: i, section: 0))
             }
+            self?.collectionView.insertItems(at: indices)
         }
     }
 }
@@ -50,6 +53,7 @@ extension FCGalleryVC: UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        checkForMoreData(at: indexPath.row)
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GalleryCell", for: indexPath) as? FCGalleryCell else{
             return UICollectionViewCell(.clear)
         }
@@ -57,24 +61,18 @@ extension FCGalleryVC: UICollectionViewDataSource{
         cell.configure()
         return cell
     }
-}
-
-//Cell Delegates
-extension FCGalleryVC: UICollectionViewDelegate{
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let height = scrollView.frame.size.height
-        let contentYOffset = scrollView.contentOffset.y
-        let distanceFromBottom = scrollView.contentSize.height - contentYOffset
-        if distanceFromBottom < height{
-            //reached end of table            
+    func checkForMoreData(at displayingIndex: Int){
+        let totalItems = viewModel?.itemCount ?? 0
+        let index = totalItems - displayingIndex
+        if index <= 5 {
+            print("Need Update")
             viewModel?.getMoreData()
         }
     }
 }
 
 //Segue
-extension FCGalleryVC{
+extension FCGalleryVC: UICollectionViewDelegate{
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         performSegue(withIdentifier: "GalleryImageDetailVCSegue", sender: indexPath.row)
