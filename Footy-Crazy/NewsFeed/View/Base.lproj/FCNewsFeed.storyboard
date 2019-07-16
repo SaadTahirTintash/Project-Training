@@ -67,12 +67,28 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="op8-w2-BvV">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oLW-hE-88Q" userLabel="ImageContainer">
                                                         <rect key="frame" x="0.0" y="39" width="300" height="250"/>
+                                                        <subviews>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="op8-w2-BvV">
+                                                                <rect key="frame" x="0.0" y="0.0" width="300" height="250"/>
+                                                            </imageView>
+                                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="vY5-yy-6Ze">
+                                                                <rect key="frame" x="131.5" y="106.5" width="37" height="37"/>
+                                                                <color key="color" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </activityIndicatorView>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="250" id="AoJ-8U-qg4"/>
+                                                            <constraint firstItem="op8-w2-BvV" firstAttribute="leading" secondItem="oLW-hE-88Q" secondAttribute="leading" id="6za-Yu-keX"/>
+                                                            <constraint firstAttribute="trailing" secondItem="op8-w2-BvV" secondAttribute="trailing" id="9K2-3s-Fdg"/>
+                                                            <constraint firstItem="vY5-yy-6Ze" firstAttribute="centerY" secondItem="oLW-hE-88Q" secondAttribute="centerY" id="B0A-G0-JrU"/>
+                                                            <constraint firstItem="op8-w2-BvV" firstAttribute="top" secondItem="oLW-hE-88Q" secondAttribute="top" id="C9q-bB-BkC"/>
+                                                            <constraint firstAttribute="height" constant="250" id="ZkW-KA-rDs"/>
+                                                            <constraint firstAttribute="bottom" secondItem="op8-w2-BvV" secondAttribute="bottom" id="fRR-Zt-YAU"/>
+                                                            <constraint firstItem="vY5-yy-6Ze" firstAttribute="centerX" secondItem="oLW-hE-88Q" secondAttribute="centerX" id="kiL-Ry-yyh"/>
                                                         </constraints>
-                                                    </imageView>
+                                                    </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H9S-5R-Pb0">
                                                         <rect key="frame" x="0.0" y="299" width="300" height="936"/>
                                                         <string key="text">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
@@ -115,6 +131,7 @@
                         <viewLayoutGuide key="safeArea" id="mTY-mZ-TCA"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="vY5-yy-6Ze" id="S14-Hl-9XW"/>
                         <outlet property="descriptionLabel" destination="H9S-5R-Pb0" id="p6Y-vm-46m"/>
                         <outlet property="imgView" destination="op8-w2-BvV" id="5nm-Fy-kz9"/>
                         <outlet property="titleLabel" destination="1CG-7n-UT8" id="lL1-f7-QpO"/>
@@ -147,11 +164,26 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g0q-aT-rM5" customClass="YTPlayerView">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JAW-NJ-dSs" userLabel="VideoContainer">
                                                         <rect key="frame" x="0.0" y="39" width="300" height="250"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g0q-aT-rM5" customClass="YTPlayerView">
+                                                                <rect key="frame" x="0.0" y="0.0" width="300" height="250"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </view>
+                                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="VGY-BG-6jM">
+                                                                <rect key="frame" x="131.5" y="106.5" width="37" height="37"/>
+                                                            </activityIndicatorView>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="250" id="N3E-R6-2pm"/>
+                                                            <constraint firstItem="VGY-BG-6jM" firstAttribute="centerX" secondItem="JAW-NJ-dSs" secondAttribute="centerX" id="7aK-ff-cZU"/>
+                                                            <constraint firstItem="g0q-aT-rM5" firstAttribute="leading" secondItem="JAW-NJ-dSs" secondAttribute="leading" id="8j3-UV-Vso"/>
+                                                            <constraint firstItem="VGY-BG-6jM" firstAttribute="centerY" secondItem="JAW-NJ-dSs" secondAttribute="centerY" id="DEv-Uv-mbC"/>
+                                                            <constraint firstAttribute="height" constant="250" id="Qeh-85-qQp"/>
+                                                            <constraint firstAttribute="trailing" secondItem="g0q-aT-rM5" secondAttribute="trailing" id="d6n-9A-3fl"/>
+                                                            <constraint firstAttribute="bottom" secondItem="g0q-aT-rM5" secondAttribute="bottom" id="fVq-0m-KAq"/>
+                                                            <constraint firstItem="g0q-aT-rM5" firstAttribute="top" secondItem="JAW-NJ-dSs" secondAttribute="top" id="jKS-sK-sWb"/>
                                                         </constraints>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ywx-uk-0NS" userLabel="Description">
@@ -190,6 +222,7 @@
                         <viewLayoutGuide key="safeArea" id="qT7-qq-SPk"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="VGY-BG-6jM" id="1tp-rH-0ju"/>
                         <outlet property="descriptionLabel" destination="ywx-uk-0NS" id="iBe-g6-Ba7"/>
                         <outlet property="titleLabel" destination="kWr-bI-IzK" id="hTX-QO-kst"/>
                         <outlet property="videoView" destination="g0q-aT-rM5" id="gNE-Di-rOB"/>
@@ -222,12 +255,28 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="M9o-K0-mq8">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="INf-9d-T7v" userLabel="ImageContainer">
                                                         <rect key="frame" x="0.0" y="39" width="300" height="250"/>
+                                                        <subviews>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="M9o-K0-mq8">
+                                                                <rect key="frame" x="0.0" y="0.0" width="300" height="250"/>
+                                                            </imageView>
+                                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="5td-IH-yL0">
+                                                                <rect key="frame" x="131.5" y="106.5" width="37" height="37"/>
+                                                                <color key="color" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </activityIndicatorView>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="250" id="A6d-4G-FhI"/>
+                                                            <constraint firstAttribute="trailing" secondItem="M9o-K0-mq8" secondAttribute="trailing" id="2GM-XD-2vG"/>
+                                                            <constraint firstItem="M9o-K0-mq8" firstAttribute="leading" secondItem="INf-9d-T7v" secondAttribute="leading" id="3IY-zB-Bam"/>
+                                                            <constraint firstItem="5td-IH-yL0" firstAttribute="centerX" secondItem="INf-9d-T7v" secondAttribute="centerX" id="Cdb-2w-eQN"/>
+                                                            <constraint firstItem="5td-IH-yL0" firstAttribute="centerY" secondItem="INf-9d-T7v" secondAttribute="centerY" id="Nn1-9q-4Xr"/>
+                                                            <constraint firstAttribute="height" constant="250" id="ZRk-d6-w2n"/>
+                                                            <constraint firstItem="M9o-K0-mq8" firstAttribute="top" secondItem="INf-9d-T7v" secondAttribute="top" id="cik-mU-2cU"/>
+                                                            <constraint firstAttribute="bottom" secondItem="M9o-K0-mq8" secondAttribute="bottom" id="p4l-Lc-yX6"/>
                                                         </constraints>
-                                                    </imageView>
+                                                    </view>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SKw-2M-AeQ" userLabel="urlBtn">
                                                         <rect key="frame" x="0.0" y="299" width="300" height="27"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -278,6 +327,7 @@
                         <viewLayoutGuide key="safeArea" id="Nt6-ko-gFI"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="5td-IH-yL0" id="bAu-R4-QG8"/>
                         <outlet property="descriptionLabel" destination="0G8-Ef-6wr" id="nki-rY-c6J"/>
                         <outlet property="imgView" destination="M9o-K0-mq8" id="KNo-Sh-Vw6"/>
                         <outlet property="titleLabel" destination="FHz-Ki-Tqn" id="6dU-bB-jEO"/>

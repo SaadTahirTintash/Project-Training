@@ -11,40 +11,50 @@ import UIKit
 class FCPlayersVC: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    var playersModelArray: [FCPlayersModel] = [FCPlayersModel]()
-    var isFetchingData = false
+    var viewModel: FCPlayersVM?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel = FCPlayersVM([FCPlayersModel]())
         tableView.dataSource = self
         tableView.delegate = self
-        isFetchingData = true
         registerCells()
-        FCDataManager.shared.getPlayers(startingKey: Constants.PLAYERS_STARTING_KEY, pageSize: Constants.PLAYERS_INITIAL_PAGE_SIZE){[weak self](success, modelArray) in
-            guard success, let array = modelArray else{
-                self?.isFetchingData = false
-                return
-            }
-            self?.playersModelArray.append(contentsOf: array)
-            self?.tableView.reloadData()
-            self?.isFetchingData = false
-        }
+        initializeCompletionHandlers()
+        viewModel?.getInitialData()
     }
     
     func registerCells(){
         tableView.register(UINib(nibName: "FCPlayerTableViewCell", bundle: nil), forCellReuseIdentifier: "PlayerCell")
+    }
+    
+    func initializeCompletionHandlers(){
+        viewModel?.initialDataCompletionHandler = {[weak self](success) in
+            if success{
+                self?.tableView.reloadData()
+            }
+        }
+        viewModel?.moreDataCompletionHandler = {[weak self](success, indexPathArray) in
+            if success{
+                if let indexPathArray = indexPathArray{
+                    self?.tableView.beginUpdates()
+                    self?.tableView.insertRows(at: indexPathArray, with: .fade)
+                    self?.tableView.endUpdates()
+                }
+            }
+        }
     }
 }
 
 //Tableview Datasource
 extension FCPlayersVC: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return playersModelArray.count
+        return viewModel?.itemCount ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerCell") as! FCPlayerTableViewCell
-        cell.setupCell(playersModelArray[indexPath.row])
+        cell.viewModel = viewModel?.viewModelForDetail(at: indexPath.row)
+        cell.configure()
         return cell
     }
     
@@ -60,35 +70,8 @@ extension FCPlayersVC: UITableViewDelegate{
         let distanceFromBottom = scrollView.contentSize.height - contentYOffset
         if distanceFromBottom < height{
             //reached end of table
-            if !isFetchingData{
-                isFetchingData = true
-                var startingId = playersModelArray.last?.id ?? 0
-                if startingId != 0{
-                    startingId += 1
-                    FCDataManager.shared.getPlayers(startingKey: String(startingId), pageSize: Constants.PLAYERS_PAGE_SIZE) { [weak self](success, playersModelArray) in
-                        guard success, let modelArray = playersModelArray else{
-                            self?.isFetchingData = false
-                            return
-                        }
-                        self?.playersModelArray.append(contentsOf: modelArray)
-                        self?.updateRows(modelArray)
-                        self?.isFetchingData = false
-                    }
-                }
-            }
+            viewModel?.getMoreData()
         }
-    }
-    
-    func updateRows(_ modelArray: [FCPlayersModel]){
-        var indexPathsArray = [IndexPath]()
-        for obj in modelArray.enumerated(){
-            let index = obj.element.id
-            let indexPath = IndexPath(row: index - 1, section: 0)
-            indexPathsArray.append(indexPath)
-        }
-        tableView.beginUpdates()
-        tableView.insertRows(at: indexPathsArray, with: .fade)
-        tableView.endUpdates()
     }
 }
 
@@ -97,14 +80,12 @@ extension FCPlayersVC{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "FCPlayersDetailVCSegue", sender: indexPath.row)
-
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? FCPlayersDetailVC{
             if let index = sender as? Int{
-                let model = playersModelArray[index]
-                vc.model = model
+                vc.viewModel = viewModel?.viewModelForDetail(at: index)
             }
         }
     }

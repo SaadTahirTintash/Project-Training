@@ -11,7 +11,7 @@ import UIKit
 class FCGalleryDetailVC: UIViewController {
 
     @IBOutlet weak var img: UIImageView!
-    var model: FCGalleryModel = FCGalleryModel()
+    var viewModel: FCGalleryDetailVM?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,12 +19,9 @@ class FCGalleryDetailVC: UIViewController {
     }
     
     func setupVC(){
-        model.imageUrl = model.imageUrl
-        if let urlString = model.imageUrl{
+        if let urlString = viewModel?.imageUrl{
             if let url = URL(string: urlString){
-                img.loadImage(from: url) { [weak self](success, downloadedImg) in
-                    self?.model.image = downloadedImg
-                }
+                img.loadImage(from: url, completion: nil)
             }
         }
     }

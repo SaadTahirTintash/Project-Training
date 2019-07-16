@@ -15,8 +15,7 @@ class FCTeamsDetailVC: UIViewController {
     @IBOutlet weak var countryLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var flagImage: UIImageView!
-    
-    var model: FCTeamsModel = FCTeamsModel()
+    var viewModel: FCTeamsDetailVM?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,20 +23,20 @@ class FCTeamsDetailVC: UIViewController {
     }
     
     func setupVC(){
-        if let name = model.name{
+        if let name = viewModel?.teamName{
             nameLabel.text = name
         }
-        if let standing = model.standing{
-            standingLabel.text = "Standing: \(standing)"
+        if let standing = viewModel?.teamStanding{
+            standingLabel.text = "Ranking: \(standing)"
         }        
-        if let country = model.country{
+        if let country = viewModel?.countryName{
             countryLabel.text = "Country: \(country)"
         }
-        if let description = model.description{
+        if let description = viewModel?.teamDescription{
             descriptionLabel.text = description
         }
-        if let imgString = model.flagUrl{
-            if let url = URL(string: imgString){
+        if let imageUrl = viewModel?.imageUrl{
+            if let url = URL(string: imageUrl){
                 flagImage.loadImage(from: url, completion: nil)
             }
         }

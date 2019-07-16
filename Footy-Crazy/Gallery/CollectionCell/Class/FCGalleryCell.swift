@@ -12,20 +12,21 @@ class FCGalleryCell: UICollectionViewCell {
     
     @IBOutlet weak var img: UIImageView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-
+    var viewModel: FCGalleryDetailVM?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
 
-    func setupCell(_ model: FCGalleryModel){
-        if let urlString = model.imageUrl{
+    func configure(){
+        if let urlString = viewModel?.imageUrl{
             if let url = URL(string: urlString){
                 img.loadImage(from: url){
                     [weak self](_,_) in
                     self?.activityIndicator.stopAnimating()
                 }
             }
-        }        
+        }
     }    
 }

@@ -20,16 +20,16 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CMa-D4-Cpd" userLabel="BackgroundView">
-                        <rect key="frame" x="0.0" y="0.0" width="391" height="449.5"/>
+                        <rect key="frame" x="10" y="10" width="371" height="429.5"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="o6t-GY-bza">
-                                <rect key="frame" x="0.0" y="0.0" width="391" height="449.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="371" height="429.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zlw-1n-40i" userLabel="videoViewBg">
-                                        <rect key="frame" x="0.0" y="0.0" width="391" height="300"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="371" height="300"/>
                                         <subviews>
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LID-ca-GwJ" userLabel="videoView" customClass="YTPlayerView">
-                                                <rect key="frame" x="10" y="15" width="371" height="270"/>
+                                                <rect key="frame" x="10" y="15" width="351" height="270"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -38,30 +38,35 @@
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
+                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="QPc-ys-Hdt">
+                                                <rect key="frame" x="167" y="131.5" width="37" height="37"/>
+                                            </activityIndicatorView>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="LID-ca-GwJ" secondAttribute="trailing" constant="10" id="2A4-Ee-uNy"/>
                                             <constraint firstItem="LID-ca-GwJ" firstAttribute="top" secondItem="zlw-1n-40i" secondAttribute="top" constant="15" id="9nh-Os-Xig"/>
+                                            <constraint firstItem="QPc-ys-Hdt" firstAttribute="centerX" secondItem="zlw-1n-40i" secondAttribute="centerX" id="MwW-l4-BrF"/>
+                                            <constraint firstItem="QPc-ys-Hdt" firstAttribute="centerY" secondItem="zlw-1n-40i" secondAttribute="centerY" id="arJ-in-o5W"/>
                                             <constraint firstAttribute="height" constant="300" id="gQo-IR-IW6"/>
                                             <constraint firstItem="LID-ca-GwJ" firstAttribute="leading" secondItem="zlw-1n-40i" secondAttribute="leading" constant="10" id="oAR-Hd-XFj"/>
                                             <constraint firstAttribute="bottom" secondItem="LID-ca-GwJ" secondAttribute="bottom" constant="15" id="vTQ-IK-nbF"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CWC19 SF: AUS v END - Match Highlights" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a72-T4-QSx" userLabel="titleLabel">
-                                        <rect key="frame" x="0.0" y="300" width="391" height="99.5"/>
+                                        <rect key="frame" x="0.0" y="300" width="371" height="79.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SC0-32-9qE" userLabel="buttonView">
-                                        <rect key="frame" x="0.0" y="399.5" width="391" height="50"/>
+                                        <rect key="frame" x="0.0" y="379.5" width="371" height="50"/>
                                         <subviews>
                                             <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dpl-lo-g1g">
-                                                <rect key="frame" x="0.0" y="0.0" width="195.5" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="185.5" height="50"/>
                                                 <state key="normal" title="Read"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r6h-go-hNF">
-                                                <rect key="frame" x="195.5" y="0.0" width="195.5" height="50"/>
+                                                <rect key="frame" x="185.5" y="0.0" width="185.5" height="50"/>
                                                 <state key="normal" title="Share"/>
                                                 <connections>
                                                     <action selector="share:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="WMq-u1-mR4"/>
@@ -93,14 +98,15 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="CMa-D4-Cpd" secondAttribute="bottom" id="NsY-33-Zfh"/>
-                    <constraint firstItem="CMa-D4-Cpd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="hO9-9v-iuC"/>
-                    <constraint firstAttribute="trailing" secondItem="CMa-D4-Cpd" secondAttribute="trailing" id="rOz-gS-XEn"/>
-                    <constraint firstItem="CMa-D4-Cpd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="uV8-Od-lzF"/>
+                    <constraint firstAttribute="bottom" secondItem="CMa-D4-Cpd" secondAttribute="bottom" constant="10" id="NsY-33-Zfh"/>
+                    <constraint firstItem="CMa-D4-Cpd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="hO9-9v-iuC"/>
+                    <constraint firstAttribute="trailing" secondItem="CMa-D4-Cpd" secondAttribute="trailing" constant="10" id="rOz-gS-XEn"/>
+                    <constraint firstItem="CMa-D4-Cpd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="uV8-Od-lzF"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="activityIndicator" destination="QPc-ys-Hdt" id="hEF-eX-9Ya"/>
                 <outlet property="titleLabel" destination="a72-T4-QSx" id="fQz-2E-1yP"/>
                 <outlet property="videoView" destination="LID-ca-GwJ" id="cPX-bx-KeH"/>
             </connections>

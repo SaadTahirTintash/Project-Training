@@ -13,7 +13,7 @@
 		4A0227F422D736AB006F5E1D /* FCGalleryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0227F222D736AB006F5E1D /* FCGalleryCell.swift */; };
 		4A0227F522D736AB006F5E1D /* FCGalleryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A0227F322D736AB006F5E1D /* FCGalleryCell.xib */; };
 		4A0227FA22D73E68006F5E1D /* FCGalleryDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0227F922D73E68006F5E1D /* FCGalleryDetailVC.swift */; };
-		4A047B6B22D608B500A7E61C /* FCNewsFeedProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A047B6A22D608B500A7E61C /* FCNewsFeedProtocol.swift */; };
+		4A047B6B22D608B500A7E61C /* FCProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A047B6A22D608B500A7E61C /* FCProtocols.swift */; };
 		4A047B6D22D60D3600A7E61C /* FCUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A047B6C22D60D3600A7E61C /* FCUtilities.swift */; };
 		4A05142622D75827009BE500 /* FCTeamsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A05142522D75827009BE500 /* FCTeamsModel.swift */; };
 		4A05142822D7587B009BE500 /* FCTeamsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A05142722D7587B009BE500 /* FCTeamsVC.swift */; };
@@ -27,8 +27,6 @@
 		4A05143E22D75A80009BE500 /* FCPlayerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A05143C22D75A80009BE500 /* FCPlayerTableViewCell.xib */; };
 		4A05144022D75AB9009BE500 /* FCAboutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A05143F22D75AB9009BE500 /* FCAboutVC.swift */; };
 		4A0573F222CB9506007BAE6E /* FCConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0573F122CB9506007BAE6E /* FCConstants.swift */; };
-		4A0CD2BE22CA27CC00A79D8F /* FCEmptyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0CD2BC22CA27CC00A79D8F /* FCEmptyTableViewCell.swift */; };
-		4A0CD2BF22CA27CC00A79D8F /* FCEmptyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A0CD2BD22CA27CC00A79D8F /* FCEmptyTableViewCell.xib */; };
 		4A2B430922C4DA2C00815318 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A2B430822C4DA2C00815318 /* GoogleService-Info.plist */; };
 		4A2B431022C5E39F00815318 /* FCNewsFeedType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2B430F22C5E39F00815318 /* FCNewsFeedType.swift */; };
 		4A2B431822C5E4D800815318 /* FCNewsFeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2B431722C5E4D800815318 /* FCNewsFeedVC.swift */; };
@@ -39,6 +37,14 @@
 		4A34872322C4D7C4009436EB /* FCNewsFeed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A34872122C4D7C4009436EB /* FCNewsFeed.storyboard */; };
 		4A34872522C4D7C5009436EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A34872422C4D7C5009436EB /* Assets.xcassets */; };
 		4A34872822C4D7C5009436EB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A34872622C4D7C5009436EB /* LaunchScreen.storyboard */; };
+		4A75439922DC94AC0068173F /* FCGalleryDetailVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A75439822DC94AC0068173F /* FCGalleryDetailVM.swift */; };
+		4A75439B22DC94DE0068173F /* FCGalleryVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A75439A22DC94DE0068173F /* FCGalleryVM.swift */; };
+		4A8820F422DDA5A500AC8938 /* FCTeamsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8820F322DDA5A500AC8938 /* FCTeamsVM.swift */; };
+		4A8820F622DDA9DF00AC8938 /* FCTeamsDetailVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8820F522DDA9DF00AC8938 /* FCTeamsDetailVM.swift */; };
+		4A8820F922DDAFEF00AC8938 /* FCPlayersVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8820F822DDAFEF00AC8938 /* FCPlayersVM.swift */; };
+		4A8820FB22DDAFFB00AC8938 /* FCPlayersDetailVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8820FA22DDAFFB00AC8938 /* FCPlayersDetailVM.swift */; };
+		4A8820FE22DDB5B000AC8938 /* FCNewsFeedVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8820FD22DDB5B000AC8938 /* FCNewsFeedVM.swift */; };
+		4A88210022DDB98700AC8938 /* FCNewsFeedDetailVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8820FF22DDB98700AC8938 /* FCNewsFeedDetailVM.swift */; };
 		4A8CC76C22C9D6A900E9483B /* FCDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8CC76B22C9D6A900E9483B /* FCDataManager.swift */; };
 		4AB9C01022D7088F002B8E77 /* FCGalleryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB9C00F22D7088F002B8E77 /* FCGalleryModel.swift */; };
 		4AB9C01222D70D4F002B8E77 /* FCGalleryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB9C01122D70D4F002B8E77 /* FCGalleryVC.swift */; };
@@ -49,7 +55,7 @@
 		4AE3C10522D3121000282F29 /* FCTeams.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AE3C10422D3121000282F29 /* FCTeams.storyboard */; };
 		4AE3C10722D3121900282F29 /* FCPlayers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AE3C10622D3121900282F29 /* FCPlayers.storyboard */; };
 		4AE3C10922D3122100282F29 /* FCAbout.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AE3C10822D3122100282F29 /* FCAbout.storyboard */; };
-		4AE3C13122D34F3A00282F29 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE3C13022D34F3A00282F29 /* Extensions.swift */; };
+		4AE3C13122D34F3A00282F29 /* FCExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE3C13022D34F3A00282F29 /* FCExtensions.swift */; };
 		4AFDD29822CA24EE0044B728 /* FCFactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFDD29622CA24EE0044B728 /* FCFactTableViewCell.swift */; };
 		4AFDD29922CA24EE0044B728 /* FCFactTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AFDD29722CA24EE0044B728 /* FCFactTableViewCell.xib */; };
 		4AFDD29C22CA24FC0044B728 /* FCNewsLinkTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFDD29A22CA24FC0044B728 /* FCNewsLinkTableViewCell.swift */; };
@@ -65,7 +71,7 @@
 		4A0227F222D736AB006F5E1D /* FCGalleryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCGalleryCell.swift; sourceTree = "<group>"; };
 		4A0227F322D736AB006F5E1D /* FCGalleryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FCGalleryCell.xib; sourceTree = "<group>"; };
 		4A0227F922D73E68006F5E1D /* FCGalleryDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCGalleryDetailVC.swift; sourceTree = "<group>"; };
-		4A047B6A22D608B500A7E61C /* FCNewsFeedProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCNewsFeedProtocol.swift; sourceTree = "<group>"; };
+		4A047B6A22D608B500A7E61C /* FCProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCProtocols.swift; sourceTree = "<group>"; };
 		4A047B6C22D60D3600A7E61C /* FCUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCUtilities.swift; sourceTree = "<group>"; };
 		4A05142522D75827009BE500 /* FCTeamsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCTeamsModel.swift; sourceTree = "<group>"; };
 		4A05142722D7587B009BE500 /* FCTeamsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCTeamsVC.swift; sourceTree = "<group>"; };
@@ -79,8 +85,6 @@
 		4A05143C22D75A80009BE500 /* FCPlayerTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FCPlayerTableViewCell.xib; sourceTree = "<group>"; };
 		4A05143F22D75AB9009BE500 /* FCAboutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCAboutVC.swift; sourceTree = "<group>"; };
 		4A0573F122CB9506007BAE6E /* FCConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCConstants.swift; sourceTree = "<group>"; };
-		4A0CD2BC22CA27CC00A79D8F /* FCEmptyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCEmptyTableViewCell.swift; sourceTree = "<group>"; };
-		4A0CD2BD22CA27CC00A79D8F /* FCEmptyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FCEmptyTableViewCell.xib; sourceTree = "<group>"; };
 		4A2B430822C4DA2C00815318 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4A2B430F22C5E39F00815318 /* FCNewsFeedType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCNewsFeedType.swift; sourceTree = "<group>"; };
 		4A2B431722C5E4D800815318 /* FCNewsFeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCNewsFeedVC.swift; sourceTree = "<group>"; };
@@ -93,6 +97,14 @@
 		4A34872422C4D7C5009436EB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4A34872722C4D7C5009436EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4A34872922C4D7C5009436EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4A75439822DC94AC0068173F /* FCGalleryDetailVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCGalleryDetailVM.swift; sourceTree = "<group>"; };
+		4A75439A22DC94DE0068173F /* FCGalleryVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCGalleryVM.swift; sourceTree = "<group>"; };
+		4A8820F322DDA5A500AC8938 /* FCTeamsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCTeamsVM.swift; sourceTree = "<group>"; };
+		4A8820F522DDA9DF00AC8938 /* FCTeamsDetailVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCTeamsDetailVM.swift; sourceTree = "<group>"; };
+		4A8820F822DDAFEF00AC8938 /* FCPlayersVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCPlayersVM.swift; sourceTree = "<group>"; };
+		4A8820FA22DDAFFB00AC8938 /* FCPlayersDetailVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCPlayersDetailVM.swift; sourceTree = "<group>"; };
+		4A8820FD22DDB5B000AC8938 /* FCNewsFeedVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCNewsFeedVM.swift; sourceTree = "<group>"; };
+		4A8820FF22DDB98700AC8938 /* FCNewsFeedDetailVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCNewsFeedDetailVM.swift; sourceTree = "<group>"; };
 		4A8CC76B22C9D6A900E9483B /* FCDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCDataManager.swift; sourceTree = "<group>"; };
 		4AB9C00F22D7088F002B8E77 /* FCGalleryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCGalleryModel.swift; sourceTree = "<group>"; };
 		4AB9C01122D70D4F002B8E77 /* FCGalleryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCGalleryVC.swift; sourceTree = "<group>"; };
@@ -103,7 +115,7 @@
 		4AE3C10422D3121000282F29 /* FCTeams.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FCTeams.storyboard; sourceTree = "<group>"; };
 		4AE3C10622D3121900282F29 /* FCPlayers.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FCPlayers.storyboard; sourceTree = "<group>"; };
 		4AE3C10822D3122100282F29 /* FCAbout.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FCAbout.storyboard; sourceTree = "<group>"; };
-		4AE3C13022D34F3A00282F29 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		4AE3C13022D34F3A00282F29 /* FCExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCExtensions.swift; sourceTree = "<group>"; };
 		4AFDD29622CA24EE0044B728 /* FCFactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCFactTableViewCell.swift; sourceTree = "<group>"; };
 		4AFDD29722CA24EE0044B728 /* FCFactTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FCFactTableViewCell.xib; sourceTree = "<group>"; };
 		4AFDD29A22CA24FC0044B728 /* FCNewsLinkTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCNewsLinkTableViewCell.swift; sourceTree = "<group>"; };
@@ -162,7 +174,7 @@
 		4A047B6922D6089000A7E61C /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				4A047B6A22D608B500A7E61C /* FCNewsFeedProtocol.swift */,
+				4A047B6A22D608B500A7E61C /* FCProtocols.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -228,12 +240,12 @@
 		4A2B430A22C5E2F700815318 /* NewsFeed */ = {
 			isa = PBXGroup;
 			children = (
-				4A047B6922D6089000A7E61C /* Protocols */,
+				4A2B430E22C5E38700815318 /* Enum */,
 				4A2B431E22C5E8D700815318 /* TableCell */,
 				4A2B431622C5E47100815318 /* Controller */,
-				4A2B431522C5E46700815318 /* View */,
-				4A2B430E22C5E38700815318 /* Enum */,
+				4A8820FC22DDB48F00AC8938 /* ViewModel */,
 				4A2B430B22C5E31000815318 /* Model */,
+				4A2B431522C5E46700815318 /* View */,
 			);
 			path = NewsFeed;
 			sourceTree = "<group>";
@@ -319,6 +331,7 @@
 				4A0573F022CB94F8007BAE6E /* Constants */,
 				4A2B432022C5ED1B00815318 /* NetworkEngine */,
 				4A8CC76A22C9D69400E9483B /* DataManager */,
+				4A047B6922D6089000A7E61C /* Protocols */,
 				4ABDAE2222C9E53C00E5C1C6 /* SplashScreen */,
 				4A2B430A22C5E2F700815318 /* NewsFeed */,
 				4AE3C0F222D3111100282F29 /* Gallery */,
@@ -329,6 +342,42 @@
 				4A2B430822C4DA2C00815318 /* GoogleService-Info.plist */,
 			);
 			path = "Footy-Crazy";
+			sourceTree = "<group>";
+		};
+		4A75439722DC94740068173F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				4A75439A22DC94DE0068173F /* FCGalleryVM.swift */,
+				4A75439822DC94AC0068173F /* FCGalleryDetailVM.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		4A8820EE22DCB69900AC8938 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				4A8820F322DDA5A500AC8938 /* FCTeamsVM.swift */,
+				4A8820F522DDA9DF00AC8938 /* FCTeamsDetailVM.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		4A8820F722DDAFD800AC8938 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				4A8820F822DDAFEF00AC8938 /* FCPlayersVM.swift */,
+				4A8820FA22DDAFFB00AC8938 /* FCPlayersDetailVM.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		4A8820FC22DDB48F00AC8938 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				4A8820FD22DDB5B000AC8938 /* FCNewsFeedVM.swift */,
+				4A8820FF22DDB98700AC8938 /* FCNewsFeedDetailVM.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		4A8CC76A22C9D69400E9483B /* DataManager */ = {
@@ -377,8 +426,9 @@
 			isa = PBXGroup;
 			children = (
 				4A0227F622D736C3006F5E1D /* CollectionCell */,
-				4AE3C0F822D3116C00282F29 /* Controller */,
 				4AE3C0F722D3116700282F29 /* View */,
+				4AE3C0F822D3116C00282F29 /* Controller */,
+				4A75439722DC94740068173F /* ViewModel */,
 				4AE3C0F622D3116000282F29 /* Model */,
 			);
 			path = Gallery;
@@ -390,6 +440,7 @@
 				4A05142B22D75894009BE500 /* TableCell */,
 				4AE3C0FB22D3118600282F29 /* Controller */,
 				4AE3C0FC22D3119500282F29 /* View */,
+				4A8820EE22DCB69900AC8938 /* ViewModel */,
 				4AE3C0FD22D3119900282F29 /* Model */,
 			);
 			path = Teams;
@@ -401,6 +452,7 @@
 				4A05143222D7596B009BE500 /* TableCell */,
 				4AE3C10022D311F600282F29 /* Controller */,
 				4AE3C0FF22D311F200282F29 /* View */,
+				4A8820F722DDAFD800AC8938 /* ViewModel */,
 				4AE3C0FE22D311EE00282F29 /* Model */,
 			);
 			path = Players;
@@ -509,7 +561,7 @@
 		4AE3C12F22D34F1E00282F29 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				4AE3C13022D34F3A00282F29 /* Extensions.swift */,
+				4AE3C13022D34F3A00282F29 /* FCExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -520,7 +572,6 @@
 				4A2B431B22C5E8A800815318 /* FCVideoTableViewCell.xib */,
 				4AFDD29722CA24EE0044B728 /* FCFactTableViewCell.xib */,
 				4AFDD29B22CA24FC0044B728 /* FCNewsLinkTableViewCell.xib */,
-				4A0CD2BD22CA27CC00A79D8F /* FCEmptyTableViewCell.xib */,
 			);
 			path = Nib;
 			sourceTree = "<group>";
@@ -531,7 +582,6 @@
 				4A2B431A22C5E8A800815318 /* FCVideoTableViewCell.swift */,
 				4AFDD29622CA24EE0044B728 /* FCFactTableViewCell.swift */,
 				4AFDD29A22CA24FC0044B728 /* FCNewsLinkTableViewCell.swift */,
-				4A0CD2BC22CA27CC00A79D8F /* FCEmptyTableViewCell.swift */,
 			);
 			path = Class;
 			sourceTree = "<group>";
@@ -613,7 +663,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4A0CD2BF22CA27CC00A79D8F /* FCEmptyTableViewCell.xib in Resources */,
 				4AE3C10922D3122100282F29 /* FCAbout.storyboard in Resources */,
 				4A34872822C4D7C5009436EB /* LaunchScreen.storyboard in Resources */,
 				4AE3C0FA22D3118000282F29 /* FCGallery.storyboard in Resources */,
@@ -689,10 +738,13 @@
 				4A2B431822C5E4D800815318 /* FCNewsFeedVC.swift in Sources */,
 				4A05143622D759A5009BE500 /* FCPlayersVC.swift in Sources */,
 				4A05144022D75AB9009BE500 /* FCAboutVC.swift in Sources */,
+				4A75439922DC94AC0068173F /* FCGalleryDetailVM.swift in Sources */,
+				4A8820FE22DDB5B000AC8938 /* FCNewsFeedVM.swift in Sources */,
 				4A01E35222D5D2A400929D10 /* FCNewsLinkDetailVC.swift in Sources */,
 				4ABDAE2622C9E55B00E5C1C6 /* FCSplashScreenVC.swift in Sources */,
-				4A0CD2BE22CA27CC00A79D8F /* FCEmptyTableViewCell.swift in Sources */,
+				4A88210022DDB98700AC8938 /* FCNewsFeedDetailVM.swift in Sources */,
 				4A047B6D22D60D3600A7E61C /* FCUtilities.swift in Sources */,
+				4A8820F922DDAFEF00AC8938 /* FCPlayersVM.swift in Sources */,
 				4A8CC76C22C9D6A900E9483B /* FCDataManager.swift in Sources */,
 				4AB9C01222D70D4F002B8E77 /* FCGalleryVC.swift in Sources */,
 				4AFF91AE22C622C4004FEBB6 /* FCNewsFeedModel.swift in Sources */,
@@ -700,16 +752,20 @@
 				4ABDAE1C22C9DAC800E5C1C6 /* FCParseSnapshot.swift in Sources */,
 				4A01E35422D5D2C100929D10 /* FCVideoDetailVC.swift in Sources */,
 				4A0227F422D736AB006F5E1D /* FCGalleryCell.swift in Sources */,
+				4A75439B22DC94DE0068173F /* FCGalleryVM.swift in Sources */,
 				4A05142822D7587B009BE500 /* FCTeamsVC.swift in Sources */,
+				4A8820F622DDA9DF00AC8938 /* FCTeamsDetailVM.swift in Sources */,
 				4AFDD29822CA24EE0044B728 /* FCFactTableViewCell.swift in Sources */,
 				4AFE969322D4CC6E00BBD074 /* FCFactDetailVC.swift in Sources */,
 				4A2B431022C5E39F00815318 /* FCNewsFeedType.swift in Sources */,
 				4A05143D22D75A80009BE500 /* FCPlayerTableViewCell.swift in Sources */,
 				4A0227FA22D73E68006F5E1D /* FCGalleryDetailVC.swift in Sources */,
+				4A8820F422DDA5A500AC8938 /* FCTeamsVM.swift in Sources */,
 				4A05143822D759AF009BE500 /* FCPlayersDetailVC.swift in Sources */,
-				4AE3C13122D34F3A00282F29 /* Extensions.swift in Sources */,
+				4AE3C13122D34F3A00282F29 /* FCExtensions.swift in Sources */,
 				4A05143A22D759BD009BE500 /* FCPlayersModel.swift in Sources */,
-				4A047B6B22D608B500A7E61C /* FCNewsFeedProtocol.swift in Sources */,
+				4A8820FB22DDAFFB00AC8938 /* FCPlayersDetailVM.swift in Sources */,
+				4A047B6B22D608B500A7E61C /* FCProtocols.swift in Sources */,
 				4AB9C01022D7088F002B8E77 /* FCGalleryModel.swift in Sources */,
 				4A34871E22C4D7C4009436EB /* AppDelegate.swift in Sources */,
 				4A0573F222CB9506007BAE6E /* FCConstants.swift in Sources */,

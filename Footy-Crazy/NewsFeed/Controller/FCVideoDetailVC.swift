@@ -11,10 +11,11 @@ import youtube_ios_player_helper
 
 class FCVideoDetailVC: UIViewController {
 
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var videoView: YTPlayerView!
-    var model: FCNewsFeedModel = FCNewsFeedModel()
+    var viewModel: FCNewsFeedDetailVM?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,9 +25,9 @@ class FCVideoDetailVC: UIViewController {
     
     func setupVC(){
         //initial setup
-        descriptionLabel.text = model.description
-        titleLabel.text = model.title
-        if let urlString = model.url {
+        descriptionLabel.text = viewModel?.description
+        titleLabel.text = viewModel?.title
+        if let urlString = viewModel?.url {
             videoView.load(withVideoId: urlString, playerVars:["playsinline":1])
         }        
     }
@@ -35,23 +36,15 @@ class FCVideoDetailVC: UIViewController {
 
 extension FCVideoDetailVC: YTPlayerViewDelegate{
     
-    func addActivityIndicator(_ to: UIView){
-        let activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
-        activityIndicator.center = to.center
-        to.addSubview(activityIndicator)
-        to.layoutIfNeeded()
-        activityIndicator.startAnimating()
-    }
-    
     func playerViewPreferredInitialLoading(_ playerView: YTPlayerView) -> UIView? {
         let videoPreferredView = UIView.init(frame: playerView.frame)
         videoPreferredView.backgroundColor = .black
-        //addActivityIndicator(videoPreferredView)
         return videoPreferredView
     }
     
     func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
         print("Video is ready")
+        activityIndicator.stopAnimating()
     }
     
     func playerView(_ playerView: YTPlayerView, didChangeTo state: YTPlayerState) {

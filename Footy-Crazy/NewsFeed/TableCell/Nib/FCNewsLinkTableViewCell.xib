@@ -20,16 +20,16 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yfx-Wr-nz4" userLabel="BackgroundView">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="449.5"/>
+                        <rect key="frame" x="10" y="10" width="394" height="429.5"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="NbT-r9-9ZM">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="449.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="394" height="429.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p9Z-l1-Xmw" userLabel="ImageContainer">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="250"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="394" height="250"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="4h1-iX-5MH" userLabel="newsImg">
-                                                <rect key="frame" x="5" y="5" width="404" height="240"/>
+                                                <rect key="frame" x="5" y="5" width="384" height="240"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                         <integer key="value" value="20"/>
@@ -37,30 +37,36 @@
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
                                             </imageView>
+                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="ELA-OB-3ro">
+                                                <rect key="frame" x="178.5" y="106.5" width="37" height="37"/>
+                                                <color key="color" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </activityIndicatorView>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="4h1-iX-5MH" secondAttribute="bottom" constant="5" id="4Tn-Ry-FEt"/>
                                             <constraint firstAttribute="trailing" secondItem="4h1-iX-5MH" secondAttribute="trailing" constant="5" id="Loa-yX-gnh"/>
                                             <constraint firstAttribute="height" constant="250" id="QkY-X1-hKj"/>
+                                            <constraint firstItem="ELA-OB-3ro" firstAttribute="centerY" secondItem="p9Z-l1-Xmw" secondAttribute="centerY" id="VxV-rf-sjQ"/>
                                             <constraint firstItem="4h1-iX-5MH" firstAttribute="leading" secondItem="p9Z-l1-Xmw" secondAttribute="leading" constant="5" id="jm4-mK-HPC"/>
                                             <constraint firstItem="4h1-iX-5MH" firstAttribute="top" secondItem="p9Z-l1-Xmw" secondAttribute="top" constant="5" id="sD5-zJ-kVW"/>
+                                            <constraint firstItem="ELA-OB-3ro" firstAttribute="centerX" secondItem="p9Z-l1-Xmw" secondAttribute="centerX" id="v3g-vp-x6S"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ndy-9a-QjJ" userLabel="titleLbl">
-                                        <rect key="frame" x="0.0" y="250" width="414" height="149.5"/>
+                                        <rect key="frame" x="0.0" y="250" width="394" height="129.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" verticalCompressionResistancePriority="748" translatesAutoresizingMaskIntoConstraints="NO" id="UzA-dy-Bp8" userLabel="ButtonView">
-                                        <rect key="frame" x="0.0" y="399.5" width="414" height="50"/>
+                                        <rect key="frame" x="0.0" y="379.5" width="394" height="50"/>
                                         <subviews>
                                             <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G9k-kX-zje">
-                                                <rect key="frame" x="0.0" y="0.0" width="207" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="197" height="50"/>
                                                 <state key="normal" title="Read"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qkj-cA-cFz">
-                                                <rect key="frame" x="207" y="0.0" width="207" height="50"/>
+                                                <rect key="frame" x="197" y="0.0" width="197" height="50"/>
                                                 <state key="normal" title="Share"/>
                                                 <connections>
                                                     <action selector="share:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Dbm-Wh-htD"/>
@@ -92,14 +98,15 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="Yfx-Wr-nz4" secondAttribute="trailing" id="GKN-0j-cun"/>
-                    <constraint firstItem="Yfx-Wr-nz4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="QBi-Zp-Tvc"/>
-                    <constraint firstAttribute="bottom" secondItem="Yfx-Wr-nz4" secondAttribute="bottom" id="WAX-Bu-gT8"/>
-                    <constraint firstItem="Yfx-Wr-nz4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Z4E-sK-akX"/>
+                    <constraint firstAttribute="trailing" secondItem="Yfx-Wr-nz4" secondAttribute="trailing" constant="10" id="GKN-0j-cun"/>
+                    <constraint firstItem="Yfx-Wr-nz4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="QBi-Zp-Tvc"/>
+                    <constraint firstAttribute="bottom" secondItem="Yfx-Wr-nz4" secondAttribute="bottom" constant="10" id="WAX-Bu-gT8"/>
+                    <constraint firstItem="Yfx-Wr-nz4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="Z4E-sK-akX"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="activityIndicator" destination="ELA-OB-3ro" id="LZy-NR-6EY"/>
                 <outlet property="newsImg" destination="4h1-iX-5MH" id="dIV-Py-5O9"/>
                 <outlet property="stackView" destination="NbT-r9-9ZM" id="bhQ-oF-GvG"/>
                 <outlet property="titleLbl" destination="Ndy-9a-QjJ" id="BWS-7J-wWc"/>

@@ -11,11 +11,12 @@ import SwiftLinkPreview
 
 class FCNewsLinkDetailVC: UIViewController {
 
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var urlButton: UIButton!
     @IBOutlet weak var imgView: UIImageView!
-    var model: FCNewsFeedModel = FCNewsFeedModel()
+    var viewModel: FCNewsFeedDetailVM?
     let slp = SwiftLinkPreview()
     
     override func viewDidLoad() {
@@ -26,16 +27,16 @@ class FCNewsLinkDetailVC: UIViewController {
     
     func setupVC(){
         //initial setup
-        descriptionLabel.text = model.description
-        titleLabel.text = model.title
-        urlButton.setTitle(model.url, for: .normal)
-        if let urlString = model.url{
+        descriptionLabel.text = viewModel?.description
+        titleLabel.text = viewModel?.title
+        urlButton.setTitle(viewModel?.url, for: .normal)
+        if let urlString = viewModel?.url{
             loadLink(urlString)
         }
     }
     
     @IBAction func urlButtonAction(_ sender: Any) {
-        if let urlString = model.url {
+        if let urlString = viewModel?.url {
             FCUtilities.openLinkInSafari(urlString, self.navigationController)
         }
     }
@@ -47,7 +48,9 @@ class FCNewsLinkDetailVC: UIViewController {
             self?.descriptionLabel.text = response.description
             if let urlString = response.image{
                 if let url = URL(string: urlString){
-                    self?.imgView.loadImage(from: url, completion: nil)
+                    self?.imgView.loadImage(from: url){[weak self](_,_) in
+                        self?.activityIndicator.stopAnimating()
+                    }
                 }
             }
         }) { [weak self](error) in

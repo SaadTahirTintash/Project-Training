@@ -15,25 +15,26 @@ class FCPlayerTableViewCell: UITableViewCell {
     @IBOutlet weak var playerName: UILabel!
     @IBOutlet weak var countryName: UILabel!
     @IBOutlet weak var clubName: UILabel!
+    var viewModel: FCPlayersDetailVM?
     
     override func awakeFromNib() {
         super.awakeFromNib()
     }
 
-    func setupCell(_ model: FCPlayersModel){
-        if let standing = model.standing{
+    func configure(){
+        if let standing = viewModel?.playerStanding{
             standingLabel.text = standing
         }
-        if let name = model.name{
+        if let name = viewModel?.playerName{
             playerName.text = name
         }
-        if let country = model.country{
+        if let country = viewModel?.countryName{
             countryName.text = country
         }
-        if let club = model.club{
+        if let club = viewModel?.clubName{
             clubName.text = club
         }
-        if let imageUrl = model.playerDPUrl{
+        if let imageUrl = viewModel?.imageUrl{
             if let url = URL(string: imageUrl){
                 playerDPImage.loadImage(from: url, completion: nil)
             }

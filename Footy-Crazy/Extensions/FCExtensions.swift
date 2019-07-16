@@ -28,3 +28,10 @@ extension UIImageView{
         }
     }
 }
+
+extension UITableViewCell {
+    convenience init(_ bgColor: UIColor = .clear) {
+        self.init()
+        backgroundColor = bgColor
+    }
+}

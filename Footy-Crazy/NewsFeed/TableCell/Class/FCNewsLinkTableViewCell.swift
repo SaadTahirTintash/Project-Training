@@ -11,52 +11,42 @@ import SwiftLinkPreview
 
 class FCNewsLinkTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var newsImg: UIImageView!
     @IBOutlet weak var stackView: UIStackView!
-//    @IBOutlet weak var urlLbl: UILabel!
-//    @IBOutlet weak var descriptionLbl: UILabel!
-    var newsFeedModel : FCNewsFeedModel = FCNewsFeedModel()
     weak var shareBtnDelegate: FCNewsFeedShareButtonDelegate?
+    var viewModel: FCNewsFeedDetailVM?
     let slp = SwiftLinkPreview()
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
     
     override func prepareForReuse() {
         newsImg.image = nil
     }
     
-    func setupCell(_ model:  FCNewsFeedModel) {
-        titleLbl.text   = model.title
-//        urlLbl.text     = model.url
-//        descriptionLbl.text = model.description
-        newsImg.image = model.image ?? Constants.EMPTY_IMAGE
-        if let urlString = model.url{
+    func configure() {
+        titleLbl.text   = viewModel?.title
+        if let urlString = viewModel?.url{
             loadLink(urlString)
         }
-        saveModel(model)
     }
     
     @IBAction func share(_ sender: Any) {
-        shareBtnDelegate?.didPressShareButton(newsFeedModel)
-    }
-    
-    func saveModel(_ model: FCNewsFeedModel){
-        newsFeedModel.title = model.title
-        newsFeedModel.description = model.description
-        newsFeedModel.url = model.url
+        shareBtnDelegate?.didPressShareButton(viewModel)
     }
     
     func loadLink(_ newsLink: String){
         slp.preview(newsLink, onSuccess: { [weak self] (response) in
             self?.titleLbl.text   = response.title
-//            self?.urlLbl.text     = response.url?.absoluteString
-//            self?.descriptionLbl.text = response.description
             if let imgURL = response.image{
-                self?.newsImg.loadImage(from: URL(string: imgURL)!, completion: nil)
+                if let url = URL(string: imgURL){
+                    self?.newsImg.loadImage(from: url){[weak self](_,_) in
+                        self?.activityIndicator.stopAnimating()
+                    }
+                }
             } else{
                 self?.newsImg.image = Constants.EMPTY_IMAGE
             }

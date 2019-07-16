@@ -12,17 +12,15 @@ import SafariServices
 class FCNewsFeedVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    
-    var newsFeedModelArray : [FCNewsFeedModel] = [FCNewsFeedModel]()
-    var isFetchingData = false
+    var viewModel: FCNewsFeedVM?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel = FCNewsFeedVM(FCDataManager.shared.newsFeedModelArray)
         tableView.dataSource = self
         tableView.delegate = self
-        
-        newsFeedModelArray = FCDataManager.shared.newsFeedModelArray        
         registerCells()
+        initializeCompletionHandlers()
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 450
     }
@@ -34,43 +32,56 @@ class FCNewsFeedVC: UIViewController {
         tableView.register(UINib(nibName: "FCEmptyTableViewCell", bundle: nil), forCellReuseIdentifier: "EmptyCell")
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+    func initializeCompletionHandlers(){
+        viewModel?.moreDataCompletionHandler = {[weak self](success, indexPathAray) in
+            if success{
+                if let indexPathArray = indexPathAray{
+                    self?.tableView.beginUpdates()
+                    self?.tableView.insertRows(at: indexPathArray, with: .fade)
+                    self?.tableView.endUpdates()
+                }
+            }
+        }
     }
 }
 
 extension FCNewsFeedVC: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return newsFeedModelArray.count
+        return viewModel?.itemCount ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let model = newsFeedModelArray[indexPath.row]
-        switch model.type {
+        guard let type = viewModel?.getType(of: indexPath.row) else{
+            return UITableViewCell()
+        }
+        switch type {
         case "video":
-            let cell = tableView.dequeueReusableCell(withIdentifier: "VideoCell") as! FCVideoTableViewCell
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "VideoCell") as? FCVideoTableViewCell else{
+                return UITableViewCell()
+            }
             cell.shareBtnDelegate = self
-            cell.setupCell(model)
+            cell.viewModel = viewModel?.viewModelForDetail(at: indexPath.row)
+            cell.configure()
             return cell
         case "news_link":
-            let cell = tableView.dequeueReusableCell(withIdentifier: "NewsLinkCell") as! FCNewsLinkTableViewCell
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "NewsLinkCell") as? FCNewsLinkTableViewCell else{
+                return UITableViewCell()
+            }
             cell.shareBtnDelegate = self
-            cell.setupCell(model)
+            cell.viewModel = viewModel?.viewModelForDetail(at: indexPath.row)
+            cell.configure()
             return cell
         case "fact":
-            let cell = tableView.dequeueReusableCell(withIdentifier: "FactCell") as! FCFactTableViewCell
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "FactCell") as? FCFactTableViewCell else{
+                return UITableViewCell()
+            }
             cell.shareBtnDelegate = self
-            cell.setupCell(model)
+            cell.viewModel = viewModel?.viewModelForDetail(at: indexPath.row)
+            cell.configure()
             return cell
         default:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "EmptyCell") as! FCEmptyTableViewCell
-            cell.label.text = "No Data!"
-            return cell
+            return UITableViewCell()
         }
     }
 }
@@ -83,49 +94,23 @@ extension FCNewsFeedVC: UITableViewDelegate{
         let distanceFromBottom = scrollView.contentSize.height - contentYOffset
         if distanceFromBottom < height{
             //reached end of table
-            if !isFetchingData{
-                isFetchingData = true
-                var startingId = newsFeedModelArray.last?.id ?? 0
-                if startingId != 0{
-                    startingId += 1
-                    FCDataManager.shared.getNewsFeed(startingKey: String(startingId), pageSize: Constants.NEWS_FEED_PAGE_SIZE) { [weak self] (success,newsFeedModelArray) in
-                        if success{
-                            if let modelArray = newsFeedModelArray{
-                                self?.newsFeedModelArray.append(contentsOf: modelArray)
-                            }
-                            self?.updateTableRows(newsFeedModelArray!)
-                            self?.isFetchingData = false
-                        }
-                    }
-                }
-            }
+            viewModel?.getMoreData()
         }
-    }
-    
-    func updateTableRows(_ modelArray: [FCNewsFeedModel]){
-        var indexPathsArray = [IndexPath]()
-        for obj in modelArray.enumerated(){
-            let index = obj.element.id
-            let indexPath = IndexPath(row: index - 1, section: 0)
-            indexPathsArray.append(indexPath)
-        }
-        tableView.beginUpdates()
-        tableView.insertRows(at: indexPathsArray, with: .fade)
-        tableView.endUpdates()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let model = newsFeedModelArray[indexPath.row]
-        switch model.type {
-        case "news_link":
-            performSegue(withIdentifier: "FCNewsLinkDetailVC", sender: indexPath.row)
-        case "video":
-            performSegue(withIdentifier: "FCVideoDetailVC", sender: indexPath.row)
-        case "fact":
-            performSegue(withIdentifier: "FCFactDetailVC", sender: indexPath.row)
-        default:
-            print("Can't perform segue for empty cells")
-        }        
+        if let type = viewModel?.getType(of: indexPath.row){
+            switch type {
+            case "news_link":
+                performSegue(withIdentifier: "FCNewsLinkDetailVC", sender: indexPath.row)
+            case "video":
+                performSegue(withIdentifier: "FCVideoDetailVC", sender: indexPath.row)
+            case "fact":
+                performSegue(withIdentifier: "FCFactDetailVC", sender: indexPath.row)
+            default:
+                print("Can't perform segue for empty cells")
+            }
+        }
     }
 }
 
@@ -133,27 +118,27 @@ extension FCNewsFeedVC: UITableViewDelegate{
 extension FCNewsFeedVC{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? FCFactDetailVC{
-            let index = sender as! Int
-            let model = newsFeedModelArray[index]
-            vc.model = model
+            if let index = sender as? Int{
+                vc.viewModel = viewModel?.viewModelForDetail(at: index)
+            }
         }
         else if let vc = segue.destination as? FCVideoDetailVC{
-            let index = sender as! Int
-            let model = newsFeedModelArray[index]
-            vc.model = model
+            if let index = sender as? Int{
+                vc.viewModel = viewModel?.viewModelForDetail(at: index)
+            }
         }
         else if let vc = segue.destination as? FCNewsLinkDetailVC{
-            let index = sender as! Int
-            let model = newsFeedModelArray[index]
-            vc.model = model
+            if let index = sender as? Int{
+                vc.viewModel = viewModel?.viewModelForDetail(at: index)
+            }
         }
     }
 }
 
 //cell button press protocol
 extension FCNewsFeedVC: FCNewsFeedShareButtonDelegate{
-    func didPressShareButton(_ model: FCNewsFeedModel) {
-        let text = [model.title,model.url,model.description]
+    func didPressShareButton(_ newsFeedVM: FCNewsFeedDetailVM?) {
+        let text = [newsFeedVM?.title,newsFeedVM?.url,newsFeedVM?.description]
         FCUtilities.shareContent(self, text as [Any])
     }
 }

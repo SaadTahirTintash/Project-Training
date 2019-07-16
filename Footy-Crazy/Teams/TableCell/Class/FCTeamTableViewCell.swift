@@ -14,25 +14,18 @@ class FCTeamTableViewCell: UITableViewCell {
     @IBOutlet weak var flagImage: UIImageView!
     @IBOutlet weak var teamName: UILabel!
     @IBOutlet weak var country: UILabel!
+    var viewModel : FCTeamsDetailVM?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        flagImage.layer.masksToBounds = true
-        flagImage.layer.cornerRadius = flagImage.frame.width/2        
     }
 
-    func setupCell(_ model: FCTeamsModel){
-        if let standing = model.standing{
-            standingLabel.text = String(standing)
-        }
-        if let name = model.name{
-            teamName.text = name
-        }
-        if let countryName = model.country{
-            country.text = countryName
-        }
-        if let imgString = model.flagUrl{
-            if let url = URL(string: imgString){
+    func configure(){
+        standingLabel.text = viewModel?.teamStanding
+        teamName.text = viewModel?.teamName
+        country.text = viewModel?.countryName
+        if let imageUrl = viewModel?.imageUrl{
+            if let url = URL(string: imageUrl){
                 flagImage.loadImage(from: url, completion: nil)
             }
         }

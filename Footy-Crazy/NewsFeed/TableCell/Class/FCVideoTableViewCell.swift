@@ -11,11 +11,11 @@ import youtube_ios_player_helper
 
 class FCVideoTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var videoView: YTPlayerView!
-//    @IBOutlet weak var descriptionLabel: UILabel!
     weak var shareBtnDelegate: FCNewsFeedShareButtonDelegate?
-    var newsFeedModel: FCNewsFeedModel = FCNewsFeedModel()
+    var viewModel: FCNewsFeedDetailVM?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,45 +23,29 @@ class FCVideoTableViewCell: UITableViewCell {
         videoView.delegate = self        
     }
     
-    func setupCell(_ model: FCNewsFeedModel){        
-        titleLabel.text = model.title
-//        descriptionLabel.text = model.description
-        if let urlString = model.url{
-            videoView.load(withVideoId: urlString, playerVars:["playsinline":1])
-        }        
-        saveModel(model)
-    }
-    
-    func saveModel(_ model: FCNewsFeedModel){
-        newsFeedModel.title = model.title
-        newsFeedModel.url = model.url
-//        newsFeedModel.description = model.description
+    func configure(){        
+        titleLabel.text = viewModel?.title
+        if let urlString = viewModel?.url{
+            videoView.load(withVideoId: urlString, playerVars:["playsinline":1])            
+        }
     }
     
     @IBAction func share(_ sender: Any) {
-        shareBtnDelegate?.didPressShareButton(newsFeedModel)
+        shareBtnDelegate?.didPressShareButton(viewModel)
     }
 }
 
 extension FCVideoTableViewCell: YTPlayerViewDelegate{
     
-    func addActivityIndicator(_ to: UIView){
-        let activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
-        activityIndicator.center = to.center
-        to.addSubview(activityIndicator)
-        to.layoutIfNeeded()
-        activityIndicator.startAnimating()
-    }
-    
     func playerViewPreferredInitialLoading(_ playerView: YTPlayerView) -> UIView? {
         let videoPreferredView = UIView.init(frame: playerView.frame)
         videoPreferredView.backgroundColor = .black
-        //addActivityIndicator(videoPreferredView)
         return videoPreferredView
     }
     
     func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
         print("Video is ready")
+        activityIndicator.stopAnimating()
     }
     
     func playerView(_ playerView: YTPlayerView, didChangeTo state: YTPlayerState) {
