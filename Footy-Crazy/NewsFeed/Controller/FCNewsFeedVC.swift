@@ -8,12 +8,10 @@
 
 import UIKit
 import SafariServices
-
 class FCNewsFeedVC: UIViewController {
+    @IBOutlet weak var tableView    : UITableView!
+    var viewModel                   : FCNewsFeedVM?
     
-    @IBOutlet weak var tableView: UITableView!
-    var viewModel: FCNewsFeedVM?
-
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel = FCNewsFeedVM(FCDataManager.shared.newsFeedModelArray)
@@ -24,14 +22,11 @@ class FCNewsFeedVC: UIViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 450
     }
-    
     func registerCells(){
         tableView.register(UINib(nibName: "FCVideoTableViewCell", bundle: nil), forCellReuseIdentifier: "VideoCell")
         tableView.register(UINib(nibName: "FCFactTableViewCell", bundle: nil), forCellReuseIdentifier: "FactCell")
         tableView.register(UINib(nibName: "FCNewsLinkTableViewCell", bundle: nil), forCellReuseIdentifier: "NewsLinkCell")
-        tableView.register(UINib(nibName: "FCEmptyTableViewCell", bundle: nil), forCellReuseIdentifier: "EmptyCell")
     }
-    
     func initializeCompletionHandlers(){
         viewModel?.newDataFetched = { [weak self] success in
             guard success else { return }
@@ -47,13 +42,10 @@ class FCNewsFeedVC: UIViewController {
         }
     }
 }
-
 extension FCNewsFeedVC: UITableViewDataSource{
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel?.itemCount ?? 0
     }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let type = viewModel?.getType(of: indexPath.row) else{
             return UITableViewCell(.clear)
@@ -61,45 +53,51 @@ extension FCNewsFeedVC: UITableViewDataSource{
         checkForMoreData(at: indexPath.row)
         switch type {
         case "video":
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "VideoCell") as? FCVideoTableViewCell else{
-                return UITableViewCell(.clear)
-            }
-            cell.shareBtnDelegate = self
-            cell.viewModel = viewModel?.viewModelForDetail(at: indexPath.row)
-            cell.configure()
-            return cell
+            return videoTableCell(at: indexPath)
         case "news_link":
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "NewsLinkCell") as? FCNewsLinkTableViewCell else{
-                return UITableViewCell(.clear)
-            }
-            cell.shareBtnDelegate = self
-            cell.viewModel = viewModel?.viewModelForDetail(at: indexPath.row)
-            cell.configure()
-            return cell
+            return newsLinkTableCell(at: indexPath)
         case "fact":
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "FactCell") as? FCFactTableViewCell else{
-                return UITableViewCell(.clear)
-            }
-            cell.shareBtnDelegate = self
-            cell.viewModel = viewModel?.viewModelForDetail(at: indexPath.row)
-            cell.configure()
-            return cell
+            return factTableCell(at: indexPath)
         default:
             return UITableViewCell(.clear)
         }
     }
-    
     func checkForMoreData(at displayingIndex: Int){
         let totalItems = viewModel?.itemCount ?? 0
         let index = totalItems - displayingIndex
-        if index <= 5 {
+        if index <= Constants.DATA_FETCH_THRESHOLD {
             print("Need Update")
             viewModel?.getMoreData()
         }
     }
+    func videoTableCell(at indexPath: IndexPath)->UITableViewCell{
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "VideoCell") as? FCVideoTableViewCell else{
+            return UITableViewCell(.clear)
+        }
+        cell.shareBtnDelegate = self
+        cell.viewModel = viewModel?.viewModelForDetail(at: indexPath.row)
+        cell.configure()
+        return cell
+    }
+    func newsLinkTableCell(at indexPath: IndexPath)->UITableViewCell{
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "NewsLinkCell") as? FCNewsLinkTableViewCell else{
+            return UITableViewCell(.clear)
+        }
+        cell.shareBtnDelegate = self
+        cell.viewModel = viewModel?.viewModelForDetail(at: indexPath.row)
+        cell.configure()
+        return cell
+    }
+    func factTableCell(at indexPath: IndexPath)->UITableViewCell{
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "FactCell") as? FCFactTableViewCell else{
+            return UITableViewCell(.clear)
+        }
+        cell.shareBtnDelegate = self
+        cell.viewModel = viewModel?.viewModelForDetail(at: indexPath.row)
+        cell.configure()
+        return cell
+    }
 }
-
-//UITableView delegate
 extension FCNewsFeedVC: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let type = viewModel?.getType(of: indexPath.row){
@@ -116,29 +114,23 @@ extension FCNewsFeedVC: UITableViewDelegate{
         }
     }
 }
-
-//segue
 extension FCNewsFeedVC{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? FCFactDetailVC{
             if let index = sender as? Int{
                 vc.viewModel = viewModel?.viewModelForDetail(at: index)
             }
-        }
-        else if let vc = segue.destination as? FCVideoDetailVC{
+        } else if let vc = segue.destination as? FCVideoDetailVC{
             if let index = sender as? Int{
                 vc.viewModel = viewModel?.viewModelForDetail(at: index)
             }
-        }
-        else if let vc = segue.destination as? FCNewsLinkDetailVC{
+        } else if let vc = segue.destination as? FCNewsLinkDetailVC{
             if let index = sender as? Int{
                 vc.viewModel = viewModel?.viewModelForDetail(at: index)
             }
         }
     }
 }
-
-//cell button press protocol
 extension FCNewsFeedVC: FCNewsFeedShareButtonDelegate{
     func didPressShareButton(_ newsFeedVM: FCNewsFeedDetailVM?) {
         let text = [newsFeedVM?.title,newsFeedVM?.url,newsFeedVM?.description]

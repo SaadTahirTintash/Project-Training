@@ -9,10 +9,10 @@
 import UIKit
 
 struct FCPlayersModel: Decodable{
-    var standing: String?
-    var name: String?
-    var country: String?
-    var club: String?
-    var playerDPUrl: String?
-    var description: String?
+    var standing:       String?
+    var name:           String?
+    var country:        String?
+    var club:           String?
+    var playerDPUrl:    String?
+    var description:    String?
 }

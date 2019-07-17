@@ -7,23 +7,18 @@
 //
 
 import UIKit
-
 class FCFactDetailVC: UIViewController {
-
-    
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var imgView: UIImageView!
-    var viewModel: FCNewsFeedDetailVM?
+    @IBOutlet weak var activityIndicator    : UIActivityIndicatorView!
+    @IBOutlet weak var titleLabel           : UILabel!
+    @IBOutlet weak var descriptionLabel     : UILabel!
+    @IBOutlet weak var imgView              : UIImageView!
+    var viewModel                           : FCNewsFeedDetailVM?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupVC()
     }
-    
     func setupVC(){
-        //initial setup
         descriptionLabel.text = viewModel?.description
         titleLabel.text = viewModel?.title
         if let urlString = viewModel?.url{
@@ -34,5 +29,4 @@ class FCFactDetailVC: UIViewController {
             }
         }        
     }
-
 }

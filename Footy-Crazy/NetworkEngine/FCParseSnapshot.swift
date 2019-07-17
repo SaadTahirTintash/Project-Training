@@ -7,9 +7,7 @@
 //
 
 import FirebaseDatabase
-
 class FCParseSnapshot{
-    
     func parseToNewsFeed(snapshot: DataSnapshot)->[FCNewsFeedModel]{
         var newsFeedModelArray = [FCNewsFeedModel]()
         let enumerator = snapshot.children
@@ -27,7 +25,6 @@ class FCParseSnapshot{
         }
         return newsFeedModelArray
     }
-    
     func parseToGallary(snapshot: DataSnapshot)->[FCGalleryModel]{
         var galleryModelArray = [FCGalleryModel]()
         let enumerator = snapshot.children
@@ -37,7 +34,6 @@ class FCParseSnapshot{
         }
         return galleryModelArray
     }
-    
     func parseToTeams(snapshot: DataSnapshot)->[FCTeamsModel]{
         var teamsModelArray = [FCTeamsModel]()
         let enumerator = snapshot.children
@@ -54,8 +50,7 @@ class FCParseSnapshot{
             }
         }
         return teamsModelArray
-    }
-    
+    }    
     func parseToPlayers(snapshot: DataSnapshot)->[FCPlayersModel]{
         var playersModelArray = [FCPlayersModel]()
         let enumerator = snapshot.children

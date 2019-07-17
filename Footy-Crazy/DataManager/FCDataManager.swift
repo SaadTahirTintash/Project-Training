@@ -5,27 +5,16 @@
 //  Created by Tintash on 01/07/2019.
 //  Copyright © 2019 Tintash. All rights reserved.
 //
-
-/*
- - It gets data from server, saves that data in itself and return that data to others 
- */
-
-
-
 class FCDataManager{
-    
     static let shared = FCDataManager()
     private let networkEngine : NetworkEngine?
-    
     var newsFeedModelArray: [FCNewsFeedModel] = [FCNewsFeedModel]()
     var galleryModelArray: [FCGalleryModel] = [FCGalleryModel]()
     var teamsModelArray: [FCTeamsModel] = [FCTeamsModel]()
     var playersModelArray: [FCPlayersModel] = [FCPlayersModel]()
-    
     private init(){
         networkEngine = NetworkEngine()
     }
-    
     func getNewsFeed(startingKey id: String, pageSize limit: Int, completion: @escaping(_ success: Bool, _ newsFeedModelArray: [FCNewsFeedModel]?)->()){
         networkEngine?.loadNewsFeed(startingKey: id, pageSize: limit, completion: { [weak self] (success, newsFeedModelArray) in
             if success, let array = newsFeedModelArray{
@@ -34,7 +23,6 @@ class FCDataManager{
             completion(success,newsFeedModelArray)
         })
     }
-    
     func getGallery(startingKey id: String, pageSize limit: Int, completion: @escaping(_ success: Bool,_ galleryModelArray: [FCGalleryModel]?)->()){
         networkEngine?.loadGallery(startingKey: id, pageSize: limit, completion: { [weak self](success, galleryModelArray) in
             if success, let array = galleryModelArray{
@@ -43,7 +31,6 @@ class FCDataManager{
             completion(success,galleryModelArray)
         })
     }
-    
     func getTeams(startingKey id: String, pageSize limit: Int, completion: ((_ success: Bool, _ teamsModelArray: [FCTeamsModel]?)->Void)?){
         networkEngine?.loadTeams(startingKey: id, pageSize: limit, completion: { [weak self] (success, teamsModelArray) in
             if success, let array = teamsModelArray{
@@ -52,7 +39,6 @@ class FCDataManager{
             completion?(success,teamsModelArray)
         })
     }
-    
     func getPlayers(startingKey id: String, pageSize limit: Int, completion: ((_ success: Bool, _ playersModelArray: [FCPlayersModel]?)->Void)?){
         networkEngine?.loadPlayers(startingKey: id, pageSize: limit, completion: { [weak self] (success, playersModelArray) in
             if success, let array = playersModelArray{
@@ -61,10 +47,7 @@ class FCDataManager{
             completion?(success,playersModelArray)
         })
     }
-    
-    //MARK: Remove observers
     func removeAllObservers(){
         networkEngine?.removeAllObservers()
     }
-    
 }

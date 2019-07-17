@@ -8,36 +8,30 @@
 
 import UIKit
 import SwiftLinkPreview
-
 class FCNewsLinkTableViewCell: UITableViewCell {
-
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var titleLbl: UILabel!
-    @IBOutlet weak var newsImg: UIImageView!
-    @IBOutlet weak var stackView: UIStackView!
-    weak var shareBtnDelegate: FCNewsFeedShareButtonDelegate?
-    var viewModel: FCNewsFeedDetailVM?
-    let slp = SwiftLinkPreview()
-
+    @IBOutlet weak var activityIndicator    : UIActivityIndicatorView!
+    @IBOutlet weak var titleLbl             : UILabel!
+    @IBOutlet weak var newsImg              : UIImageView!
+    @IBOutlet weak var stackView            : UIStackView!
+    weak var shareBtnDelegate               : FCNewsFeedShareButtonDelegate?
+    var viewModel                           : FCNewsFeedDetailVM?
+    let slp                                 : SwiftLinkPreview                  = SwiftLinkPreview()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-    
     override func prepareForReuse() {
         newsImg.image = nil
     }
-    
     func configure() {
         titleLbl.text   = viewModel?.title
         if let urlString = viewModel?.url{
             loadLink(urlString)
         }
     }
-    
     @IBAction func share(_ sender: Any) {
         shareBtnDelegate?.didPressShareButton(viewModel)
-    }
-    
+    }    
     func loadLink(_ newsLink: String){
         slp.preview(newsLink, onSuccess: { [weak self] (response) in
             self?.titleLbl.text   = response.title

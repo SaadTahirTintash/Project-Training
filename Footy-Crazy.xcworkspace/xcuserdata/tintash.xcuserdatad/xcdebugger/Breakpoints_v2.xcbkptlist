@@ -9,60 +9,12 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Footy-Crazy/SplashScreen/Controller/FCSplashScreenVC.swift"
-            timestampString = "584969357.653463"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
-            landmarkName = "viewWillAppear(_:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Footy_Crazy.FCSplashScreenVC.viewWillAppear(Swift.Bool) -&gt; ()"
-                  moduleName = "Footy-Crazy"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/tintash/Documents/Project/Footy-Crazy/Footy-Crazy/SplashScreen/Controller/FCSplashScreenVC.swift"
-                  timestampString = "584371749.61638"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "29"
-                  endingLineNumber = "29"
-                  offsetFromSymbolStart = "127">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Bool, Swift.Optional&lt;Swift.Array&lt;Footy_Crazy.FCNewsFeedModel&gt;&gt;) -&gt; () in Footy_Crazy.FCSplashScreenVC.viewWillAppear(Swift.Bool) -&gt; ()"
-                  moduleName = "Footy-Crazy"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/tintash/Documents/Project/Footy-Crazy/Footy-Crazy/SplashScreen/Controller/FCSplashScreenVC.swift"
-                  timestampString = "584371749.6203229"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "29"
-                  endingLineNumber = "29"
-                  offsetFromSymbolStart = "111">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Footy-Crazy/NewsFeed/Controller/FCNewsFeedVC.swift"
-            timestampString = "584973514.935444"
+            timestampString = "585041616.975543"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "20"
-            endingLineNumber = "20"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -74,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Footy-Crazy/NewsFeed/ViewModel/FCNewsFeedVM.swift"
-            timestampString = "585039701.82789"
+            timestampString = "585041616.975799"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
             landmarkName = "getMoreData()"
             landmarkType = "7">
          </BreakpointContent>
@@ -90,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Footy-Crazy/NewsFeed/ViewModel/FCNewsFeedVM.swift"
-            timestampString = "585039701.82833"
+            timestampString = "585041616.9759049"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
             landmarkName = "getMoreData()"
             landmarkType = "7">
          </BreakpointContent>
@@ -106,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Footy-Crazy/Players/ViewModel/FCPlayersVM.swift"
-            timestampString = "585039701.828658"
+            timestampString = "585041616.976007"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "43"

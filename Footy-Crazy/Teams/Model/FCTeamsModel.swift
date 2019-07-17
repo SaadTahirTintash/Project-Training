@@ -7,11 +7,10 @@
 //
 
 import UIKit
-
 struct FCTeamsModel: Decodable{
-    var name: String?
-    var standing: String?
-    var country: String?
-    var flagUrl: String?    
-    var description: String?
+    var name:           String?
+    var standing:       String?
+    var country:        String?
+    var flagUrl:        String?
+    var description:    String?
 }

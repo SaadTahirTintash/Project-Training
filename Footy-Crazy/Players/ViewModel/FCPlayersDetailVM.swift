@@ -9,7 +9,7 @@
 import UIKit
 
 class FCPlayersDetailVM {
-    private var model: FCPlayersModel
+    private var model   : FCPlayersModel
     init(_ model: FCPlayersModel) {
         self.model = model
     }

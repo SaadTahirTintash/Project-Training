@@ -28,7 +28,6 @@
 		4A05144022D75AB9009BE500 /* FCAboutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A05143F22D75AB9009BE500 /* FCAboutVC.swift */; };
 		4A0573F222CB9506007BAE6E /* FCConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0573F122CB9506007BAE6E /* FCConstants.swift */; };
 		4A2B430922C4DA2C00815318 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A2B430822C4DA2C00815318 /* GoogleService-Info.plist */; };
-		4A2B431022C5E39F00815318 /* FCNewsFeedType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2B430F22C5E39F00815318 /* FCNewsFeedType.swift */; };
 		4A2B431822C5E4D800815318 /* FCNewsFeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2B431722C5E4D800815318 /* FCNewsFeedVC.swift */; };
 		4A2B431C22C5E8A800815318 /* FCVideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2B431A22C5E8A800815318 /* FCVideoTableViewCell.swift */; };
 		4A2B431D22C5E8A800815318 /* FCVideoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A2B431B22C5E8A800815318 /* FCVideoTableViewCell.xib */; };
@@ -86,7 +85,6 @@
 		4A05143F22D75AB9009BE500 /* FCAboutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCAboutVC.swift; sourceTree = "<group>"; };
 		4A0573F122CB9506007BAE6E /* FCConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCConstants.swift; sourceTree = "<group>"; };
 		4A2B430822C4DA2C00815318 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		4A2B430F22C5E39F00815318 /* FCNewsFeedType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCNewsFeedType.swift; sourceTree = "<group>"; };
 		4A2B431722C5E4D800815318 /* FCNewsFeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCNewsFeedVC.swift; sourceTree = "<group>"; };
 		4A2B431A22C5E8A800815318 /* FCVideoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCVideoTableViewCell.swift; sourceTree = "<group>"; };
 		4A2B431B22C5E8A800815318 /* FCVideoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FCVideoTableViewCell.xib; sourceTree = "<group>"; };
@@ -240,7 +238,6 @@
 		4A2B430A22C5E2F700815318 /* NewsFeed */ = {
 			isa = PBXGroup;
 			children = (
-				4A2B430E22C5E38700815318 /* Enum */,
 				4A2B431E22C5E8D700815318 /* TableCell */,
 				4A2B431622C5E47100815318 /* Controller */,
 				4A8820FC22DDB48F00AC8938 /* ViewModel */,
@@ -256,14 +253,6 @@
 				4AFF91AD22C622C4004FEBB6 /* FCNewsFeedModel.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		4A2B430E22C5E38700815318 /* Enum */ = {
-			isa = PBXGroup;
-			children = (
-				4A2B430F22C5E39F00815318 /* FCNewsFeedType.swift */,
-			);
-			path = Enum;
 			sourceTree = "<group>";
 		};
 		4A2B431522C5E46700815318 /* View */ = {
@@ -757,7 +746,6 @@
 				4A8820F622DDA9DF00AC8938 /* FCTeamsDetailVM.swift in Sources */,
 				4AFDD29822CA24EE0044B728 /* FCFactTableViewCell.swift in Sources */,
 				4AFE969322D4CC6E00BBD074 /* FCFactDetailVC.swift in Sources */,
-				4A2B431022C5E39F00815318 /* FCNewsFeedType.swift in Sources */,
 				4A05143D22D75A80009BE500 /* FCPlayerTableViewCell.swift in Sources */,
 				4A0227FA22D73E68006F5E1D /* FCGalleryDetailVC.swift in Sources */,
 				4A8820F422DDA5A500AC8938 /* FCTeamsVM.swift in Sources */,

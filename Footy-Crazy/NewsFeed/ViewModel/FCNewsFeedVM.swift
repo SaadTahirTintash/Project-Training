@@ -7,34 +7,25 @@
 //
 
 import UIKit
-
 class FCNewsFeedVM: FCViewModelProtocol{
-    
-    private var modelArray: [FCNewsFeedModel]
-    var isFetchingData: Bool = false
-    var initialDataFetched: ((Bool) -> Void)?
-    var newDataFetched: ((Bool) -> Void)?
+    private var modelArray  : [FCNewsFeedModel]
+    var isFetchingData      : Bool              = false
+    var initialDataFetched  : ((Bool) -> Void)?
+    var newDataFetched      : ((Bool) -> Void)?
 
     init(_ modelArray: [FCNewsFeedModel]) {
         self.modelArray = modelArray
     }
-    
     var itemCount: Int{
         return modelArray.count
     }
-    
     func getType(of index: Int)->String?{
         return modelArray[index].type
     }
-    
     func viewModelForDetail(at index: Int)->FCNewsFeedDetailVM{
         return FCNewsFeedDetailVM(modelArray[index])
     }
-    
-    func getInitialData() {
-        //no need
-    }
-    
+    func getInitialData() {}    
     func getMoreData() {
         if !isFetchingData{
             isFetchingData = true

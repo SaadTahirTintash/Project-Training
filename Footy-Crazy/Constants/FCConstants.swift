@@ -38,4 +38,6 @@ class Constants{
     static let ABOUT_US                     :String     = "This text is about us"
     
     static let GALLERY_CELL_ROW_COUNT       :Int        = 2
+    
+    static let DATA_FETCH_THRESHOLD         :Int        = 5
 }

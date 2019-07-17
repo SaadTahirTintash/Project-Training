@@ -9,24 +9,20 @@
 import UIKit
 
 class FCGalleryVM: FCViewModelProtocol{
-    
-    private var modelArray : [FCGalleryModel]
-    var isFetchingData: Bool = false
-    var initialDataFetched: ((Bool)->Void)?
-    var newDataFetched: ((Bool)->Void)?
+    private var modelArray  : [FCGalleryModel]
+    var isFetchingData      : Bool = false
+    var initialDataFetched  : ((Bool)->Void)?
+    var newDataFetched      : ((Bool)->Void)?
 
     init(_ modelArray: [FCGalleryModel]) {
         self.modelArray = modelArray
     }
-    
     var itemCount: Int{
         return modelArray.count
     }
-    
     func viewModelForDetail(at index: Int) -> FCGalleryDetailVM {
         return FCGalleryDetailVM(model: modelArray[index])
     }
-    
     func getInitialData(){
         FCDataManager.shared.getGallery(startingKey: Constants.GALLERY_STARTING_KEY, pageSize: Constants.GALLERY_INITIAL_PAGE_SIZE){[weak self](success, modelArray) in
             guard success, let array = modelArray else{
@@ -38,8 +34,7 @@ class FCGalleryVM: FCViewModelProtocol{
             self?.isFetchingData = false
             self?.initialDataFetched?(true)
         }
-    }
-    
+    }    
     func getMoreData(){
         if !isFetchingData{
             isFetchingData = true

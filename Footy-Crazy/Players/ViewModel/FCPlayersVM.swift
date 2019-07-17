@@ -9,10 +9,10 @@
 import UIKit
 
 class FCPlayersVM: FCViewModelProtocol{
-    private var modelArray: [FCPlayersModel]
-    var isFetchingData: Bool = false
-    var initialDataFetched: ((Bool)->Void)?
-    var newDataFetched: ((Bool)->Void)?
+    private var modelArray          : [FCPlayersModel]
+    var isFetchingData              : Bool              = false
+    var initialDataFetched          : ((Bool)->Void)?
+    var newDataFetched              : ((Bool)->Void)?
     
     init(_ modelArray: [FCPlayersModel]) {
         self.modelArray = modelArray

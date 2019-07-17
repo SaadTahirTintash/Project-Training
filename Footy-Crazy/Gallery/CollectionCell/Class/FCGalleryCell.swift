@@ -9,16 +9,13 @@
 import UIKit
 
 class FCGalleryCell: UICollectionViewCell {
-    
-    @IBOutlet weak var img: UIImageView!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    var viewModel: FCGalleryDetailVM?
+    @IBOutlet weak var img                  : UIImageView!
+    @IBOutlet weak var activityIndicator    : UIActivityIndicatorView!
+    var viewModel                           : FCGalleryDetailVM?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
-
     func configure(){
         if let urlString = viewModel?.imageUrl{
             if let url = URL(string: urlString){

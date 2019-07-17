@@ -7,21 +7,18 @@
 //
 
 import UIKit
-
 class FCTeamsDetailVC: UIViewController {
-
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var standingLabel: UILabel!
-    @IBOutlet weak var countryLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var flagImage: UIImageView!
-    var viewModel: FCTeamsDetailVM?
+    @IBOutlet weak var nameLabel        : UILabel!
+    @IBOutlet weak var standingLabel    : UILabel!
+    @IBOutlet weak var countryLabel     : UILabel!
+    @IBOutlet weak var descriptionLabel : UILabel!
+    @IBOutlet weak var flagImage        : UIImageView!
+    var viewModel                       : FCTeamsDetailVM?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupVC()
-    }
-    
+    }    
     func setupVC(){
         if let name = viewModel?.teamName{
             nameLabel.text = name

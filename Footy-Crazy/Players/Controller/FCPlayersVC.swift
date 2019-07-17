@@ -7,11 +7,9 @@
 //
 
 import UIKit
-
 class FCPlayersVC: UIViewController {
-
-    @IBOutlet weak var tableView: UITableView!
-    var viewModel: FCPlayersVM?
+    @IBOutlet weak var tableView    : UITableView!
+    var viewModel                   : FCPlayersVM?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,11 +20,9 @@ class FCPlayersVC: UIViewController {
         initializeCompletionHandlers()
         viewModel?.getInitialData()
     }
-    
     func registerCells(){
         tableView.register(UINib(nibName: "FCPlayerTableViewCell", bundle: nil), forCellReuseIdentifier: "PlayerCell")
     }
-    
     func initializeCompletionHandlers(){
         viewModel?.initialDataFetched = {[weak self](success) in
             if success{
@@ -47,13 +43,10 @@ class FCPlayersVC: UIViewController {
         }
     }
 }
-
-//Tableview Datasource
 extension FCPlayersVC: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel?.itemCount ?? 0
     }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         checkForMoreData(at: indexPath.row)
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerCell") as? FCPlayerTableViewCell else{
@@ -63,7 +56,6 @@ extension FCPlayersVC: UITableViewDataSource{
         cell.configure()
         return cell
     }
-    
     func checkForMoreData(at displayingIndex: Int){
         let totalItems = viewModel?.itemCount ?? 0
         let index = totalItems - displayingIndex
@@ -72,14 +64,10 @@ extension FCPlayersVC: UITableViewDataSource{
         }
     }
 }
-
-//Segue
 extension FCPlayersVC: UITableViewDelegate{
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "FCPlayersDetailVCSegue", sender: indexPath.row)
-    }
-    
+    }    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? FCPlayersDetailVC{
             if let index = sender as? Int{

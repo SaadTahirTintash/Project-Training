@@ -7,9 +7,8 @@
 //
 
 import UIKit
-
 class FCNewsFeedDetailVM{
-    private var model: FCNewsFeedModel
+    private var model   : FCNewsFeedModel
     init(_ model: FCNewsFeedModel) {
         self.model = model
     }    

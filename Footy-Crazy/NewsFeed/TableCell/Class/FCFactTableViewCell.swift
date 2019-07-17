@@ -7,20 +7,16 @@
 //
 
 import UIKit
-
 class FCFactTableViewCell: UITableViewCell {
-
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var imgView: UIImageView!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    weak var shareBtnDelegate: FCNewsFeedShareButtonDelegate?
-    var viewModel: FCNewsFeedDetailVM?
+    @IBOutlet weak var titleLabel           : UILabel!
+    @IBOutlet weak var imgView              : UIImageView!
+    @IBOutlet weak var activityIndicator    : UIActivityIndicatorView!
+    weak var shareBtnDelegate               : FCNewsFeedShareButtonDelegate?
+    var viewModel                           : FCNewsFeedDetailVM?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
-    
     func configure(){
         titleLabel.text = viewModel?.title
         if let urlString = viewModel?.url{
@@ -31,13 +27,10 @@ class FCFactTableViewCell: UITableViewCell {
             }
         }
     }
-    
     @IBAction func share(_ sender: Any) {
         shareBtnDelegate?.didPressShareButton(viewModel)
     }
-    
     override func prepareForReuse() {
         self.imgView.image = nil
     }
-    
 }

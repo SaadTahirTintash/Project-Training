@@ -7,11 +7,9 @@
 //
 
 import UIKit
-
 class FCGalleryVC: UIViewController {
-
-    @IBOutlet weak var collectionView: UICollectionView!
-    var viewModel : FCGalleryVM?
+    @IBOutlet weak var collectionView   : UICollectionView!
+    var viewModel                       : FCGalleryVM?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,17 +20,13 @@ class FCGalleryVC: UIViewController {
         initializeCompletionHandlers()
         viewModel?.getInitialData()
     }
-    
     func registerCells(){
         collectionView.register(UINib(nibName: "FCGalleryCell", bundle: nil), forCellWithReuseIdentifier: "GalleryCell")        
     }
-    
     func initializeCompletionHandlers(){
-        
         viewModel?.initialDataFetched = { [weak self](success) in
             self?.collectionView.reloadData()
         }
-        
         viewModel?.newDataFetched = { [weak self] success in
             guard success else { return }
             let rowCount    = (self?.collectionView.numberOfItems(inSection: 0) ?? 0)
@@ -45,13 +39,10 @@ class FCGalleryVC: UIViewController {
         }
     }
 }
-
-//Collection View DataSource
 extension FCGalleryVC: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel?.itemCount ?? 0
     }
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         checkForMoreData(at: indexPath.row)
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GalleryCell", for: indexPath) as? FCGalleryCell else{
@@ -64,20 +55,16 @@ extension FCGalleryVC: UICollectionViewDataSource{
     func checkForMoreData(at displayingIndex: Int){
         let totalItems = viewModel?.itemCount ?? 0
         let index = totalItems - displayingIndex
-        if index <= 5 {
+        if index <= Constants.DATA_FETCH_THRESHOLD {
             print("Need Update")
             viewModel?.getMoreData()
         }
     }
 }
-
-//Segue
 extension FCGalleryVC: UICollectionViewDelegate{
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         performSegue(withIdentifier: "GalleryImageDetailVCSegue", sender: indexPath.row)
     }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? FCGalleryDetailVC{
             if let index = sender as? Int{                
@@ -86,18 +73,14 @@ extension FCGalleryVC: UICollectionViewDelegate{
         }
     }
 }
-
-//Desiging collection cell
 extension FCGalleryVC: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.frame.width / CGFloat(Constants.GALLERY_CELL_ROW_COUNT) - 1
         return CGSize(width: width, height: width)
     }
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 1.0
     }
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 1.0
     }

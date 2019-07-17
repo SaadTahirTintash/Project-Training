@@ -7,9 +7,8 @@
 //
 
 import UIKit
-
 class FCTeamsDetailVM{
-    private var model: FCTeamsModel
+    private var model   : FCTeamsModel
     init(_ model: FCTeamsModel) {
         self.model = model
     }

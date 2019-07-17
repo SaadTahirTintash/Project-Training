@@ -7,20 +7,17 @@
 //
 
 import UIKit
-
 class FCPlayerTableViewCell: UITableViewCell {
-
-    @IBOutlet weak var standingLabel: UILabel!
-    @IBOutlet weak var playerDPImage: UIImageView!
-    @IBOutlet weak var playerName: UILabel!
-    @IBOutlet weak var countryName: UILabel!
-    @IBOutlet weak var clubName: UILabel!
-    var viewModel: FCPlayersDetailVM?
+    @IBOutlet weak var standingLabel        : UILabel!
+    @IBOutlet weak var playerDPImage        : UIImageView!
+    @IBOutlet weak var playerName           : UILabel!
+    @IBOutlet weak var countryName          : UILabel!
+    @IBOutlet weak var clubName             : UILabel!
+    var viewModel                           : FCPlayersDetailVM?
     
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-
     func configure(){
         if let standing = viewModel?.playerStanding{
             standingLabel.text = standing
@@ -40,5 +37,4 @@ class FCPlayerTableViewCell: UITableViewCell {
             }
         }
     }
-    
 }

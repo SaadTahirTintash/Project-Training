@@ -7,18 +7,12 @@
 //
 
 import UIKit
-
 class FCGalleryDetailVM{
-    
-    private let model : FCGalleryModel
-    
+    private let model   : FCGalleryModel
     init(model: FCGalleryModel) {
         self.model = model
     }
-    
     var imageUrl: String?{
         return model.imageUrl
     }
-    
-    
 }

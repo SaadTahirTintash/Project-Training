@@ -7,23 +7,20 @@
 //
 
 import UIKit
-
 class FCTeamsVM: FCViewModelProtocol{
-    private var modelArray: [FCTeamsModel]
-    var isFetchingData: Bool = false
-    var initialDataFetched: ((Bool)->Void)?
-    var newDataFetched: ((Bool) -> Void)?
+    private var modelArray      : [FCTeamsModel]
+    var isFetchingData          : Bool              = false
+    var initialDataFetched      : ((Bool)->Void)?
+    var newDataFetched          : ((Bool) -> Void)?
     init(_ modelArray: [FCTeamsModel]) {
         self.modelArray = modelArray
     }
-    
     var itemCount: Int{
         return modelArray.count
     }
     func viewModelForDetail(at index: Int)->FCTeamsDetailVM{
         return FCTeamsDetailVM(modelArray[index])
     }
-    
     func getInitialData(){
         FCDataManager.shared.getTeams(startingKey: Constants.TEAMS_STARTING_KEY,
                                       pageSize: Constants.TEAMS_INITIAL_PAGE_SIZE) {[weak self](success, modelArray) in
@@ -36,8 +33,7 @@ class FCTeamsVM: FCViewModelProtocol{
             self?.isFetchingData = false
             self?.initialDataFetched?(true)
         }
-    }
-    
+    }    
     func getMoreData(){
         guard !isFetchingData else { return }
         isFetchingData = true
