@@ -15,7 +15,7 @@ class FCNewsLinkDetailVC: UIViewController {
     @IBOutlet weak var urlButton                : UIButton!
     @IBOutlet weak var imgView                  : UIImageView!
     var viewModel                               : FCNewsFeedDetailVM?
-    let slp                                     : SwiftLinkPreview          = SwiftLinkPreview()
+    let slp                                     : SwiftLinkPreview = SwiftLinkPreview()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,14 +40,27 @@ class FCNewsLinkDetailVC: UIViewController {
             self?.urlButton.setTitle(response.url?.absoluteString, for: .normal)
             self?.descriptionLabel.text = response.description
             if let urlString = response.image{
-                if let url = URL(string: urlString){
-                    self?.imgView.loadImage(from: url){[weak self](_,_) in
-                        self?.activityIndicator.stopAnimating()
-                    }
-                }
+                self?.loadImage(urlString)
             }
         }) { [weak self](error) in
             self?.imgView.image = Constants.EMPTY_IMAGE
+        }
+    }
+    func loadImage(_ urlString: String){
+        if let cache = FCCacheManager.shared.getImage(urlString){
+            imgView.image = cache
+            print("Image loaded from cache")
+            activityIndicator.stopAnimating()
+        } else if let url = URL(string: urlString){
+            imgView.loadImage(from: url){[weak self](success,downloadedImg) in
+                if success{
+                    print("Image downloaded from internet")
+                    if let downloadedImg = downloadedImg{
+                        FCCacheManager.shared.setImage(urlString, downloadedImg)
+                    }
+                }
+                self?.activityIndicator.stopAnimating()
+            }
         }
     }
 }

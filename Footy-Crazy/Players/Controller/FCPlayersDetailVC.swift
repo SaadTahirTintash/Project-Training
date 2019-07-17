@@ -14,6 +14,7 @@ class FCPlayersDetailVC: UIViewController {
     @IBOutlet weak var descriptionLabel : UILabel!
     @IBOutlet weak var standingLabel    : UILabel!
     @IBOutlet weak var playerImage      : UIImageView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     var viewModel                       : FCPlayersDetailVM?
     
     override func viewDidLoad() {
@@ -37,8 +38,22 @@ class FCPlayersDetailVC: UIViewController {
             standingLabel.text = "Standing: \(standing)"
         }
         if let imageUrl = viewModel?.imageUrl{
-            if let url = URL(string: imageUrl){
-                playerImage.loadImage(from: url, completion: nil)
+            loadImage(imageUrl)
+        }
+    }
+    func loadImage(_ urlString: String){
+        if let cache = FCCacheManager.shared.getImage(urlString){
+            playerImage.image = cache
+            print("Image loaded from cache")
+        } else if let url = URL(string: urlString){
+            playerImage.loadImage(from: url){[weak self](success,downloadedImg) in
+                if success{
+                    print("Image downloaded from internet")
+                    if let downloadedImg = downloadedImg{
+                        FCCacheManager.shared.setImage(urlString, downloadedImg)
+                    }
+                }
+                self?.activityIndicator.stopAnimating()
             }
         }
     }

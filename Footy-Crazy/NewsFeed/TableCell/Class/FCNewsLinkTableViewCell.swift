@@ -15,7 +15,7 @@ class FCNewsLinkTableViewCell: UITableViewCell {
     @IBOutlet weak var stackView            : UIStackView!
     weak var shareBtnDelegate               : FCNewsFeedShareButtonDelegate?
     var viewModel                           : FCNewsFeedDetailVM?
-    let slp                                 : SwiftLinkPreview                  = SwiftLinkPreview()
+    let slp                                 : SwiftLinkPreview              = SwiftLinkPreview()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -34,18 +34,31 @@ class FCNewsLinkTableViewCell: UITableViewCell {
     }    
     func loadLink(_ newsLink: String){
         slp.preview(newsLink, onSuccess: { [weak self] (response) in
-            self?.titleLbl.text   = response.title
-            if let imgURL = response.image{
-                if let url = URL(string: imgURL){
-                    self?.newsImg.loadImage(from: url){[weak self](_,_) in
-                        self?.activityIndicator.stopAnimating()
-                    }
-                }
+            self?.titleLbl.text = response.title
+            if let urlString = response.image{
+                self?.loadImage(urlString)
             } else{
                 self?.newsImg.image = Constants.EMPTY_IMAGE
             }
         }) { [weak self](error) in
             self?.newsImg.image = Constants.EMPTY_IMAGE
+        }
+    }
+    func loadImage(_ urlString: String){
+        if let cache = FCCacheManager.shared.getImage(urlString){
+            newsImg.image = cache
+            print("Image loaded from cache")
+            activityIndicator.stopAnimating()
+        } else if let url = URL(string: urlString){
+            newsImg.loadImage(from: url){[weak self](success,downloadedImg) in
+                if success{
+                    print("Image downloaded from internet")
+                    if let downloadedImg = downloadedImg{
+                        FCCacheManager.shared.setImage(urlString, downloadedImg)
+                    }
+                }
+                self?.activityIndicator.stopAnimating()
+            }
         }
     }
 }

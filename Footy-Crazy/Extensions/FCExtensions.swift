@@ -13,7 +13,6 @@ extension UIImageView{
     func loadImage(from url: URL, completion: ((_ success:Bool,_ downloadedImg: UIImage?)->Void)?){
         DispatchQueue.global().async { [weak self] in
             if let data = try? Data(contentsOf: url){
-                print("Image loaded successfully")
                 if let image = UIImage(data: data){
                     DispatchQueue.main.async {
                         self?.image = image
@@ -22,7 +21,6 @@ extension UIImageView{
                 }
             }
             else{
-                print("Image Loading error")
                 completion?(false,nil)
             }
         }

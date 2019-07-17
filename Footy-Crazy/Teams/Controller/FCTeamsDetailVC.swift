@@ -13,8 +13,9 @@ class FCTeamsDetailVC: UIViewController {
     @IBOutlet weak var countryLabel     : UILabel!
     @IBOutlet weak var descriptionLabel : UILabel!
     @IBOutlet weak var flagImage        : UIImageView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     var viewModel                       : FCTeamsDetailVM?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupVC()
@@ -33,8 +34,23 @@ class FCTeamsDetailVC: UIViewController {
             descriptionLabel.text = description
         }
         if let imageUrl = viewModel?.imageUrl{
-            if let url = URL(string: imageUrl){
-                flagImage.loadImage(from: url, completion: nil)
+            loadImage(imageUrl)
+        }
+    }
+    func loadImage(_ urlString: String){
+        if let cache = FCCacheManager.shared.getImage(urlString){
+            flagImage.image = cache
+            print("Image loaded from cache")
+            activityIndicator.stopAnimating()
+        } else if let url = URL(string: urlString){
+            flagImage.loadImage(from: url){[weak self](success,downloadedImg) in
+                if success{
+                    print("Image downloaded from internet")
+                    if let downloadedImg = downloadedImg{
+                        FCCacheManager.shared.setImage(urlString, downloadedImg)
+                    }
+                }
+                self?.activityIndicator.stopAnimating()
             }
         }
     }

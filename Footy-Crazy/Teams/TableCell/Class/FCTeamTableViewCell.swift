@@ -13,7 +13,7 @@ class FCTeamTableViewCell: UITableViewCell {
     @IBOutlet weak var teamName         : UILabel!
     @IBOutlet weak var country          : UILabel!
     var viewModel                       : FCTeamsDetailVM?
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -22,9 +22,25 @@ class FCTeamTableViewCell: UITableViewCell {
         teamName.text = viewModel?.teamName
         country.text = viewModel?.countryName
         if let imageUrl = viewModel?.imageUrl{
-            if let url = URL(string: imageUrl){
-                flagImage.loadImage(from: url, completion: nil)
+            loadImage(imageUrl)
+        }
+    }
+    func loadImage(_ urlString: String){
+        if let cache = FCCacheManager.shared.getImage(urlString){
+            flagImage.image = cache
+            print("Image loaded from cache")
+        } else if let url = URL(string: urlString){
+            flagImage.loadImage(from: url){(success,downloadedImg) in
+                if success{
+                    print("Image downloaded from internet")
+                    if let downloadedImg = downloadedImg{
+                        FCCacheManager.shared.setImage(urlString, downloadedImg)
+                    }
+                }
             }
         }
+    }
+    override func prepareForReuse() {
+        flagImage.image = nil
     }
 }

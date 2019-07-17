@@ -62,6 +62,10 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pk7-dg-HC0">
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                             </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="7Ue-nw-eDL">
+                                <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
+                                <color key="color" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -69,6 +73,8 @@
                             <constraint firstItem="pk7-dg-HC0" firstAttribute="leading" secondItem="3zC-os-18Z" secondAttribute="leading" id="2yD-Hj-8Ph"/>
                             <constraint firstItem="3zC-os-18Z" firstAttribute="bottom" secondItem="pk7-dg-HC0" secondAttribute="bottom" id="Fy4-bF-uFv"/>
                             <constraint firstItem="3zC-os-18Z" firstAttribute="trailing" secondItem="pk7-dg-HC0" secondAttribute="trailing" id="SwA-VJ-AAN"/>
+                            <constraint firstItem="7Ue-nw-eDL" firstAttribute="centerY" secondItem="ALc-kA-xzM" secondAttribute="centerY" id="b65-QJ-Pqs"/>
+                            <constraint firstItem="7Ue-nw-eDL" firstAttribute="centerX" secondItem="ALc-kA-xzM" secondAttribute="centerX" id="m4Y-5e-X2W"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3zC-os-18Z"/>
                     </view>
@@ -80,6 +86,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicator" destination="7Ue-nw-eDL" id="gyR-DD-e11"/>
                         <outlet property="img" destination="pk7-dg-HC0" id="I9y-Cs-eAm"/>
                     </connections>
                 </viewController>

@@ -14,7 +14,8 @@ class FCPlayerTableViewCell: UITableViewCell {
     @IBOutlet weak var countryName          : UILabel!
     @IBOutlet weak var clubName             : UILabel!
     var viewModel                           : FCPlayersDetailVM?
-    
+    var imgCache                            : NSCache<NSString,UIImage> = NSCache<NSString,UIImage>()
+
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -36,5 +37,24 @@ class FCPlayerTableViewCell: UITableViewCell {
                 playerDPImage.loadImage(from: url, completion: nil)
             }
         }
+    }
+    func loadImage(_ urlString: String){
+        if let cache = FCCacheManager.shared.getImage(urlString){
+            playerDPImage.image = cache
+            print("Image loaded from cache")
+        } else if let url = URL(string: urlString){
+            playerDPImage.loadImage(from: url){(success,downloadedImg) in
+                if success{
+                    print("Image downloaded from internet")
+                    if let downloadedImg = downloadedImg{
+                        FCCacheManager.shared.setImage(urlString, downloadedImg)
+                    }
+                }
+            }
+        }
+    }
+
+    override func prepareForReuse() {
+        playerDPImage.image = nil
     }
 }

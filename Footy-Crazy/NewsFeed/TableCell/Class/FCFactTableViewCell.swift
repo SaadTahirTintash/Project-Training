@@ -20,10 +20,23 @@ class FCFactTableViewCell: UITableViewCell {
     func configure(){
         titleLabel.text = viewModel?.title
         if let urlString = viewModel?.url{
-            if let url = URL(string: urlString){
-                imgView.loadImage(from: url){[weak self](_,_) in
-                    self?.activityIndicator.stopAnimating()
+            loadImage(urlString)
+        }
+    }
+    func loadImage(_ urlString: String){
+        if let cache = FCCacheManager.shared.getImage(urlString){
+            imgView.image = cache
+            print("Image loaded from cache")
+            activityIndicator.stopAnimating()
+        } else if let url = URL(string: urlString){
+            imgView.loadImage(from: url){[weak self](success,downloadedImg) in
+                if success{
+                    print("Image downloaded from internet")
+                    if let downloadedImg = downloadedImg{                        
+                        FCCacheManager.shared.setImage(urlString, downloadedImg)
+                    }
                 }
+                self?.activityIndicator.stopAnimating()
             }
         }
     }
