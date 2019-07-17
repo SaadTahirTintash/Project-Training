@@ -38,7 +38,7 @@ class FCNewsFeedVM: FCViewModelProtocol{
     func getMoreData() {
         if !isFetchingData{
             isFetchingData = true
-            var startingId = modelArray.last?.id ?? 0
+            var startingId = modelArray.endIndex
             if startingId != 0{
                 startingId += 1
                 FCDataManager.shared.getNewsFeed(startingKey: String(startingId), pageSize: Constants.NEWS_FEED_PAGE_SIZE) { [weak self] (success,modelArray) in

@@ -9,8 +9,6 @@
 import UIKit
 
 struct FCGalleryModel{
-    var id: Int = 0
     var imageUrl: String?
-    var image: UIImage?
 }
 

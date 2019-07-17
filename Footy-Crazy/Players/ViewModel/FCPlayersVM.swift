@@ -41,8 +41,8 @@ class FCPlayersVM: FCViewModelProtocol{
     
     func getMoreData(){
         if !isFetchingData{
-            isFetchingData = true
-            var startingId = modelArray.last?.id ?? 0
+            isFetchingData = true            
+            var startingId = modelArray.endIndex
             if startingId != 0{
                 startingId += 1
                 FCDataManager.shared.getPlayers(startingKey: String(startingId), pageSize: Constants.PLAYERS_PAGE_SIZE) { [weak self](success, modelArray) in

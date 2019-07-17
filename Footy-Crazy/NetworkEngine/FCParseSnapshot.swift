@@ -14,9 +14,15 @@ class FCParseSnapshot{
         var newsFeedModelArray = [FCNewsFeedModel]()
         let enumerator = snapshot.children
         while let snap = enumerator.nextObject() as? DataSnapshot{
-            if let value = snap.value as? [String: Any]{
-                let newsFeedModel = FCNewsFeedModel(id: Int(snap.key) ?? 0,url: value["url"] as? String, description: value["description"] as? String, title: value["title"] as? String, type: value["type"] as? String, image: nil)
-                newsFeedModelArray.append(newsFeedModel)
+            do{
+                if let value = snap.value as? [String: Any]{
+                    let jsonData = try JSONSerialization.data(withJSONObject: value, options: [])
+                    let decoder = JSONDecoder()
+                    let data = try decoder.decode(FCNewsFeedModel.self, from: jsonData)
+                    newsFeedModelArray.append(data)
+                }
+            }catch{
+                print("Whoops! An error occured while decoding NewsFeed: \(error)")
             }
         }
         return newsFeedModelArray
@@ -26,7 +32,7 @@ class FCParseSnapshot{
         var galleryModelArray = [FCGalleryModel]()
         let enumerator = snapshot.children
         while let snap = enumerator.nextObject() as? DataSnapshot{
-            let galleryModel = FCGalleryModel(id: Int(snap.key) ?? 0, imageUrl: snap.value as? String ?? nil, image: nil)
+            let galleryModel = FCGalleryModel(imageUrl: snap.value as? String)
             galleryModelArray.append(galleryModel)
         }
         return galleryModelArray
@@ -36,9 +42,15 @@ class FCParseSnapshot{
         var teamsModelArray = [FCTeamsModel]()
         let enumerator = snapshot.children
         while let snap = enumerator.nextObject() as? DataSnapshot{
-            if let value = snap.value as? [String: Any]{
-                let teamsModel = FCTeamsModel(id: Int(snap.key) ?? 0, name: value["name"] as? String, standing: value["standing"] as? String, country: value["country"] as? String, flag: nil, flagUrl: value["flagUrl"] as? String, description: value["description"] as? String)
-                teamsModelArray.append(teamsModel)
+            do {
+                if let value = snap.value as? [String: Any]{
+                    let jsonData = try JSONSerialization.data(withJSONObject: value, options: [])
+                    let decoder = JSONDecoder()
+                    let data = try decoder.decode(FCTeamsModel.self, from: jsonData)
+                    teamsModelArray.append(data)
+                }
+            }catch{
+                print("Whoops! An error occured while decoding Teams: \(error)")
             }
         }
         return teamsModelArray
@@ -48,12 +60,17 @@ class FCParseSnapshot{
         var playersModelArray = [FCPlayersModel]()
         let enumerator = snapshot.children
         while let snap = enumerator.nextObject() as? DataSnapshot{
-            if let value = snap.value as? [String: Any]{
-                let playersModel = FCPlayersModel(id: Int(snap.key) ?? 0, standing: value["standing"] as? String, name: value["name"] as? String, country: value["country"] as? String, club: value["club"] as? String, playerDP: nil, playerDPUrl: value["playerDPUrl"] as? String, description: value["description"] as? String)
-                playersModelArray.append(playersModel)
+            do {
+                if let value = snap.value as? [String: Any]{
+                    let jsonData = try JSONSerialization.data(withJSONObject: value, options: [])
+                    let decoder = JSONDecoder()
+                    let data = try decoder.decode(FCPlayersModel.self, from: jsonData)
+                    playersModelArray.append(data)
+                }
+            }catch{
+                print("Whoops! An error occured while decoding Players: \(error)")
             }
         }
         return playersModelArray
     }
-
 }

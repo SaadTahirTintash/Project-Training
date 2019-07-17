@@ -8,13 +8,11 @@
 
 import UIKit
 
-struct FCPlayersModel{
-    var id: Int = 0
+struct FCPlayersModel: Decodable{
     var standing: String?
     var name: String?
     var country: String?
     var club: String?
-    var playerDP: UIImage?
     var playerDPUrl: String?
     var description: String?
 }

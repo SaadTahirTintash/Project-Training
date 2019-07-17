@@ -41,7 +41,7 @@ class FCTeamsVM: FCViewModelProtocol{
     func getMoreData(){
         guard !isFetchingData else { return }
         isFetchingData = true
-        var startingId = modelArray.last?.id ?? 0
+        var startingId = modelArray.endIndex
         if startingId != 0{
             startingId += 1
             FCDataManager.shared.getTeams(startingKey: String(startingId), pageSize: Constants.TEAMS_PAGE_SIZE) { [weak self](success, modelArray) in

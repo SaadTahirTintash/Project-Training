@@ -8,11 +8,9 @@
 
 import UIKit
 
-struct FCNewsFeedModel{
-    var id: Int = 0
+struct FCNewsFeedModel: Decodable{
     var url: String?
     var description: String?
     var title: String?
     var type: String?
-    var image: UIImage?
 }
