@@ -7,16 +7,13 @@
 //
 class FCDataManager{
     static let shared = FCDataManager()
-    private let networkEngine : NetworkEngine?
     var newsFeedModelArray: [FCNewsFeedModel] = [FCNewsFeedModel]()
     var galleryModelArray: [FCGalleryModel] = [FCGalleryModel]()
     var teamsModelArray: [FCTeamsModel] = [FCTeamsModel]()
     var playersModelArray: [FCPlayersModel] = [FCPlayersModel]()
-    private init(){
-        networkEngine = NetworkEngine()
-    }
+    private init(){}
     func getNewsFeed(startingKey id: String, pageSize limit: Int, completion: @escaping(_ success: Bool, _ newsFeedModelArray: [FCNewsFeedModel]?)->()){
-        networkEngine?.loadNewsFeed(startingKey: id, pageSize: limit, completion: { [weak self] (success, newsFeedModelArray) in
+        FCNetworkEngine.shared.loadNewsFeed(startingKey: id, pageSize: limit, completion: { [weak self] (success, newsFeedModelArray) in
             if success, let array = newsFeedModelArray{
                 self?.newsFeedModelArray = array
             }
@@ -24,7 +21,7 @@ class FCDataManager{
         })
     }
     func getGallery(startingKey id: String, pageSize limit: Int, completion: @escaping(_ success: Bool,_ galleryModelArray: [FCGalleryModel]?)->()){
-        networkEngine?.loadGallery(startingKey: id, pageSize: limit, completion: { [weak self](success, galleryModelArray) in
+        FCNetworkEngine.shared.loadGallery(startingKey: id, pageSize: limit, completion: { [weak self](success, galleryModelArray) in
             if success, let array = galleryModelArray{
                 self?.galleryModelArray = array
             }
@@ -32,7 +29,7 @@ class FCDataManager{
         })
     }
     func getTeams(startingKey id: String, pageSize limit: Int, completion: ((_ success: Bool, _ teamsModelArray: [FCTeamsModel]?)->Void)?){
-        networkEngine?.loadTeams(startingKey: id, pageSize: limit, completion: { [weak self] (success, teamsModelArray) in
+        FCNetworkEngine.shared.loadTeams(startingKey: id, pageSize: limit, completion: { [weak self] (success, teamsModelArray) in
             if success, let array = teamsModelArray{
                 self?.teamsModelArray = array
             }
@@ -40,7 +37,7 @@ class FCDataManager{
         })
     }
     func getPlayers(startingKey id: String, pageSize limit: Int, completion: ((_ success: Bool, _ playersModelArray: [FCPlayersModel]?)->Void)?){
-        networkEngine?.loadPlayers(startingKey: id, pageSize: limit, completion: { [weak self] (success, playersModelArray) in
+        FCNetworkEngine.shared.loadPlayers(startingKey: id, pageSize: limit, completion: { [weak self] (success, playersModelArray) in
             if success, let array = playersModelArray{
                 self?.playersModelArray = array
             }
@@ -48,6 +45,6 @@ class FCDataManager{
         })
     }
     func removeAllObservers(){
-        networkEngine?.removeAllObservers()
+        FCNetworkEngine.shared.removeAllObservers()
     }
 }

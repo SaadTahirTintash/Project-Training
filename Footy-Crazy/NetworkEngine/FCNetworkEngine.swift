@@ -8,11 +8,12 @@
 
 
 import FirebaseDatabase
-class NetworkEngine{
+class FCNetworkEngine{
+    static let shared = FCNetworkEngine()
     let snapshotParser = FCParseSnapshot()
     var ref: DatabaseReference!
     var rootQuery = DatabaseReference()
-    init() {
+    private init() {
         ref = Database.database().reference()
         rootQuery = ref.child("footy_crazy_data")
     }
