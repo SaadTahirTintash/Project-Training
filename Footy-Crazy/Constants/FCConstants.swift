@@ -8,6 +8,7 @@
 import UIKit
 
 class Constants{
+    static let CITIES_LOCATION_API_STRING   :String     = "https://www.metaweather.com/api/location/search/"    
     static let NEWS_FEED_PATH_STRING        :String     = "news_feed"
     static let GALLERY_PATH_STRING          :String     = "gallery"
     static let TEAMS_PATH_STRING            :String     = "teams"
@@ -35,7 +36,11 @@ class Constants{
     static let EMPTY_NEWS_DESCRIPTION       :String     = "News Description"
     static let EMPTY_NEWS_TITLE             :String     = "News Title"
     
-    static let ABOUT_US                     :String     = "This text is about us"
+    static let ABOUT_US                     :String     = """
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+"""
     
     static let GALLERY_CELL_ROW_COUNT       :Int        = 2
     

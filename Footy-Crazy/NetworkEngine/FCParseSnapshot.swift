@@ -7,6 +7,9 @@
 //
 
 import FirebaseDatabase
+import SwiftyJSON
+import Alamofire
+
 class FCParseSnapshot{
     func parseToNewsFeed(snapshot: DataSnapshot)->[FCNewsFeedModel]{
         var newsFeedModelArray = [FCNewsFeedModel]()
@@ -16,11 +19,11 @@ class FCParseSnapshot{
                 if let value = snap.value as? [String: Any]{
                     let jsonData = try JSONSerialization.data(withJSONObject: value, options: [])
                     let decoder = JSONDecoder()
-                    let data = try decoder.decode(FCNewsFeedModel.self, from: jsonData)
-                    newsFeedModelArray.append(data)
+                    let model = try decoder.decode(FCNewsFeedModel.self, from: jsonData)
+                    newsFeedModelArray.append(model)
                 }
             }catch{
-                print("Whoops! An error occured while decoding NewsFeed: \(error)")
+                print("Whoops! An error occured while decoding NewsFeed: \(error.localizedDescription)")
             }
         }
         return newsFeedModelArray
@@ -42,11 +45,11 @@ class FCParseSnapshot{
                 if let value = snap.value as? [String: Any]{
                     let jsonData = try JSONSerialization.data(withJSONObject: value, options: [])
                     let decoder = JSONDecoder()
-                    let data = try decoder.decode(FCTeamsModel.self, from: jsonData)
-                    teamsModelArray.append(data)
+                    let model = try decoder.decode(FCTeamsModel.self, from: jsonData)
+                    teamsModelArray.append(model)
                 }
             }catch{
-                print("Whoops! An error occured while decoding Teams: \(error)")
+                print("Whoops! An error occured while decoding Teams: \(error.localizedDescription)")
             }
         }
         return teamsModelArray
@@ -59,13 +62,32 @@ class FCParseSnapshot{
                 if let value = snap.value as? [String: Any]{
                     let jsonData = try JSONSerialization.data(withJSONObject: value, options: [])
                     let decoder = JSONDecoder()
-                    let data = try decoder.decode(FCPlayersModel.self, from: jsonData)
-                    playersModelArray.append(data)
+                    let model = try decoder.decode(FCPlayersModel.self, from: jsonData)
+                    playersModelArray.append(model)
                 }
             }catch{
-                print("Whoops! An error occured while decoding Players: \(error)")
+                print("Whoops! An error occured while decoding Players: \(error.localizedDescription)")
             }
         }
         return playersModelArray
     }
+    
+    func parseToCitiesLocation(value: Any)->[FCCitiesLocationModel]?{
+        var citiesLocationModelArray = [FCCitiesLocationModel]()
+        guard let dataArray = value as? [[String:Any]] else{
+            return nil
+        }
+        for data in dataArray{
+            do{
+                let jsonData = try JSONSerialization.data(withJSONObject: data, options: [])
+                let decoder = JSONDecoder()
+                let data = try decoder.decode(FCCitiesLocationModel.self, from: jsonData)
+                citiesLocationModelArray.append(data)
+            }catch{
+                print(error.localizedDescription)
+            }
+        }
+        return citiesLocationModelArray
+    }
+    
 }

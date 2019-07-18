@@ -19,6 +19,7 @@ class FCPlayersVC: UIViewController {
         registerCells()
         initializeCompletionHandlers()
         viewModel?.getInitialData()
+
     }
     func registerCells(){
         tableView.register(UINib(nibName: "FCPlayerTableViewCell", bundle: nil), forCellReuseIdentifier: "PlayerCell")

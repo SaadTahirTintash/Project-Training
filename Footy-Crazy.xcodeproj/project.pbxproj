@@ -61,6 +61,13 @@
 		4AFDD29D22CA24FC0044B728 /* FCNewsLinkTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AFDD29B22CA24FC0044B728 /* FCNewsLinkTableViewCell.xib */; };
 		4AFE969322D4CC6E00BBD074 /* FCFactDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFE969222D4CC6E00BBD074 /* FCFactDetailVC.swift */; };
 		4AFF789122DF5B2A002B89DE /* FCCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFF789022DF5B2A002B89DE /* FCCacheManager.swift */; };
+		4AFF78E322E05A73002B89DE /* FCCitiesLocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFF78E222E05A73002B89DE /* FCCitiesLocationVC.swift */; };
+		4AFF78E522E05A89002B89DE /* FCCitiesLocationVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFF78E422E05A89002B89DE /* FCCitiesLocationVM.swift */; };
+		4AFF78E722E05AA0002B89DE /* FCCitiesLocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFF78E622E05AA0002B89DE /* FCCitiesLocationModel.swift */; };
+		4AFF78E922E05B34002B89DE /* FCCitiesLocation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AFF78E822E05B34002B89DE /* FCCitiesLocation.storyboard */; };
+		4AFF78EB22E05B91002B89DE /* FCCitiesLocationDetailVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFF78EA22E05B91002B89DE /* FCCitiesLocationDetailVM.swift */; };
+		4AFF78F222E05C0B002B89DE /* FCCitiesLocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFF78F022E05C0B002B89DE /* FCCitiesLocationCell.swift */; };
+		4AFF78F322E05C0B002B89DE /* FCCitiesLocationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4AFF78F122E05C0B002B89DE /* FCCitiesLocationCell.xib */; };
 		4AFF91AE22C622C4004FEBB6 /* FCNewsFeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFF91AD22C622C4004FEBB6 /* FCNewsFeedModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -121,6 +128,13 @@
 		4AFDD29B22CA24FC0044B728 /* FCNewsLinkTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FCNewsLinkTableViewCell.xib; sourceTree = "<group>"; };
 		4AFE969222D4CC6E00BBD074 /* FCFactDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCFactDetailVC.swift; sourceTree = "<group>"; };
 		4AFF789022DF5B2A002B89DE /* FCCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCCacheManager.swift; sourceTree = "<group>"; };
+		4AFF78E222E05A73002B89DE /* FCCitiesLocationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCCitiesLocationVC.swift; sourceTree = "<group>"; };
+		4AFF78E422E05A89002B89DE /* FCCitiesLocationVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCCitiesLocationVM.swift; sourceTree = "<group>"; };
+		4AFF78E622E05AA0002B89DE /* FCCitiesLocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCCitiesLocationModel.swift; sourceTree = "<group>"; };
+		4AFF78E822E05B34002B89DE /* FCCitiesLocation.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FCCitiesLocation.storyboard; sourceTree = "<group>"; };
+		4AFF78EA22E05B91002B89DE /* FCCitiesLocationDetailVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCCitiesLocationDetailVM.swift; sourceTree = "<group>"; };
+		4AFF78F022E05C0B002B89DE /* FCCitiesLocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCCitiesLocationCell.swift; sourceTree = "<group>"; };
+		4AFF78F122E05C0B002B89DE /* FCCitiesLocationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FCCitiesLocationCell.xib; sourceTree = "<group>"; };
 		4AFF91AD22C622C4004FEBB6 /* FCNewsFeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCNewsFeedModel.swift; sourceTree = "<group>"; };
 		677AE1B4CFC37760F711027B /* Pods-Footy-Crazy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Footy-Crazy.release.xcconfig"; path = "Target Support Files/Pods-Footy-Crazy/Pods-Footy-Crazy.release.xcconfig"; sourceTree = "<group>"; };
 		A6CFC77DED640E777ED08EAB /* Pods_Footy_Crazy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Footy_Crazy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -330,6 +344,7 @@
 				4AE3C0F322D3113100282F29 /* Teams */,
 				4AE3C0F422D3113B00282F29 /* Players */,
 				4AE3C0F522D3114300282F29 /* About */,
+				4AFF78DA22E059FD002B89DE /* CitiesLocation */,
 				4A34872922C4D7C5009436EB /* Info.plist */,
 				4A2B430822C4DA2C00815318 /* GoogleService-Info.plist */,
 			);
@@ -586,6 +601,76 @@
 			path = CacheManager;
 			sourceTree = "<group>";
 		};
+		4AFF78DA22E059FD002B89DE /* CitiesLocation */ = {
+			isa = PBXGroup;
+			children = (
+				4AFF78DF22E05A46002B89DE /* TableCell */,
+				4AFF78DE22E05A42002B89DE /* Model */,
+				4AFF78DD22E05A3D002B89DE /* ViewModel */,
+				4AFF78DC22E05A33002B89DE /* Controller */,
+				4AFF78DB22E05A0B002B89DE /* View */,
+			);
+			path = CitiesLocation;
+			sourceTree = "<group>";
+		};
+		4AFF78DB22E05A0B002B89DE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4AFF78E822E05B34002B89DE /* FCCitiesLocation.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4AFF78DC22E05A33002B89DE /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4AFF78E222E05A73002B89DE /* FCCitiesLocationVC.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		4AFF78DD22E05A3D002B89DE /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				4AFF78E422E05A89002B89DE /* FCCitiesLocationVM.swift */,
+				4AFF78EA22E05B91002B89DE /* FCCitiesLocationDetailVM.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		4AFF78DE22E05A42002B89DE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4AFF78E622E05AA0002B89DE /* FCCitiesLocationModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4AFF78DF22E05A46002B89DE /* TableCell */ = {
+			isa = PBXGroup;
+			children = (
+				4AFF78E122E05A4F002B89DE /* Cell */,
+				4AFF78E022E05A4B002B89DE /* Nib */,
+			);
+			path = TableCell;
+			sourceTree = "<group>";
+		};
+		4AFF78E022E05A4B002B89DE /* Nib */ = {
+			isa = PBXGroup;
+			children = (
+				4AFF78F122E05C0B002B89DE /* FCCitiesLocationCell.xib */,
+			);
+			path = Nib;
+			sourceTree = "<group>";
+		};
+		4AFF78E122E05A4F002B89DE /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				4AFF78F022E05C0B002B89DE /* FCCitiesLocationCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		594C115A3B487D0D24A7377A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -668,12 +753,14 @@
 				4AE3C0FA22D3118000282F29 /* FCGallery.storyboard in Resources */,
 				4A2B431D22C5E8A800815318 /* FCVideoTableViewCell.xib in Resources */,
 				4A0227F522D736AB006F5E1D /* FCGalleryCell.xib in Resources */,
+				4AFF78E922E05B34002B89DE /* FCCitiesLocation.storyboard in Resources */,
 				4AE3C10722D3121900282F29 /* FCPlayers.storyboard in Resources */,
 				4A05143E22D75A80009BE500 /* FCPlayerTableViewCell.xib in Resources */,
 				4A05143122D758F2009BE500 /* FCTeamTableViewCell.xib in Resources */,
 				4AFDD29922CA24EE0044B728 /* FCFactTableViewCell.xib in Resources */,
 				4AFDD29D22CA24FC0044B728 /* FCNewsLinkTableViewCell.xib in Resources */,
 				4A2B430922C4DA2C00815318 /* GoogleService-Info.plist in Resources */,
+				4AFF78F322E05C0B002B89DE /* FCCitiesLocationCell.xib in Resources */,
 				4A34872522C4D7C5009436EB /* Assets.xcassets in Resources */,
 				4A34872322C4D7C4009436EB /* FCNewsFeed.storyboard in Resources */,
 				4AE3C10522D3121000282F29 /* FCTeams.storyboard in Resources */,
@@ -730,6 +817,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4AFF78F222E05C0B002B89DE /* FCCitiesLocationCell.swift in Sources */,
 				4A2B431C22C5E8A800815318 /* FCVideoTableViewCell.swift in Sources */,
 				4A05142A22D7588A009BE500 /* FCTeamsDetailVC.swift in Sources */,
 				4A05143022D758F2009BE500 /* FCTeamTableViewCell.swift in Sources */,
@@ -738,14 +826,18 @@
 				4A2B431822C5E4D800815318 /* FCNewsFeedVC.swift in Sources */,
 				4A05143622D759A5009BE500 /* FCPlayersVC.swift in Sources */,
 				4A05144022D75AB9009BE500 /* FCAboutVC.swift in Sources */,
+				4AFF78E722E05AA0002B89DE /* FCCitiesLocationModel.swift in Sources */,
 				4A75439922DC94AC0068173F /* FCGalleryDetailVM.swift in Sources */,
+				4AFF78EB22E05B91002B89DE /* FCCitiesLocationDetailVM.swift in Sources */,
 				4A8820FE22DDB5B000AC8938 /* FCNewsFeedVM.swift in Sources */,
 				4AFF789122DF5B2A002B89DE /* FCCacheManager.swift in Sources */,
 				4A01E35222D5D2A400929D10 /* FCNewsLinkDetailVC.swift in Sources */,
 				4ABDAE2622C9E55B00E5C1C6 /* FCSplashScreenVC.swift in Sources */,
 				4A88210022DDB98700AC8938 /* FCNewsFeedDetailVM.swift in Sources */,
 				4A047B6D22D60D3600A7E61C /* FCUtilities.swift in Sources */,
+				4AFF78E322E05A73002B89DE /* FCCitiesLocationVC.swift in Sources */,
 				4A8820F922DDAFEF00AC8938 /* FCPlayersVM.swift in Sources */,
+				4AFF78E522E05A89002B89DE /* FCCitiesLocationVM.swift in Sources */,
 				4A8CC76C22C9D6A900E9483B /* FCDataManager.swift in Sources */,
 				4AB9C01222D70D4F002B8E77 /* FCGalleryVC.swift in Sources */,
 				4AFF91AE22C622C4004FEBB6 /* FCNewsFeedModel.swift in Sources */,

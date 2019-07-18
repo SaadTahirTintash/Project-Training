@@ -11,6 +11,7 @@ class FCDataManager{
     var galleryModelArray: [FCGalleryModel] = [FCGalleryModel]()
     var teamsModelArray: [FCTeamsModel] = [FCTeamsModel]()
     var playersModelArray: [FCPlayersModel] = [FCPlayersModel]()
+    var citiesLocationModelArray: [FCCitiesLocationModel] = [FCCitiesLocationModel]()
     private init(){}
     func getNewsFeed(startingKey id: String, pageSize limit: Int, completion: @escaping(_ success: Bool, _ newsFeedModelArray: [FCNewsFeedModel]?)->()){
         FCNetworkEngine.shared.loadNewsFeed(startingKey: id, pageSize: limit, completion: { [weak self] (success, newsFeedModelArray) in
@@ -43,6 +44,14 @@ class FCDataManager{
             }
             completion?(success,playersModelArray)
         })
+    }
+    func getCitiesLocation(completion: ((_ success: Bool, _ playersModelArray: [FCCitiesLocationModel]?)->Void)?){
+        FCNetworkEngine.shared.loadCitiesLocation { [weak self](success, citiesLocationModelArray) in
+            if success, let array = citiesLocationModelArray{
+                self?.citiesLocationModelArray = array
+            }
+            completion?(success,citiesLocationModelArray)
+        }
     }
     func removeAllObservers(){
         FCNetworkEngine.shared.removeAllObservers()

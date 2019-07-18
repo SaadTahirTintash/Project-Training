@@ -8,7 +8,8 @@
 
 
 import FirebaseDatabase
-
+import Alamofire
+import SwiftyJSON
 
 class FCNetworkEngine{
     static let shared = FCNetworkEngine()
@@ -58,7 +59,19 @@ class FCNetworkEngine{
                 completion?(false,nil)
             }
         }
-    }    
+    }
+    func loadCitiesLocation(completion: ((_ success: Bool,_ citiesLocationModelArray: [FCCitiesLocationModel]?)->Void)?){        
+        Alamofire.AF.request(Constants.CITIES_LOCATION_API_STRING+"?query=san").responseJSON { [weak self](response) in
+            switch response.result{
+            case .success(let value):
+                let modelArray = self?.snapshotParser.parseToCitiesLocation(value: value)
+                completion?(true,modelArray)
+            case .failure(let error):
+                print(error.localizedDescription)
+                completion?(false,nil)
+            }
+        }
+    }
     func removeAllObservers(){
         ref.removeAllObservers()
     }
