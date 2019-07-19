@@ -77,15 +77,13 @@ class FCParseSnapshot{
         guard let dataArray = value as? [[String:Any]] else{
             return nil
         }
-        for data in dataArray{
-            do{
-                let jsonData = try JSONSerialization.data(withJSONObject: data, options: [])
-                let decoder = JSONDecoder()
-                let data = try decoder.decode(FCCitiesLocationModel.self, from: jsonData)
-                citiesLocationModelArray.append(data)
-            }catch{
-                print(error.localizedDescription)
-            }
+        do{
+            let jsonData = try JSONSerialization.data(withJSONObject: dataArray, options: [])
+            let decoder = JSONDecoder()
+            let data = try decoder.decode([FCCitiesLocationModel].self, from: jsonData)
+            citiesLocationModelArray.append(contentsOf: data)
+        }catch{
+            print(error.localizedDescription)
         }
         return citiesLocationModelArray
     }

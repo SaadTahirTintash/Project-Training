@@ -10,9 +10,9 @@ import UIKit
 
 class FCCitiesLocationVC: UIViewController {
 
-    @IBOutlet weak var tableView: UITableView!
-    
-    var viewModel: FCCitiesLocationVM?
+    @IBOutlet weak var activityIndicator    : UIActivityIndicatorView!
+    @IBOutlet weak var tableView            : UITableView!
+    var viewModel                           : FCCitiesLocationVM?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +32,8 @@ class FCCitiesLocationVC: UIViewController {
     }
     
     func initializeCompletionHandlers(){
-        viewModel?.initialDataFetched = {success in
+        viewModel?.initialDataFetched = {[weak self]success in
+            self?.activityIndicator.stopAnimating()
             if success{
                 DispatchQueue.main.async {[weak self] in
                     self?.tableView.reloadData()
