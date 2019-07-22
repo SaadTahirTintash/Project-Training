@@ -8,38 +8,49 @@
 
 import UIKit
 import SafariServices
+
 class FCNewsFeedVC: UIViewController {
     @IBOutlet weak var tableView    : UITableView!
     var viewModel                   : FCNewsFeedVM?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel = FCNewsFeedVM(FCDataManager.shared.newsFeedModelArray)
-        tableView.dataSource = self
-        tableView.delegate = self
+        configureViewModel()
+        configureTableViewDelegates()
+        configureTableViewAutoLayout()
         registerCells()
-        initializeCompletionHandlers()
+    }
+}
+extension FCNewsFeedVC{
+    func configureViewModel(){
+        viewModel = FCNewsFeedVM(FCDataManager.shared.newsFeedData)
+        viewModel?.newDataFetched = { [weak self] success in
+            self?.newDataFetched(success)
+        }
+    }
+    func configureTableViewDelegates(){
+        tableView.dataSource = self
+        tableView.delegate   = self
+    }
+    func configureTableViewAutoLayout(){
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 450
+    }
+    func newDataFetched(_ success: Bool){
+        guard success else { return }
+        let rowCount    = tableView.numberOfRows(inSection: 0)
+        let range       = rowCount ..< (viewModel?.itemCount ?? 0)
+        var indices     = [IndexPath]()
+        for i in range {
+            indices.append(IndexPath(row: i, section: 0))
+        }
+        tableView.beginUpdates()
+        tableView.insertRows(at: indices, with: .fade)
+        tableView.endUpdates()
     }
     func registerCells(){
         tableView.register(UINib(nibName: "FCVideoTableViewCell", bundle: nil), forCellReuseIdentifier: "VideoCell")
         tableView.register(UINib(nibName: "FCFactTableViewCell", bundle: nil), forCellReuseIdentifier: "FactCell")
         tableView.register(UINib(nibName: "FCNewsLinkTableViewCell", bundle: nil), forCellReuseIdentifier: "NewsLinkCell")
-    }
-    func initializeCompletionHandlers(){
-        viewModel?.newDataFetched = { [weak self] success in
-            guard success else { return }
-            let rowCount    = (self?.tableView.numberOfRows(inSection: 0) ?? 0)
-            let range       = rowCount ..< (self?.viewModel?.itemCount ?? 0)
-            var indices     = [IndexPath]()
-            for i in range {
-                indices.append(IndexPath(row: i, section: 0))
-            }
-            self?.tableView.beginUpdates()
-            self?.tableView.insertRows(at: indices, with: .fade)
-            self?.tableView.endUpdates()
-        }
     }
 }
 extension FCNewsFeedVC: UITableViewDataSource{
@@ -65,7 +76,7 @@ extension FCNewsFeedVC: UITableViewDataSource{
     func checkForMoreData(at displayingIndex: Int){
         let totalItems = viewModel?.itemCount ?? 0
         let index = totalItems - displayingIndex
-        if index <= Constants.DATA_FETCH_THRESHOLD {
+        if index <= FCConstants.DATA_FETCH_THRESHOLD {
             print("Need Update")
             viewModel?.getMoreData()
         }
@@ -74,8 +85,8 @@ extension FCNewsFeedVC: UITableViewDataSource{
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "VideoCell") as? FCVideoTableViewCell else{
             return UITableViewCell(.clear)
         }
-        cell.shareBtnDelegate = self
-        cell.viewModel = viewModel?.viewModelForDetail(at: indexPath.row)
+        cell.viewModel          = viewModel?.viewModelForDetail(at: indexPath.row)
+        cell.shareBtnPressed    = {[weak self] (model) in self?.share(model)}
         cell.configure()
         return cell
     }
@@ -83,8 +94,8 @@ extension FCNewsFeedVC: UITableViewDataSource{
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "NewsLinkCell") as? FCNewsLinkTableViewCell else{
             return UITableViewCell(.clear)
         }
-        cell.shareBtnDelegate = self
-        cell.viewModel = viewModel?.viewModelForDetail(at: indexPath.row)
+        cell.viewModel          = viewModel?.viewModelForDetail(at: indexPath.row)
+        cell.shareBtnPressed    = {[weak self] (model) in self?.share(model)}
         cell.configure()
         return cell
     }
@@ -92,8 +103,8 @@ extension FCNewsFeedVC: UITableViewDataSource{
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FactCell") as? FCFactTableViewCell else{
             return UITableViewCell(.clear)
         }
-        cell.shareBtnDelegate = self
-        cell.viewModel = viewModel?.viewModelForDetail(at: indexPath.row)
+        cell.viewModel          = viewModel?.viewModelForDetail(at: indexPath.row)
+        cell.shareBtnPressed    = {[weak self] (model) in self?.share(model)}
         cell.configure()
         return cell
     }
@@ -131,9 +142,9 @@ extension FCNewsFeedVC{
         }
     }
 }
-extension FCNewsFeedVC: FCNewsFeedShareButtonDelegate{
-    func didPressShareButton(_ newsFeedVM: FCNewsFeedDetailVM?) {
-        let text = [newsFeedVM?.title,newsFeedVM?.url,newsFeedVM?.description]
-        FCUtilities.shareContent(self, text as [Any])
+extension FCNewsFeedVC{
+    func share(_ newsFeedDetailVM: FCNewsFeedDetailVM?){
+        let text = [newsFeedDetailVM?.title,newsFeedDetailVM?.url,newsFeedDetailVM?.description]
+        FCUtilities.shared.shareContent(self, text as [Any])
     }
 }

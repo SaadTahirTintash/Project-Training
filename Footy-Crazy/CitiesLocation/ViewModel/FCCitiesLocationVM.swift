@@ -17,22 +17,23 @@ class FCCitiesLocationVM: FCViewModelProtocol{
     init(_ modelArray: [FCCitiesLocationModel]) {
         self.modelArray = modelArray
     }
+}
+extension FCCitiesLocationVM: FCCitiesLocationService{
     func viewModelForDetail (at index: Int)->FCCitiesLocationDetailVM{
         return FCCitiesLocationDetailVM(modelArray[index])
     }
     func getInitialData(){
-        FCDataManager.shared.getCitiesLocation { [weak self](success, modelArray) in
+        getCitiesLocationData(pathString: FCConstants.CITIES_LOCATION_CONSTANTS.PATH_STRING, queryString: FCConstants.CITIES_LOCATION_CONSTANTS.QUERY_STRING) { [weak self](success, modelArray) in
             guard success, let array = modelArray else{
                 self?.isFetchingData = false
                 self?.initialDataFetched?(false)
                 return
             }
+            FCDataManager.shared.citiesLocationData.append(contentsOf: array)
             self?.modelArray.append(contentsOf: array)
             self?.isFetchingData = false
             self?.initialDataFetched?(true)
         }
     }
-    func getMoreData(){
-        
-    }
+    func getMoreData(){}
 }

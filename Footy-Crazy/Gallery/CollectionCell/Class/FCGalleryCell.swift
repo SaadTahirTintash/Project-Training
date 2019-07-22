@@ -27,14 +27,12 @@ class FCGalleryCell: UICollectionViewCell {
             print("Image loaded from cache")
             activityIndicator.stopAnimating()
         } else if let url = URL(string: urlString){
-            img.loadImage(from: url){[weak self](success,downloadedImg) in
-                if success{
-                    print("Image downloaded from internet")
-                    if let downloadedImg = downloadedImg{
-                        FCCacheManager.shared.setImage(urlString, downloadedImg)
-                    }
-                }
+            img.loadImage(from: url, success: { [weak self](img) in
+                FCCacheManager.shared.setImage(urlString, img)
                 self?.activityIndicator.stopAnimating()
+            }) { [weak self](errorMsg) in
+                self?.activityIndicator.stopAnimating()
+                print(errorMsg)
             }
         }
     }

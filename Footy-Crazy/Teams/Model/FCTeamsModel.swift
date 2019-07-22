@@ -7,7 +7,7 @@
 //
 
 import UIKit
-struct FCTeamsModel: Decodable{
+class FCTeamsModel: Decodable{
     var name:           String?
     var standing:       String?
     var country:        String?

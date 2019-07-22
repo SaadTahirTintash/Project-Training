@@ -14,7 +14,8 @@ class FCVideoDetailVC: UIViewController {
     @IBOutlet weak var descriptionLabel     : UILabel!
     @IBOutlet weak var videoView            : YTPlayerView!
     var viewModel                           : FCNewsFeedDetailVM?
-    
+}
+extension FCVideoDetailVC{
     override func viewDidLoad() {
         super.viewDidLoad()
         videoView.delegate = self

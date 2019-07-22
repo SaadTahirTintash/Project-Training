@@ -381,7 +381,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="KoB-6e-91H">
             <objects>
-                <tabBarController storyboardIdentifier="NewsFeedTabBar" automaticallyAdjustsScrollViewInsets="NO" id="G66-67-73Q" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="G66-67-73Q" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="P5e-pQ-uGt">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>

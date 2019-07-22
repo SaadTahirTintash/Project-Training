@@ -21,6 +21,8 @@ class FCPlayersDetailVC: UIViewController {
         super.viewDidLoad()
         setupVC()
     }
+}
+extension FCPlayersDetailVC{
     func setupVC(){
         if let name = viewModel?.playerName{
             nameLabel.text = name
@@ -46,14 +48,12 @@ class FCPlayersDetailVC: UIViewController {
             playerImage.image = cache
             print("Image loaded from cache")
         } else if let url = URL(string: urlString){
-            playerImage.loadImage(from: url){[weak self](success,downloadedImg) in
-                if success{
-                    print("Image downloaded from internet")
-                    if let downloadedImg = downloadedImg{
-                        FCCacheManager.shared.setImage(urlString, downloadedImg)
-                    }
-                }
+            playerImage.loadImage(from: url, success: { [weak self](img) in
+                FCCacheManager.shared.setImage(urlString, img)
                 self?.activityIndicator.stopAnimating()
+            }) { [weak self](errorMsg) in
+                self?.activityIndicator.stopAnimating()
+                print(errorMsg)
             }
         }
     }

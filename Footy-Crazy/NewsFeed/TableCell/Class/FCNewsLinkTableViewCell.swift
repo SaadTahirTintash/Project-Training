@@ -13,13 +13,10 @@ class FCNewsLinkTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLbl             : UILabel!
     @IBOutlet weak var newsImg              : UIImageView!
     @IBOutlet weak var stackView            : UIStackView!
-    weak var shareBtnDelegate               : FCNewsFeedShareButtonDelegate?
+    var shareBtnPressed                     : ((FCNewsFeedDetailVM?)->Void)?
     var viewModel                           : FCNewsFeedDetailVM?
-    let slp                                 : SwiftLinkPreview              = SwiftLinkPreview()
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
+}
+extension FCNewsLinkTableViewCell{
     override func prepareForReuse() {
         newsImg.image = nil
     }
@@ -30,18 +27,19 @@ class FCNewsLinkTableViewCell: UITableViewCell {
         }
     }
     @IBAction func share(_ sender: Any) {
-        shareBtnDelegate?.didPressShareButton(viewModel)
+        shareBtnPressed?(viewModel)
     }    
     func loadLink(_ newsLink: String){
+        let slp: SwiftLinkPreview = SwiftLinkPreview()
         slp.preview(newsLink, onSuccess: { [weak self] (response) in
             self?.titleLbl.text = response.title
             if let urlString = response.image{
                 self?.loadImage(urlString)
             } else{
-                self?.newsImg.image = Constants.EMPTY_IMAGE
+                self?.newsImg.image = FCConstants.EMPTY_IMAGE
             }
         }) { [weak self](error) in
-            self?.newsImg.image = Constants.EMPTY_IMAGE
+            self?.newsImg.image = FCConstants.EMPTY_IMAGE
         }
     }
     func loadImage(_ urlString: String){
@@ -50,15 +48,13 @@ class FCNewsLinkTableViewCell: UITableViewCell {
             print("Image loaded from cache")
             activityIndicator.stopAnimating()
         } else if let url = URL(string: urlString){
-            newsImg.loadImage(from: url){[weak self](success,downloadedImg) in
-                if success{
-                    print("Image downloaded from internet")
-                    if let downloadedImg = downloadedImg{
-                        FCCacheManager.shared.setImage(urlString, downloadedImg)
-                    }
-                }
+            newsImg.loadImage(from: url, success: { [weak self](img) in
+                FCCacheManager.shared.setImage(urlString, img)
                 self?.activityIndicator.stopAnimating()
-            }
+            }, failure:  { [weak self](msg) in
+                self?.activityIndicator.stopAnimating()
+                print(msg)
+            })
         }
     }
 }

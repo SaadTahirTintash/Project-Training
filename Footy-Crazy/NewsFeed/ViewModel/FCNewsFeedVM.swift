@@ -12,13 +12,14 @@ class FCNewsFeedVM: FCViewModelProtocol{
     var isFetchingData      : Bool              = false
     var initialDataFetched  : ((Bool) -> Void)?
     var newDataFetched      : ((Bool) -> Void)?
-
-    init(_ modelArray: [FCNewsFeedModel]) {
-        self.modelArray = modelArray
-    }
     var itemCount: Int{
         return modelArray.count
     }
+    init(_ modelArray: [FCNewsFeedModel]) {
+        self.modelArray = modelArray
+    }
+}
+extension FCNewsFeedVM: FCNewsFeedService{
     func getType(of index: Int)->String?{
         return modelArray[index].type
     }
@@ -32,19 +33,25 @@ class FCNewsFeedVM: FCViewModelProtocol{
             var startingId = modelArray.endIndex
             if startingId != 0{
                 startingId += 1
-                FCDataManager.shared.getNewsFeed(startingKey: String(startingId), pageSize: Constants.NEWS_FEED_PAGE_SIZE) { [weak self] (success,modelArray) in
+                getNewsFeedData(startingKey: String(startingId), pageSize: FCConstants.NEWS_FEED_CONSTANTS.PAGE_SIZE) { [weak self] (success,modelArray) in
                     if success{
-                        guard success, let modelArray = modelArray else{
-                            self?.isFetchingData = false
-                            self?.newDataFetched?(false)
-                            return
+                        if let modelArray = modelArray{
+                            FCDataManager.shared.newsFeedData.append(contentsOf: modelArray)
                         }
-                        self?.modelArray.append(contentsOf: modelArray)
-                        self?.isFetchingData = false
-                        self?.newDataFetched?(true)
+                        self?.success(success,modelArray)
                     }
                 }
             }
         }
-    }    
+    }
+    func success(_ success: Bool, _ array: [FCNewsFeedModel]?){
+        guard success, let array = array else{
+            isFetchingData = false
+            newDataFetched?(false)
+            return
+        }
+        modelArray.append(contentsOf: array)
+        isFetchingData = false
+        newDataFetched?(true)
+    }
 }

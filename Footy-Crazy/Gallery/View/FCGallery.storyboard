@@ -29,12 +29,30 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                             </collectionView>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pC0-CY-FKy">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="C7m-b1-wCN">
+                                        <rect key="frame" x="188.5" y="344" width="37" height="37"/>
+                                        <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="C7m-b1-wCN" firstAttribute="centerY" secondItem="pC0-CY-FKy" secondAttribute="centerY" id="3iI-PL-hDv"/>
+                                    <constraint firstItem="C7m-b1-wCN" firstAttribute="centerX" secondItem="pC0-CY-FKy" secondAttribute="centerX" id="b8B-od-ED2"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="pC0-CY-FKy" firstAttribute="top" secondItem="dlK-JX-y7f" secondAttribute="top" id="2Ya-pI-4QI"/>
                             <constraint firstItem="m5X-cD-o2z" firstAttribute="leading" secondItem="dlK-JX-y7f" secondAttribute="leading" id="5vJ-XW-jHI"/>
+                            <constraint firstItem="pC0-CY-FKy" firstAttribute="trailing" secondItem="dlK-JX-y7f" secondAttribute="trailing" id="7sl-YS-yUl"/>
                             <constraint firstItem="dlK-JX-y7f" firstAttribute="trailing" secondItem="m5X-cD-o2z" secondAttribute="trailing" id="DAV-SO-uRo"/>
+                            <constraint firstItem="dlK-JX-y7f" firstAttribute="bottom" secondItem="pC0-CY-FKy" secondAttribute="bottom" id="HMI-R4-ZaW"/>
                             <constraint firstItem="m5X-cD-o2z" firstAttribute="top" secondItem="dlK-JX-y7f" secondAttribute="top" id="cKb-l5-9a0"/>
+                            <constraint firstItem="pC0-CY-FKy" firstAttribute="leading" secondItem="dlK-JX-y7f" secondAttribute="leading" id="vaZ-JC-66b"/>
                             <constraint firstItem="dlK-JX-y7f" firstAttribute="bottom" secondItem="m5X-cD-o2z" secondAttribute="bottom" id="wwR-y6-T0U"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="dlK-JX-y7f"/>
@@ -43,6 +61,7 @@
                     <navigationItem key="navigationItem" title="Gallery" id="F8b-ZZ-qwM"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="activityBGView" destination="pC0-CY-FKy" id="Zpo-9V-odh"/>
                         <outlet property="collectionView" destination="m5X-cD-o2z" id="TnL-XF-Jba"/>
                         <segue destination="zSL-6G-44s" kind="show" identifier="GalleryImageDetailVCSegue" id="M7s-p5-hEH"/>
                     </connections>

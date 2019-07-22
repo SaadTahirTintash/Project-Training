@@ -14,25 +14,21 @@
 
 import UIKit
 
-class FCSplashScreenVC: UIViewController {
-    let storyboardID = UIStoryboard(name: "FCNewsFeed", bundle: nil)
-    let startingKey = "1"
+class FCSplashScreenVC: UIViewController, FCNewsFeedService {    
+    // do not mate storyboard id a property
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        FCDataManager.shared.getNewsFeed(startingKey: Constants.NEWS_FEED_STARTING_KEY, pageSize: Constants.NEWS_FEED_INITIAL_PAGE_SIZE) { [weak self](success, _) in
+        getNewsFeedData(startingKey: FCConstants.NEWS_FEED_CONSTANTS.STARTING_KEY, pageSize: FCConstants.NEWS_FEED_CONSTANTS.INITIAL_PAGE_SIZE){(success, newsFeedModelArray) in
             if success{
-                if let vc = self?.storyboardID.instantiateViewController(withIdentifier: "NewsFeedTabBar") as? UITabBarController{
-                    print("Successfully loaded data from Firebase")
-                    self?.present(vc, animated: true, completion: nil)
-                } else{
-                    print("Error loading NewsFeedVC")
+                if let newsFeedModelArray = newsFeedModelArray{
+                    FCDataManager.shared.newsFeedData = newsFeedModelArray
                 }
+                let storyboardID = UIStoryboard(name: "FCNewsFeed", bundle: nil)
+                UIApplication.shared.delegate?.window??.rootViewController = storyboardID.instantiateInitialViewController()
             } else{
                 print("Problem while loading data from Firebase")
             }
         }
     }
 }
+

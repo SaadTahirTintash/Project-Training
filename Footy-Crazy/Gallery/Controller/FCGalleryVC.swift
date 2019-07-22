@@ -8,24 +8,24 @@
 
 import UIKit
 class FCGalleryVC: UIViewController {
+    @IBOutlet weak var activityBGView       : UIView!
     @IBOutlet weak var collectionView   : UICollectionView!
     var viewModel                       : FCGalleryVM?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureViewModel()
+        configureCollectionViewDelegates()
+        registerCells()        
+    }
+}
+extension FCGalleryVC{
+    func configureViewModel(){
         viewModel = FCGalleryVM([FCGalleryModel]())
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        registerCells()
-        initializeCompletionHandlers()
-        viewModel?.getInitialData()
-    }
-    func registerCells(){
-        collectionView.register(UINib(nibName: "FCGalleryCell", bundle: nil), forCellWithReuseIdentifier: "GalleryCell")        
-    }
-    func initializeCompletionHandlers(){
         viewModel?.initialDataFetched = { [weak self](success) in
-            self?.collectionView.reloadData()
+            if success{
+                self?.activityBGView.isHidden = true
+                self?.collectionView.reloadData()
+            }
         }
         viewModel?.newDataFetched = { [weak self] success in
             guard success else { return }
@@ -37,6 +37,14 @@ class FCGalleryVC: UIViewController {
             }
             self?.collectionView.insertItems(at: indices)
         }
+        viewModel?.getInitialData()
+    }
+    func configureCollectionViewDelegates(){
+        collectionView.dataSource = self
+        collectionView.delegate = self
+    }
+    func registerCells(){
+        collectionView.register(UINib(nibName: "FCGalleryCell", bundle: nil), forCellWithReuseIdentifier: "GalleryCell")        
     }
 }
 extension FCGalleryVC: UICollectionViewDataSource{
@@ -55,7 +63,7 @@ extension FCGalleryVC: UICollectionViewDataSource{
     func checkForMoreData(at displayingIndex: Int){
         let totalItems = viewModel?.itemCount ?? 0
         let index = totalItems - displayingIndex
-        if index <= Constants.DATA_FETCH_THRESHOLD {
+        if index <= FCConstants.DATA_FETCH_THRESHOLD {
             print("Need Update")
             viewModel?.getMoreData()
         }
@@ -75,7 +83,7 @@ extension FCGalleryVC: UICollectionViewDelegate{
 }
 extension FCGalleryVC: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = collectionView.frame.width / CGFloat(Constants.GALLERY_CELL_ROW_COUNT) - 1
+        let width = collectionView.frame.width / CGFloat(FCConstants.GALLERY_CONSTANTS.CELL_ROW_COUNT) - 1
         return CGSize(width: width, height: width)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

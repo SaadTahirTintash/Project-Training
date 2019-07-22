@@ -13,6 +13,6 @@ class FCGalleryDetailVM{
         self.model = model
     }
     var imageUrl: String?{
-        return model.imageUrl
+        return model.url
     }
 }

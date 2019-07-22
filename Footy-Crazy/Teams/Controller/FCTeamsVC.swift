@@ -8,24 +8,23 @@
 
 import UIKit
 class FCTeamsVC: UIViewController {
-    @IBOutlet weak var tableView    : UITableView!
-    var viewModel                   : FCTeamsVM?
+    @IBOutlet weak var activityBGView       : UIView!
+    @IBOutlet weak var tableView            : UITableView!
+    var viewModel                           : FCTeamsVM?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel = FCTeamsVM([FCTeamsModel]())
-        tableView.dataSource = self
-        tableView.delegate = self
+        configureViewModel()
+        configureTableViewDelegates()
         registerCells()
-        initializeCompletionHandlers()
-        viewModel?.getInitialData()
     }
-    func registerCells(){
-        tableView.register(UINib(nibName: "FCTeamTableViewCell", bundle: nil), forCellReuseIdentifier: "TeamCell")
-    }
-    func initializeCompletionHandlers(){
+}
+extension FCTeamsVC{
+    func configureViewModel(){
+        viewModel = FCTeamsVM([FCTeamsModel]())
         viewModel?.initialDataFetched = {[weak self](success) in
             if success{
+                self?.activityBGView.isHidden = true
                 self?.tableView.reloadData()
             }
         }
@@ -41,6 +40,14 @@ class FCTeamsVC: UIViewController {
             self?.tableView.insertRows(at: indices, with: .fade)
             self?.tableView.endUpdates()
         }
+        viewModel?.getInitialData()
+    }
+    func configureTableViewDelegates(){
+        tableView.dataSource = self
+        tableView.delegate = self
+    }
+    func registerCells(){
+        tableView.register(UINib(nibName: "FCTeamTableViewCell", bundle: nil), forCellReuseIdentifier: "TeamCell")
     }
 }
 extension FCTeamsVC: UITableViewDataSource{

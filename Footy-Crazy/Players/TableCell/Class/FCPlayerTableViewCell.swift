@@ -34,7 +34,9 @@ class FCPlayerTableViewCell: UITableViewCell {
         }
         if let imageUrl = viewModel?.imageUrl{
             if let url = URL(string: imageUrl){
-                playerDPImage.loadImage(from: url, completion: nil)
+                playerDPImage.loadImage(from: url, success: nil) { (errorMsg) in
+                    print(errorMsg)
+                }
             }
         }
     }
@@ -43,13 +45,10 @@ class FCPlayerTableViewCell: UITableViewCell {
             playerDPImage.image = cache
             print("Image loaded from cache")
         } else if let url = URL(string: urlString){
-            playerDPImage.loadImage(from: url){(success,downloadedImg) in
-                if success{
-                    print("Image downloaded from internet")
-                    if let downloadedImg = downloadedImg{
-                        FCCacheManager.shared.setImage(urlString, downloadedImg)
-                    }
-                }
+            playerDPImage.loadImage(from: url, success: { (img) in
+                FCCacheManager.shared.setImage(urlString, img)
+            }) { (errorMsg) in
+                print(errorMsg)
             }
         }
     }

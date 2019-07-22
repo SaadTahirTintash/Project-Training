@@ -8,10 +8,13 @@
 import UIKit
 import Foundation
 
-class FCCacheManager{
+struct FCCacheManager {
     static let shared   : FCCacheManager            = FCCacheManager()
-    var imageCache           : NSCache<NSString,UIImage> = NSCache<NSString,UIImage>()
+    var imageCache      : NSCache<NSString,UIImage> = NSCache<NSString,UIImage>()
     private init() {}
+}
+
+extension FCCacheManager {
     func getImage(_ url: String)->UIImage?{
         return imageCache.object(forKey: url as NSString)
     }

@@ -22,19 +22,38 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6vy-dp-TqF">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="ciy-dF-KML">
+                                        <rect key="frame" x="188.5" y="344" width="37" height="37"/>
+                                        <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="ciy-dF-KML" firstAttribute="centerX" secondItem="6vy-dp-TqF" secondAttribute="centerX" id="4aC-HM-Nrl"/>
+                                    <constraint firstItem="ciy-dF-KML" firstAttribute="centerY" secondItem="6vy-dp-TqF" secondAttribute="centerY" id="NXH-S5-fGZ"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="emI-sO-XEE" firstAttribute="top" secondItem="0eu-Bb-tGk" secondAttribute="top" id="64s-4t-hgr"/>
                             <constraint firstItem="emI-sO-XEE" firstAttribute="leading" secondItem="0eu-Bb-tGk" secondAttribute="leading" id="NZj-6F-ktn"/>
                             <constraint firstItem="0eu-Bb-tGk" firstAttribute="bottom" secondItem="emI-sO-XEE" secondAttribute="bottom" id="U68-vF-pBw"/>
+                            <constraint firstItem="6vy-dp-TqF" firstAttribute="trailing" secondItem="0eu-Bb-tGk" secondAttribute="trailing" id="UZN-Ne-9XT"/>
+                            <constraint firstItem="0eu-Bb-tGk" firstAttribute="bottom" secondItem="6vy-dp-TqF" secondAttribute="bottom" id="btj-L0-NSz"/>
+                            <constraint firstItem="6vy-dp-TqF" firstAttribute="leading" secondItem="0eu-Bb-tGk" secondAttribute="leading" id="l1r-Cs-fph"/>
                             <constraint firstItem="0eu-Bb-tGk" firstAttribute="trailing" secondItem="emI-sO-XEE" secondAttribute="trailing" id="rvm-2r-70n"/>
+                            <constraint firstItem="6vy-dp-TqF" firstAttribute="top" secondItem="0eu-Bb-tGk" secondAttribute="top" id="ufj-E1-zBX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="0eu-Bb-tGk"/>
                     </view>
                     <navigationItem key="navigationItem" title="Teams" id="jfk-Rt-P9Y"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="activityBGView" destination="6vy-dp-TqF" id="iEh-xO-obh"/>
                         <outlet property="tableView" destination="emI-sO-XEE" id="w8M-L2-8ok"/>
                         <segue destination="MiB-NG-Pqh" kind="show" identifier="FCTeamsDetailVCSegue" id="38j-Jp-87u"/>
                     </connections>

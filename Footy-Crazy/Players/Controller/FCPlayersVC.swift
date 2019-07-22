@@ -8,8 +8,9 @@
 
 import UIKit
 class FCPlayersVC: UIViewController {
-    @IBOutlet weak var tableView    : UITableView!
-    var viewModel                   : FCPlayersVM?
+    @IBOutlet weak var activityBGView       : UIView!
+    @IBOutlet weak var tableView            : UITableView!
+    var viewModel                           : FCPlayersVM?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +28,7 @@ class FCPlayersVC: UIViewController {
     func initializeCompletionHandlers(){
         viewModel?.initialDataFetched = {[weak self](success) in
             if success{
+                self?.activityBGView.isHidden = true
                 self?.tableView.reloadData()
             }
         }

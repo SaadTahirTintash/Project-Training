@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct FCPlayersModel: Decodable{
+class FCPlayersModel: Decodable{
     var standing:       String?
     var name:           String?
     var country:        String?

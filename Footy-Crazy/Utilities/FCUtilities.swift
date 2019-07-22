@@ -8,9 +8,13 @@
 
 import SafariServices
 
-class FCUtilities{
-    
-    static func openLinkInSafari(_ urlString: String,_ nvc: UINavigationController?){
+struct FCUtilities{ // make struct
+    static let shared = FCUtilities()
+    private init(){}
+}
+
+extension FCUtilities{
+    func openLinkInSafari(_ urlString: String,_ nvc: UINavigationController?){
         print("open news link")
         guard let url = URL(string: urlString) else{
             print("Invalid URL")
@@ -19,12 +23,9 @@ class FCUtilities{
         let svc = SFSafariViewController(url: url)
         nvc?.present(svc, animated: true, completion: nil)
     }
-    
-    static func shareContent(_ onVC: UIViewController, _ shareableContent: [Any]){
+    func shareContent(_ onVC: UIViewController, _ shareableContent: [Any]){
         let activityViewController = UIActivityViewController(activityItems: shareableContent, applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = onVC.view
         onVC.present(activityViewController, animated: true, completion: nil)
     }
-    
-    
 }

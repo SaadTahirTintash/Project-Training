@@ -30,13 +30,10 @@ class FCTeamTableViewCell: UITableViewCell {
             flagImage.image = cache
             print("Image loaded from cache")
         } else if let url = URL(string: urlString){
-            flagImage.loadImage(from: url){(success,downloadedImg) in
-                if success{
-                    print("Image downloaded from internet")
-                    if let downloadedImg = downloadedImg{
-                        FCCacheManager.shared.setImage(urlString, downloadedImg)
-                    }
-                }
+            flagImage.loadImage(from: url, success: {(img) in
+                FCCacheManager.shared.setImage(urlString, img)
+            }) {(errorMsg) in
+                print(errorMsg)
             }
         }
     }

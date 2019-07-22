@@ -13,23 +13,25 @@ class FCGalleryVM: FCViewModelProtocol{
     var isFetchingData      : Bool = false
     var initialDataFetched  : ((Bool)->Void)?
     var newDataFetched      : ((Bool)->Void)?
-
-    init(_ modelArray: [FCGalleryModel]) {
-        self.modelArray = modelArray
-    }
     var itemCount: Int{
         return modelArray.count
     }
+    init(_ modelArray: [FCGalleryModel]) {
+        self.modelArray = modelArray
+    }
+}
+extension FCGalleryVM: FCGalleryService{
     func viewModelForDetail(at index: Int) -> FCGalleryDetailVM {
         return FCGalleryDetailVM(model: modelArray[index])
     }
     func getInitialData(){
-        FCDataManager.shared.getGallery(startingKey: Constants.GALLERY_STARTING_KEY, pageSize: Constants.GALLERY_INITIAL_PAGE_SIZE){[weak self](success, modelArray) in
+        getGalleryData(startingKey: FCConstants.GALLERY_CONSTANTS.STARTING_KEY, pageSize: FCConstants.GALLERY_CONSTANTS.PAGE_SIZE){[weak self](success, modelArray) in
             guard success, let array = modelArray else{
                 self?.isFetchingData = false
                 self?.initialDataFetched?(false)
                 return
             }
+            FCDataManager.shared.galleryData.append(contentsOf: array)
             self?.modelArray.append(contentsOf: array)
             self?.isFetchingData = false
             self?.initialDataFetched?(true)
@@ -41,13 +43,14 @@ class FCGalleryVM: FCViewModelProtocol{
             var startingId = modelArray.endIndex
             if startingId != 0{
                 startingId += 1
-                FCDataManager.shared.getGallery(startingKey: String(startingId), pageSize: Constants.GALLERY_PAGE_SIZE) { [weak self](success, modelArray) in
-                    guard success, let modelArray = modelArray else{
+                getGalleryData(startingKey: String(startingId), pageSize: FCConstants.GALLERY_CONSTANTS.PAGE_SIZE) { [weak self](success, modelArray) in
+                    guard success, let array = modelArray else{
                         self?.isFetchingData = false
                         self?.newDataFetched?(false)
                         return
                     }
-                    self?.modelArray.append(contentsOf: modelArray)
+                    FCDataManager.shared.galleryData.append(contentsOf: array)
+                    self?.modelArray.append(contentsOf: array)
                     self?.isFetchingData = false
                     self?.newDataFetched?(true)
                 }

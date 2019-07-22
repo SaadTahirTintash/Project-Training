@@ -9,62 +9,60 @@
 
 import FirebaseDatabase
 import Alamofire
-import SwiftyJSON
+import SwiftyJSON // remove it
 
-class FCNetworkEngine{
-    static let shared = FCNetworkEngine()
-    let snapshotParser = FCParseSnapshot()
-    var ref: DatabaseReference!
-    var rootQuery = DatabaseReference()
-    private init() {
-        ref = Database.database().reference()
-        rootQuery = ref.child("footy_crazy_data")
+protocol FCNetworkEngineProtocol{ // remname
+    
+}
+
+extension FCNetworkEngineProtocol{
+    var ref: DatabaseReference{
+        return Database.database().reference()
     }
-    func loadNewsFeed(startingKey id: String, pageSize limit: Int, completion: ((_ success: Bool, _ newsFeedModelArray: [FCNewsFeedModel]?)->Void)?){
-        rootQuery.child(Constants.NEWS_FEED_PATH_STRING).queryOrderedByKey().queryStarting(atValue: id).queryLimited(toFirst: UInt(limit)).observeSingleEvent(of: .value) { [weak self] (snapshot) in
+    var rootQuery: DatabaseReference{
+        return ref.child("footy_crazy_data")
+    }
+    
+    func fetchData<MODEL_TYPE>(pathString: String, startingKey id: String, pageSize limit: Int, completion: ((Bool,[MODEL_TYPE]?)->Void)?) where MODEL_TYPE : Decodable {
+        rootQuery.child(pathString).queryOrderedByKey().queryStarting(atValue: id).queryLimited(toFirst: UInt(limit)).observeSingleEvent(of: .value) {(snapshot) in
             if snapshot.value != nil && snapshot.childrenCount > 0{
-                let newsFeedModelArray = self?.snapshotParser.parseToNewsFeed(snapshot: snapshot)
-                completion?(true,newsFeedModelArray)
+                var modelArray = [MODEL_TYPE]()
+                let enumerator = snapshot.children
+                while let snap = enumerator.nextObject() as? DataSnapshot{
+                    do{
+                        if let value = snap.value as? [String: Any]{
+                            let jsonData = try JSONSerialization.data(withJSONObject: value, options: [])
+                            let decoder = JSONDecoder()
+                            let model = try decoder.decode(MODEL_TYPE.self, from: jsonData)
+                            modelArray.append(model)
+                        }
+                    }catch{
+                        print("Whoops! An error occured while decoding NewsFeed: \(error.localizedDescription)")
+                    }
+                }
+                completion?(true,modelArray)
             } else{
                 completion?(false,nil)
             }
         }
     }
-    func loadGallery(startingKey id: String, pageSize limit: Int, completion:((_ success: Bool,_ galleryModelArray: [FCGalleryModel]?)->Void)?){
-        rootQuery.child(Constants.GALLERY_PATH_STRING).queryOrderedByKey().queryStarting(atValue: id).queryLimited(toFirst: UInt(limit)).observeSingleEvent(of: .value) { [weak self](snapshot) in
-            if snapshot.value != nil && snapshot.childrenCount > 0{
-                let galleryModelArray = self?.snapshotParser.parseToGallary(snapshot: snapshot)
-                completion?(true,galleryModelArray)
-            } else{
-                completion?(false,nil)
-            }
-        }
-    }
-    func loadTeams(startingKey id: String, pageSize limit: Int, completion: ((_ success:Bool,_ teamModelArray: [FCTeamsModel]?)->Void)?){
-        rootQuery.child(Constants.TEAMS_PATH_STRING).queryOrderedByKey().queryStarting(atValue: id).queryLimited(toFirst: UInt(limit)).observeSingleEvent(of: .value) { [weak self](snapshot) in
-            if snapshot.value != nil && snapshot.childrenCount > 0 {
-                let teamsModelArray = self?.snapshotParser.parseToTeams(snapshot: snapshot)
-                completion?(true,teamsModelArray)
-            } else{
-                completion?(false,nil)
-            }
-        }
-    }
-    func loadPlayers(startingKey id: String, pageSize limit: Int, completion: ((_ success:Bool,_ playerModelArray: [FCPlayersModel]?)->Void)?){
-        rootQuery.child(Constants.PLAYERS_PATH_STRING).queryOrderedByKey().queryStarting(atValue: id).queryLimited(toFirst: UInt(limit)).observeSingleEvent(of: .value) { [weak self](snapshot) in
-            if snapshot.value != nil && snapshot.childrenCount > 0 {
-                let playersModelArray = self?.snapshotParser.parseToPlayers(snapshot: snapshot)
-                completion?(true,playersModelArray)
-            } else{
-                completion?(false,nil)
-            }
-        }
-    }
-    func loadCitiesLocation(completion: ((_ success: Bool,_ citiesLocationModelArray: [FCCitiesLocationModel]?)->Void)?){        
-        Alamofire.AF.request(Constants.CITIES_LOCATION_API_STRING+"?query=san").responseJSON { [weak self](response) in
+    
+    func fetchAPI<MODEL_TYPE>(pathString: String, query: String, completion: ((_ success: Bool,_ modelArray: [MODEL_TYPE]?)->Void)?) where MODEL_TYPE: Decodable{
+        Alamofire.AF.request(pathString+query).responseJSON { (response) in
             switch response.result{
             case .success(let value):
-                let modelArray = self?.snapshotParser.parseToCitiesLocation(value: value)
+                var modelArray: [MODEL_TYPE] = []
+                guard let dataArray = value as? [[String:Any]] else{
+                    return
+                }
+                do{
+                    let jsonData = try JSONSerialization.data(withJSONObject: dataArray)
+                    let decoder = JSONDecoder()
+                    let data = try decoder.decode([MODEL_TYPE].self, from: jsonData)
+                    modelArray.append(contentsOf: data)
+                }catch{
+                    print(error.localizedDescription)
+                }
                 completion?(true,modelArray)
             case .failure(let error):
                 print(error.localizedDescription)
@@ -72,6 +70,7 @@ class FCNetworkEngine{
             }
         }
     }
+    
     func removeAllObservers(){
         ref.removeAllObservers()
     }

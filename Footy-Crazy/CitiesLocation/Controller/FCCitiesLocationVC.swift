@@ -10,7 +10,7 @@ import UIKit
 
 class FCCitiesLocationVC: UIViewController {
 
-    @IBOutlet weak var activityIndicator    : UIActivityIndicatorView!
+    @IBOutlet weak var activityBGView       : UIView!
     @IBOutlet weak var tableView            : UITableView!
     var viewModel                           : FCCitiesLocationVM?
     
@@ -33,7 +33,7 @@ class FCCitiesLocationVC: UIViewController {
     
     func initializeCompletionHandlers(){
         viewModel?.initialDataFetched = {[weak self]success in
-            self?.activityIndicator.stopAnimating()
+            self?.activityBGView.isHidden = true
             if success{
                 DispatchQueue.main.async {[weak self] in
                     self?.tableView.reloadData()

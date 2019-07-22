@@ -8,31 +8,36 @@
 
 import UIKit
 import youtube_ios_player_helper
+
 class FCVideoTableViewCell: UITableViewCell {
-    @IBOutlet weak var activityIndicator        : UIActivityIndicatorView!
+   
     @IBOutlet weak var titleLabel               : UILabel!
     @IBOutlet weak var videoView                : YTPlayerView!
-    weak var shareBtnDelegate                   : FCNewsFeedShareButtonDelegate?
+    @IBOutlet weak var activityIndicator        : UIActivityIndicatorView!
+    
+    var shareBtnPressed                         : ((FCNewsFeedDetailVM?)->Void)?
     var viewModel                               : FCNewsFeedDetailVM?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         videoView.delegate = self        
     }
-    func configure(){        
+}
+extension FCVideoTableViewCell{
+    func configure(){
         titleLabel.text = viewModel?.title
         if let urlString = viewModel?.url{
             videoView.load(withVideoId: urlString, playerVars:["playsinline":1])            
         }
     }
     @IBAction func share(_ sender: Any) {
-        shareBtnDelegate?.didPressShareButton(viewModel)
+        shareBtnPressed?(viewModel)
     }
 }
 extension FCVideoTableViewCell: YTPlayerViewDelegate{
     func playerViewPreferredInitialLoading(_ playerView: YTPlayerView) -> UIView? {
-        let videoPreferredView = UIView.init(frame: playerView.frame)
-        videoPreferredView.backgroundColor = .black
+        let videoPreferredView              = UIView(frame: playerView.frame)
+        videoPreferredView.backgroundColor  = .black
         return videoPreferredView
     }
     func playerViewDidBecomeReady(_ playerView: YTPlayerView) {

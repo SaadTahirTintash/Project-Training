@@ -43,14 +43,12 @@ class FCTeamsDetailVC: UIViewController {
             print("Image loaded from cache")
             activityIndicator.stopAnimating()
         } else if let url = URL(string: urlString){
-            flagImage.loadImage(from: url){[weak self](success,downloadedImg) in
-                if success{
-                    print("Image downloaded from internet")
-                    if let downloadedImg = downloadedImg{
-                        FCCacheManager.shared.setImage(urlString, downloadedImg)
-                    }
-                }
+            flagImage.loadImage(from: url, success: { [weak self](img) in
+                FCCacheManager.shared.setImage(urlString, img)
                 self?.activityIndicator.stopAnimating()
+            }) { [weak self](errorMsg) in
+                self?.activityIndicator.stopAnimating()
+                print(errorMsg)
             }
         }
     }

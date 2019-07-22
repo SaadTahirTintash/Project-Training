@@ -11,12 +11,11 @@ class FCFactTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel           : UILabel!
     @IBOutlet weak var imgView              : UIImageView!
     @IBOutlet weak var activityIndicator    : UIActivityIndicatorView!
-    weak var shareBtnDelegate               : FCNewsFeedShareButtonDelegate?
+    var shareBtnPressed                     : ((FCNewsFeedDetailVM?)->Void)?
     var viewModel                           : FCNewsFeedDetailVM?
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
+}
+
+extension FCFactTableViewCell{
     func configure(){
         titleLabel.text = viewModel?.title
         if let urlString = viewModel?.url{
@@ -28,20 +27,18 @@ class FCFactTableViewCell: UITableViewCell {
             imgView.image = cache
             print("Image loaded from cache")
             activityIndicator.stopAnimating()
-        } else if let url = URL(string: urlString){
-            imgView.loadImage(from: url){[weak self](success,downloadedImg) in
-                if success{
-                    print("Image downloaded from internet")
-                    if let downloadedImg = downloadedImg{                        
-                        FCCacheManager.shared.setImage(urlString, downloadedImg)
-                    }
-                }
+        } else if let url = URL(string: urlString) {
+            imgView.loadImage(from: url, success: { [weak self](img) in
+                FCCacheManager.shared.setImage(urlString, img)
                 self?.activityIndicator.stopAnimating()
+            }) { [weak self](errorMsg) in
+                self?.activityIndicator.stopAnimating()
+                print(errorMsg)
             }
         }
     }
     @IBAction func share(_ sender: Any) {
-        shareBtnDelegate?.didPressShareButton(viewModel)
+        shareBtnPressed?(viewModel)
     }
     override func prepareForReuse() {
         self.imgView.image = nil

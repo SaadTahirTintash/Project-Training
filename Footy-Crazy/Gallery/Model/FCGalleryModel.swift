@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct FCGalleryModel{
-    var imageUrl: String?
+class FCGalleryModel: Decodable{
+    var url: String?
 }
 

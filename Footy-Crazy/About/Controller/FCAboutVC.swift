@@ -9,12 +9,13 @@
 import UIKit
 class FCAboutVC: UIViewController {
     @IBOutlet weak var aboutLabel       : UILabel!
-    
+}
+extension FCAboutVC{
     override func viewDidLoad() {
         super.viewDidLoad()
         setupVC()
     }
     func setupVC(){
-        aboutLabel.text = Constants.ABOUT_US
+        aboutLabel.text = FCConstants.ABOUT_US
     }
 }
