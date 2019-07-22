@@ -25,16 +25,15 @@ extension FCGalleryVM: FCGalleryService{
         return FCGalleryDetailVM(model: modelArray[index])
     }
     func getInitialData(){
-        getGalleryData(startingKey: FCConstants.GALLERY_CONSTANTS.STARTING_KEY, pageSize: FCConstants.GALLERY_CONSTANTS.PAGE_SIZE){[weak self](success, modelArray) in
-            guard success, let array = modelArray else{
-                self?.isFetchingData = false
-                self?.initialDataFetched?(false)
-                return
-            }
+        getGalleryData(startingKey: FCConstants.GALLERY_CONSTANTS.STARTING_KEY, pageSize: FCConstants.GALLERY_CONSTANTS.INITIAL_PAGE_SIZE, success: { [weak self](array) in
             FCDataManager.shared.galleryData.append(contentsOf: array)
             self?.modelArray.append(contentsOf: array)
             self?.isFetchingData = false
             self?.initialDataFetched?(true)
+        }) { [weak self](errorMsg) in
+            print(errorMsg)
+            self?.isFetchingData = false
+            self?.initialDataFetched?(false)
         }
     }    
     func getMoreData(){
@@ -43,16 +42,15 @@ extension FCGalleryVM: FCGalleryService{
             var startingId = modelArray.endIndex
             if startingId != 0{
                 startingId += 1
-                getGalleryData(startingKey: String(startingId), pageSize: FCConstants.GALLERY_CONSTANTS.PAGE_SIZE) { [weak self](success, modelArray) in
-                    guard success, let array = modelArray else{
-                        self?.isFetchingData = false
-                        self?.newDataFetched?(false)
-                        return
-                    }
+                getGalleryData(startingKey: String(startingId), pageSize: FCConstants.GALLERY_CONSTANTS.PAGE_SIZE, success: { [weak self](array) in
                     FCDataManager.shared.galleryData.append(contentsOf: array)
                     self?.modelArray.append(contentsOf: array)
                     self?.isFetchingData = false
                     self?.newDataFetched?(true)
+                }) { [weak self](errorMsg) in
+                    print(errorMsg)
+                    self?.isFetchingData = false
+                    self?.newDataFetched?(false)
                 }
             }
         }

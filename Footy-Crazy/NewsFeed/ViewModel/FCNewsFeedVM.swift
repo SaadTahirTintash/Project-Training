@@ -33,25 +33,17 @@ extension FCNewsFeedVM: FCNewsFeedService{
             var startingId = modelArray.endIndex
             if startingId != 0{
                 startingId += 1
-                getNewsFeedData(startingKey: String(startingId), pageSize: FCConstants.NEWS_FEED_CONSTANTS.PAGE_SIZE) { [weak self] (success,modelArray) in
-                    if success{
-                        if let modelArray = modelArray{
-                            FCDataManager.shared.newsFeedData.append(contentsOf: modelArray)
-                        }
-                        self?.success(success,modelArray)
-                    }
+                getNewsFeedData(startingKey: String(startingId), pageSize: FCConstants.NEWS_FEED_CONSTANTS.PAGE_SIZE, success: { [weak self](modelArray) in
+                    FCDataManager.shared.newsFeedData.append(contentsOf: modelArray)
+                    self?.modelArray.append(contentsOf: modelArray)
+                    self?.isFetchingData = false
+                    self?.newDataFetched?(true)
+                }) { [weak self](errorMsg) in
+                    print(errorMsg)
+                    self?.isFetchingData = false
+                    self?.newDataFetched?(false)
                 }
             }
         }
-    }
-    func success(_ success: Bool, _ array: [FCNewsFeedModel]?){
-        guard success, let array = array else{
-            isFetchingData = false
-            newDataFetched?(false)
-            return
-        }
-        modelArray.append(contentsOf: array)
-        isFetchingData = false
-        newDataFetched?(true)
     }
 }

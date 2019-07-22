@@ -8,7 +8,7 @@
 
 import SafariServices
 
-struct FCUtilities{ // make struct
+struct FCUtilities{
     static let shared = FCUtilities()
     private init(){}
 }

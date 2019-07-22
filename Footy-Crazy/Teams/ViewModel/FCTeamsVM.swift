@@ -24,36 +24,35 @@ extension FCTeamsVM: FCTeamsService{
         return FCTeamsDetailVM(modelArray[index])
     }
     func getInitialData(){
-        getTeamData(startingKey: FCConstants.TEAMS_CONSTANTS.STARTING_KEY,
-                                      pageSize: FCConstants.TEAMS_CONSTANTS.INITIAL_PAGE_SIZE) {[weak self](success, modelArray) in
-            guard success, let array = modelArray else{
+        getTeamData(startingKey: FCConstants.TEAMS_CONSTANTS.STARTING_KEY, pageSize: FCConstants.TEAMS_CONSTANTS.INITIAL_PAGE_SIZE, success: { [weak self](array) in
+                FCDataManager.shared.teamsData.append(contentsOf: array)
+                self?.modelArray.append(contentsOf: array)
+                self?.isFetchingData = false
+                self?.initialDataFetched?(true)
+            }, failure: {[weak self](errorMsg) in
+                print(errorMsg)
                 self?.isFetchingData = false
                 self?.initialDataFetched?(false)
-                return
             }
-            FCDataManager.shared.teamsData.append(contentsOf: array)
-            self?.modelArray.append(contentsOf: array)
-            self?.isFetchingData = false
-            self?.initialDataFetched?(true)
-        }
-    }    
+        )
+    }
+    
     func getMoreData(){
         guard !isFetchingData else { return }
         isFetchingData = true
         var startingId = modelArray.endIndex
         if startingId != 0{
             startingId += 1
-            getTeamData(startingKey: String(startingId), pageSize: FCConstants.TEAMS_CONSTANTS.PAGE_SIZE) { [weak self](success, modelArray) in
-                guard success, let array = modelArray else{
+            getTeamData(startingKey:String(startingId), pageSize: FCConstants.TEAMS_CONSTANTS.PAGE_SIZE, success: { [weak self](array) in
+                    FCDataManager.shared.teamsData.append(contentsOf: array)
+                    self?.modelArray.append(contentsOf: array)
+                    self?.isFetchingData = false
+                    self?.newDataFetched?(true)
+                }, failure: {  [weak self](errorMsg) in
+                    print(errorMsg)
                     self?.isFetchingData = false
                     self?.newDataFetched?(false)
-                    return
-                }
-                FCDataManager.shared.teamsData.append(contentsOf: array)
-                self?.modelArray.append(contentsOf: array)
-                self?.isFetchingData = false
-                self?.newDataFetched?(true)
-            }
+            })
         }
     }
 }

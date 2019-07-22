@@ -7,7 +7,6 @@
 //
 import UIKit
 
-// make struct use project initial literals
 struct FCConstants{
     static let NEWS_FEED_CONSTANTS          :FCNewsFeedConstants        = FCNewsFeedConstants()
     static let GALLERY_CONSTANTS            :FCGalleryConstants         = FCGalleryConstants()

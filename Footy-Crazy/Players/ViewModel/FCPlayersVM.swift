@@ -25,16 +25,15 @@ extension FCPlayersVM: FCPlayersService{
         return FCPlayersDetailVM(modelArray[index])
     }
     func getInitialData(){
-        getPlayerData(startingKey: FCConstants.PLAYERS_CONSTANTS.STARTING_KEY, pageSize: FCConstants.PLAYERS_CONSTANTS.INITIAL_PAGE_SIZE){[weak self](success, modelArray) in
-            guard success, let array = modelArray else{
-                self?.isFetchingData = false
-                self?.initialDataFetched?(false)
-                return
-            }
+        getPlayerData(startingKey: FCConstants.PLAYERS_CONSTANTS.STARTING_KEY, pageSize: FCConstants.PLAYERS_CONSTANTS.INITIAL_PAGE_SIZE, success: { [weak self](array) in
             FCDataManager.shared.playersData.append(contentsOf: array)
             self?.modelArray.append(contentsOf: array)
             self?.isFetchingData = false
             self?.initialDataFetched?(true)
+        }) { [weak self](errorMsg) in
+            print(errorMsg)
+            self?.isFetchingData = false
+            self?.initialDataFetched?(false)
         }
     }
     func getMoreData(){
@@ -43,16 +42,15 @@ extension FCPlayersVM: FCPlayersService{
             var startingId = modelArray.endIndex
             if startingId != 0{
                 startingId += 1
-                getPlayerData(startingKey: String(startingId), pageSize: FCConstants.PLAYERS_CONSTANTS.PAGE_SIZE) { [weak self](success, modelArray) in
-                    guard success, let array = modelArray else{
-                        self?.isFetchingData = false
-                        self?.newDataFetched?(false)
-                        return
-                    }
+                getPlayerData(startingKey: String(startingId), pageSize: FCConstants.PLAYERS_CONSTANTS.PAGE_SIZE, success: { [weak self](array) in
                     FCDataManager.shared.playersData.append(contentsOf: array)
                     self?.modelArray.append(contentsOf: array)
                     self?.isFetchingData = false
                     self?.newDataFetched?(true)
+                }) { [weak self](errorMsg) in
+                    print(errorMsg)
+                    self?.isFetchingData = false
+                    self?.newDataFetched?(false)
                 }
             }
         }

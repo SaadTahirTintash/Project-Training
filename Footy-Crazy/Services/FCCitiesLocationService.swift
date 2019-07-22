@@ -6,7 +6,7 @@
 //  Copyright © 2019 Tintash. All rights reserved.
 //
 
-protocol FCCitiesLocationService: FCNetworkEngineProtocol {}
+protocol FCCitiesLocationService: FCNetworkEngine {}
 extension FCCitiesLocationService{
     func getCitiesLocationData(pathString: String, queryString: String, completion: ((_ success: Bool, _ citiesLocationModelArray: [FCCitiesLocationModel]?)->Void)?){
         fetchAPI(pathString: pathString, query: queryString, completion: completion)

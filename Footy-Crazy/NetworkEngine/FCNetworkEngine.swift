@@ -9,21 +9,19 @@
 
 import FirebaseDatabase
 import Alamofire
-import SwiftyJSON // remove it
 
-protocol FCNetworkEngineProtocol{ // remname
-    
+protocol FCNetworkEngine{
+    typealias success<MODEL_TYPE>   = (([MODEL_TYPE])->Void)?
+    typealias failure               = ((String)->Void)?
 }
-
-extension FCNetworkEngineProtocol{
+extension FCNetworkEngine{
     var ref: DatabaseReference{
         return Database.database().reference()
     }
     var rootQuery: DatabaseReference{
         return ref.child("footy_crazy_data")
     }
-    
-    func fetchData<MODEL_TYPE>(pathString: String, startingKey id: String, pageSize limit: Int, completion: ((Bool,[MODEL_TYPE]?)->Void)?) where MODEL_TYPE : Decodable {
+    func fetchData<MODEL_TYPE>(pathString: String, startingKey id: String, pageSize limit: Int, success: success<MODEL_TYPE>, failure: failure) where MODEL_TYPE : Decodable {
         rootQuery.child(pathString).queryOrderedByKey().queryStarting(atValue: id).queryLimited(toFirst: UInt(limit)).observeSingleEvent(of: .value) {(snapshot) in
             if snapshot.value != nil && snapshot.childrenCount > 0{
                 var modelArray = [MODEL_TYPE]()
@@ -40,13 +38,12 @@ extension FCNetworkEngineProtocol{
                         print("Whoops! An error occured while decoding NewsFeed: \(error.localizedDescription)")
                     }
                 }
-                completion?(true,modelArray)
+                success?(modelArray)
             } else{
-                completion?(false,nil)
+                failure?("No Data Found")
             }
         }
     }
-    
     func fetchAPI<MODEL_TYPE>(pathString: String, query: String, completion: ((_ success: Bool,_ modelArray: [MODEL_TYPE]?)->Void)?) where MODEL_TYPE: Decodable{
         Alamofire.AF.request(pathString+query).responseJSON { (response) in
             switch response.result{
@@ -70,7 +67,6 @@ extension FCNetworkEngineProtocol{
             }
         }
     }
-    
     func removeAllObservers(){
         ref.removeAllObservers()
     }
