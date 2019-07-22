@@ -24,7 +24,7 @@ extension FCVideoDetailVC{
     func setupVC(){
         descriptionLabel.text = viewModel?.description
         titleLabel.text = viewModel?.title
-        if let urlString = viewModel?.url {
+        if let urlString = viewModel?.url {            
             videoView.load(withVideoId: urlString, playerVars:["playsinline":1])
         }        
     }

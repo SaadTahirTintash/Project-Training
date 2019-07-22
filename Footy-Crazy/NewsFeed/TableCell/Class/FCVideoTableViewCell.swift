@@ -26,7 +26,7 @@ class FCVideoTableViewCell: UITableViewCell {
 extension FCVideoTableViewCell{
     func configure(){
         titleLabel.text = viewModel?.title
-        if let urlString = viewModel?.url{
+        if let urlString = viewModel?.url{            
             videoView.load(withVideoId: urlString, playerVars:["playsinline":1])            
         }
     }

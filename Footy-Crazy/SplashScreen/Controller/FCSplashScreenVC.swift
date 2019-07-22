@@ -18,11 +18,11 @@ class FCSplashScreenVC: UIViewController, FCNewsFeedService {
     // do not mate storyboard id a property
     override func viewDidLoad() {
         super.viewDidLoad()
-        getNewsFeedData(startingKey: FCConstants.NEWS_FEED_CONSTANTS.STARTING_KEY, pageSize: FCConstants.NEWS_FEED_CONSTANTS.INITIAL_PAGE_SIZE, success: { [weak self](array) in
+        getNewsFeedData(startingKey: FCConstants.NEWS_FEED_CONSTANTS.STARTING_KEY, pageSize: FCConstants.NEWS_FEED_CONSTANTS.INITIAL_PAGE_SIZE, success: {(array) in
             FCDataManager.shared.newsFeedData = array
             let storyboardID = UIStoryboard(name: "FCNewsFeed", bundle: nil)
             UIApplication.shared.delegate?.window??.rootViewController = storyboardID.instantiateInitialViewController()
-        }) { [weak self](errorMsg) in
+        }) {(errorMsg) in
             print(errorMsg)
         }
     }
