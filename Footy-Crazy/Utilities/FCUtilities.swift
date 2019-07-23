@@ -40,10 +40,14 @@ extension FCUtilities{
                         success?(image)
                     }
                 } else{
-                    failure?("Image downloading failed!")
+                    DispatchQueue.main.async {
+                        failure?("Image downloading failed!")
+                    }
                 }
             } else{
-                failure?("Incorrect URL!")
+                DispatchQueue.main.async {
+                    failure?("Incorrect URL!")
+                }
             }
         }
     }

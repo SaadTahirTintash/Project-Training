@@ -38,16 +38,17 @@ extension FCNewsLinkTableViewCell{
             }
         }else{
             let slp: SwiftLinkPreview = SwiftLinkPreview()
+            activityIndicator.startAnimating()
             slp.preview(newsLink, onSuccess: { [weak self] (response) in
                 FCCacheManager.shared.setNewsLink(newsLink, response)
                 self?.titleLbl.text = response.title
-                if let urlString = response.image{
-                    self?.loadImage(urlString)
-                } else{
-                    self?.newsImg.image = FCConstants.EMPTY_IMAGE
+                guard let urlString = response.image else{
+                    print("Incorrect image url!")
+                    return
                 }
-            }) { [weak self](error) in
-                self?.newsImg.image = FCConstants.EMPTY_IMAGE
+                self?.loadImage(urlString)
+            }) { (error) in
+                print(error.localizedDescription)
             }
         }
     }
@@ -63,6 +64,7 @@ extension FCNewsLinkTableViewCell{
                 self?.newsImg.image = downloadedImg
                 }, failure: {[weak self](errorMsg) in
                     print(errorMsg)
+                    self?.newsImg.image = FCConstants.EMPTY_IMAGE
                     self?.activityIndicator.stopAnimating()
             })
         }

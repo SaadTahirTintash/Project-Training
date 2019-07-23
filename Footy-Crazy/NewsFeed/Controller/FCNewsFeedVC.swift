@@ -99,6 +99,7 @@ extension FCNewsFeedVC: UITableViewDataSource{
         cell.viewModel          = cellVM
         cell.shareBtnPressed    = {[weak self] (model) in self?.share(model)}
         cell.configure()
+        
         return cell
     }
     func factTableCell(at indexPath: IndexPath)->UITableViewCell{
