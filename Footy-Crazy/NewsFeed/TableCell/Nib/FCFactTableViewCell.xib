@@ -22,7 +22,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yhd-M7-9Ml" userLabel="BackgroundView">
                         <rect key="frame" x="10" y="10" width="394" height="450.5"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="K2X-qW-wvZ">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="K2X-qW-wvZ">
                                 <rect key="frame" x="0.0" y="0.0" width="394" height="450.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ASi-zk-kfk" userLabel="ImgContainer">
@@ -53,7 +53,7 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YmF-Oq-Zbj" userLabel="Title">
-                                        <rect key="frame" x="0.0" y="250" width="394" height="150.5"/>
+                                        <rect key="frame" x="0.0" y="255" width="394" height="140.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -61,19 +61,19 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="obD-iC-Yqn" userLabel="ButtonView">
                                         <rect key="frame" x="0.0" y="400.5" width="394" height="50"/>
                                         <subviews>
-                                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I8q-Sq-aeD">
+                                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I8q-Sq-aeD">
                                                 <rect key="frame" x="0.0" y="0.0" width="197" height="50"/>
-                                                <state key="normal" title="Read"/>
+                                                <state key="normal" image="read"/>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DkG-m4-WEn">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DkG-m4-WEn">
                                                 <rect key="frame" x="197" y="0.0" width="197" height="50"/>
-                                                <state key="normal" title="Share"/>
+                                                <state key="normal" image="share"/>
                                                 <connections>
                                                     <action selector="share:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="FhD-Ve-6jT"/>
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" white="0.67000000000000004" alpha="0.25" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="DkG-m4-WEn" firstAttribute="top" secondItem="obD-iC-Yqn" secondAttribute="top" id="Aoz-S4-OdM"/>
                                             <constraint firstItem="DkG-m4-WEn" firstAttribute="leading" secondItem="I8q-Sq-aeD" secondAttribute="trailing" id="CQD-oX-8Uz"/>
@@ -113,4 +113,8 @@
             <point key="canvasLocation" x="57.971014492753625" y="107.47767857142857"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="read" width="32" height="32"/>
+        <image name="share" width="32" height="32"/>
+    </resources>
 </document>

@@ -22,7 +22,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CMa-D4-Cpd" userLabel="BackgroundView">
                         <rect key="frame" x="10" y="10" width="371" height="429.5"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="o6t-GY-bza">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="o6t-GY-bza">
                                 <rect key="frame" x="0.0" y="0.0" width="371" height="429.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zlw-1n-40i" userLabel="videoViewBg">
@@ -53,7 +53,7 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CWC19 SF: AUS v END - Match Highlights" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a72-T4-QSx" userLabel="titleLabel">
-                                        <rect key="frame" x="0.0" y="300" width="371" height="79.5"/>
+                                        <rect key="frame" x="0.0" y="305" width="371" height="69.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -61,19 +61,19 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SC0-32-9qE" userLabel="buttonView">
                                         <rect key="frame" x="0.0" y="379.5" width="371" height="50"/>
                                         <subviews>
-                                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dpl-lo-g1g">
+                                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dpl-lo-g1g">
                                                 <rect key="frame" x="0.0" y="0.0" width="185.5" height="50"/>
-                                                <state key="normal" title="Read"/>
+                                                <state key="normal" image="read"/>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r6h-go-hNF">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r6h-go-hNF">
                                                 <rect key="frame" x="185.5" y="0.0" width="185.5" height="50"/>
-                                                <state key="normal" title="Share"/>
+                                                <state key="normal" image="share"/>
                                                 <connections>
                                                     <action selector="share:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="WMq-u1-mR4"/>
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" white="0.67000000000000004" alpha="0.25" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="Dpl-lo-g1g" firstAttribute="top" secondItem="SC0-32-9qE" secondAttribute="top" id="1ZE-bg-v4y"/>
                                             <constraint firstAttribute="height" constant="50" id="H9x-tA-tr7"/>
@@ -113,4 +113,8 @@
             <point key="canvasLocation" x="31.159420289855074" y="198.88392857142856"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="read" width="32" height="32"/>
+        <image name="share" width="32" height="32"/>
+    </resources>
 </document>

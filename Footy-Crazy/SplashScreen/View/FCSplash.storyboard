@@ -18,19 +18,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="deI-xD-jog">
-                                <rect key="frame" x="157" y="398" width="100" height="100"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="vDx-Wa-swl"/>
-                                    <constraint firstAttribute="width" constant="100" id="wJG-rg-tAb"/>
-                                </constraints>
-                                <color key="color" cocoaTouchSystemColor="darkTextColor"/>
-                            </activityIndicatorView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="2xU-di-tIi">
+                                <rect key="frame" x="59" y="390" width="296" height="116"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FOOTY CRAZY" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="23" translatesAutoresizingMaskIntoConstraints="NO" id="C5U-lz-suJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="296" height="54"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="45"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="deI-xD-jog">
+                                        <rect key="frame" x="129.5" y="79" width="37" height="37"/>
+                                        <color key="color" cocoaTouchSystemColor="darkTextColor"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="deI-xD-jog" firstAttribute="centerX" secondItem="gzu-VU-FuW" secondAttribute="centerX" id="fMr-3R-9mw"/>
-                            <constraint firstItem="deI-xD-jog" firstAttribute="centerY" secondItem="gzu-VU-FuW" secondAttribute="centerY" id="pVv-bF-sh3"/>
+                            <constraint firstItem="2xU-di-tIi" firstAttribute="centerX" secondItem="gzu-VU-FuW" secondAttribute="centerX" id="QDK-pj-cGE"/>
+                            <constraint firstItem="2xU-di-tIi" firstAttribute="centerY" secondItem="gzu-VU-FuW" secondAttribute="centerY" id="Rin-Lu-Mjq"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="GG3-TQ-nD2"/>
                     </view>
