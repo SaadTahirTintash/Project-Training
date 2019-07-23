@@ -12,6 +12,7 @@ import SafariServices
 class FCNewsFeedVC: UIViewController {
     @IBOutlet weak var tableView    : UITableView!
     var viewModel                   : FCNewsFeedVM?
+    var itemHeights                 : [CGFloat]     = [CGFloat](repeating: UITableView.automaticDimension, count: 100)
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewModel()
@@ -32,8 +33,8 @@ extension FCNewsFeedVC{
         tableView.delegate   = self
     }
     func configureTableViewAutoLayout(){
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 450
+//        tableView.rowHeight = UITableView.automaticDimension
+//        tableView.estimatedRowHeight = 450
     }
     func newDataFetched(_ success: Bool){
         guard success else { return }
@@ -44,7 +45,7 @@ extension FCNewsFeedVC{
             indices.append(IndexPath(row: i, section: 0))
         }
         tableView.beginUpdates()
-        tableView.insertRows(at: indices, with: .fade)
+        tableView.insertRows(at: indices, with: .none)
         tableView.endUpdates()
     }
     func registerCells(){
@@ -94,7 +95,8 @@ extension FCNewsFeedVC: UITableViewDataSource{
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "NewsLinkCell") as? FCNewsLinkTableViewCell else{
             return UITableViewCell(.clear)
         }
-        cell.viewModel          = viewModel?.viewModelForDetail(at: indexPath.row)
+        let cellVM              = viewModel?.viewModelForDetail(at: indexPath.row)
+        cell.viewModel          = cellVM
         cell.shareBtnPressed    = {[weak self] (model) in self?.share(model)}
         cell.configure()
         return cell
@@ -103,9 +105,26 @@ extension FCNewsFeedVC: UITableViewDataSource{
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FactCell") as? FCFactTableViewCell else{
             return UITableViewCell(.clear)
         }
-        cell.viewModel          = viewModel?.viewModelForDetail(at: indexPath.row)
+        let cellVM              = viewModel?.viewModelForDetail(at: indexPath.row)
+        cell.viewModel          = cellVM
         cell.shareBtnPressed    = {[weak self] (model) in self?.share(model)}
         cell.configure()
+        if let imageUrl = cellVM?.url{
+            if let cache = FCCacheManager.shared.getImage(imageUrl){
+                cell.setImage(cache)
+            }else {
+                FCUtilities.shared.loadImage(from: imageUrl, success: { [weak self](downloadedImg) in
+                    FCCacheManager.shared.setImage(imageUrl, downloadedImg)
+                    if let updateCell = self?.tableView.cellForRow(at: indexPath) as? FCFactTableViewCell{
+                        updateCell.setImage(downloadedImg)
+                    }else{
+                        print("Wrong cell")
+                    }
+                }) { (errorMsg) in
+                    print(errorMsg)
+                }
+            }
+        }
         return cell
     }
 }
@@ -123,6 +142,18 @@ extension FCNewsFeedVC: UITableViewDelegate{
                 print("Can't perform segue for empty cells")
             }
         }
+    }
+}
+extension FCNewsFeedVC{
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        print("willDisplay: \(indexPath.row)")
+        if itemHeights[indexPath.row] == UITableView.automaticDimension {
+            itemHeights[indexPath.row] = cell.bounds.height
+        }
+    }
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        print("estimatedHeightForRowAt: \(indexPath.row)")
+        return itemHeights[indexPath.row]
     }
 }
 extension FCNewsFeedVC{

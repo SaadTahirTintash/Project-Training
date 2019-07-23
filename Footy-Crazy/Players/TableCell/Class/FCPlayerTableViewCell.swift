@@ -32,27 +32,10 @@ class FCPlayerTableViewCell: UITableViewCell {
         if let club = viewModel?.clubName{
             clubName.text = club
         }
-        if let imageUrl = viewModel?.imageUrl{
-            if let url = URL(string: imageUrl){
-                playerDPImage.loadImage(from: url, success: nil) { (errorMsg) in
-                    print(errorMsg)
-                }
-            }
-        }
     }
-    func loadImage(_ urlString: String){
-        if let cache = FCCacheManager.shared.getImage(urlString){
-            playerDPImage.image = cache
-            print("Image loaded from cache")
-        } else if let url = URL(string: urlString){
-            playerDPImage.loadImage(from: url, success: { (img) in
-                FCCacheManager.shared.setImage(urlString, img)
-            }) { (errorMsg) in
-                print(errorMsg)
-            }
-        }
+    func setImage(_ newImage: UIImage){
+        playerDPImage.image = newImage
     }
-
     override func prepareForReuse() {
         playerDPImage.image = nil
     }

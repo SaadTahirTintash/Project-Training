@@ -13,7 +13,7 @@ struct FCConstants{
     static let PLAYERS_CONSTANTS            :FCPlayersConstants         = FCPlayersConstants()
     static let TEAMS_CONSTANTS              :FCTeamsConstants           = FCTeamsConstants()
     static let CITIES_LOCATION_CONSTANTS    :FCCitiesLocationConstants  = FCCitiesLocationConstants()
-    static let DATA_FETCH_THRESHOLD         :Int                        = 5
+    static let DATA_FETCH_THRESHOLD         :Int                        = 2
     static let EMPTY_IMAGE                  :UIImage?                   = UIImage(named: "emptyImage")
     static let EMPTY_NEWS_IMAGE_URL         :URL?                       = URL(string: "https:\\google.com")
     static let EMPTY_NEWS_URL               :URL?                       = URL(string:"https:\\google.com")

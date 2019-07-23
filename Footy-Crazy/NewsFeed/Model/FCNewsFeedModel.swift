@@ -7,7 +7,8 @@
 //
 
 import UIKit
-class FCNewsFeedModel: Decodable{
+
+struct FCNewsFeedModel: Decodable{
     var url:            String?
     var description:    String?
     var title:          String?

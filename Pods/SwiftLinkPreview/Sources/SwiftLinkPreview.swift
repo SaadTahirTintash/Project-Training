@@ -123,7 +123,7 @@ open class SwiftLinkPreview: NSObject {
                             successResponseQueue(result)
                         } else {
                             
-                            var result = Response()
+                            let result = Response()
                             result.url = url
                             result.finalUrl = self.extractInURLRedirectionIfNeeded(unshortened)
                             result.canonicalUrl = self.extractCanonicalURL(unshortened)
@@ -315,7 +315,7 @@ extension SwiftLinkPreview {
         }
 
         if url.absoluteString.isImage() {
-            var result = response
+            let result = response
 
             result.title = ""
             result.description = ""
@@ -454,7 +454,7 @@ extension SwiftLinkPreview {
 
     // searc for favicn
     internal func crawIcon(_ htmlCode: String, result: Response) -> Response {
-        var result = result
+        let result = result
 
         let metatags = Regex.pregMatchAll(htmlCode, regex: Regex.linkPattern, index: 1)
 
@@ -477,7 +477,7 @@ extension SwiftLinkPreview {
     // Search for meta tags
     internal func crawlMetaTags(_ htmlCode: String, result: Response) -> Response {
 
-        var result = result
+        let result = result
 
         let possibleTags: [String] = [
             Response.Key.title.rawValue,
@@ -523,7 +523,7 @@ extension SwiftLinkPreview {
 
     // Crawl for title if needed
     internal func crawlTitle(_ htmlCode: String, result: Response) -> (htmlCode: String, result: Response) {
-        var result = result
+        let result = result
         let title = result.title
 
         if title == nil || title?.isEmpty ?? true {
@@ -545,7 +545,7 @@ extension SwiftLinkPreview {
 
     // Crawl for description if needed
     internal func crawlDescription(_ htmlCode: String, result: Response) -> (htmlCode: String, result: Response) {
-        var result = result
+        let result = result
         let description = result.description
 
         if description == nil || description?.isEmpty ?? true {
@@ -561,7 +561,7 @@ extension SwiftLinkPreview {
     // Crawl for images
     internal func crawlImages(_ htmlCode: String, result: Response) -> Response {
 
-        var result = result
+        let result = result
 
         let mainImage = result.image
 
@@ -586,7 +586,7 @@ extension SwiftLinkPreview {
     
     // Crawl for price
     internal func crawlPrice(_ htmlCode: String, result: Response) -> (htmlCode: String, result: Response) {
-        var result = result
+        let result = result
         
         let mainPrice = result.price
         

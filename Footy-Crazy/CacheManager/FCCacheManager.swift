@@ -7,10 +7,12 @@
 //
 import UIKit
 import Foundation
+import SwiftLinkPreview
 
 struct FCCacheManager {
-    static let shared   : FCCacheManager            = FCCacheManager()
-    var imageCache      : NSCache<NSString,UIImage> = NSCache<NSString,UIImage>()
+    static let shared   : FCCacheManager             = FCCacheManager()
+    var imageCache      : NSCache<NSString,UIImage>  = NSCache<NSString,UIImage>()
+    var newsLinkCache   : NSCache<NSString,Response> = NSCache<NSString,Response>()
     private init() {}
 }
 
@@ -20,5 +22,11 @@ extension FCCacheManager {
     }
     func setImage(_ url: String,_ image: UIImage){        
         imageCache.setObject(image, forKey: url as NSString)
+    }
+    func getNewsLink(_ url: String)->Response?{
+        return newsLinkCache.object(forKey: url as NSString)
+    }
+    func setNewsLink(_ url: String,_ response: Response){
+        newsLinkCache.setObject(response, forKey: url as NSString)
     }
 }

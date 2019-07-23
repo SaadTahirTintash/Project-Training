@@ -38,7 +38,7 @@ internal extension Response {
         case price
     }
     
-    mutating func set(_ value: Any, for key: Key) {
+    func set(_ value: Any, for key: Key) {
         switch key {
         case Key.url:
             if let value = value as? URL { self.url = value }

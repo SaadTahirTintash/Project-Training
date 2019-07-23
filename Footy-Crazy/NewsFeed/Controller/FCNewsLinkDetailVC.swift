@@ -22,10 +22,10 @@ extension FCNewsLinkDetailVC{
         setupVC()
     }
     func setupVC(){
-        descriptionLabel.text = viewModel?.description
-        titleLabel.text = viewModel?.title
+        titleLabel.text         = viewModel?.title
+        descriptionLabel.text   = viewModel?.description
         urlButton.setTitle(viewModel?.url, for: .normal)
-        guard let urlString = viewModel?.url else{
+        guard let urlString     = viewModel?.url else {
             print("Incorrect URL")
             return
         }
@@ -37,18 +37,23 @@ extension FCNewsLinkDetailVC{
         }
     }
     func loadLink(_ newsLink: String){
-        let slp : SwiftLinkPreview = SwiftLinkPreview()
-        slp.preview(newsLink, onSuccess: { [weak self] (response) in
-            self?.linkSuccess(response, newsLink)
-        }) { [weak self](error) in
-            self?.linkFailure(error)
+        if let response = FCCacheManager.shared.getNewsLink(newsLink){
+            linkSuccess(response, newsLink)
+        }else{
+            let slp : SwiftLinkPreview = SwiftLinkPreview()
+            slp.preview(newsLink, onSuccess: { [weak self] (response) in
+                FCCacheManager.shared.setNewsLink(newsLink, response)
+                self?.linkSuccess(response, newsLink)
+            }) { [weak self](error) in
+                self?.linkFailure(error)
+            }
         }
     }
     func linkSuccess(_ response: Response, _ urlString: String){
-        titleLabel.text   = response.title
+        titleLabel.text     = response.title
         urlButton.setTitle(response.url?.absoluteString, for: .normal)
         descriptionLabel.text = response.description
-        if let urlString = response.image{
+        if let urlString    = response.image{
             loadImage(urlString)
         }
     }
@@ -61,20 +66,15 @@ extension FCNewsLinkDetailVC{
             imgView.image = cache
             print("Image loaded from cache")
             activityIndicator.stopAnimating()
-        } else if let url = URL(string: urlString){
-            imgView.loadImage(from: url, success: { [weak self](img) in
-                self?.imageSuccess(img, urlString)
-            }) { [weak self](errorMsg) in
-                self?.imageFailure(errorMsg)
-            }
+        }else{
+            FCUtilities.shared.loadImage(from: urlString, success: {[weak self] (downloadedImg) in
+                FCCacheManager.shared.setImage(urlString, downloadedImg)
+                self?.activityIndicator.stopAnimating()
+                self?.imgView.image = downloadedImg
+                }, failure: {[weak self](errorMsg) in
+                    print(errorMsg)
+                    self?.activityIndicator.stopAnimating()
+            })
         }
-    }
-    func imageSuccess(_ img: UIImage, _ urlString: String){
-        FCCacheManager.shared.setImage(urlString, img)
-        activityIndicator.stopAnimating()
-    }
-    func imageFailure(_ errorMsg: String){
-        activityIndicator.stopAnimating()
-        print(errorMsg)
     }
 }

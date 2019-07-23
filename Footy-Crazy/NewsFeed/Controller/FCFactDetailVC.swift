@@ -31,20 +31,15 @@ extension FCFactDetailVC{
             imgView.image = cache
             print("Image loaded from cache")
             activityIndicator.stopAnimating()
-        } else if let url = URL(string: urlString){
-            imgView.loadImage(from: url, success: { [weak self](img) in
-                self?.success(img,urlString)
-            }) { [weak self](errorMsg) in
-                self?.failure(errorMsg)
-            }
+        }else{
+            FCUtilities.shared.loadImage(from: urlString, success: {[weak self] (downloadedImg) in
+                FCCacheManager.shared.setImage(urlString, downloadedImg)
+                self?.activityIndicator.stopAnimating()
+                self?.imgView.image = downloadedImg
+            }, failure: {[weak self](errorMsg) in
+                    print(errorMsg)
+                    self?.activityIndicator.stopAnimating()
+            })
         }
-    }
-    func success(_ img: UIImage,_ urlString: String){
-        FCCacheManager.shared.setImage(urlString, img)
-        activityIndicator.stopAnimating()
-    }
-    func failure(_ errorMsg: String){
-        activityIndicator.stopAnimating()
-        print(errorMsg)
     }
 }

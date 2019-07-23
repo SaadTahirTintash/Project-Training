@@ -55,8 +55,25 @@ extension FCPlayersVC: UITableViewDataSource{
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerCell") as? FCPlayerTableViewCell else{
             return UITableViewCell(.clear)
         }
-        cell.viewModel = viewModel?.viewModelForDetail(at: indexPath.row)
+        let cellVM              = viewModel?.viewModelForDetail(at: indexPath.row)
+        cell.viewModel          = cellVM
         cell.configure()
+        if let imageUrl = cellVM?.imageUrl{
+            if let cache = FCCacheManager.shared.getImage(imageUrl){
+                cell.setImage(cache)
+            }else {
+                FCUtilities.shared.loadImage(from: imageUrl, success: { (downloadedImg) in
+                    FCCacheManager.shared.setImage(imageUrl, downloadedImg)
+                    if let updateCell = tableView.cellForRow(at: indexPath) as? FCPlayerTableViewCell{
+                        updateCell.setImage(downloadedImg)
+                    }else{
+                        print("Wrong cell")
+                    }
+                }) { (errorMsg) in
+                    print(errorMsg)
+                }
+            }
+        }
         return cell
     }
     func checkForMoreData(at displayingIndex: Int){

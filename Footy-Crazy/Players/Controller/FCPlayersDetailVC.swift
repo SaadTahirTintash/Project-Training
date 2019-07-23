@@ -47,14 +47,16 @@ extension FCPlayersDetailVC{
         if let cache = FCCacheManager.shared.getImage(urlString){
             playerImage.image = cache
             print("Image loaded from cache")
-        } else if let url = URL(string: urlString){
-            playerImage.loadImage(from: url, success: { [weak self](img) in
-                FCCacheManager.shared.setImage(urlString, img)
+            activityIndicator.stopAnimating()
+        }else{
+            FCUtilities.shared.loadImage(from: urlString, success: {[weak self] (downloadedImg) in
+                FCCacheManager.shared.setImage(urlString, downloadedImg)
                 self?.activityIndicator.stopAnimating()
-            }) { [weak self](errorMsg) in
-                self?.activityIndicator.stopAnimating()
-                print(errorMsg)
-            }
+                self?.playerImage.image = downloadedImg
+                }, failure: {[weak self](errorMsg) in
+                    print(errorMsg)
+                    self?.activityIndicator.stopAnimating()
+            })
         }
     }
 }

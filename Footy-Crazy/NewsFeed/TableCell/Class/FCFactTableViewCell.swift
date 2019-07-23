@@ -18,24 +18,10 @@ class FCFactTableViewCell: UITableViewCell {
 extension FCFactTableViewCell{
     func configure(){
         titleLabel.text = viewModel?.title
-        if let urlString = viewModel?.url{
-            loadImage(urlString)
-        }
     }
-    func loadImage(_ urlString: String){
-        if let cache = FCCacheManager.shared.getImage(urlString){
-            imgView.image = cache
-            print("Image loaded from cache")
-            activityIndicator.stopAnimating()
-        } else if let url = URL(string: urlString) {
-            imgView.loadImage(from: url, success: { [weak self](img) in
-                FCCacheManager.shared.setImage(urlString, img)
-                self?.activityIndicator.stopAnimating()
-            }) { [weak self](errorMsg) in
-                self?.activityIndicator.stopAnimating()
-                print(errorMsg)
-            }
-        }
+    func setImage(_ newImage: UIImage){
+        activityIndicator.stopAnimating()
+        imgView.image = newImage
     }
     @IBAction func share(_ sender: Any) {
         shareBtnPressed?(viewModel)

@@ -21,21 +21,9 @@ class FCTeamTableViewCell: UITableViewCell {
         standingLabel.text = viewModel?.teamStanding
         teamName.text = viewModel?.teamName
         country.text = viewModel?.countryName
-        if let imageUrl = viewModel?.imageUrl{
-            loadImage(imageUrl)
-        }
     }
-    func loadImage(_ urlString: String){
-        if let cache = FCCacheManager.shared.getImage(urlString){
-            flagImage.image = cache
-            print("Image loaded from cache")
-        } else if let url = URL(string: urlString){
-            flagImage.loadImage(from: url, success: {(img) in
-                FCCacheManager.shared.setImage(urlString, img)
-            }) {(errorMsg) in
-                print(errorMsg)
-            }
-        }
+    func setImage(_ newImage: UIImage){
+        flagImage.image = newImage
     }
     override func prepareForReuse() {
         flagImage.image = nil

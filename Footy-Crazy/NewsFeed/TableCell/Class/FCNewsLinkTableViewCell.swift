@@ -30,16 +30,25 @@ extension FCNewsLinkTableViewCell{
         shareBtnPressed?(viewModel)
     }    
     func loadLink(_ newsLink: String){
-        let slp: SwiftLinkPreview = SwiftLinkPreview()
-        slp.preview(newsLink, onSuccess: { [weak self] (response) in
-            self?.titleLbl.text = response.title
+        if let response = FCCacheManager.shared.getNewsLink(newsLink){
+            print("News Link loaded from Cache")
+            titleLbl.text = response.title
             if let urlString = response.image{
-                self?.loadImage(urlString)
-            } else{
+                loadImage(urlString)
+            }
+        }else{
+            let slp: SwiftLinkPreview = SwiftLinkPreview()
+            slp.preview(newsLink, onSuccess: { [weak self] (response) in
+                FCCacheManager.shared.setNewsLink(newsLink, response)
+                self?.titleLbl.text = response.title
+                if let urlString = response.image{
+                    self?.loadImage(urlString)
+                } else{
+                    self?.newsImg.image = FCConstants.EMPTY_IMAGE
+                }
+            }) { [weak self](error) in
                 self?.newsImg.image = FCConstants.EMPTY_IMAGE
             }
-        }) { [weak self](error) in
-            self?.newsImg.image = FCConstants.EMPTY_IMAGE
         }
     }
     func loadImage(_ urlString: String){
@@ -47,13 +56,14 @@ extension FCNewsLinkTableViewCell{
             newsImg.image = cache
             print("Image loaded from cache")
             activityIndicator.stopAnimating()
-        } else if let url = URL(string: urlString){
-            newsImg.loadImage(from: url, success: { [weak self](img) in
-                FCCacheManager.shared.setImage(urlString, img)
+        }else{
+            FCUtilities.shared.loadImage(from: urlString, success: {[weak self] (downloadedImg) in
+                FCCacheManager.shared.setImage(urlString, downloadedImg)
                 self?.activityIndicator.stopAnimating()
-            }, failure:  { [weak self](msg) in
-                self?.activityIndicator.stopAnimating()
-                print(msg)
+                self?.newsImg.image = downloadedImg
+                }, failure: {[weak self](errorMsg) in
+                    print(errorMsg)
+                    self?.activityIndicator.stopAnimating()
             })
         }
     }

@@ -34,14 +34,15 @@ extension FCGalleryDetailVC{
             img.image = cache
             print("Image loaded from cache")
             activityIndicator.stopAnimating()
-        } else if let url = URL(string: urlString){
-            img.loadImage(from: url, success: { [weak self](img) in
-                FCCacheManager.shared.setImage(urlString, img)
+        }else{
+            FCUtilities.shared.loadImage(from: urlString, success: {[weak self] (downloadedImg) in
+                FCCacheManager.shared.setImage(urlString, downloadedImg)
                 self?.activityIndicator.stopAnimating()
-            }) { [weak self](errorMsg) in
-                self?.activityIndicator.stopAnimating()
-                print(errorMsg)
-            }
+                self?.img.image = downloadedImg
+                }, failure: {[weak self](errorMsg) in
+                    print(errorMsg)
+                    self?.activityIndicator.stopAnimating()
+            })
         }
     }
 }

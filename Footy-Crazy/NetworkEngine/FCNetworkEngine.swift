@@ -18,10 +18,17 @@ extension FCNetworkEngine{
     var ref: DatabaseReference{
         return Database.database().reference()
     }
+    
     var rootQuery: DatabaseReference{
         return ref.child("footy_crazy_data")
     }
-    func fetchData<MODEL_TYPE>(pathString: String, startingKey id: String, pageSize limit: Int, success: success<MODEL_TYPE>, failure: failure) where MODEL_TYPE : Decodable {
+    
+    func fetchData<MODEL_TYPE : Decodable>(pathString           : String,
+                                           startingKey  id      : String,
+                                           pageSize     limit   : Int,
+                                           success              : success<MODEL_TYPE>,
+                                           failure              : failure){
+        
         rootQuery.child(pathString).queryOrderedByKey().queryStarting(atValue: id).queryLimited(toFirst: UInt(limit)).observeSingleEvent(of: .value) {(snapshot) in
             if snapshot.value != nil && snapshot.childrenCount > 0{
                 var modelArray = [MODEL_TYPE]()
