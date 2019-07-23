@@ -31,7 +31,7 @@ extension FCNetworkEngine{
         
         rootQuery.child(pathString).queryOrderedByKey().queryStarting(atValue: id).queryLimited(toFirst: UInt(limit)).observeSingleEvent(of: .value) {(snapshot) in
             if snapshot.value != nil && snapshot.childrenCount > 0{
-                var modelArray = [MODEL_TYPE]()
+                var modelArray  : [MODEL_TYPE]?   = [MODEL_TYPE]()
                 let enumerator = snapshot.children
                 while let snap = enumerator.nextObject() as? DataSnapshot{
                     do{
@@ -39,13 +39,17 @@ extension FCNetworkEngine{
                             let jsonData = try JSONSerialization.data(withJSONObject: value, options: [])
                             let decoder = JSONDecoder()
                             let model = try decoder.decode(MODEL_TYPE.self, from: jsonData)
-                            modelArray.append(model)
+                            modelArray?.append(model)
                         }
                     }catch{
                         print("Whoops! An error occured while decoding NewsFeed: \(error.localizedDescription)")
                     }
                 }
-                success?(modelArray)
+                if let modelArray = modelArray{
+                    success?(modelArray)
+                }else{
+                    failure?("Model array is nil")
+                }
             } else{
                 failure?("No Data Found")
             }
