@@ -111,6 +111,7 @@ extension FCNewsFeedVC: UITableViewDataSource{
         cell.shareBtnPressed    = {[weak self] (model) in self?.share(model)}
         cell.configure()
         if let imageUrl = cellVM?.url{
+            cell.activityIndicator.startAnimating()
             if let cache = FCCacheManager.shared.getImage(imageUrl){
                 cell.setImage(cache)
             }else {
