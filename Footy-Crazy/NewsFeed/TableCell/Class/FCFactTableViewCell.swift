@@ -7,7 +7,7 @@
 //
 
 import UIKit
-class FCFactTableViewCell: UITableViewCell {
+class FCFactTableViewCell: UITableViewCell, FCImageDownloader {
     @IBOutlet weak var titleLabel           : UILabel!
     @IBOutlet weak var imgView              : UIImageView!
     @IBOutlet weak var activityIndicator    : UIActivityIndicatorView!
@@ -18,10 +18,28 @@ class FCFactTableViewCell: UITableViewCell {
 extension FCFactTableViewCell{
     func configure(){
         titleLabel.text = viewModel?.title
+        activityIndicator.startAnimating()
+        loadImage(from: viewModel?.url, success: {[weak self](downloadedImg,urlString) in
+                guard urlString == self?.viewModel?.url else{
+                    print("Wrong cell!")
+                    return
+                }
+                DispatchQueue.main.async {
+                    self?.success(downloadedImg)
+                }
+            }, failure: {[weak self](errorMsg) in
+                DispatchQueue.main.async {
+                    self?.failure(errorMsg)
+                }
+        })
     }
-    func setImage(_ newImage: UIImage){
+    func success(_ downloadedImg: UIImage){
         activityIndicator.stopAnimating()
-        imgView.image = newImage
+        imgView.image = downloadedImg
+    }
+    func failure(_ errorMsg: String){
+        activityIndicator.stopAnimating()
+        print(errorMsg)
     }
     @IBAction func share(_ sender: Any) {
         shareBtnPressed?(viewModel)

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-class FCFactDetailVC: UIViewController {
+class FCFactDetailVC: UIViewController, FCImageDownloader {
     @IBOutlet weak var activityIndicator    : UIActivityIndicatorView!
     @IBOutlet weak var titleLabel           : UILabel!
     @IBOutlet weak var descriptionLabel     : UILabel!
@@ -22,24 +22,19 @@ extension FCFactDetailVC{
     func setupVC(){
         descriptionLabel.text = viewModel?.description
         titleLabel.text = viewModel?.title
-        if let urlString = viewModel?.url{
-            loadImage(urlString)
-        }        
+        loadImage(from: viewModel?.url, success: success, failure: failure)
     }
-    func loadImage(_ urlString: String){
-        if let cache = FCCacheManager.shared.getImage(urlString){
-            imgView.image = cache
-            print("Image loaded from cache")
-            activityIndicator.stopAnimating()
-        }else{
-            FCUtilities.shared.loadImage(from: urlString, success: {[weak self] (downloadedImg) in
-                FCCacheManager.shared.setImage(urlString, downloadedImg)
-                self?.activityIndicator.stopAnimating()
-                self?.imgView.image = downloadedImg
-            }, failure: {[weak self](errorMsg) in
-                    print(errorMsg)
-                    self?.activityIndicator.stopAnimating()
-            })
+    func success(_ downloadedImg: UIImage,_ urlString: String){
+        DispatchQueue.main.async {[weak self] in
+            self?.activityIndicator.stopAnimating()
+            self?.imgView.image = downloadedImg
         }
+    }
+    func failure(_ errorMsg: String){
+        DispatchQueue.main.async {[weak self] in
+            self?.activityIndicator.stopAnimating()
+            self?.imgView.image = FCConstants.EMPTY_IMAGE
+        }
+        print(errorMsg)
     }
 }

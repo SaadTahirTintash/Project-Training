@@ -99,34 +99,15 @@ extension FCNewsFeedVC: UITableViewDataSource{
         cell.viewModel          = cellVM
         cell.shareBtnPressed    = {[weak self] (model) in self?.share(model)}
         cell.configure()
-        
         return cell
     }
     func factTableCell(at indexPath: IndexPath)->UITableViewCell{
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FactCell") as? FCFactTableViewCell else{
             return UITableViewCell(.clear)
-        }
-        let cellVM              = viewModel?.viewModelForDetail(at: indexPath.row)
-        cell.viewModel          = cellVM
+        }        
+        cell.viewModel          = viewModel?.viewModelForDetail(at: indexPath.row)
         cell.shareBtnPressed    = {[weak self] (model) in self?.share(model)}
         cell.configure()
-        if let imageUrl = cellVM?.url{
-            cell.activityIndicator.startAnimating()
-            if let cache = FCCacheManager.shared.getImage(imageUrl){
-                cell.setImage(cache)
-            }else {
-                FCUtilities.shared.loadImage(from: imageUrl, success: { [weak self](downloadedImg) in
-                    FCCacheManager.shared.setImage(imageUrl, downloadedImg)
-                    if let updateCell = self?.tableView.cellForRow(at: indexPath) as? FCFactTableViewCell{
-                        updateCell.setImage(downloadedImg)
-                    }else{
-                        print("Wrong cell")
-                    }
-                }) { (errorMsg) in
-                    print(errorMsg)
-                }
-            }
-        }
         return cell
     }
 }
@@ -175,9 +156,9 @@ extension FCNewsFeedVC{
         }
     }
 }
-extension FCNewsFeedVC{
+extension FCNewsFeedVC: FCUtilities{
     func share(_ newsFeedDetailVM: FCNewsFeedDetailVM?){
         let text = [newsFeedDetailVM?.title,newsFeedDetailVM?.url,newsFeedDetailVM?.description]
-        FCUtilities.shared.shareContent(self, text as [Any])
+        shareContent(self, text as [Any])
     }
 }

@@ -8,8 +8,10 @@
 
 import UIKit
 class FCPlayersVC: UIViewController {
+    
     @IBOutlet weak var activityBGView       : UIView!
     @IBOutlet weak var tableView            : UITableView!
+    
     var viewModel                           : FCPlayersVM?
     
     override func viewDidLoad() {
@@ -22,9 +24,12 @@ class FCPlayersVC: UIViewController {
         viewModel?.getInitialData()
 
     }
+    
     func registerCells(){
         tableView.register(UINib(nibName: "FCPlayerTableViewCell", bundle: nil), forCellReuseIdentifier: "PlayerCell")
     }
+    
+    
     func initializeCompletionHandlers(){
         viewModel?.initialDataFetched = {[weak self](success) in
             if success{
@@ -46,36 +51,24 @@ class FCPlayersVC: UIViewController {
         }
     }
 }
+
 extension FCPlayersVC: UITableViewDataSource{
+   
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel?.itemCount ?? 0
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         checkForMoreData(at: indexPath.row)
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerCell") as? FCPlayerTableViewCell else{
             return UITableViewCell(.clear)
-        }
-        let cellVM              = viewModel?.viewModelForDetail(at: indexPath.row)
-        cell.viewModel          = cellVM
+        }        
+        cell.viewModel          = viewModel?.viewModelForDetail(at: indexPath.row)
         cell.configure()
-        if let imageUrl = cellVM?.imageUrl{
-            if let cache = FCCacheManager.shared.getImage(imageUrl){
-                cell.setImage(cache)
-            }else {
-                FCUtilities.shared.loadImage(from: imageUrl, success: { (downloadedImg) in
-                    FCCacheManager.shared.setImage(imageUrl, downloadedImg)
-                    if let updateCell = tableView.cellForRow(at: indexPath) as? FCPlayerTableViewCell{
-                        updateCell.setImage(downloadedImg)
-                    }else{
-                        print("Wrong cell")
-                    }
-                }) { (errorMsg) in
-                    print(errorMsg)
-                }
-            }
-        }
         return cell
     }
+    
+    
     func checkForMoreData(at displayingIndex: Int){
         let totalItems = viewModel?.itemCount ?? 0
         let index = totalItems - displayingIndex
@@ -85,9 +78,11 @@ extension FCPlayersVC: UITableViewDataSource{
     }
 }
 extension FCPlayersVC: UITableViewDelegate{
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "FCPlayersDetailVCSegue", sender: indexPath.row)
     }    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? FCPlayersDetailVC{
             if let index = sender as? Int{

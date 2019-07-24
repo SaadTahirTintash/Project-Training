@@ -10,9 +10,9 @@ import Foundation
 import SwiftLinkPreview
 
 struct FCCacheManager {
-    static let shared   : FCCacheManager             = FCCacheManager()
-    var imageCache      : NSCache<NSString,UIImage>  = NSCache<NSString,UIImage>()
-    var newsLinkCache   : NSCache<NSString,Response> = NSCache<NSString,Response>()
+    static let shared           : FCCacheManager             = FCCacheManager()
+    private var imageCache      : NSCache<NSString,UIImage>  = NSCache<NSString,UIImage>()
+    private var newsLinkCache   : NSCache<NSString,Response> = NSCache<NSString,Response>()
     private init() {}
 }
 

@@ -13,7 +13,7 @@
 		4A0227F422D736AB006F5E1D /* FCGalleryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0227F222D736AB006F5E1D /* FCGalleryCell.swift */; };
 		4A0227F522D736AB006F5E1D /* FCGalleryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A0227F322D736AB006F5E1D /* FCGalleryCell.xib */; };
 		4A0227FA22D73E68006F5E1D /* FCGalleryDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0227F922D73E68006F5E1D /* FCGalleryDetailVC.swift */; };
-		4A047B6B22D608B500A7E61C /* FCProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A047B6A22D608B500A7E61C /* FCProtocols.swift */; };
+		4A047B6B22D608B500A7E61C /* FCViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A047B6A22D608B500A7E61C /* FCViewModelProtocol.swift */; };
 		4A047B6D22D60D3600A7E61C /* FCUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A047B6C22D60D3600A7E61C /* FCUtilities.swift */; };
 		4A04D96C22E1F8CD00E3688C /* FCNewsFeedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A04D96B22E1F8CD00E3688C /* FCNewsFeedService.swift */; };
 		4A04D96E22E1F8D900E3688C /* FCGalleryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A04D96D22E1F8D900E3688C /* FCGalleryService.swift */; };
@@ -32,6 +32,8 @@
 		4A05143E22D75A80009BE500 /* FCPlayerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A05143C22D75A80009BE500 /* FCPlayerTableViewCell.xib */; };
 		4A05144022D75AB9009BE500 /* FCAboutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A05143F22D75AB9009BE500 /* FCAboutVC.swift */; };
 		4A0573F222CB9506007BAE6E /* FCConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0573F122CB9506007BAE6E /* FCConstants.swift */; };
+		4A24469622E836F400E185AA /* FCImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A24469522E836F400E185AA /* FCImageDownloader.swift */; };
+		4A24469822E85C5600E185AA /* FCNewsLinkDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A24469722E85C5600E185AA /* FCNewsLinkDownloader.swift */; };
 		4A2B430922C4DA2C00815318 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A2B430822C4DA2C00815318 /* GoogleService-Info.plist */; };
 		4A2B431822C5E4D800815318 /* FCNewsFeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2B431722C5E4D800815318 /* FCNewsFeedVC.swift */; };
 		4A2B431C22C5E8A800815318 /* FCVideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2B431A22C5E8A800815318 /* FCVideoTableViewCell.swift */; };
@@ -82,7 +84,7 @@
 		4A0227F222D736AB006F5E1D /* FCGalleryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCGalleryCell.swift; sourceTree = "<group>"; };
 		4A0227F322D736AB006F5E1D /* FCGalleryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FCGalleryCell.xib; sourceTree = "<group>"; };
 		4A0227F922D73E68006F5E1D /* FCGalleryDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCGalleryDetailVC.swift; sourceTree = "<group>"; };
-		4A047B6A22D608B500A7E61C /* FCProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCProtocols.swift; sourceTree = "<group>"; };
+		4A047B6A22D608B500A7E61C /* FCViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCViewModelProtocol.swift; sourceTree = "<group>"; };
 		4A047B6C22D60D3600A7E61C /* FCUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCUtilities.swift; sourceTree = "<group>"; };
 		4A04D96B22E1F8CD00E3688C /* FCNewsFeedService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCNewsFeedService.swift; sourceTree = "<group>"; };
 		4A04D96D22E1F8D900E3688C /* FCGalleryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCGalleryService.swift; sourceTree = "<group>"; };
@@ -101,6 +103,8 @@
 		4A05143C22D75A80009BE500 /* FCPlayerTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FCPlayerTableViewCell.xib; sourceTree = "<group>"; };
 		4A05143F22D75AB9009BE500 /* FCAboutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCAboutVC.swift; sourceTree = "<group>"; };
 		4A0573F122CB9506007BAE6E /* FCConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCConstants.swift; sourceTree = "<group>"; };
+		4A24469522E836F400E185AA /* FCImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCImageDownloader.swift; sourceTree = "<group>"; };
+		4A24469722E85C5600E185AA /* FCNewsLinkDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCNewsLinkDownloader.swift; sourceTree = "<group>"; };
 		4A2B430822C4DA2C00815318 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4A2B431722C5E4D800815318 /* FCNewsFeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCNewsFeedVC.swift; sourceTree = "<group>"; };
 		4A2B431A22C5E8A800815318 /* FCVideoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FCVideoTableViewCell.swift; sourceTree = "<group>"; };
@@ -196,7 +200,9 @@
 		4A047B6922D6089000A7E61C /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				4A047B6A22D608B500A7E61C /* FCProtocols.swift */,
+				4A047B6A22D608B500A7E61C /* FCViewModelProtocol.swift */,
+				4A24469522E836F400E185AA /* FCImageDownloader.swift */,
+				4A24469722E85C5600E185AA /* FCNewsLinkDownloader.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -874,6 +880,7 @@
 				4A04D96C22E1F8CD00E3688C /* FCNewsFeedService.swift in Sources */,
 				4AFE969322D4CC6E00BBD074 /* FCFactDetailVC.swift in Sources */,
 				4A05143D22D75A80009BE500 /* FCPlayerTableViewCell.swift in Sources */,
+				4A24469622E836F400E185AA /* FCImageDownloader.swift in Sources */,
 				4A0227FA22D73E68006F5E1D /* FCGalleryDetailVC.swift in Sources */,
 				4A8820F422DDA5A500AC8938 /* FCTeamsVM.swift in Sources */,
 				4A05143822D759AF009BE500 /* FCPlayersDetailVC.swift in Sources */,
@@ -881,7 +888,8 @@
 				4A05143A22D759BD009BE500 /* FCPlayersModel.swift in Sources */,
 				4A8820FB22DDAFFB00AC8938 /* FCPlayersDetailVM.swift in Sources */,
 				4A04D97022E1F8E300E3688C /* FCPlayersService.swift in Sources */,
-				4A047B6B22D608B500A7E61C /* FCProtocols.swift in Sources */,
+				4A047B6B22D608B500A7E61C /* FCViewModelProtocol.swift in Sources */,
+				4A24469822E85C5600E185AA /* FCNewsLinkDownloader.swift in Sources */,
 				4AB9C01022D7088F002B8E77 /* FCGalleryModel.swift in Sources */,
 				4A34871E22C4D7C4009436EB /* AppDelegate.swift in Sources */,
 				4A0573F222CB9506007BAE6E /* FCConstants.swift in Sources */,

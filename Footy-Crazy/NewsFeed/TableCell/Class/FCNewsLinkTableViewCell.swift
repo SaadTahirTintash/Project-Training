@@ -8,7 +8,7 @@
 
 import UIKit
 import SwiftLinkPreview
-class FCNewsLinkTableViewCell: UITableViewCell {
+class FCNewsLinkTableViewCell: UITableViewCell, FCImageDownloader , FCNewsLinkDownloader{
     @IBOutlet weak var activityIndicator    : UIActivityIndicatorView!
     @IBOutlet weak var titleLbl             : UILabel!
     @IBOutlet weak var newsImg              : UIImageView!
@@ -16,58 +16,55 @@ class FCNewsLinkTableViewCell: UITableViewCell {
     var shareBtnPressed                     : ((FCNewsFeedDetailVM?)->Void)?
     var viewModel                           : FCNewsFeedDetailVM?
 }
+
 extension FCNewsLinkTableViewCell{
     override func prepareForReuse() {
         newsImg.image = nil
     }
     func configure() {
+        
         titleLbl.text   = viewModel?.title
-        if let urlString = viewModel?.url{
-            loadLink(urlString)
+        
+        activityIndicator.startAnimating()
+        loadLink(from: viewModel?.url, success: { [weak self] (response) in
+            guard response.url?.absoluteString == self?.viewModel?.url else {
+                print("Wrong NewsLink Cell!")
+                return
+            }
+            self?.linkSuccess(response)
+        }, failure: failure)
+    }
+    func linkSuccess(_ response: Response){
+        titleLbl.text           = response.title
+        if let imgUrlString     = response.image{
+            loadImage(from: imgUrlString, success: { [weak self] (downloadedImg, urlString) in
+                guard imgUrlString == urlString else{
+                    print("Wrong NewsLink Image Cell!")
+                    return
+                }
+                DispatchQueue.main.async {
+                    self?.imgSuccess(downloadedImg)
+                }
+            }) { [weak self](errorMsg) in
+                DispatchQueue.main.async {
+                    self?.failure(errorMsg)
+                }
+            }
+        } else {
+            failure("No Image in response!")
         }
+    }
+    func imgSuccess(_ downloadedImg: UIImage){
+        activityIndicator.stopAnimating()
+        newsImg.image = downloadedImg
+    }
+    func failure(_ errorMsg: String){
+        activityIndicator.stopAnimating()
+        newsImg.image = FCConstants.EMPTY_IMAGE
+        print(errorMsg)
     }
     @IBAction func share(_ sender: Any) {
         shareBtnPressed?(viewModel)
-    }    
-    func loadLink(_ newsLink: String){
-        if let response = FCCacheManager.shared.getNewsLink(newsLink){
-            print("News Link loaded from Cache")
-            titleLbl.text = response.title
-            if let urlString = response.image{
-                loadImage(urlString)
-            }
-        }else{
-            let slp: SwiftLinkPreview = SwiftLinkPreview()
-            activityIndicator.startAnimating()
-            slp.preview(newsLink, onSuccess: { [weak self] (response) in
-                FCCacheManager.shared.setNewsLink(newsLink, response)
-                self?.titleLbl.text = response.title
-                guard let urlString = response.image else{
-                    print("Incorrect image url!")
-                    return
-                }
-                self?.loadImage(urlString)
-            }) { (error) in
-                print(error.localizedDescription)
-            }
-        }
-    }
-    func loadImage(_ urlString: String){
-        if let cache = FCCacheManager.shared.getImage(urlString){
-            newsImg.image = cache
-            print("Image loaded from cache")
-            activityIndicator.stopAnimating()
-        }else{
-            FCUtilities.shared.loadImage(from: urlString, success: {[weak self] (downloadedImg) in
-                FCCacheManager.shared.setImage(urlString, downloadedImg)
-                self?.activityIndicator.stopAnimating()
-                self?.newsImg.image = downloadedImg
-                }, failure: {[weak self](errorMsg) in
-                    print(errorMsg)
-                    self?.newsImg.image = FCConstants.EMPTY_IMAGE
-                    self?.activityIndicator.stopAnimating()
-            })
-        }
     }
 }
 

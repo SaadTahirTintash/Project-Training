@@ -55,25 +55,9 @@ extension FCGalleryVC: UICollectionViewDataSource{
         checkForMoreData(at: indexPath.row)
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GalleryCell", for: indexPath) as? FCGalleryCell else{
             return UICollectionViewCell(.clear)
-        }
-        let cellVM = viewModel?.viewModelForDetail(at: indexPath.row)
-        cell.viewModel = cellVM
-        if let imageUrl = cellVM?.imageUrl{
-            if let cache = FCCacheManager.shared.getImage(imageUrl){
-                cell.setImage(cache)
-            }else {
-                FCUtilities.shared.loadImage(from: imageUrl, success: { (downloadedImg) in
-                    FCCacheManager.shared.setImage(imageUrl, downloadedImg)
-                    if let updateCell = collectionView.cellForItem(at: indexPath) as? FCGalleryCell{
-                        updateCell.setImage(downloadedImg)
-                    }else{
-                        print("Wrong cell")
-                    }
-                }) { (errorMsg) in
-                    print(errorMsg)
-                }
-            }
-        }
+        }        
+        cell.viewModel = viewModel?.viewModelForDetail(at: indexPath.row)
+        cell.configure()
         return cell
     }
     func checkForMoreData(at displayingIndex: Int){

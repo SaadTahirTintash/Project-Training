@@ -7,18 +7,19 @@
 //
 
 import UIKit
-class FCPlayerTableViewCell: UITableViewCell {
+class FCPlayerTableViewCell: UITableViewCell,FCImageDownloader {
     @IBOutlet weak var standingLabel        : UILabel!
     @IBOutlet weak var playerDPImage        : UIImageView!
     @IBOutlet weak var playerName           : UILabel!
     @IBOutlet weak var countryName          : UILabel!
     @IBOutlet weak var clubName             : UILabel!
+    
     var viewModel                           : FCPlayersDetailVM?
-    var imgCache                            : NSCache<NSString,UIImage> = NSCache<NSString,UIImage>()
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
+    
     func configure(){
         if let standing = viewModel?.playerStanding{
             standingLabel.text = standing
@@ -32,10 +33,30 @@ class FCPlayerTableViewCell: UITableViewCell {
         if let club = viewModel?.clubName{
             clubName.text = club
         }
+        loadImage(from: viewModel?.imageUrl, success: {[weak self](downloadedImg,urlString) in
+            guard urlString == self?.viewModel?.imageUrl else{
+                print("Wrong cell!")
+                return
+            }
+            DispatchQueue.main.async {
+                self?.success(downloadedImg, urlString)
+            }
+            }, failure: {[weak self](errorMsg) in
+                DispatchQueue.main.async {
+                    self?.failure(errorMsg)
+                }
+        })
     }
-    func setImage(_ newImage: UIImage){
-        playerDPImage.image = newImage
+    
+    func success(_ downloadedImg: UIImage,_ urlString: String){
+        playerDPImage.image = downloadedImg
     }
+    
+    func failure(_ errorMsg: String){
+        playerDPImage.image = FCConstants.EMPTY_IMAGE
+        print(errorMsg)
+    }
+    
     override func prepareForReuse() {
         playerDPImage.image = nil
     }

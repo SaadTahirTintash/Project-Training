@@ -19,6 +19,7 @@ class FCNewsFeedVM: FCViewModelProtocol{
         self.modelArray = modelArray
     }
 }
+
 extension FCNewsFeedVM: FCNewsFeedService{
     func getType(of index: Int)->String?{
         return modelArray[index].type

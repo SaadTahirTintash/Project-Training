@@ -22,7 +22,7 @@ class FCPlayersDetailVC: UIViewController {
         setupVC()
     }
 }
-extension FCPlayersDetailVC{
+extension FCPlayersDetailVC: FCImageDownloader{
     func setupVC(){
         if let name = viewModel?.playerName{
             nameLabel.text = name
@@ -39,24 +39,21 @@ extension FCPlayersDetailVC{
         if let standing = viewModel?.playerStanding{
             standingLabel.text = "Standing: \(standing)"
         }
-        if let imageUrl = viewModel?.imageUrl{
-            loadImage(imageUrl)
+        loadImage(from: viewModel?.imageUrl, success: success, failure: failure)
+    }
+    func success(_ downloadedImg: UIImage,_ urlString: String){
+        DispatchQueue.main.async {[weak self] in
+            self?.activityIndicator.stopAnimating()
+            self?.playerImage.image = downloadedImg
         }
     }
-    func loadImage(_ urlString: String){
-        if let cache = FCCacheManager.shared.getImage(urlString){
-            playerImage.image = cache
-            print("Image loaded from cache")
-            activityIndicator.stopAnimating()
-        }else{
-            FCUtilities.shared.loadImage(from: urlString, success: {[weak self] (downloadedImg) in
-                FCCacheManager.shared.setImage(urlString, downloadedImg)
-                self?.activityIndicator.stopAnimating()
-                self?.playerImage.image = downloadedImg
-                }, failure: {[weak self](errorMsg) in
-                    print(errorMsg)
-                    self?.activityIndicator.stopAnimating()
-            })
+    func failure(_ errorMsg: String){
+        DispatchQueue.main.async {[weak self] in
+            self?.activityIndicator.stopAnimating()
+            self?.playerImage.image = FCConstants.EMPTY_IMAGE
         }
+        print(errorMsg)
     }
 }
+
+

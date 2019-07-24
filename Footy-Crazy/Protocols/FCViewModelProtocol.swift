@@ -7,6 +7,7 @@
 //
 
 import UIKit
+
 protocol FCViewModelProtocol: class{
     associatedtype myType
     var isFetchingData      : Bool                          { get set }

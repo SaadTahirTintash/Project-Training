@@ -17,32 +17,31 @@ class FCGalleryDetailVC: UIViewController {
     }
 }
 
-extension FCGalleryDetailVC{
+extension FCGalleryDetailVC: FCImageDownloader{
     func setupVC(){
-        if let urlString = viewModel?.imageUrl{
-            loadImage(urlString)
+        loadImage(from: viewModel?.imageUrl, success: success, failure: failure)
+    }
+    func success(_ downloadedImg: UIImage,_ urlString: String){
+        DispatchQueue.main.async {[weak self] in
+            self?.activityIndicator.stopAnimating()
+            self?.img.image = downloadedImg
         }
     }
+    func failure(_ errorMsg: String){
+        DispatchQueue.main.async {[weak self] in
+            self?.activityIndicator.stopAnimating()
+            self?.img.image = FCConstants.EMPTY_IMAGE
+        }
+        print(errorMsg)
+    }
+}
+
+extension FCGalleryDetailVC: FCUtilities{
+    
     @IBAction func share(_ sender: Any?){
         if let downloadedImage = img.image{
             let shareableImg = [downloadedImage]
-            FCUtilities.shared.shareContent(self, shareableImg)
-        }
-    }
-    func loadImage(_ urlString: String){
-        if let cache = FCCacheManager.shared.getImage(urlString){
-            img.image = cache
-            print("Image loaded from cache")
-            activityIndicator.stopAnimating()
-        }else{
-            FCUtilities.shared.loadImage(from: urlString, success: {[weak self] (downloadedImg) in
-                FCCacheManager.shared.setImage(urlString, downloadedImg)
-                self?.activityIndicator.stopAnimating()
-                self?.img.image = downloadedImg
-                }, failure: {[weak self](errorMsg) in
-                    print(errorMsg)
-                    self?.activityIndicator.stopAnimating()
-            })
+            shareContent(self, shareableImg)
         }
     }
 }

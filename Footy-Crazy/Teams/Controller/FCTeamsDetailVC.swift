@@ -19,7 +19,9 @@ class FCTeamsDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupVC()
-    }    
+    }
+}
+extension FCTeamsDetailVC: FCImageDownloader{
     func setupVC(){
         if let name = viewModel?.teamName{
             nameLabel.text = name
@@ -33,24 +35,19 @@ class FCTeamsDetailVC: UIViewController {
         if let description = viewModel?.teamDescription{
             descriptionLabel.text = description
         }
-        if let imageUrl = viewModel?.imageUrl{
-            loadImage(imageUrl)
+        loadImage(from: viewModel?.imageUrl, success: success, failure: failure)
+    }
+    func success(_ downloadedImg: UIImage,_ urlString: String){
+        DispatchQueue.main.async {[weak self] in
+            self?.activityIndicator.stopAnimating()
+            self?.flagImage.image = downloadedImg
         }
     }
-    func loadImage(_ urlString: String){
-        if let cache = FCCacheManager.shared.getImage(urlString){
-            flagImage.image = cache
-            print("Image loaded from cache")
-            activityIndicator.stopAnimating()
-        }else{
-            FCUtilities.shared.loadImage(from: urlString, success: {[weak self] (downloadedImg) in
-                FCCacheManager.shared.setImage(urlString, downloadedImg)
-                self?.flagImage.image = downloadedImg
-                self?.activityIndicator.stopAnimating()
-                }, failure: {[weak self](errorMsg) in
-                    print(errorMsg)
-                    self?.activityIndicator.stopAnimating()
-            })
+    func failure(_ errorMsg: String){
+        DispatchQueue.main.async {[weak self] in
+            self?.activityIndicator.stopAnimating()
+            self?.flagImage.image = FCConstants.EMPTY_IMAGE
         }
+        print(errorMsg)
     }
 }
