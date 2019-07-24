@@ -148,13 +148,13 @@ extension FCNewsFeedVC: UITableViewDelegate{
 }
 extension FCNewsFeedVC{
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        print("willDisplay: \(indexPath.row)")
+//        print("willDisplay: \(indexPath.row)")
         if itemHeights[indexPath.row] == UITableView.automaticDimension {
             itemHeights[indexPath.row] = cell.bounds.height
         }
     }
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        print("estimatedHeightForRowAt: \(indexPath.row)")
+//        print("estimatedHeightForRowAt: \(indexPath.row)")
         return itemHeights[indexPath.row]
     }
 }
