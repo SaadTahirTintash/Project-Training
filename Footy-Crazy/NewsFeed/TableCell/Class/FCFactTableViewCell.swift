@@ -7,7 +7,7 @@
 //
 
 import UIKit
-class FCFactTableViewCell: UITableViewCell, FCImageDownloader {
+class FCFactTableViewCell: UITableViewCell, FCNewsFeedCellProtocol {
     @IBOutlet weak var titleLabel           : UILabel!
     @IBOutlet weak var imgView              : UIImageView!
     @IBOutlet weak var activityIndicator    : UIActivityIndicatorView!
@@ -15,32 +15,21 @@ class FCFactTableViewCell: UITableViewCell, FCImageDownloader {
     var viewModel                           : FCNewsFeedDetailVM?
 }
 
-extension FCFactTableViewCell{
+extension FCFactTableViewCell: FCImageDownloader{
     func configure(){
         titleLabel.text = viewModel?.title
         activityIndicator.startAnimating()
-        loadImage(from: viewModel?.url, success: {[weak self](downloadedImg,urlString) in
-                guard urlString == self?.viewModel?.url else{
-                    print("Wrong cell!")
-                    return
-                }
-                DispatchQueue.main.async {
-                    self?.success(downloadedImg)
-                }
+        loadImage(from: viewModel?.url, success: {[weak self] (downloadedImg,urlString) in
+            guard urlString == self?.viewModel?.url else{
+                print("Wrong cell!")
+                return
+            }
+            self?.success(self?.imgView, self?.activityIndicator, downloadedImg)
             }, failure: {[weak self](errorMsg) in
-                DispatchQueue.main.async {
-                    self?.failure(errorMsg)
-                }
+                self?.failure(self?.imgView,self?.activityIndicator, errorMsg)
         })
     }
-    func success(_ downloadedImg: UIImage){
-        activityIndicator.stopAnimating()
-        imgView.image = downloadedImg
-    }
-    func failure(_ errorMsg: String){
-        activityIndicator.stopAnimating()
-        print(errorMsg)
-    }
+    
     @IBAction func share(_ sender: Any) {
         shareBtnPressed?(viewModel)
     }

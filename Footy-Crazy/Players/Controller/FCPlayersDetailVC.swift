@@ -39,20 +39,11 @@ extension FCPlayersDetailVC: FCImageDownloader{
         if let standing = viewModel?.playerStanding{
             standingLabel.text = "Standing: \(standing)"
         }
-        loadImage(from: viewModel?.imageUrl, success: success, failure: failure)
-    }
-    func success(_ downloadedImg: UIImage,_ urlString: String){
-        DispatchQueue.main.async {[weak self] in
-            self?.activityIndicator.stopAnimating()
-            self?.playerImage.image = downloadedImg
+        loadImage(from: viewModel?.imageUrl, success: { [weak self] (downloadedImg, urlString) in
+            self?.success(self?.playerImage, self?.activityIndicator, downloadedImg)
+        }) { [weak self] (errorMsg) in
+            self?.failure(self?.playerImage, self?.activityIndicator, errorMsg)
         }
-    }
-    func failure(_ errorMsg: String){
-        DispatchQueue.main.async {[weak self] in
-            self?.activityIndicator.stopAnimating()
-            self?.playerImage.image = FCConstants.EMPTY_IMAGE
-        }
-        print(errorMsg)
     }
 }
 

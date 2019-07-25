@@ -49,7 +49,7 @@ extension FCCitiesLocationVC: UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FCCitiesLocationCell") as? FCCitiesLocationCell else{
-            return UITableViewCell(.clear)
+            return tableView.defaultCell()
         }
         cell.viewModel = viewModel?.viewModelForDetail(at: indexPath.row)
         cell.configure()

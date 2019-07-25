@@ -22,24 +22,10 @@ class FCGalleryCell: UICollectionViewCell, FCImageDownloader {
                 print("Wrong cell!")
                 return
             }
-            DispatchQueue.main.async {
-                self?.success(downloadedImg, urlString)
-            }
+            self?.success(self?.img, self?.activityIndicator, downloadedImg)
         }) { [weak self](errorMsg) in
-            DispatchQueue.main.async {
-                self?.failure(errorMsg)
-            }
+            self?.failure(self?.img, self?.activityIndicator, errorMsg)
         }
-    }
-    func success(_ downloadedImg: UIImage,_ urlString: String){
-        activityIndicator.stopAnimating()
-        img.image = downloadedImg
-    }
-    
-    func failure(_ errorMsg: String){        
-        activityIndicator.stopAnimating()
-        img.image = FCConstants.EMPTY_IMAGE
-        print(errorMsg)
     }
     override func prepareForReuse() {
         img.image = nil

@@ -13,6 +13,8 @@ struct FCConstants{
     static let PLAYERS_CONSTANTS            :FCPlayersConstants         = FCPlayersConstants()
     static let TEAMS_CONSTANTS              :FCTeamsConstants           = FCTeamsConstants()
     static let CITIES_LOCATION_CONSTANTS    :FCCitiesLocationConstants  = FCCitiesLocationConstants()
+    static let NIBS                         :FCNibs                     = FCNibs()
+    static let CELL_IDENTIFIERS             :FCCellIdentifiers          = FCCellIdentifiers()
     static let DATA_FETCH_THRESHOLD         :Int                        = 2
     static let EMPTY_IMAGE                  :UIImage?                   = UIImage(named: "emptyImage")
     static let EMPTY_NEWS_IMAGE_URL         :URL?                       = URL(string: "https:\\google.com")
@@ -60,7 +62,18 @@ extension FCConstants{
         let PAGE_SIZE           :Int        = 5
     }
     struct FCCitiesLocationConstants {
-        let PATH_STRING         :String = "https://www.metaweather.com/api/location/search/"
-        let QUERY_STRING        :String = "?query=san"
+        let PATH_STRING         :String     = "https://www.metaweather.com/api/location/search/"
+        let QUERY_STRING        :String     = "?query=san"
+    }
+    struct FCNibs {
+        let video               :String     = "FCVideoTableViewCell"
+        let fact                :String     = "FCFactTableViewCell"
+        let newsLink            :String     = "FCNewsLinkTableViewCell"
+    }
+    struct FCCellIdentifiers {
+        let video               :String     = "VideoCell"
+        let fact                :String     = "FactCell"
+        let newsLink            :String     = "NewsLinkCell"
+        let defaultCell         :String     = "DefaultCell"
     }
 }

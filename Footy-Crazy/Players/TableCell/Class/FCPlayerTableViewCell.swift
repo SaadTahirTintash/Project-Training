@@ -38,23 +38,10 @@ class FCPlayerTableViewCell: UITableViewCell,FCImageDownloader {
                 print("Wrong cell!")
                 return
             }
-            DispatchQueue.main.async {
-                self?.success(downloadedImg, urlString)
-            }
+            self?.success(self?.playerDPImage, nil, downloadedImg)
             }, failure: {[weak self](errorMsg) in
-                DispatchQueue.main.async {
-                    self?.failure(errorMsg)
-                }
+                self?.failure(self?.playerDPImage, nil, errorMsg)
         })
-    }
-    
-    func success(_ downloadedImg: UIImage,_ urlString: String){
-        playerDPImage.image = downloadedImg
-    }
-    
-    func failure(_ errorMsg: String){
-        playerDPImage.image = FCConstants.EMPTY_IMAGE
-        print(errorMsg)
     }
     
     override func prepareForReuse() {

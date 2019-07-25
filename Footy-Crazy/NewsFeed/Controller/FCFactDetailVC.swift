@@ -22,19 +22,10 @@ extension FCFactDetailVC{
     func setupVC(){
         descriptionLabel.text = viewModel?.description
         titleLabel.text = viewModel?.title
-        loadImage(from: viewModel?.url, success: success, failure: failure)
-    }
-    func success(_ downloadedImg: UIImage,_ urlString: String){
-        DispatchQueue.main.async {[weak self] in
-            self?.activityIndicator.stopAnimating()
-            self?.imgView.image = downloadedImg
+        loadImage(from: viewModel?.url, success: { [weak self] (downloadedImg, urlString) in
+            self?.success(self?.imgView, self?.activityIndicator, downloadedImg)
+        }) { [weak self] (errorMsg) in
+            self?.failure(self?.imgView, self?.activityIndicator, errorMsg)
         }
-    }
-    func failure(_ errorMsg: String){
-        DispatchQueue.main.async {[weak self] in
-            self?.activityIndicator.stopAnimating()
-            self?.imgView.image = FCConstants.EMPTY_IMAGE
-        }
-        print(errorMsg)
     }
 }

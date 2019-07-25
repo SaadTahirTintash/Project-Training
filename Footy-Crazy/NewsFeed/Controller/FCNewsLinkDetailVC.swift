@@ -9,7 +9,7 @@
 import UIKit
 import SwiftLinkPreview
 
-class FCNewsLinkDetailVC: UIViewController, FCImageDownloader, FCNewsLinkDownloader, FCUtilities {
+class FCNewsLinkDetailVC: UIViewController, FCImageDownloader, FCNewsLinkDownloader {
     
     @IBOutlet weak var activityIndicator        : UIActivityIndicatorView!
     @IBOutlet weak var titleLabel               : UILabel!
@@ -25,43 +25,35 @@ class FCNewsLinkDetailVC: UIViewController, FCImageDownloader, FCNewsLinkDownloa
     }
 }
 
-extension FCNewsLinkDetailVC{
-    
+extension FCNewsLinkDetailVC: FCOpenLink{
     @IBAction func urlButtonAction(_ sender: Any) {
         if let urlString = viewModel?.url {
             openLinkInSafari(urlString, self.navigationController)
         }
     }
+}
+
+extension FCNewsLinkDetailVC{
     
-    func setupVC(){
+   func setupVC(){
         
         titleLabel.text         = viewModel?.title
         descriptionLabel.text   = viewModel?.description
         urlButton.setTitle(viewModel?.url, for: .normal)
-        loadLink(from: viewModel?.url, success: linkSuccess, failure: failure)
+        loadLink(from: viewModel?.url, success: linkSuccess){ [weak self] (errorMsg) in
+            self?.failure(self?.imgView, self?.activityIndicator, errorMsg)
+        }
     }
     
     func linkSuccess(_ response: Response){
         titleLabel.text         = response.title
         descriptionLabel.text   = response.description
         if let imgUrlString     = response.image{
-            loadImage(from: imgUrlString, success: imgSuccess) { [weak self](errorMsg) in
-                DispatchQueue.main.async {
-                    self?.failure(errorMsg)
-                }
+            loadImage(from: imgUrlString, success: { [weak self] (downloadedImg, urlString) in
+                self?.success(self?.imgView, self?.activityIndicator, downloadedImg)
+            }) { [weak self] (errorMsg) in
+                self?.failure(self?.imgView, self?.activityIndicator, errorMsg)
             }
         }
     }
-    
-    func imgSuccess(_ downloadedImg: UIImage,_ urlString: String){
-        activityIndicator.stopAnimating()
-        imgView.image = downloadedImg
-    }
-    
-    func failure(_ errorMsg: String){
-        activityIndicator.stopAnimating()
-        imgView.image = FCConstants.EMPTY_IMAGE
-        print(errorMsg)
-    }
-    
 }

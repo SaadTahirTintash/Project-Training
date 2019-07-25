@@ -26,22 +26,10 @@ class FCTeamTableViewCell: UITableViewCell, FCImageDownloader {
                 print("Wrong cell!")
                 return
             }
-            DispatchQueue.main.async {
-                self?.success(downloadedImg, urlString)
-            }
+            self?.success(self?.flagImage, nil, downloadedImg)
         }, failure: {[weak self](errorMsg) in
-            DispatchQueue.main.async {
-                self?.failure(errorMsg)
-            }
+            self?.failure(self?.flagImage, nil, errorMsg)
         })
-    }
-    func success(_ downloadedImg: UIImage,_ urlString: String){
-        flagImage.image = downloadedImg
-    }
-    
-    func failure(_ errorMsg: String){
-        flagImage.image = FCConstants.EMPTY_IMAGE
-        print(errorMsg)
     }
     override func prepareForReuse() {
         flagImage.image = FCConstants.EMPTY_IMAGE

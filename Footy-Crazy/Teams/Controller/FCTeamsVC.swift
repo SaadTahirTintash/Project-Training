@@ -57,7 +57,7 @@ extension FCTeamsVC: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         checkForMoreData(at: indexPath.row)
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "TeamCell") as? FCTeamTableViewCell else {
-            return UITableViewCell(.clear)
+            return tableView.defaultCell()
         }
         cell.viewModel          = viewModel?.viewModelForDetail(at: indexPath.row)
         cell.configure()

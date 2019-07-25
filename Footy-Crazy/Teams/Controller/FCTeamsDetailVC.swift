@@ -35,19 +35,10 @@ extension FCTeamsDetailVC: FCImageDownloader{
         if let description = viewModel?.teamDescription{
             descriptionLabel.text = description
         }
-        loadImage(from: viewModel?.imageUrl, success: success, failure: failure)
-    }
-    func success(_ downloadedImg: UIImage,_ urlString: String){
-        DispatchQueue.main.async {[weak self] in
-            self?.activityIndicator.stopAnimating()
-            self?.flagImage.image = downloadedImg
+        loadImage(from: viewModel?.imageUrl, success: { [weak self] (downloadedImg, urlString) in
+            self?.success(self?.flagImage, self?.activityIndicator, downloadedImg)
+        }) { [weak self] (errorMsg) in
+            self?.failure(self?.flagImage, self?.activityIndicator, errorMsg)
         }
-    }
-    func failure(_ errorMsg: String){
-        DispatchQueue.main.async {[weak self] in
-            self?.activityIndicator.stopAnimating()
-            self?.flagImage.image = FCConstants.EMPTY_IMAGE
-        }
-        print(errorMsg)
-    }
+    }    
 }

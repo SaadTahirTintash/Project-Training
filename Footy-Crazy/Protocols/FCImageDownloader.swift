@@ -40,4 +40,17 @@ extension FCImageDownloader{
             }
         }
     }
+    func success(_ uiImageView: UIImageView?,_ activityIndicator: UIActivityIndicatorView?, _ downloadedImg: UIImage){
+        DispatchQueue.main.async {
+            activityIndicator?.stopAnimating()
+            uiImageView?.image = downloadedImg
+        }
+    }
+    func failure(_ uiImageView: UIImageView?, _ activityIndicator: UIActivityIndicatorView?,_ errorMsg: String){
+        DispatchQueue.main.async {
+            activityIndicator?.stopAnimating()
+            uiImageView?.image = FCConstants.EMPTY_IMAGE
+        }
+        print(errorMsg)
+    }
 }

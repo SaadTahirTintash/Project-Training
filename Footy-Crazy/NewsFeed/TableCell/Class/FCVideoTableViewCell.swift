@@ -9,7 +9,7 @@
 import UIKit
 import youtube_ios_player_helper
 
-class FCVideoTableViewCell: UITableViewCell {
+class FCVideoTableViewCell: UITableViewCell, FCNewsFeedCellProtocol {
    
     @IBOutlet weak var titleLabel               : UILabel!
     @IBOutlet weak var videoView                : YTPlayerView!
@@ -26,7 +26,8 @@ class FCVideoTableViewCell: UITableViewCell {
 extension FCVideoTableViewCell{
     func configure(){
         titleLabel.text = viewModel?.title
-        if let urlString = viewModel?.url{            
+        if let urlString = viewModel?.url{
+            activityIndicator.startAnimating()
             videoView.load(withVideoId: urlString, playerVars:["playsinline":1])            
         }
     }

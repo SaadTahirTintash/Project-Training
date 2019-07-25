@@ -8,7 +8,7 @@
 
 import UIKit
 import SwiftLinkPreview
-class FCNewsLinkTableViewCell: UITableViewCell, FCImageDownloader , FCNewsLinkDownloader{
+class FCNewsLinkTableViewCell: UITableViewCell, FCNewsFeedCellProtocol{
     @IBOutlet weak var activityIndicator    : UIActivityIndicatorView!
     @IBOutlet weak var titleLbl             : UILabel!
     @IBOutlet weak var newsImg              : UIImageView!
@@ -17,7 +17,7 @@ class FCNewsLinkTableViewCell: UITableViewCell, FCImageDownloader , FCNewsLinkDo
     var viewModel                           : FCNewsFeedDetailVM?
 }
 
-extension FCNewsLinkTableViewCell{
+extension FCNewsLinkTableViewCell:FCImageDownloader , FCNewsLinkDownloader{
     override func prepareForReuse() {
         newsImg.image = nil
     }
@@ -32,7 +32,9 @@ extension FCNewsLinkTableViewCell{
                 return
             }
             self?.linkSuccess(response)
-        }, failure: failure)
+            }, failure: { [weak self] (errorMsg) in
+                self?.failure(self?.newsImg, self?.activityIndicator, errorMsg)
+        })
     }
     func linkSuccess(_ response: Response){
         titleLbl.text           = response.title
@@ -42,26 +44,13 @@ extension FCNewsLinkTableViewCell{
                     print("Wrong NewsLink Image Cell!")
                     return
                 }
-                DispatchQueue.main.async {
-                    self?.imgSuccess(downloadedImg)
-                }
+                self?.success(self?.newsImg, self?.activityIndicator, downloadedImg)
             }) { [weak self](errorMsg) in
-                DispatchQueue.main.async {
-                    self?.failure(errorMsg)
-                }
+                self?.failure(self?.newsImg, self?.activityIndicator, errorMsg)
             }
         } else {
-            failure("No Image in response!")
+            failure(newsImg, activityIndicator, "No Image in response!")
         }
-    }
-    func imgSuccess(_ downloadedImg: UIImage){
-        activityIndicator.stopAnimating()
-        newsImg.image = downloadedImg
-    }
-    func failure(_ errorMsg: String){
-        activityIndicator.stopAnimating()
-        newsImg.image = FCConstants.EMPTY_IMAGE
-        print(errorMsg)
     }
     @IBAction func share(_ sender: Any) {
         shareBtnPressed?(viewModel)

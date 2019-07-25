@@ -14,3 +14,5 @@ struct FCNewsFeedModel: Decodable{
     var title:          String?
     var type:           String?
 }
+
+

@@ -54,7 +54,7 @@ extension FCGalleryVC: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         checkForMoreData(at: indexPath.row)
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GalleryCell", for: indexPath) as? FCGalleryCell else{
-            return UICollectionViewCell(.clear)
+            return collectionView.dequeueReusableCell(withReuseIdentifier: "DefaultGalleryCell", for: indexPath)
         }        
         cell.viewModel = viewModel?.viewModelForDetail(at: indexPath.row)
         cell.configure()

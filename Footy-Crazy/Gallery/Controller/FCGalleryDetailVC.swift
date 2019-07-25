@@ -19,24 +19,15 @@ class FCGalleryDetailVC: UIViewController {
 
 extension FCGalleryDetailVC: FCImageDownloader{
     func setupVC(){
-        loadImage(from: viewModel?.imageUrl, success: success, failure: failure)
-    }
-    func success(_ downloadedImg: UIImage,_ urlString: String){
-        DispatchQueue.main.async {[weak self] in
-            self?.activityIndicator.stopAnimating()
-            self?.img.image = downloadedImg
+        loadImage(from: viewModel?.imageUrl, success: { [weak self] (downloadedImg, urlString) in
+            self?.success(self?.img, self?.activityIndicator, downloadedImg)
+        }) { [weak self] (errorMsg) in
+            self?.failure(self?.img, self?.activityIndicator, errorMsg)
         }
-    }
-    func failure(_ errorMsg: String){
-        DispatchQueue.main.async {[weak self] in
-            self?.activityIndicator.stopAnimating()
-            self?.img.image = FCConstants.EMPTY_IMAGE
-        }
-        print(errorMsg)
     }
 }
 
-extension FCGalleryDetailVC: FCUtilities{
+extension FCGalleryDetailVC: FCShareContent{
     
     @IBAction func share(_ sender: Any?){
         if let downloadedImage = img.image{

@@ -33,8 +33,8 @@ extension FCNewsFeedVC{
         tableView.delegate   = self
     }
     func configureTableViewAutoLayout(){
-//        tableView.rowHeight = UITableView.automaticDimension
-//        tableView.estimatedRowHeight = 450
+        //tableView.rowHeight = UITableView.automaticDimension
+        //tableView.estimatedRowHeight = 450
     }
     func newDataFetched(_ success: Bool){
         guard success else { return }
@@ -49,9 +49,9 @@ extension FCNewsFeedVC{
         tableView.endUpdates()
     }
     func registerCells(){
-        tableView.register(UINib(nibName: "FCVideoTableViewCell", bundle: nil), forCellReuseIdentifier: "VideoCell")
-        tableView.register(UINib(nibName: "FCFactTableViewCell", bundle: nil), forCellReuseIdentifier: "FactCell")
-        tableView.register(UINib(nibName: "FCNewsLinkTableViewCell", bundle: nil), forCellReuseIdentifier: "NewsLinkCell")
+        tableView.register(UINib(nibName: FCConstants.NIBS.video, bundle: nil), forCellReuseIdentifier: FCConstants.CELL_IDENTIFIERS.video)
+        tableView.register(UINib(nibName: FCConstants.NIBS.fact, bundle: nil), forCellReuseIdentifier: FCConstants.CELL_IDENTIFIERS.fact)
+        tableView.register(UINib(nibName: FCConstants.NIBS.newsLink, bundle: nil), forCellReuseIdentifier: FCConstants.CELL_IDENTIFIERS.newsLink)
     }
 }
 extension FCNewsFeedVC: UITableViewDataSource{
@@ -60,7 +60,7 @@ extension FCNewsFeedVC: UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let type = viewModel?.getType(of: indexPath.row) else{
-            return UITableViewCell(.clear)
+            return tableView.defaultCell()
         }
         checkForMoreData(at: indexPath.row)
         switch type {
@@ -71,7 +71,7 @@ extension FCNewsFeedVC: UITableViewDataSource{
         case "fact":
             return factTableCell(at: indexPath)
         default:
-            return UITableViewCell(.clear)
+            return tableView.defaultCell()
         }
     }
     func checkForMoreData(at displayingIndex: Int){
@@ -84,28 +84,27 @@ extension FCNewsFeedVC: UITableViewDataSource{
     }
     func videoTableCell(at indexPath: IndexPath)->UITableViewCell{
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "VideoCell") as? FCVideoTableViewCell else{
-            return UITableViewCell(.clear)
+            return tableView.defaultCell()
         }
-        cell.viewModel          = viewModel?.viewModelForDetail(at: indexPath.row)
+        cell.viewModel = viewModel?.viewModelForDetail(at: indexPath.row)
         cell.shareBtnPressed    = {[weak self] (model) in self?.share(model)}
         cell.configure()
         return cell
     }
     func newsLinkTableCell(at indexPath: IndexPath)->UITableViewCell{
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "NewsLinkCell") as? FCNewsLinkTableViewCell else{
-            return UITableViewCell(.clear)
+            return tableView.defaultCell()
         }
-        let cellVM              = viewModel?.viewModelForDetail(at: indexPath.row)
-        cell.viewModel          = cellVM
+        cell.viewModel = viewModel?.viewModelForDetail(at: indexPath.row)
         cell.shareBtnPressed    = {[weak self] (model) in self?.share(model)}
         cell.configure()
         return cell
     }
     func factTableCell(at indexPath: IndexPath)->UITableViewCell{
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FactCell") as? FCFactTableViewCell else{
-            return UITableViewCell(.clear)
-        }        
-        cell.viewModel          = viewModel?.viewModelForDetail(at: indexPath.row)
+            return tableView.defaultCell()
+        }
+        cell.viewModel = viewModel?.viewModelForDetail(at: indexPath.row)
         cell.shareBtnPressed    = {[weak self] (model) in self?.share(model)}
         cell.configure()
         return cell
@@ -156,7 +155,7 @@ extension FCNewsFeedVC{
         }
     }
 }
-extension FCNewsFeedVC: FCUtilities{
+extension FCNewsFeedVC: FCShareContent{
     func share(_ newsFeedDetailVM: FCNewsFeedDetailVM?){
         let text = [newsFeedDetailVM?.title,newsFeedDetailVM?.url,newsFeedDetailVM?.description]
         shareContent(self, text as [Any])
