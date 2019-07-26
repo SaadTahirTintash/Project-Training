@@ -60,18 +60,6 @@ extension FCPlayersVC {
     func registerCells() {
         tableView.register(UINib(nibName: FCConstants.NIBS.players, bundle: nil), forCellReuseIdentifier: FCConstants.CELL_IDENTIFIERS.player)
     }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cellHeightsDictionary[indexPath.row] = cell.bounds.height
-    }
-    
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        if cellHeightsDictionary[indexPath.row] != nil{
-            return cellHeightsDictionary[indexPath.row] ?? UITableView.automaticDimension
-        }
-        return UITableView.automaticDimension
-    }
 }
 
 extension FCPlayersVC: UITableViewDataSource {
@@ -105,6 +93,18 @@ extension FCPlayersVC: UITableViewDataSource {
 }
 
 extension FCPlayersVC: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cellHeightsDictionary[indexPath.row] = cell.bounds.height
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if cellHeightsDictionary[indexPath.row] != nil{
+            return cellHeightsDictionary[indexPath.row] ?? UITableView.automaticDimension
+        }
+        return UITableView.automaticDimension
+    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: FCConstants.SEGUES.playersDetailVC, sender: indexPath.row)

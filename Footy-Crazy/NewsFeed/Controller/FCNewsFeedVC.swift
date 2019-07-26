@@ -68,18 +68,6 @@ extension FCNewsFeedVC {
         tableView.register(UINib(nibName: FCConstants.NIBS.newsLink, bundle: nil),
                            forCellReuseIdentifier: FCConstants.CELL_IDENTIFIERS.newsLink)
     }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cellHeightsDictionary[indexPath.row] = cell.bounds.height
-    }
-    
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        if cellHeightsDictionary[indexPath.row] != nil{
-            return cellHeightsDictionary[indexPath.row] ?? UITableView.automaticDimension
-        }
-        return UITableView.automaticDimension
-    }
 }
 
 extension FCNewsFeedVC: UITableViewDataSource {
@@ -170,6 +158,18 @@ extension FCNewsFeedVC: UITableViewDelegate {
                 print(FCConstants.ERRORS.segueError)
             }
         }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cellHeightsDictionary[indexPath.row] = cell.bounds.height
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if cellHeightsDictionary[indexPath.row] != nil{
+            return cellHeightsDictionary[indexPath.row] ?? UITableView.automaticDimension
+        }
+        return UITableView.automaticDimension
     }
 }
 
