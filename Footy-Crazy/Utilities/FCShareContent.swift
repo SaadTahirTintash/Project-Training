@@ -11,10 +11,13 @@ protocol FCShareContent {}
 
 extension FCShareContent {
     
-    func shareContent(_ onVC: UIViewController, _ shareableContent: [Any]){
+    func shareContent(_ onVC: UIViewController,
+                      _ shareableContent: [Any]) {
+        
         let activityViewController = UIActivityViewController(activityItems: shareableContent, applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = onVC.view
         onVC.present(activityViewController, animated: true, completion: nil)
+        
     }
     
 }

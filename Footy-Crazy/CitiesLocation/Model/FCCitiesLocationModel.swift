@@ -7,7 +7,9 @@
 //
 
 import Foundation
+
 struct FCCitiesLocationModel: Decodable {
+    
     var woeid: Int
     var latt_long: String
     var location_type: String

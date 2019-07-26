@@ -15,23 +15,26 @@ enum LocationType: String {
     case Province
 }
 
-class FCCitiesLocationDetailVM{
-    var model: FCCitiesLocationModel
+class FCCitiesLocationDetailVM {
+    
+    private var model: FCCitiesLocationModel
+    
     init(_ model: FCCitiesLocationModel) {
         self.model = model
     }
-    var lattitude: String{
+    
+    var lattitude: String {
         let latt_long = model.latt_long.components(separatedBy: ",")
         return latt_long[0]
     }
-    var longitude: String{
+    var longitude: String {
         let latt_long = model.latt_long.components(separatedBy: ",")
         return latt_long[1]
     }
-    var title: String{
+    var title: String {
         return model.title
     }
-    var type: String{
+    var type: String {
         switch model.location_type {
         case "City":
             return LocationType.City.rawValue
@@ -43,7 +46,7 @@ class FCCitiesLocationDetailVM{
             return LocationType.None.rawValue
         }
     }
-    var woeid: Int{
+    var woeid: Int {
         return model.woeid
     }
 }

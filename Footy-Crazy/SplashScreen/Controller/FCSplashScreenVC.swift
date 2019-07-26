@@ -14,13 +14,17 @@
 
 import UIKit
 
-class FCSplashScreenVC: UIViewController, FCNewsFeedService {    
-    // do not mate storyboard id a property
+class FCSplashScreenVC: UIViewController, FCNewsFeedService {
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-        getNewsFeedData(startingKey: FCConstants.NEWS_FEED_CONSTANTS.STARTING_KEY, pageSize: FCConstants.NEWS_FEED_CONSTANTS.INITIAL_PAGE_SIZE, success: {(array) in
-            FCDataManager.shared.newsFeedData = array
-            let storyboardID = UIStoryboard(name: "FCNewsFeed", bundle: nil)
+        
+        getNewsFeedData(startingKey: FCConstants.NEWS_FEED_CONSTANTS.STARTING_KEY,
+                        pageSize: FCConstants.NEWS_FEED_CONSTANTS.INITIAL_PAGE_SIZE,
+                        success: { (array) in
+            FCDataManager.shared.addNewsFeedData(item: array)
+            let storyboardID = UIStoryboard(name: FCConstants.NEWS_FEED_CONSTANTS.STORYBOARD_ID, bundle: nil)
             UIApplication.shared.delegate?.window??.rootViewController = storyboardID.instantiateInitialViewController()
         }) {(errorMsg) in
             print(errorMsg)

@@ -10,25 +10,31 @@ import Foundation
 import UIKit
 import SwiftLinkPreview
 
-protocol FCNewsLinkDownloader{}
+protocol FCNewsLinkDownloader {
+    
+    typealias successType = (_ response: Response)->Void
+    typealias failureType = (_ error: String)->Void
+}
 
-extension FCNewsLinkDownloader{
-    func loadLink(from urlString: String?, success: @escaping((_ response: Response)->Void), failure: @escaping((_ error: String)->Void)){
+extension FCNewsLinkDownloader {
+    
+    func loadLink(from urlString: String?,
+                  success: @escaping successType,
+                  failure: @escaping failureType) {
         
         guard let url = urlString else {
-            print("Incorrect URL!")
+            print(FCConstants.ERRORS.invalidUrl)
             return
         }
-        if let response = FCCacheManager.shared.getNewsLink(url){
-            print("Response Loaded from cache!")
+        
+        if let response = FCCacheManager.shared.getNewsLink(url) {
             success(response)
-        }else{
-            print("Response network request!")
+        } else {
             let slp : SwiftLinkPreview = SwiftLinkPreview()
             slp.preview(url, onSuccess: { (response) in
                 FCCacheManager.shared.setNewsLink(url, response)
                 success(response)
-            }, onError: {(error) in
+            }, onError: { (error) in
                 failure(error.localizedDescription)
             })
         }

@@ -12,12 +12,14 @@ protocol FCOpenLink {}
 
 extension FCOpenLink {
     
-    func openLinkInSafari(_ urlString: String,_ nvc: UINavigationController?){
-        print("open news link")
-        guard let url = URL(string: urlString) else{
-            print("Invalid URL")
+    func openLinkInSafari(_ urlString: String,
+                          _ nvc: UINavigationController?) {
+        
+        guard let url = URL(string: urlString) else {
+            print(FCConstants.ERRORS.invalidUrl)
             return
         }
+        
         let svc = SFSafariViewController(url: url)
         nvc?.present(svc, animated: true, completion: nil)
     }

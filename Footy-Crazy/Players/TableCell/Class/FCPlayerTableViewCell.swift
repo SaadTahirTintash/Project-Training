@@ -7,7 +7,8 @@
 //
 
 import UIKit
-class FCPlayerTableViewCell: UITableViewCell,FCImageDownloader {
+
+class FCPlayerTableViewCell: UITableViewCell {
     @IBOutlet weak var standingLabel        : UILabel!
     @IBOutlet weak var playerDPImage        : UIImageView!
     @IBOutlet weak var playerName           : UILabel!
@@ -20,31 +21,35 @@ class FCPlayerTableViewCell: UITableViewCell,FCImageDownloader {
         super.awakeFromNib()
     }
     
-    func configure(){
-        if let standing = viewModel?.playerStanding{
+    override func prepareForReuse() {
+        playerDPImage.image = nil
+    }
+}
+
+extension FCPlayerTableViewCell: FCImageDownloader {
+    
+    func configure() {
+        if let standing = viewModel?.playerStanding {
             standingLabel.text = standing
         }
-        if let name = viewModel?.playerName{
+        if let name = viewModel?.playerName {
             playerName.text = name
         }
-        if let country = viewModel?.countryName{
+        if let country = viewModel?.countryName {
             countryName.text = country
         }
-        if let club = viewModel?.clubName{
+        if let club = viewModel?.clubName {
             clubName.text = club
         }
+        
         loadImage(from: viewModel?.imageUrl, success: {[weak self](downloadedImg,urlString) in
             guard urlString == self?.viewModel?.imageUrl else{
-                print("Wrong cell!")
+                print(FCConstants.ERRORS.wrongCell)
                 return
             }
             self?.success(self?.playerDPImage, nil, downloadedImg)
             }, failure: {[weak self](errorMsg) in
                 self?.failure(self?.playerDPImage, nil, errorMsg)
         })
-    }
-    
-    override func prepareForReuse() {
-        playerDPImage.image = nil
     }
 }

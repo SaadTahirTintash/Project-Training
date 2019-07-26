@@ -7,6 +7,7 @@
 //
 
 import UIKit
+
 class FCPlayersVC: UIViewController {
     
     @IBOutlet weak var activityBGView       : UIView!
@@ -16,28 +17,25 @@ class FCPlayersVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel = FCPlayersVM([FCPlayersModel]())
-        tableView.dataSource = self
-        tableView.delegate = self
+        configureViewModel()
+        configureTableViewDelegates()
         registerCells()
-        initializeCompletionHandlers()
-        viewModel?.getInitialData()
+    }
+}
 
-    }
+extension FCPlayersVC {
     
-    func registerCells(){
-        tableView.register(UINib(nibName: "FCPlayerTableViewCell", bundle: nil), forCellReuseIdentifier: "PlayerCell")
-    }
-    
-    
-    func initializeCompletionHandlers(){
-        viewModel?.initialDataFetched = {[weak self](success) in
+    func configureViewModel(){
+        viewModel                       = FCPlayersVM([FCPlayersModel]())
+        
+        viewModel?.initialDataFetched   = {[weak self](success) in
             if success{
                 self?.activityBGView.isHidden = true
                 self?.tableView.reloadData()
             }
         }
-        viewModel?.newDataFetched = { [weak self] success in
+        
+        viewModel?.newDataFetched       = { [weak self] success in
             guard success else { return }
             let rowCount    = (self?.tableView.numberOfRows(inSection: 0) ?? 0)
             let range       = rowCount ..< (self?.viewModel?.itemCount ?? 0)
@@ -49,27 +47,42 @@ class FCPlayersVC: UIViewController {
             self?.tableView.insertRows(at: indices, with: .fade)
             self?.tableView.endUpdates()
         }
+        
+        viewModel?.getInitialData()
+    }
+    
+    func configureTableViewDelegates(){
+        tableView.dataSource    = self
+        tableView.delegate      = self
+    }
+    
+    func registerCells() {
+        tableView.register(UINib(nibName: FCConstants.NIBS.players, bundle: nil), forCellReuseIdentifier: FCConstants.CELL_IDENTIFIERS.player)
     }
 }
 
-extension FCPlayersVC: UITableViewDataSource{
+extension FCPlayersVC: UITableViewDataSource {
    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel?.itemCount ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         checkForMoreData(at: indexPath.row)
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerCell") as? FCPlayerTableViewCell else{
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: FCConstants.CELL_IDENTIFIERS.player) as? FCPlayerTableViewCell else{
             return tableView.defaultCell()
         }        
+        
         cell.viewModel          = viewModel?.viewModelForDetail(at: indexPath.row)
         cell.configure()
         return cell
     }
     
     
-    func checkForMoreData(at displayingIndex: Int){
+    func checkForMoreData(at displayingIndex: Int) {
+        
         let totalItems = viewModel?.itemCount ?? 0
         let index = totalItems - displayingIndex
         if index <= 5 {
@@ -77,10 +90,11 @@ extension FCPlayersVC: UITableViewDataSource{
         }
     }
 }
-extension FCPlayersVC: UITableViewDelegate{
+
+extension FCPlayersVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "FCPlayersDetailVCSegue", sender: indexPath.row)
+        performSegue(withIdentifier: FCConstants.SEGUES.playersDetailVC, sender: indexPath.row)
     }    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -7,14 +7,19 @@
 //
 
 import UIKit
+
 class FCAboutVC: UIViewController {
+    
     @IBOutlet weak var aboutLabel       : UILabel!
-}
-extension FCAboutVC{
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupVC()
     }
+}
+
+extension FCAboutVC {
+    
     func setupVC(){
         aboutLabel.text = FCConstants.ABOUT_US
     }

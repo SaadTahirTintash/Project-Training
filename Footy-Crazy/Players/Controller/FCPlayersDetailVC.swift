@@ -7,7 +7,9 @@
 //
 
 import UIKit
+
 class FCPlayersDetailVC: UIViewController {
+    
     @IBOutlet weak var nameLabel        : UILabel!
     @IBOutlet weak var clubLabel        : UILabel!
     @IBOutlet weak var countryLabel     : UILabel!
@@ -15,6 +17,7 @@ class FCPlayersDetailVC: UIViewController {
     @IBOutlet weak var standingLabel    : UILabel!
     @IBOutlet weak var playerImage      : UIImageView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     var viewModel                       : FCPlayersDetailVM?
     
     override func viewDidLoad() {
@@ -22,8 +25,11 @@ class FCPlayersDetailVC: UIViewController {
         setupVC()
     }
 }
-extension FCPlayersDetailVC: FCImageDownloader{
-    func setupVC(){
+
+extension FCPlayersDetailVC: FCImageDownloader {
+    
+    func setupVC() {
+        
         if let name = viewModel?.playerName{
             nameLabel.text = name
         }
@@ -39,6 +45,7 @@ extension FCPlayersDetailVC: FCImageDownloader{
         if let standing = viewModel?.playerStanding{
             standingLabel.text = "Standing: \(standing)"
         }
+        
         loadImage(from: viewModel?.imageUrl, success: { [weak self] (downloadedImg, urlString) in
             self?.success(self?.playerImage, self?.activityIndicator, downloadedImg)
         }) { [weak self] (errorMsg) in

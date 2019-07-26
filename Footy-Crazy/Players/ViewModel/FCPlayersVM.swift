@@ -8,8 +8,10 @@
 
 import UIKit
 
-class FCPlayersVM: FCViewModelProtocol{
+class FCPlayersVM: FCViewModelProtocol {
+    
     private var modelArray          : [FCPlayersModel]
+    
     var isFetchingData              : Bool              = false
     var initialDataFetched          : ((Bool)->Void)?
     var newDataFetched              : ((Bool)->Void)?
@@ -20,13 +22,16 @@ class FCPlayersVM: FCViewModelProtocol{
         self.modelArray = modelArray
     }
 }
-extension FCPlayersVM: FCPlayersService{
-    func viewModelForDetail(at index: Int)->FCPlayersDetailVM{
+
+extension FCPlayersVM: FCPlayersService {
+    
+    func viewModelForDetail(at index: Int)->FCPlayersDetailVM {
         return FCPlayersDetailVM(modelArray[index])
     }
-    func getInitialData(){
+    
+    func getInitialData() {
         getPlayerData(startingKey: FCConstants.PLAYERS_CONSTANTS.STARTING_KEY, pageSize: FCConstants.PLAYERS_CONSTANTS.INITIAL_PAGE_SIZE, success: { [weak self](array) in
-            FCDataManager.shared.playersData.append(contentsOf: array)
+            FCDataManager.shared.addPlayersData(item: array)
             self?.modelArray.append(contentsOf: array)
             self?.isFetchingData = false
             self?.initialDataFetched?(true)
@@ -36,14 +41,15 @@ extension FCPlayersVM: FCPlayersService{
             self?.initialDataFetched?(false)
         }
     }
-    func getMoreData(){
-        if !isFetchingData{
+    
+    func getMoreData() {
+        if !isFetchingData {
             isFetchingData = true            
             var startingId = modelArray.endIndex
-            if startingId != 0{
+            if startingId != 0 {
                 startingId += 1
                 getPlayerData(startingKey: String(startingId), pageSize: FCConstants.PLAYERS_CONSTANTS.PAGE_SIZE, success: { [weak self](array) in
-                    FCDataManager.shared.playersData.append(contentsOf: array)
+                    FCDataManager.shared.addPlayersData(item: array)
                     self?.modelArray.append(contentsOf: array)
                     self?.isFetchingData = false
                     self?.newDataFetched?(true)

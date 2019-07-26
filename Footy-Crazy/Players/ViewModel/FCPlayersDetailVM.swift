@@ -9,10 +9,13 @@
 import UIKit
 
 class FCPlayersDetailVM {
+    
     private var model   : FCPlayersModel
+    
     init(_ model: FCPlayersModel) {
         self.model = model
     }
+    
     var playerName: String?{
         return model.name
     }

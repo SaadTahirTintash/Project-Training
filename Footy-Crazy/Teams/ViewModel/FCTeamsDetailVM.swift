@@ -7,11 +7,15 @@
 //
 
 import UIKit
-class FCTeamsDetailVM{
+
+class FCTeamsDetailVM {
+    
     private var model   : FCTeamsModel
+    
     init(_ model: FCTeamsModel) {
         self.model = model
     }
+    
     var countryName: String?{
         return model.country?.capitalized
     }

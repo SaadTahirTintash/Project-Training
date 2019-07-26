@@ -10,7 +10,7 @@ import UIKit
 import youtube_ios_player_helper
 
 class FCVideoTableViewCell: UITableViewCell, FCNewsFeedCellProtocol {
-   
+    
     @IBOutlet weak var titleLabel               : UILabel!
     @IBOutlet weak var videoView                : YTPlayerView!
     @IBOutlet weak var activityIndicator        : UIActivityIndicatorView!
@@ -23,26 +23,34 @@ class FCVideoTableViewCell: UITableViewCell, FCNewsFeedCellProtocol {
         videoView.delegate = self        
     }
 }
-extension FCVideoTableViewCell{
-    func configure(){
-        titleLabel.text = viewModel?.title
-        if let urlString = viewModel?.url{
-            activityIndicator.startAnimating()
-            videoView.load(withVideoId: urlString, playerVars:["playsinline":1])            
-        }
-    }
+
+extension FCVideoTableViewCell {
+    
     @IBAction func share(_ sender: Any) {
         shareBtnPressed?(viewModel)
     }
 }
-extension FCVideoTableViewCell: YTPlayerViewDelegate{
+
+extension FCVideoTableViewCell {
+    
+    func configure() {
+        titleLabel.text     = viewModel?.title
+        if let urlString    = viewModel?.url {
+            activityIndicator.startAnimating()
+            videoView.load(withVideoId: urlString, playerVars:["playsinline":1])            
+        }
+    }
+}
+
+extension FCVideoTableViewCell: YTPlayerViewDelegate {
+    
     func playerViewPreferredInitialLoading(_ playerView: YTPlayerView) -> UIView? {
         let videoPreferredView              = UIView(frame: playerView.frame)
         videoPreferredView.backgroundColor  = .black
         return videoPreferredView
     }
+    
     func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
-        print("Video is ready")
         activityIndicator.stopAnimating()
     }
 }

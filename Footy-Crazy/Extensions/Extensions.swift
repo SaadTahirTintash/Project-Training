@@ -8,10 +8,12 @@
 
 import UIKit
 
-extension UITableView{
-    func defaultCell()->UITableViewCell{
-        guard let cell = self.dequeueReusableCell(withIdentifier: FCConstants.CELL_IDENTIFIERS.defaultCell) else{
-            return UITableViewCell(style: .default, reuseIdentifier: FCConstants.CELL_IDENTIFIERS.defaultCell)
+extension UITableView {
+    
+    func defaultCell()-> UITableViewCell {
+        
+        guard let cell = self.dequeueReusableCell(withIdentifier: FCConstants.CELL_IDENTIFIERS.defaultTableCell) else {
+            return UITableViewCell(style: .default, reuseIdentifier: FCConstants.CELL_IDENTIFIERS.defaultTableCell)
         }
         return cell
     }
