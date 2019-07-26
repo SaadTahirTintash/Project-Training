@@ -57,34 +57,28 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="obD-iC-Yqn" userLabel="ButtonView">
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fyJ-3g-DXZ">
                                         <rect key="frame" x="0.0" y="400.5" width="394" height="50"/>
                                         <subviews>
                                             <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I8q-Sq-aeD">
                                                 <rect key="frame" x="0.0" y="0.0" width="197" height="50"/>
+                                                <color key="backgroundColor" white="0.67000000000000004" alpha="0.25" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" image="read"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DkG-m4-WEn">
                                                 <rect key="frame" x="197" y="0.0" width="197" height="50"/>
+                                                <color key="backgroundColor" white="0.67000000000000004" alpha="0.25" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" image="share"/>
                                                 <connections>
                                                     <action selector="share:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="FhD-Ve-6jT"/>
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" white="0.67000000000000004" alpha="0.25" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="DkG-m4-WEn" firstAttribute="top" secondItem="obD-iC-Yqn" secondAttribute="top" id="Aoz-S4-OdM"/>
-                                            <constraint firstItem="DkG-m4-WEn" firstAttribute="leading" secondItem="I8q-Sq-aeD" secondAttribute="trailing" id="CQD-oX-8Uz"/>
-                                            <constraint firstAttribute="height" constant="50" id="FLN-2y-ZeG"/>
-                                            <constraint firstItem="I8q-Sq-aeD" firstAttribute="top" secondItem="obD-iC-Yqn" secondAttribute="top" id="OIr-kd-emG"/>
-                                            <constraint firstItem="DkG-m4-WEn" firstAttribute="width" secondItem="I8q-Sq-aeD" secondAttribute="width" id="Pcz-lT-AJX"/>
-                                            <constraint firstAttribute="bottom" secondItem="DkG-m4-WEn" secondAttribute="bottom" id="dic-Bg-Wge"/>
-                                            <constraint firstItem="I8q-Sq-aeD" firstAttribute="leading" secondItem="obD-iC-Yqn" secondAttribute="leading" id="lKR-8o-OWW"/>
-                                            <constraint firstAttribute="bottom" secondItem="I8q-Sq-aeD" secondAttribute="bottom" id="p5p-sZ-MSx"/>
-                                            <constraint firstAttribute="trailing" secondItem="DkG-m4-WEn" secondAttribute="trailing" id="waN-S5-pxG"/>
+                                            <constraint firstItem="DkG-m4-WEn" firstAttribute="width" secondItem="I8q-Sq-aeD" secondAttribute="width" id="Yrn-RJ-Ewe"/>
+                                            <constraint firstAttribute="height" constant="50" id="aLk-zC-Vff"/>
                                         </constraints>
-                                    </view>
+                                    </stackView>
                                 </subviews>
                             </stackView>
                         </subviews>
