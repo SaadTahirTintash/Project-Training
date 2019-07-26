@@ -33,6 +33,7 @@ extension FCVideoTableViewCell {
 
 extension FCVideoTableViewCell {
     
+    /// sets uiview from view model and loading video using given link
     func configure() {
         titleLabel.text     = viewModel?.title
         if let urlString    = viewModel?.url {
@@ -44,6 +45,10 @@ extension FCVideoTableViewCell {
 
 extension FCVideoTableViewCell: YTPlayerViewDelegate {
     
+    /// Used to create an initial view for youtube player
+    ///
+    /// - Parameter playerView: youtube player view
+    /// - Returns: initial view
     func playerViewPreferredInitialLoading(_ playerView: YTPlayerView) -> UIView? {
         let videoPreferredView              = UIView(frame: playerView.frame)
         videoPreferredView.backgroundColor  = .black

@@ -11,6 +11,11 @@ protocol FCShareContent {}
 
 extension FCShareContent {
     
+    /// Sharing images, String, Any data on a view
+    ///
+    /// - Parameters:
+    ///   - onVC: Pops the sharing dialogue on view of this VC
+    ///   - shareableContent: Images Strings Any
     func shareContent(_ onVC: UIViewController,
                       _ shareableContent: [Any]) {
         

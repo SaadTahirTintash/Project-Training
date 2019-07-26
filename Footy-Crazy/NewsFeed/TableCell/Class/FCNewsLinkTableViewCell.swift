@@ -32,8 +32,9 @@ extension FCNewsLinkTableViewCell {
     }
 }
 
-extension FCNewsLinkTableViewCell: FCImageDownloader, FCNewsLinkDownloader{
+extension FCNewsLinkTableViewCell: FCNewsLinkDownloader{
     
+    /// sets the uiview using view model and loads link from the given url link
     func configure() {
         
         titleLbl.text   = viewModel?.title
@@ -48,7 +49,13 @@ extension FCNewsLinkTableViewCell: FCImageDownloader, FCNewsLinkDownloader{
                 self?.failure(self?.newsImg, self?.activityIndicator, errorMsg)
         })
     }
+}
+
+extension FCNewsLinkTableViewCell: FCImageDownloader {
     
+    /// If response found for newsLink request, set the required ui view and load image from server
+    ///
+    /// - Parameter response: newsLink response
     func linkSuccess(_ response: Response){
         
         titleLbl.text           = response.title

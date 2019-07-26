@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 protocol FCNewsFeedCellProtocol {
-    
+    //MARK:- Generic type
     associatedtype view_model
     
     var viewModel       : view_model?               { get set }

@@ -32,6 +32,7 @@ extension FCFactTableViewCell {
 
 extension FCFactTableViewCell: FCImageDownloader {
     
+    /// sets the uiview using view model and loading image from the given link
     func configure() {
         titleLabel.text = viewModel?.title
         activityIndicator.startAnimating()

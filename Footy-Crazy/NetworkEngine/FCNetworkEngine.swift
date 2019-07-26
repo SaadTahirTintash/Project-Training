@@ -10,6 +10,7 @@
 import FirebaseDatabase
 import Alamofire
 
+//MARK: Definition
 protocol FCNetworkEngine {
     
     typealias success<MODEL_TYPE>   = (([MODEL_TYPE])->Void)?
@@ -27,6 +28,14 @@ extension FCNetworkEngine {
         return ref.child(FCConstants.FIREBASE_ROOT_NODE)
     }
     
+    /// Fetch Data from firebase server and observe for return. On return, parse the data and removes the observer. On success, parse data to model one by one using decodables. On failure, prints the required error message
+    ///
+    /// - Parameters:
+    ///   - pathString: Name of the child node to fetch data of
+    ///   - id: key from where to start fetching from
+    ///   - limit: window of data to fetch
+    ///   - success: completion handler for success
+    ///   - failure: completion handler for failure
     func fetchData<MODEL_TYPE : Decodable>(pathString           : String,
                                            startingKey  id      : String,
                                            pageSize     limit   : Int,
@@ -60,6 +69,14 @@ extension FCNetworkEngine {
             }
         }
     }
+    
+    /// Fetch data from an api using Alamofire and get a response JSON. On success, parses the whole array into model using decodables and calls success completion handler. On failure response, prints the error message
+    ///
+    /// - Parameters:
+    ///   - pathString: api link
+    ///   - query: query to fetch specific data
+    ///   - success: completion handler for success
+    ///   - failure: completion handler for failure
     func fetchAPI<MODEL_TYPE: Decodable>(pathString     : String,
                                          query          : String,
                                          success        : success<MODEL_TYPE>,
@@ -91,6 +108,8 @@ extension FCNetworkEngine {
             }
         }
     }
+    
+    /// Removing all observers if any
     func removeAllObservers(){
         ref.removeAllObservers()
     }

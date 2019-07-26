@@ -12,6 +12,7 @@ import SafariServices
 class FCNewsFeedVC: UIViewController {
     
     @IBOutlet weak var tableView    : UITableView!
+    
     var viewModel                   : FCNewsFeedVM?
     var itemHeights                 : [CGFloat]     = [CGFloat](repeating: UITableView.automaticDimension, count: 100)
     
@@ -98,14 +99,13 @@ extension FCNewsFeedVC: UITableViewDataSource {
         let totalItems = viewModel?.itemCount ?? 0
         let index = totalItems - displayingIndex
         if index <= FCConstants.DATA_FETCH_THRESHOLD {
-            print("Need Update")
             viewModel?.getMoreData()
         }
     }
     
     func videoTableCell(at indexPath: IndexPath)->UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "VideoCell") as? FCVideoTableViewCell else{
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: FCConstants.CELL_IDENTIFIERS.video) as? FCVideoTableViewCell else{
             return tableView.defaultCell()
         }
         
@@ -117,7 +117,7 @@ extension FCNewsFeedVC: UITableViewDataSource {
     
     func newsLinkTableCell(at indexPath: IndexPath)->UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "NewsLinkCell") as? FCNewsLinkTableViewCell else{
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: FCConstants.CELL_IDENTIFIERS.newsLink) as? FCNewsLinkTableViewCell else{
             return tableView.defaultCell()
         }
         
@@ -129,7 +129,7 @@ extension FCNewsFeedVC: UITableViewDataSource {
     
     func factTableCell(at indexPath: IndexPath)->UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "FactCell") as? FCFactTableViewCell else{
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: FCConstants.CELL_IDENTIFIERS.fact) as? FCFactTableViewCell else{
             return tableView.defaultCell()
         }
         

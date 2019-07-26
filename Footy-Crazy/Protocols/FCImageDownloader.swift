@@ -17,6 +17,12 @@ protocol FCImageDownloader {
 
 extension FCImageDownloader {
     
+    /// Downloading image data from given url. Checks url if already present in cache else downloads from server, saves in cache and calls success completion handler
+    ///
+    /// - Parameters:
+    ///   - url: image url
+    ///   - success: completion handler for success
+    ///   - failure: completion handler for failure
     func loadImage(from     url : String?,
                    success      : @escaping successType,
                    failure      : @escaping failureType) {

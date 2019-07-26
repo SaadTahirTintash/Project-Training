@@ -10,6 +10,7 @@ import UIKit
 
 extension UITableView {
     
+    /// Creates a table view cell with default id for the first time and then dequeues it with the same id
     func defaultCell()-> UITableViewCell {
         
         guard let cell = self.dequeueReusableCell(withIdentifier: FCConstants.CELL_IDENTIFIERS.defaultTableCell) else {

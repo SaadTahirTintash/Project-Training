@@ -12,6 +12,11 @@ protocol FCOpenLink {}
 
 extension FCOpenLink {
     
+    /// Opens a link in safari without leaving the app
+    ///
+    /// - Parameters:
+    ///   - urlString: url link to open
+    ///   - nvc: navigation controller for coming back to last screen
     func openLinkInSafari(_ urlString: String,
                           _ nvc: UINavigationController?) {
         

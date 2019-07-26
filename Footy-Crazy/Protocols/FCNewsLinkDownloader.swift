@@ -18,6 +18,12 @@ protocol FCNewsLinkDownloader {
 
 extension FCNewsLinkDownloader {
     
+    /// load link from the given url. Checks if url present in cache else downloads from server, saves the response in cache and calls success
+    ///
+    /// - Parameters:
+    ///   - urlString: news link url
+    ///   - success: success completion handler
+    ///   - failure: failure completion handler
     func loadLink(from urlString: String?,
                   success: @escaping successType,
                   failure: @escaping failureType) {

@@ -9,7 +9,7 @@
 import UIKit
 import SwiftLinkPreview
 
-class FCNewsLinkDetailVC: UIViewController, FCImageDownloader, FCNewsLinkDownloader {
+class FCNewsLinkDetailVC: UIViewController {
     
     @IBOutlet weak var activityIndicator        : UIActivityIndicatorView!
     @IBOutlet weak var titleLabel               : UILabel!
@@ -25,7 +25,8 @@ class FCNewsLinkDetailVC: UIViewController, FCImageDownloader, FCNewsLinkDownloa
     }
 }
 
-extension FCNewsLinkDetailVC: FCOpenLink{
+extension FCNewsLinkDetailVC: FCOpenLink {
+    
     @IBAction func urlButtonAction(_ sender: Any) {
         if let urlString = viewModel?.url {
             openLinkInSafari(urlString, self.navigationController)
@@ -33,9 +34,9 @@ extension FCNewsLinkDetailVC: FCOpenLink{
     }
 }
 
-extension FCNewsLinkDetailVC{
+extension FCNewsLinkDetailVC: FCNewsLinkDownloader {
     
-   func setupVC(){
+   func setupVC() {
         
         titleLabel.text         = viewModel?.title
         descriptionLabel.text   = viewModel?.description
@@ -44,8 +45,12 @@ extension FCNewsLinkDetailVC{
             self?.failure(self?.imgView, self?.activityIndicator, errorMsg)
         }
     }
+}
+
+extension FCNewsLinkDetailVC: FCImageDownloader {
     
     func linkSuccess(_ response: Response){
+        
         titleLabel.text         = response.title
         descriptionLabel.text   = response.description
         if let imgUrlString     = response.image{

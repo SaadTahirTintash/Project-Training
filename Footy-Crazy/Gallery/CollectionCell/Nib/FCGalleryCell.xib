@@ -20,7 +20,12 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="N1c-5S-96q">
-                        <rect key="frame" x="0.0" y="0.0" width="138" height="103"/>
+                        <rect key="frame" x="5" y="5" width="128" height="93"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="15"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </imageView>
                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="pKL-Gr-NsW">
                         <rect key="frame" x="50.5" y="33" width="37" height="37"/>
@@ -29,11 +34,11 @@
                 </subviews>
             </view>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="N1c-5S-96q" secondAttribute="bottom" id="2oA-Vu-u8q"/>
-                <constraint firstItem="N1c-5S-96q" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="G2g-Sk-stS"/>
+                <constraint firstAttribute="bottom" secondItem="N1c-5S-96q" secondAttribute="bottom" constant="5" id="2oA-Vu-u8q"/>
+                <constraint firstItem="N1c-5S-96q" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="G2g-Sk-stS"/>
                 <constraint firstItem="pKL-Gr-NsW" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="I5d-bc-3pv"/>
-                <constraint firstAttribute="trailing" secondItem="N1c-5S-96q" secondAttribute="trailing" id="P5Q-RE-6bW"/>
-                <constraint firstItem="N1c-5S-96q" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="bgx-pO-yoJ"/>
+                <constraint firstAttribute="trailing" secondItem="N1c-5S-96q" secondAttribute="trailing" constant="5" id="P5Q-RE-6bW"/>
+                <constraint firstItem="N1c-5S-96q" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="bgx-pO-yoJ"/>
                 <constraint firstItem="pKL-Gr-NsW" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="ta0-TE-ukp"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
