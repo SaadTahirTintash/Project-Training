@@ -14,7 +14,7 @@ class FCNewsFeedVC: UIViewController {
     @IBOutlet weak var tableView    : UITableView!
     
     var viewModel                   : FCNewsFeedVM?
-    var itemHeights                 : [CGFloat]     = [CGFloat](repeating: UITableView.automaticDimension, count: 100)
+    var cellHeightsDictionary       : [Int: CGFloat] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,8 +40,8 @@ extension FCNewsFeedVC {
     }
     
     func configureTableViewAutoLayout() {
-        //tableView.rowHeight = UITableView.automaticDimension
-        //tableView.estimatedRowHeight = 450
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 450
     }
     
     func newDataFetched(_ success: Bool) {
@@ -58,6 +58,7 @@ extension FCNewsFeedVC {
         tableView.insertRows(at: indices, with: .none)
         tableView.endUpdates()
     }
+    
     func registerCells(){
         
         tableView.register(UINib(nibName: FCConstants.NIBS.video, bundle: nil),
@@ -66,6 +67,18 @@ extension FCNewsFeedVC {
                            forCellReuseIdentifier: FCConstants.CELL_IDENTIFIERS.fact)
         tableView.register(UINib(nibName: FCConstants.NIBS.newsLink, bundle: nil),
                            forCellReuseIdentifier: FCConstants.CELL_IDENTIFIERS.newsLink)
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cellHeightsDictionary[indexPath.row] = cell.bounds.height
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if cellHeightsDictionary[indexPath.row] != nil{
+            return cellHeightsDictionary[indexPath.row] ?? UITableView.automaticDimension
+        }
+        return UITableView.automaticDimension
     }
 }
 
@@ -157,21 +170,6 @@ extension FCNewsFeedVC: UITableViewDelegate {
                 print(FCConstants.ERRORS.segueError)
             }
         }
-    }
-}
-
-extension FCNewsFeedVC {
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        
-        if itemHeights[indexPath.row] == UITableView.automaticDimension {
-            itemHeights[indexPath.row] = cell.bounds.height
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        return itemHeights[indexPath.row]
     }
 }
 

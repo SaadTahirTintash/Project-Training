@@ -58,6 +58,7 @@ extension FCGalleryVC {
     func registerCells() {
         collectionView.register(UINib(nibName: "FCGalleryCell", bundle: nil), forCellWithReuseIdentifier: "GalleryCell")        
     }
+    
 }
 
 extension FCGalleryVC: UICollectionViewDataSource {

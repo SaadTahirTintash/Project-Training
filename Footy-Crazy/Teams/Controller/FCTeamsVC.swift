@@ -13,6 +13,7 @@ class FCTeamsVC: UIViewController {
     @IBOutlet weak var activityBGView       : UIView!
     @IBOutlet weak var tableView            : UITableView!
     
+    var cellHeightsDictionary               : [Int: CGFloat] = [:]
     var viewModel                           : FCTeamsVM?
 
     override func viewDidLoad() {
@@ -59,6 +60,19 @@ extension FCTeamsVC {
     
     func registerCells() {
         tableView.register(UINib(nibName: FCConstants.NIBS.teams, bundle: nil), forCellReuseIdentifier: FCConstants.CELL_IDENTIFIERS.team)
+    }
+    
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cellHeightsDictionary[indexPath.row] = cell.bounds.height
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if cellHeightsDictionary[indexPath.row] != nil{
+            return cellHeightsDictionary[indexPath.row] ?? UITableView.automaticDimension
+        }
+        return UITableView.automaticDimension
     }
 }
 

@@ -13,6 +13,7 @@ class FCPlayersVC: UIViewController {
     @IBOutlet weak var activityBGView       : UIView!
     @IBOutlet weak var tableView            : UITableView!
     
+    var cellHeightsDictionary               : [Int: CGFloat] = [:]
     var viewModel                           : FCPlayersVM?
     
     override func viewDidLoad() {
@@ -58,6 +59,18 @@ extension FCPlayersVC {
     
     func registerCells() {
         tableView.register(UINib(nibName: FCConstants.NIBS.players, bundle: nil), forCellReuseIdentifier: FCConstants.CELL_IDENTIFIERS.player)
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cellHeightsDictionary[indexPath.row] = cell.bounds.height
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if cellHeightsDictionary[indexPath.row] != nil{
+            return cellHeightsDictionary[indexPath.row] ?? UITableView.automaticDimension
+        }
+        return UITableView.automaticDimension
     }
 }
 
