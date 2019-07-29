@@ -21,6 +21,23 @@ class FCAboutVC: UIViewController {
 extension FCAboutVC {
     
     func setupVC(){
-        aboutLabel.text = FCConstants.ABOUT_US
+        let attributedText = createAttributedString()
+        aboutLabel.attributedText = attributedText
+    }
+    
+    func createAttributedString()->NSAttributedString{
+        let text = FCConstants.ABOUT_US
+        
+        let textColor = UIColor.red
+        
+        let shadow = NSShadow()
+        shadow.shadowColor = UIColor.gray
+        shadow.shadowBlurRadius = 5
+        
+        let attributes : [NSAttributedString.Key: Any] = [
+            NSAttributedString.Key.foregroundColor  : textColor,
+            NSAttributedString.Key.shadow           : shadow
+        ]
+        return NSAttributedString(string: text, attributes: attributes)
     }
 }
