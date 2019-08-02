@@ -7,6 +7,7 @@
 //
 
 struct FCDataManager {
+    
     //MARK:- static variables
     static var shared               : FCDataManager             = FCDataManager()
     
@@ -21,7 +22,10 @@ struct FCDataManager {
     private init() {}
 }
 
+//MARK:- Extension
 extension FCDataManager {
+    
+    //MARK:- Getter
     /// Model data for news feed
     ///
     /// - Returns: News Feed model array
@@ -29,6 +33,7 @@ extension FCDataManager {
         return newsFeedData
     }
     
+    //MARK:- Methods
     /// Adding sequence to news feed array
     ///
     /// - Parameter item: an array of news feed model

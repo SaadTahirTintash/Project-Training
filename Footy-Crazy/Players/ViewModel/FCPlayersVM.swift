@@ -10,27 +10,35 @@ import UIKit
 
 class FCPlayersVM: FCViewModelProtocol {
     
+    //MARK:- Private Properties
     private var modelArray          : [FCPlayersModel]
     private var PLAYERS_CONSTANTS   : FCConstants.FCTabsConstants
     
+    //MARK:- Public Properties
     var isFetchingData              : Bool              = false
     var initialDataFetched          : ((Bool)->Void)?
     var newDataFetched              : ((Bool)->Void)?
+    
+    //MARK:- Computed Properties
     var itemCount: Int{
         return modelArray.count
     }
+    
+    //MARK:- Initialization
     init(_ modelArray: [FCPlayersModel]) {
         self.modelArray                 = modelArray
         FCConstants.TAB_CONSTANTS       = .players
         PLAYERS_CONSTANTS               = FCConstants.TAB_CONSTANTS.getTabConstants()
     }
-}
-
-extension FCPlayersVM: FCPlayersService {
     
+    //MARK:- Methods
     func viewModelForDetail(at index: Int)->FCPlayersDetailVM {
         return FCPlayersDetailVM(modelArray[index])
     }
+}
+
+//MARK:- Service
+extension FCPlayersVM: FCPlayersService {
     
     func getInitialData() {
         getPlayerData(startingKey: PLAYERS_CONSTANTS.STARTING_KEY, pageSize: PLAYERS_CONSTANTS.INITIAL_PAGE_SIZE, success: { [weak self](array) in

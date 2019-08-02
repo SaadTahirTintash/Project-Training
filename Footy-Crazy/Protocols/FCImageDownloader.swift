@@ -9,14 +9,17 @@
 import Foundation
 import UIKit
 
+//MARK:- Definition
 protocol FCImageDownloader {
     
     typealias successType = (_ img: UIImage,_ urlString: String)->Void
     typealias failureType = (_ msg: String)->Void
 }
 
+//MARK:- Extension
 extension FCImageDownloader {
     
+    //MARK:- Methods
     /// Downloading image data from given url. Checks url if already present in cache else downloads from server, saves in cache and calls success completion handler
     ///
     /// - Parameters:

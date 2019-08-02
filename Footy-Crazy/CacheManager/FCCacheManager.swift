@@ -10,6 +10,7 @@ import Foundation
 import SwiftLinkPreview
 
 struct FCCacheManager {
+    
     //MARK:- static variables
     static let shared           : FCCacheManager             = FCCacheManager()
     
@@ -21,8 +22,10 @@ struct FCCacheManager {
     private init() {}
 }
 
+//MARK:- Extension
 extension FCCacheManager {
     
+    //MARK:- Getter
     /// getter for cached image
     ///
     /// - Parameter url: key
@@ -31,6 +34,15 @@ extension FCCacheManager {
         return imageCache.object(forKey: url as NSString)
     }
     
+    /// getter for cached NewsLink Response
+    ///
+    /// - Parameter url: key
+    /// - Returns: cached response object
+    func getNewsLink(_ url: String)->Response? {
+        return newsLinkCache.object(forKey: url as NSString)
+    }
+    
+    //MARK:- Setter
     /// setter for image
     ///
     /// - Parameters:
@@ -38,14 +50,6 @@ extension FCCacheManager {
     ///   - image: image to save
     func setImage(_ url: String,_ image: UIImage) {
         imageCache.setObject(image, forKey: url as NSString)
-    }
-    
-    /// getter for cached NewsLink Response
-    ///
-    /// - Parameter url: key
-    /// - Returns: cached response object
-    func getNewsLink(_ url: String)->Response? {
-        return newsLinkCache.object(forKey: url as NSString)
     }
     
     /// setter for news link

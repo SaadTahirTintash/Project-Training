@@ -10,20 +10,20 @@ import UIKit
 
 class FCGalleryCell: UICollectionViewCell {
     
+    //MARK:- Outlets
     @IBOutlet weak var img                  : UIImageView!
     @IBOutlet weak var activityIndicator    : UIActivityIndicatorView!
     
+    //MARK:- Public Properties
     var viewModel                           : FCGalleryDetailVM?
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
+    //MARK:- Class Methods
     override func prepareForReuse() {
         img.image = nil
     }
 }
 
+//MARK:- Image Downloading
 extension FCGalleryCell: FCImageDownloader {
     
     func configure(){

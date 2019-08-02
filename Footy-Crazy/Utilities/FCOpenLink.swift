@@ -8,8 +8,10 @@
 
 import SafariServices
 
+//MARK:- Definition
 protocol FCOpenLink {}
 
+//MARK:- Extension
 extension FCOpenLink {
     
     /// Opens a link in safari without leaving the app

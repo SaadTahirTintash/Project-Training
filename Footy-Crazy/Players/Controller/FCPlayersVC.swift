@@ -10,12 +10,17 @@ import UIKit
 
 class FCPlayersVC: UIViewController {
     
+    //MARK:- Outlets
     @IBOutlet weak var activityBGView       : UIView!
     @IBOutlet weak var tableView            : UITableView!
     
-    var cellHeightsDictionary               : [Int: CGFloat] = [:]
+    //MARK:- Private Properties
+    private var cellHeightsDictionary               : [Int: CGFloat] = [:]
+    
+    //MARK:- Public Properties
     var viewModel                           : FCPlayersVM?
     
+    //MARK:- Class Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewModel()
@@ -62,6 +67,7 @@ extension FCPlayersVC {
     }
 }
 
+//MARK:- Table View DataSource
 extension FCPlayersVC: UITableViewDataSource {
    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -81,7 +87,6 @@ extension FCPlayersVC: UITableViewDataSource {
         return cell
     }
     
-    
     func checkForMoreData(at displayingIndex: Int) {
         
         let totalItems = viewModel?.itemCount ?? 0
@@ -92,6 +97,7 @@ extension FCPlayersVC: UITableViewDataSource {
     }
 }
 
+//MARK:- Table View Delegate
 extension FCPlayersVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -105,6 +111,10 @@ extension FCPlayersVC: UITableViewDelegate {
         }
         return UITableView.automaticDimension
     }
+}
+
+//MARK:- Segues
+extension FCPlayersVC {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: FCConstants.SEGUES.playersDetailVC, sender: indexPath.row)

@@ -22,7 +22,6 @@ struct FCConstants {
     
     static let GALLERY_CELL_ROW_COUNT       : Int                       = 2
 
-    
     static let EMPTY_IMAGE                  : UIImage?                  = UIImage(named: "emptyImage")
     static let EMPTY_NEWS_IMAGE_URL         : URL?                      = URL(string: "https:\\google.com")
     static let EMPTY_NEWS_URL               : URL?                      = URL(string:"https:\\google.com")

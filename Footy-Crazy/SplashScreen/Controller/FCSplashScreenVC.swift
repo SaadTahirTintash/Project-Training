@@ -16,15 +16,17 @@ import UIKit
 
 class FCSplashScreenVC: UIViewController {
     
+    //MARK:- Class Methods
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         fetchInitialData()
     }
 }
 
+//MARK:- Extension
 extension FCSplashScreenVC: FCNewsFeedService {
     
+    //MARK:- Methods
     /// Fetches news feed data, saves data in FCDataManager and sets the root view controller of main window to news feed storyboard initial view controller
     func fetchInitialData() {
         

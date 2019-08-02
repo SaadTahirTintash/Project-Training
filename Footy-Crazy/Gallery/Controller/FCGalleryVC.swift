@@ -10,11 +10,14 @@ import UIKit
 
 class FCGalleryVC: UIViewController {
     
+    //MARK:- Outlets
     @IBOutlet weak var activityBGView       : UIView!
     @IBOutlet weak var collectionView   : UICollectionView!
     
+    //MARK:- Public Properties
     var viewModel                       : FCGalleryVM?
     
+    //MARK:- Class Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewModel()
@@ -61,6 +64,7 @@ extension FCGalleryVC {
     
 }
 
+//MARK:- Collection View DataSource
 extension FCGalleryVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -86,6 +90,7 @@ extension FCGalleryVC: UICollectionViewDataSource {
     }
 }
 
+//MARK:- Collection View Delegate
 extension FCGalleryVC: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -101,6 +106,7 @@ extension FCGalleryVC: UICollectionViewDelegate {
     }
 }
 
+//MARK:- Collection View Flow Layout
 extension FCGalleryVC: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

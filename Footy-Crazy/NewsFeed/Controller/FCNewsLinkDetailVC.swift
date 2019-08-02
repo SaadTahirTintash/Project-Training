@@ -11,20 +11,24 @@ import SwiftLinkPreview
 
 class FCNewsLinkDetailVC: UIViewController {
     
+    //MARK:- Outlets
     @IBOutlet weak var activityIndicator        : UIActivityIndicatorView!
     @IBOutlet weak var titleLabel               : UILabel!
     @IBOutlet weak var descriptionLabel         : UILabel!
     @IBOutlet weak var urlButton                : UIButton!
     @IBOutlet weak var imgView                  : UIImageView!
     
+    //MARK:- Public Properties
     var viewModel                               : FCNewsFeedDetailVM?
     
+    //MARK:- Class Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setupVC()
     }
 }
 
+//MARK:- Open Link Protocol
 extension FCNewsLinkDetailVC: FCOpenLink {
     
     @IBAction func urlButtonAction(_ sender: Any) {
@@ -34,6 +38,7 @@ extension FCNewsLinkDetailVC: FCOpenLink {
     }
 }
 
+//MARK:- News Link Downloading
 extension FCNewsLinkDetailVC: FCNewsLinkDownloader {
     
    func setupVC() {
@@ -47,6 +52,7 @@ extension FCNewsLinkDetailVC: FCNewsLinkDownloader {
     }
 }
 
+//MARK:- Image Downloading
 extension FCNewsLinkDetailVC: FCImageDownloader {
     
     func linkSuccess(_ response: Response){

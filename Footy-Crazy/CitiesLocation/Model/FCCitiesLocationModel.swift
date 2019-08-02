@@ -10,8 +10,15 @@ import Foundation
 
 struct FCCitiesLocationModel: Decodable {
     
-    var woeid: Int
-    var latt_long: String
-    var location_type: String
-    var title: String
+    var woeid           : Int
+    var latt_long       : String
+    var location_type   : LocationType
+    var title           : String
+}
+
+enum LocationType: String, Decodable {
+    case None
+    case City
+    case State
+    case Province
 }

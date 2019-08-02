@@ -10,11 +10,14 @@ import UIKit
 
 class FCGalleryDetailVC: UIViewController {
     
+    //MARK:- Outlets
     @IBOutlet weak var img                  : UIImageView!
     @IBOutlet weak var activityIndicator    : UIActivityIndicatorView!
     
+    //MARK:- Public Properties
     var viewModel                           : FCGalleryDetailVM?
     
+    //MARK:- Class Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setupVC()
@@ -22,7 +25,8 @@ class FCGalleryDetailVC: UIViewController {
     
 }
 
-extension FCGalleryDetailVC: FCShareContent{
+//MARK:- Sharing Content
+extension FCGalleryDetailVC: FCShareContent {
 
     @IBAction func share(_ sender: Any?){
         if let downloadedImage = img.image{
@@ -32,6 +36,7 @@ extension FCGalleryDetailVC: FCShareContent{
     }
 }
 
+//MARK:- Image Downloading
 extension FCGalleryDetailVC: FCImageDownloader {
     func setupVC(){
         loadImage(from: viewModel?.imageUrl, success: { [weak self] (downloadedImg, urlString) in

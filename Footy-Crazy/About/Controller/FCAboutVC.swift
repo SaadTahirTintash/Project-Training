@@ -10,16 +10,19 @@ import UIKit
 
 class FCAboutVC: UIViewController {
     
+    //MARK:- Outlets
     @IBOutlet weak var aboutLabel       : UILabel!
     
+    //MARK:- Class Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setupVC()
     }
 }
 
+//MARK:- Methods
 extension FCAboutVC {
-    
+
     func setupVC(){
         let attributedText = createAttributedString()
         aboutLabel.attributedText = attributedText

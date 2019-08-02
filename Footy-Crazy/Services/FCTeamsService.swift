@@ -6,14 +6,17 @@
 //  Copyright © 2019 Tintash. All rights reserved.
 //
 
+//MARK:- Definition
 protocol FCTeamsService: FCNetworkEngine {
 
     typealias successType   = (([FCTeamsModel])->Void)?
     typealias failureType   = ((String)->Void)?
 }
 
+//MARK:- Extension
 extension FCTeamsService{
     
+    //MARK:- Methods
     /// Fetch data from network engine protocol using the required parameters
     ///
     /// - Parameters:

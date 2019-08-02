@@ -10,27 +10,35 @@ import UIKit
 
 class FCTeamsVM: FCViewModelProtocol {
     
+    //MARK:- Private Properties
     private var modelArray      : [FCTeamsModel]
     private var TEAMS_CONSTANTS  : FCConstants.FCTabsConstants
     
+    //MARK:- Public Properties
     var isFetchingData          : Bool              = false
     var initialDataFetched      : ((Bool)->Void)?
     var newDataFetched          : ((Bool) -> Void)?
+    
+    //MARK:- Computed Properties
     var itemCount: Int{
         return modelArray.count
     }
+    
+    //MARK:- Initialization
     init(_ modelArray: [FCTeamsModel]) {
         self.modelArray             = modelArray
         FCConstants.TAB_CONSTANTS   = .teams
         TEAMS_CONSTANTS             = FCConstants.TAB_CONSTANTS.getTabConstants()
     }
-}
-
-extension FCTeamsVM: FCTeamsService {
     
+    //MARK:- Methods
     func viewModelForDetail(at index: Int)->FCTeamsDetailVM{
         return FCTeamsDetailVM(modelArray[index])
     }
+}
+
+//MARK:- Service
+extension FCTeamsVM: FCTeamsService {
     
     func getInitialData() {
         

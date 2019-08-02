@@ -10,14 +10,17 @@ import Foundation
 import UIKit
 import SwiftLinkPreview
 
+//MARK:- Definition
 protocol FCNewsLinkDownloader {
     
     typealias successType = (_ response: Response)->Void
     typealias failureType = (_ error: String)->Void
 }
 
+//MARK:- Extension
 extension FCNewsLinkDownloader {
     
+    //MARK:- Methods
     /// load link from the given url. Checks if url present in cache else downloads from server, saves the response in cache and calls success
     ///
     /// - Parameters:

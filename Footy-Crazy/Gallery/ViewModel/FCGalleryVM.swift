@@ -10,28 +10,35 @@ import UIKit
 
 class FCGalleryVM: FCViewModelProtocol {
     
+    //MARK:- Private Properties
     private var modelArray          : [FCGalleryModel]
     private var GALLERY_CONSTANTS   : FCConstants.FCTabsConstants
     
+    //MARK:- Public Properties
     var isFetchingData      : Bool = false
     var initialDataFetched  : ((Bool)->Void)?
     var newDataFetched      : ((Bool)->Void)?
+    
+    //MARK:- Computed Properties
     var itemCount: Int{
         return modelArray.count
     }
     
+    //MARK:- Initialization
     init(_ modelArray: [FCGalleryModel]) {
         self.modelArray                 = modelArray
         FCConstants.TAB_CONSTANTS       = .gallery
         GALLERY_CONSTANTS               = FCConstants.TAB_CONSTANTS.getTabConstants()
     }
-}
-
-extension FCGalleryVM: FCGalleryService {
     
+    //MARK:- Methods
     func viewModelForDetail(at index: Int) -> FCGalleryDetailVM {
         return FCGalleryDetailVM(model: modelArray[index])
     }
+}
+
+//MARK:- Service
+extension FCGalleryVM: FCGalleryService {
     
     func getInitialData() {
         getGalleryData(startingKey: GALLERY_CONSTANTS.STARTING_KEY, pageSize: GALLERY_CONSTANTS.INITIAL_PAGE_SIZE, success: { [weak self](array) in

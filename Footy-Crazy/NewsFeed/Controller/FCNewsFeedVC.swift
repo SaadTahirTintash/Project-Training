@@ -11,11 +11,14 @@ import SafariServices
 
 class FCNewsFeedVC: UIViewController {
     
+    //MARK:- Outlets
     @IBOutlet weak var tableView    : UITableView!
     
+    //MARK:- Public Properties
     var viewModel                   : FCNewsFeedVM?
     var cellHeightsDictionary       : [Int: CGFloat] = [:]
     
+    //MARK:- Class Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewModel()
@@ -25,6 +28,7 @@ class FCNewsFeedVC: UIViewController {
     }
 }
 
+//MARK:- Extension
 extension FCNewsFeedVC {
     
     func configureViewModel() {
@@ -70,6 +74,7 @@ extension FCNewsFeedVC {
     }
 }
 
+//MARK:- Table View DataSource
 extension FCNewsFeedVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -142,6 +147,7 @@ extension FCNewsFeedVC: UITableViewDataSource {
     
 }
 
+//MARK:- Table View Delegate
 extension FCNewsFeedVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -173,6 +179,7 @@ extension FCNewsFeedVC: UITableViewDelegate {
     }
 }
 
+//MARK:- Segue
 extension FCNewsFeedVC {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -192,6 +199,7 @@ extension FCNewsFeedVC {
     }
 }
 
+//MARK:- Sharing Content
 extension FCNewsFeedVC: FCShareContent {
     
     func share(_ newsFeedDetailVM: FCNewsFeedDetailVM?){

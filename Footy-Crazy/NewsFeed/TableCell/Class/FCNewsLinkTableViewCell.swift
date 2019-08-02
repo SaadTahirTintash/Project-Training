@@ -11,15 +11,17 @@ import SwiftLinkPreview
 
 class FCNewsLinkTableViewCell: UITableViewCell, FCNewsFeedCellProtocol {
     
-    
+    //MARK:- Outlets
     @IBOutlet weak var activityIndicator    : UIActivityIndicatorView!
     @IBOutlet weak var titleLbl             : UILabel!
     @IBOutlet weak var newsImg              : UIImageView!
     @IBOutlet weak var stackView            : UIStackView!
     
+    //MARK:- Public Properties
     var shareBtnPressed                     : ((FCNewsFeedDetailVM?)->Void)?
     var viewModel                           : FCNewsFeedDetailVM?
     
+    //MARK:- Class Methods
     override func prepareForReuse() {
         newsImg.image = nil
     }

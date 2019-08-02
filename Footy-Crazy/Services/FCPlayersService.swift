@@ -6,14 +6,17 @@
 //  Copyright © 2019 Tintash. All rights reserved.
 //
 
+//MARK:- Definition
 protocol FCPlayersService: FCNetworkEngine {
     
     typealias successType   = (([FCPlayersModel])->Void)?
     typealias failureType   = ((String)->Void)?
 }
 
+//MARK:- Extension
 extension FCPlayersService {
     
+    //MARK:- Methods
     /// Fetch data from network engine protocol using the required parameters
     ///
     /// - Parameters:

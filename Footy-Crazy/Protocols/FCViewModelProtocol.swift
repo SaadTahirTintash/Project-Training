@@ -8,17 +8,19 @@
 
 import UIKit
 
+//MARK:- Defintion
 protocol FCViewModelProtocol {
+    
     //MARK:- Generic type
     associatedtype myType
     
-    //MARK:- Variables
+    //MARK:- Properties
     var isFetchingData      : Bool                          { get set }
     var initialDataFetched  : ((_ success: Bool)->Void)?    { get set }
     var newDataFetched      : ((_ success: Bool)->Void)?    { get set }
     var itemCount           : Int                           { get }
     
-    //MARK:- methods
+    //MARK:- Methods
     func getInitialData     ()
     func getMoreData        ()
     func viewModelForDetail (at index: Int)->myType

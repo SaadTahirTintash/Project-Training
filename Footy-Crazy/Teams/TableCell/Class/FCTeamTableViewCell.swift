@@ -10,22 +10,22 @@ import UIKit
 
 class FCTeamTableViewCell: UITableViewCell {
     
+    //MARK:- Outlets
     @IBOutlet weak var standingLabel    : UILabel!
     @IBOutlet weak var flagImage        : UIImageView!
     @IBOutlet weak var teamName         : UILabel!
     @IBOutlet weak var country          : UILabel!
     
+    //MARK:- Public Properties
     var viewModel                       : FCTeamsDetailVM?
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
+    //MARK:- Class Methods
     override func prepareForReuse() {
         flagImage.image = FCConstants.EMPTY_IMAGE
     }
 }
 
+//MARK:- Image Downloading
 extension FCTeamTableViewCell: FCImageDownloader {
     
     func configure() {

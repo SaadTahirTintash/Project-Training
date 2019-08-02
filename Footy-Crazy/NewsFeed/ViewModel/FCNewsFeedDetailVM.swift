@@ -10,20 +10,27 @@ import UIKit
 
 class FCNewsFeedDetailVM {
     
+    //MARK:- Private Properties
     private var model   : FCNewsFeedModel
     
+    //MARK:- Initialization
     init(_ model: FCNewsFeedModel) {
         self.model = model
-    }    
+    }
+    
+    //MARK:- Computed Properties
     var title: String?{
         return model.title
     }
+    
     var url: String?{
         return model.url
     }
+    
     var description: String?{
         return model.description
     }
+    
     var type: String?{
         return model.type?.rawValue
     }

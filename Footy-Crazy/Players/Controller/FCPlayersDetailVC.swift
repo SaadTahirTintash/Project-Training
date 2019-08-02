@@ -10,6 +10,7 @@ import UIKit
 
 class FCPlayersDetailVC: UIViewController {
     
+    //MARK:- Outlets
     @IBOutlet weak var nameLabel        : UILabel!
     @IBOutlet weak var clubLabel        : UILabel!
     @IBOutlet weak var countryLabel     : UILabel!
@@ -18,14 +19,17 @@ class FCPlayersDetailVC: UIViewController {
     @IBOutlet weak var playerImage      : UIImageView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    //MARK:- Public Properties
     var viewModel                       : FCPlayersDetailVM?
     
+    //MARK:- Class Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setupVC()
     }
 }
 
+//MARK:- Image Downloading
 extension FCPlayersDetailVC: FCImageDownloader {
     
     func setupVC() {

@@ -10,11 +10,14 @@ import UIKit
 
 class FCCitiesLocationVC: UIViewController {
 
+    //MARK:- Outlets
     @IBOutlet weak var activityBGView       : UIView!
     @IBOutlet weak var tableView            : UITableView!
     
+    //MARK:- Public Properties
     var viewModel                           : FCCitiesLocationVM?
     
+    //MARK:- Class Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewModel()
@@ -23,6 +26,7 @@ class FCCitiesLocationVC: UIViewController {
         registerCells()
     }
     
+    //MARK:- Methods
     func configureViewModel() {
         viewModel = FCCitiesLocationVM([FCCitiesLocationModel]())
         
@@ -50,6 +54,7 @@ class FCCitiesLocationVC: UIViewController {
     }
 }
 
+//MARK:- Table View DataSource
 extension FCCitiesLocationVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

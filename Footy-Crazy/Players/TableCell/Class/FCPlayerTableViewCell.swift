@@ -9,26 +9,28 @@
 import UIKit
 
 class FCPlayerTableViewCell: UITableViewCell {
+    
+    //MARK:- Outlets
     @IBOutlet weak var standingLabel        : UILabel!
     @IBOutlet weak var playerDPImage        : UIImageView!
     @IBOutlet weak var playerName           : UILabel!
     @IBOutlet weak var countryName          : UILabel!
     @IBOutlet weak var clubName             : UILabel!
     
+    //MARK:- Public Methods
     var viewModel                           : FCPlayersDetailVM?
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
+    //MARK:- Class Methods
     override func prepareForReuse() {
         playerDPImage.image = nil
     }
 }
 
+//MARK:- Image Downloading
 extension FCPlayerTableViewCell: FCImageDownloader {
     
     func configure() {
+        
         if let standing = viewModel?.playerStanding {
             standingLabel.text = standing
         }

@@ -10,9 +10,11 @@ import UIKit
 
 class FCNewsFeedVM: FCViewModelProtocol {
     
+    //MARK:- Private Properties
     private var modelArray          : [FCNewsFeedModel]
     private var NEWS_FEED_CONSTANTS : FCConstants.FCTabsConstants
     
+    //MARK:- Public Properties
     var isFetchingData      : Bool              = false
     var initialDataFetched  : ((Bool) -> Void)?
     var newDataFetched      : ((Bool) -> Void)?
@@ -20,23 +22,26 @@ class FCNewsFeedVM: FCViewModelProtocol {
         return modelArray.count
     }
     
+    //MARK:- Initialization
     init(_ modelArray: [FCNewsFeedModel]) {
         self.modelArray                 = modelArray
         FCConstants.TAB_CONSTANTS       = .newsFeed
         NEWS_FEED_CONSTANTS             = FCConstants.TAB_CONSTANTS.getTabConstants()
         
     }
-}
-
-extension FCNewsFeedVM: FCNewsFeedService {
     
-    func getType(of index: Int)->FCNewsFeedObjectType? {        
+    //Methods
+    func getType(of index: Int)->FCNewsFeedObjectType? {
         return modelArray[index].type
     }
     
     func viewModelForDetail(at index: Int)->FCNewsFeedDetailVM {
         return FCNewsFeedDetailVM(modelArray[index])
     }
+}
+
+//MARK:- Service Methods
+extension FCNewsFeedVM: FCNewsFeedService {
     
     func getInitialData() {}
     

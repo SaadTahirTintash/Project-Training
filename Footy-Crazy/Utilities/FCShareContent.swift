@@ -7,8 +7,10 @@
 //
 import UIKit
 
+//MARK:- Definition
 protocol FCShareContent {}
 
+//MARK:- Extension
 extension FCShareContent {
     
     /// Sharing images, String, Any data on a view

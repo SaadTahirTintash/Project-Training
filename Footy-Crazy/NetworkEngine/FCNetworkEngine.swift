@@ -10,7 +10,7 @@
 import FirebaseDatabase
 import Alamofire
 
-//MARK: Definition
+//MARK:- Definition
 protocol FCNetworkEngine {
     
     typealias success<MODEL_TYPE>   = (([MODEL_TYPE])->Void)?
@@ -18,8 +18,10 @@ protocol FCNetworkEngine {
     
 }
 
+//MARK:- Extension
 extension FCNetworkEngine {
     
+    //MARK:- Computed Properties
     var ref: DatabaseReference {
         return Database.database().reference()
     }
@@ -28,6 +30,7 @@ extension FCNetworkEngine {
         return ref.child(FCConstants.FIREBASE_ROOT_NODE)
     }
     
+    //MARK:- Methods
     /// Fetch Data from firebase server and observe for return. On return, parse the data and removes the observer. On success, parse data to model one by one using decodables. On failure, prints the required error message
     ///
     /// - Parameters:

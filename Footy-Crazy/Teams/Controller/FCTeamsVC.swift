@@ -10,12 +10,17 @@ import UIKit
 
 class FCTeamsVC: UIViewController {
     
+    //MARK:- Outlets
     @IBOutlet weak var activityBGView       : UIView!
     @IBOutlet weak var tableView            : UITableView!
     
-    var cellHeightsDictionary               : [Int: CGFloat] = [:]
+    //MARK:- Private Properties
+    private var cellHeightsDictionary               : [Int: CGFloat] = [:]
+    
+    //MARK:- Public Properties
     var viewModel                           : FCTeamsVM?
 
+    //MARK:- Class Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewModel()
@@ -63,6 +68,7 @@ extension FCTeamsVC {
     }
 }
 
+//MARK:- Table View DataSource
 extension FCTeamsVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -88,6 +94,7 @@ extension FCTeamsVC: UITableViewDataSource {
     }
 }
 
+//MARK:- Table View Delegate
 extension FCTeamsVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -101,6 +108,10 @@ extension FCTeamsVC: UITableViewDelegate {
         }
         return UITableView.automaticDimension
     }
+}
+
+//MARK:- Segues
+extension FCTeamsVC {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: FCConstants.SEGUES.teamsDetailVC, sender: indexPath.row)

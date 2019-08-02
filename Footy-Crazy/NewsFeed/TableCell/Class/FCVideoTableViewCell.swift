@@ -10,29 +10,36 @@ import UIKit
 import youtube_ios_player_helper
 
 class FCVideoTableViewCell: UITableViewCell, FCNewsFeedCellProtocol {
-    
+
+    //MARK:- Outlets
     @IBOutlet weak var titleLabel               : UILabel!
     @IBOutlet weak var videoView                : YTPlayerView!
     @IBOutlet weak var activityIndicator        : UIActivityIndicatorView!
     
+    //MARK:- Public Properties
     var shareBtnPressed                         : ((FCNewsFeedDetailVM?)->Void)?
     var viewModel                               : FCNewsFeedDetailVM?
     
+    //MARK:- Class Methods
     override func awakeFromNib() {
         super.awakeFromNib()
         videoView.delegate = self        
     }
 }
 
+//MARK:- Extension
 extension FCVideoTableViewCell {
     
+    //MARK:- Button Action
     @IBAction func share(_ sender: Any) {
         shareBtnPressed?(viewModel)
     }
 }
 
+//MARK:- Extension
 extension FCVideoTableViewCell {
     
+    //MARK:- Methods
     /// sets uiview from view model and loading video using given link
     func configure() {
         titleLabel.text     = viewModel?.title
@@ -43,8 +50,10 @@ extension FCVideoTableViewCell {
     }
 }
 
+//MARK:- Youtube Player Delegate
 extension FCVideoTableViewCell: YTPlayerViewDelegate {
     
+    //MARK:- Methods
     /// Used to create an initial view for youtube player
     ///
     /// - Parameter playerView: youtube player view
