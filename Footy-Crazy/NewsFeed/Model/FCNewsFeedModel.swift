@@ -13,7 +13,14 @@ struct FCNewsFeedModel: Decodable {
     var url:            String?
     var description:    String?
     var title:          String?
-    var type:           String?
+    var type:           FCNewsFeedObjectType?
+}
+
+enum FCNewsFeedObjectType: String, Decodable{
+    case none
+    case video
+    case news_link
+    case fact
 }
 
 

@@ -84,11 +84,11 @@ extension FCNewsFeedVC: UITableViewDataSource {
         checkForMoreData(at: indexPath.row)
         
         switch type {
-        case FCNewsFeedObjectType.Video:
+        case FCNewsFeedObjectType.video:
             return videoTableCell(at: indexPath)
-        case FCNewsFeedObjectType.NewsLink:
+        case FCNewsFeedObjectType.news_link:
             return newsLinkTableCell(at: indexPath)
-        case FCNewsFeedObjectType.Fact:
+        case FCNewsFeedObjectType.fact:
             return factTableCell(at: indexPath)
         default:
             return tableView.defaultCell()
@@ -148,11 +148,11 @@ extension FCNewsFeedVC: UITableViewDelegate {
         
         if let type = viewModel?.getType(of: indexPath.row) {
             switch type {
-            case FCNewsFeedObjectType.NewsLink:
+            case FCNewsFeedObjectType.news_link:
                 performSegue(withIdentifier: FCConstants.SEGUES.newsLinkDetailVC, sender: indexPath.row)
-            case FCNewsFeedObjectType.Video:
+            case FCNewsFeedObjectType.video:
                 performSegue(withIdentifier: FCConstants.SEGUES.videoDetailVC, sender: indexPath.row)
-            case FCNewsFeedObjectType.Fact:
+            case FCNewsFeedObjectType.fact:
                 performSegue(withIdentifier: FCConstants.SEGUES.factDetailVC, sender: indexPath.row)
             default:
                 print(FCConstants.ERRORS.segueError)

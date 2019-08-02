@@ -25,6 +25,6 @@ class FCNewsFeedDetailVM {
         return model.description
     }
     var type: String?{
-        return model.type
+        return model.type?.rawValue
     }
 }

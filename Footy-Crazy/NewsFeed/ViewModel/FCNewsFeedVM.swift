@@ -8,13 +8,6 @@
 
 import UIKit
 
-enum FCNewsFeedObjectType: Int{
-    case Default = 0
-    case Video
-    case NewsLink
-    case Fact
-}
-
 class FCNewsFeedVM: FCViewModelProtocol {
     
     private var modelArray          : [FCNewsFeedModel]
@@ -37,17 +30,8 @@ class FCNewsFeedVM: FCViewModelProtocol {
 
 extension FCNewsFeedVM: FCNewsFeedService {
     
-    func getType(of index: Int)->FCNewsFeedObjectType {
-        switch modelArray[index].type {
-        case "video":
-            return FCNewsFeedObjectType.Video
-        case "fact":
-            return FCNewsFeedObjectType.Fact
-        case "news_link":
-            return FCNewsFeedObjectType.NewsLink
-        default:
-            return FCNewsFeedObjectType.Default
-        }
+    func getType(of index: Int)->FCNewsFeedObjectType? {        
+        return modelArray[index].type
     }
     
     func viewModelForDetail(at index: Int)->FCNewsFeedDetailVM {
