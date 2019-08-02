@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="YWW-h4-ZUh">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -49,12 +49,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="0eu-Bb-tGk"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Teams" image="teams" id="JPX-af-MqY"/>
                     <navigationItem key="navigationItem" title="Teams" id="jfk-Rt-P9Y"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="activityBGView" destination="6vy-dp-TqF" id="iEh-xO-obh"/>
                         <outlet property="tableView" destination="emI-sO-XEE" id="w8M-L2-8ok"/>
-                        <segue destination="MiB-NG-Pqh" kind="show" identifier="FCTeamsDetailVCSegue" id="38j-Jp-87u"/>
+                        <segue destination="MiB-NG-Pqh" kind="show" identifier="TeamToTeamDetailSegue" id="38j-Jp-87u"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F3o-xn-SiP" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -176,7 +177,7 @@
         <!--Teams-->
         <scene sceneID="Wsc-lW-iKd">
             <objects>
-                <navigationController storyboardIdentifier="TeamsVC" automaticallyAdjustsScrollViewInsets="NO" id="YWW-h4-ZUh" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="FCTeamsVC" automaticallyAdjustsScrollViewInsets="NO" id="YWW-h4-ZUh" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Teams" image="teams" id="We1-pa-rWK"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="CcI-IK-3Cb">

@@ -115,11 +115,11 @@ extension FCConstants {
     }
     
     struct FCSegueIdentifiers {
-        let newsLinkDetailVC        :String     = "FCNewsLinkDetailVC"
-        let videoDetailVC           :String     = "FCVideoDetailVC"
-        let factDetailVC            :String     = "FCFactDetailVC"
-        let galleryImageDetailVC    :String     = "GalleryImageDetailVCSegue"
-        let teamsDetailVC           :String     = "FCTeamsDetailVCSegue"
-        let playersDetailVC         :String     = "FCPlayersDetailVCSegue"
+        let newsLinkDetailVC        :String     = "NewsFeedToNewsLinkDetailSegue"
+        let videoDetailVC           :String     = "NewsFeedToVideoDetailSegue"
+        let factDetailVC            :String     = "NewsFeedToFactDetailSegue"
+        let galleryImageDetailVC    :String     = "GalleryToGalleryDetailSegue"
+        let teamsDetailVC           :String     = "TeamToTeamDetailSegue"
+        let playersDetailVC         :String     = "PlayerToPlayerDetailSegue"
     }
 }

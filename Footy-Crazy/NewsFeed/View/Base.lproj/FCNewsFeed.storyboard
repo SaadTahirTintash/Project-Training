@@ -35,9 +35,9 @@
                     <navigationItem key="navigationItem" title="News Feed" id="fLA-52-Rmm"/>
                     <connections>
                         <outlet property="tableView" destination="x9l-KN-nzS" id="0O3-xa-HwG"/>
-                        <segue destination="b2X-IY-7Fn" kind="show" identifier="FCFactDetailVC" id="fcd-fo-JFb"/>
-                        <segue destination="46C-hg-a4a" kind="show" identifier="FCVideoDetailVC" id="Qlo-gw-Bcn"/>
-                        <segue destination="LDx-HE-kDa" kind="show" identifier="FCNewsLinkDetailVC" id="CII-hw-jWu"/>
+                        <segue destination="b2X-IY-7Fn" kind="show" identifier="NewsFeedToFactDetailSegue" id="fcd-fo-JFb"/>
+                        <segue destination="46C-hg-a4a" kind="show" identifier="NewsFeedToVideoDetailSegue" id="Qlo-gw-Bcn"/>
+                        <segue destination="LDx-HE-kDa" kind="show" identifier="NewsFeedToNewsLinkDetailSegue" id="CII-hw-jWu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -338,40 +338,40 @@
             </objects>
             <point key="canvasLocation" x="2794.202898550725" y="930.80357142857133"/>
         </scene>
-        <!--GalleryVC-->
+        <!--FCGalleryVC-->
         <scene sceneID="s56-U6-1I3">
             <objects>
-                <viewControllerPlaceholder storyboardName="FCGallery" referencedIdentifier="GalleryVC" id="fqW-ob-EH5" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="FCGallery" referencedIdentifier="FCGalleryVC" id="fqW-ob-EH5" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Gallery" id="nIG-yE-NFZ"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ucc-3D-oYk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-266" y="640"/>
         </scene>
-        <!--TeamsVC-->
+        <!--FCTeamsVC-->
         <scene sceneID="oEY-YQ-H9V">
             <objects>
-                <viewControllerPlaceholder storyboardName="FCTeams" referencedIdentifier="TeamsVC" id="GTl-C2-OS9" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="FCTeams" referencedIdentifier="FCTeamsVC" id="GTl-C2-OS9" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Teams" id="64t-4N-lSj"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uyG-VB-nT8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-36" y="638"/>
         </scene>
-        <!--PlayersVC-->
+        <!--FCPlayersVC-->
         <scene sceneID="ydg-P1-xk0">
             <objects>
-                <viewControllerPlaceholder storyboardName="FCPlayers" referencedIdentifier="PlayersVC" id="3Eo-rb-nuC" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="FCPlayers" referencedIdentifier="FCPlayersVC" id="3Eo-rb-nuC" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Players" id="fbt-sH-9YE"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LCm-2M-tiW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="245" y="633"/>
         </scene>
-        <!--AboutVC-->
+        <!--FCAboutVC-->
         <scene sceneID="Hus-Ew-r3E">
             <objects>
-                <viewControllerPlaceholder storyboardName="FCAbout" referencedIdentifier="AboutVC" id="Mlx-S5-bMz" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="FCAbout" referencedIdentifier="FCAboutVC" id="Mlx-S5-bMz" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="About" id="254-iU-Zbg"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nRc-G8-Vlx" userLabel="First Responder" sceneMemberID="firstResponder"/>

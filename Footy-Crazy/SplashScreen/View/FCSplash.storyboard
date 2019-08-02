@@ -13,7 +13,7 @@
         <!--Splash ScreenVC-->
         <scene sceneID="zJM-up-Hjk">
             <objects>
-                <viewController id="Bfx-gT-1Zi" customClass="FCSplashScreenVC" customModule="Footy_Crazy" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FCSplashScreenVC" id="Bfx-gT-1Zi" customClass="FCSplashScreenVC" customModule="Footy_Crazy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gzu-VU-FuW">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
