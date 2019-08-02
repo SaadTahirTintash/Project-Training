@@ -47,16 +47,24 @@ extension FCNewsFeedVM: FCNewsFeedService {
             if startingId != 0 {
                 startingId += 1
                 getNewsFeedData(startingKey: String(startingId), pageSize: NEWS_FEED_CONSTANTS.PAGE_SIZE, success: { [weak self](array) in
-                    FCDataManager.shared.addNewsFeedData(item: array)
-                    self?.modelArray.append(contentsOf: array)
-                    self?.isFetchingData = false
-                    self?.newDataFetched?(true)
+                    self?.dataFetched(isInitialData: false, success: true, array: array)
                 }) { [weak self](errorMsg) in
                     print(errorMsg)
-                    self?.isFetchingData = false
-                    self?.newDataFetched?(false)
+                    self?.dataFetched(isInitialData: false, success: false, array: nil)
                 }
             }
         }
     }
+    
+    func dataFetched(isInitialData:Bool, success: Bool, array: [FCNewsFeedModel]?) {
+        
+        if success {
+            guard let array = array else { return }
+            FCDataManager.shared.addNewsFeedData(item: array)
+            modelArray.append(contentsOf: array)
+        }
+        isFetchingData = false
+        isInitialData ? initialDataFetched?(success) : newDataFetched?(success)
+    }
+    
 }

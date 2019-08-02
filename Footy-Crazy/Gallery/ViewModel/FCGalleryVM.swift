@@ -35,14 +35,13 @@ extension FCGalleryVM: FCGalleryService {
     
     func getInitialData() {
         getGalleryData(startingKey: GALLERY_CONSTANTS.STARTING_KEY, pageSize: GALLERY_CONSTANTS.INITIAL_PAGE_SIZE, success: { [weak self](array) in
-            FCDataManager.shared.addGalleryData(item: array)
-            self?.modelArray.append(contentsOf: array)
-            self?.isFetchingData = false
-            self?.initialDataFetched?(true)
+            
+            self?.dataFetched(isInitialData: true, success: true, array: array)
+            
         }) { [weak self](errorMsg) in
+            
             print(errorMsg)
-            self?.isFetchingData = false
-            self?.initialDataFetched?(false)
+            self?.dataFetched(isInitialData: true, success: false, array: nil)
         }
     }
     
@@ -53,16 +52,27 @@ extension FCGalleryVM: FCGalleryService {
             if startingId != 0 {
                 startingId += 1
                 getGalleryData(startingKey: String(startingId), pageSize: GALLERY_CONSTANTS.PAGE_SIZE, success: { [weak self](array) in
-                    FCDataManager.shared.addGalleryData(item: array)
-                    self?.modelArray.append(contentsOf: array)
-                    self?.isFetchingData = false
-                    self?.newDataFetched?(true)
+                    
+                    self?.dataFetched(isInitialData: false, success: true, array: array)
+                    
                 }) { [weak self](errorMsg) in
+                    
                     print(errorMsg)
-                    self?.isFetchingData = false
-                    self?.newDataFetched?(false)
+                    self?.dataFetched(isInitialData: false, success: false, array: nil)
                 }
             }
         }
     }
+    
+    func dataFetched(isInitialData:Bool, success: Bool, array: [FCGalleryModel]?) {
+        
+        if success {
+            guard let array = array else { return }
+            FCDataManager.shared.addGalleryData(item: array)
+            modelArray.append(contentsOf: array)
+        }
+        isFetchingData = false
+        isInitialData ? initialDataFetched?(success) : newDataFetched?(success)
+    }
+    
 }

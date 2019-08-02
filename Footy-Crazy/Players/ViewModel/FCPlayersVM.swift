@@ -34,14 +34,10 @@ extension FCPlayersVM: FCPlayersService {
     
     func getInitialData() {
         getPlayerData(startingKey: PLAYERS_CONSTANTS.STARTING_KEY, pageSize: PLAYERS_CONSTANTS.INITIAL_PAGE_SIZE, success: { [weak self](array) in
-            FCDataManager.shared.addPlayersData(item: array)
-            self?.modelArray.append(contentsOf: array)
-            self?.isFetchingData = false
-            self?.initialDataFetched?(true)
+            self?.dataFetched(isInitialData: true, success: true, array: array)
         }) { [weak self](errorMsg) in
             print(errorMsg)
-            self?.isFetchingData = false
-            self?.initialDataFetched?(false)
+            self?.dataFetched(isInitialData: true, success: false, array: nil)
         }
     }
     
@@ -52,16 +48,23 @@ extension FCPlayersVM: FCPlayersService {
             if startingId != 0 {
                 startingId += 1
                 getPlayerData(startingKey: String(startingId), pageSize: PLAYERS_CONSTANTS.PAGE_SIZE, success: { [weak self](array) in
-                    FCDataManager.shared.addPlayersData(item: array)
-                    self?.modelArray.append(contentsOf: array)
-                    self?.isFetchingData = false
-                    self?.newDataFetched?(true)
+                    self?.dataFetched(isInitialData: false, success: true, array: array)
                 }) { [weak self](errorMsg) in
                     print(errorMsg)
-                    self?.isFetchingData = false
-                    self?.newDataFetched?(false)
+                    self?.dataFetched(isInitialData: false, success: false, array: nil)
                 }
             }
         }
+    }
+    
+    func dataFetched(isInitialData:Bool, success: Bool, array: [FCPlayersModel]?) {
+        
+        if success {
+            guard let array = array else { return }
+            FCDataManager.shared.addPlayersData(item: array)
+            modelArray.append(contentsOf: array)
+        }
+        isFetchingData = false
+        isInitialData ? initialDataFetched?(success) : newDataFetched?(success)
     }
 }

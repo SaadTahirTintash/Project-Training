@@ -30,16 +30,23 @@ extension FCCitiesLocationVM: FCCitiesLocationService {
     
     func getInitialData() {
         getCitiesLocationData(pathString: FCConstants.CITIES_LOCATION_CONSTANTS.PATH_STRING, queryString: FCConstants.CITIES_LOCATION_CONSTANTS.QUERY_STRING, success: { [weak self] (array) in
-            FCDataManager.shared.addCitiesLocationData(item: array)
-            self?.modelArray.append(contentsOf: array)
-            self?.isFetchingData = false
-            self?.initialDataFetched?(true)
+            self?.dataFetched(isInitialData: true, success: true, array: array)
         }, failure:  { [weak self] (errorMsg) in
             print(errorMsg)
-            self?.isFetchingData = false
-            self?.initialDataFetched?(false)
+            self?.dataFetched(isInitialData: true, success: false, array: nil)
         })
     }
     
     func getMoreData(){}
+    
+    func dataFetched(isInitialData:Bool, success: Bool, array: [FCCitiesLocationModel]?) {
+        
+        if success {
+            guard let array = array else { return }
+            FCDataManager.shared.addCitiesLocationData(item: array)
+            modelArray.append(contentsOf: array)
+        }
+        isFetchingData = false
+        isInitialData ? initialDataFetched?(success) : newDataFetched?(success)
+    }
 }
