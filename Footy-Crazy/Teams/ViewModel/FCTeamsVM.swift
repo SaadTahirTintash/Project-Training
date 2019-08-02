@@ -11,6 +11,7 @@ import UIKit
 class FCTeamsVM: FCViewModelProtocol {
     
     private var modelArray      : [FCTeamsModel]
+    private var TEAMS_CONSTANTS  : FCConstants.FCTabsConstants
     
     var isFetchingData          : Bool              = false
     var initialDataFetched      : ((Bool)->Void)?
@@ -19,7 +20,9 @@ class FCTeamsVM: FCViewModelProtocol {
         return modelArray.count
     }
     init(_ modelArray: [FCTeamsModel]) {
-        self.modelArray = modelArray
+        self.modelArray             = modelArray
+        FCConstants.TAB_CONSTANTS   = .teams
+        TEAMS_CONSTANTS             = FCConstants.TAB_CONSTANTS.getTabConstants()
     }
 }
 
@@ -30,7 +33,8 @@ extension FCTeamsVM: FCTeamsService {
     }
     
     func getInitialData() {
-        getTeamData(startingKey: FCConstants.TEAMS_CONSTANTS.STARTING_KEY, pageSize: FCConstants.TEAMS_CONSTANTS.INITIAL_PAGE_SIZE, success: { [weak self](array) in
+        
+        getTeamData(startingKey: TEAMS_CONSTANTS.STARTING_KEY, pageSize: TEAMS_CONSTANTS.INITIAL_PAGE_SIZE, success: { [weak self](array) in
                 FCDataManager.shared.addTeamsData(item: array)
                 self?.modelArray.append(contentsOf: array)
                 self?.isFetchingData = false
@@ -49,7 +53,7 @@ extension FCTeamsVM: FCTeamsService {
         var startingId = modelArray.endIndex
         if startingId != 0{
             startingId += 1
-            getTeamData(startingKey:String(startingId), pageSize: FCConstants.TEAMS_CONSTANTS.PAGE_SIZE, success: { [weak self](array) in
+            getTeamData(startingKey:String(startingId), pageSize: TEAMS_CONSTANTS.PAGE_SIZE, success: { [weak self](array) in
                     FCDataManager.shared.addTeamsData(item: array)
                     self?.modelArray.append(contentsOf: array)
                     self?.isFetchingData = false

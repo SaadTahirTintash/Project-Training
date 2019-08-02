@@ -11,26 +11,26 @@ struct FCConstants {
     
     static let FIREBASE_ROOT_NODE           : String                    = "footy_crazy_data"
     
-    static let NEWS_FEED_CONSTANTS          :FCNewsFeedConstants        = FCNewsFeedConstants()
-    static let GALLERY_CONSTANTS            :FCGalleryConstants         = FCGalleryConstants()
-    static let PLAYERS_CONSTANTS            :FCPlayersConstants         = FCPlayersConstants()
-    static let TEAMS_CONSTANTS              :FCTeamsConstants           = FCTeamsConstants()
-    static let CITIES_LOCATION_CONSTANTS    :FCCitiesLocationConstants  = FCCitiesLocationConstants()
-    static let NIBS                         :FCNibs                     = FCNibs()
-    static let CELL_IDENTIFIERS             :FCCellIdentifiers          = FCCellIdentifiers()
-    static let SEGUES                       :FCSegueIdentifiers         = FCSegueIdentifiers()
-    static let ERRORS                       :FCErrors                   = FCErrors()
+    static let CITIES_LOCATION_CONSTANTS    : FCCitiesLocationConstants = FCCitiesLocationConstants()
+    static let NIBS                         : FCNibs                    = FCNibs()
+    static let CELL_IDENTIFIERS             : FCCellIdentifiers         = FCCellIdentifiers()
+    static let SEGUES                       : FCSegueIdentifiers        = FCSegueIdentifiers()
+    static let ERRORS                       : FCErrors                  = FCErrors()
+    static var TAB_CONSTANTS                : FCTabEnum                 = .none
     
-    static let DATA_FETCH_THRESHOLD         :Int                        = 2
+    static let DATA_FETCH_THRESHOLD         : Int                       = 2
     
-    static let EMPTY_IMAGE                  :UIImage?                   = UIImage(named: "emptyImage")
-    static let EMPTY_NEWS_IMAGE_URL         :URL?                       = URL(string: "https:\\google.com")
-    static let EMPTY_NEWS_URL               :URL?                       = URL(string:"https:\\google.com")
-    static let EMPTY_NEWS_URL_STRING        :String                     = "https:\\google.com"
-    static let EMPTY_NEWS_DESCRIPTION       :String                     = "News Description"
-    static let EMPTY_NEWS_TITLE             :String                     = "News Title"
+    static let GALLERY_CELL_ROW_COUNT       : Int                       = 2
+
     
-    static let ABOUT_US                     :String                     = """
+    static let EMPTY_IMAGE                  : UIImage?                  = UIImage(named: "emptyImage")
+    static let EMPTY_NEWS_IMAGE_URL         : URL?                      = URL(string: "https:\\google.com")
+    static let EMPTY_NEWS_URL               : URL?                      = URL(string:"https:\\google.com")
+    static let EMPTY_NEWS_URL_STRING        : String                    = "https:\\google.com"
+    static let EMPTY_NEWS_DESCRIPTION       : String                    = "News Description"
+    static let EMPTY_NEWS_TITLE             : String                    = "News Title"
+    
+    static let ABOUT_US                     : String                    = """
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
@@ -44,35 +44,36 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 }
 
 extension FCConstants {
-    
-    struct FCNewsFeedConstants {
-        let STORYBOARD_ID       :String     = "FCNewsFeed"
-        let PATH_STRING         :String     = "news_feed"
-        let STARTING_KEY        :String     = "1"
-        let INITIAL_PAGE_SIZE   :Int        = 5
-        let PAGE_SIZE           :Int        = 5
+        
+    enum FCTabEnum {
+        case none
+        case newsFeed
+        case gallery
+        case players
+        case teams
+        
+        func getTabConstants() -> FCTabsConstants{
+            switch self {
+            case .none:                
+                return FCTabsConstants(STORYBOARD_ID: "", PATH_STRING: "", STARTING_KEY: "", INITIAL_PAGE_SIZE: 0, PAGE_SIZE: 0)
+            case .newsFeed:
+                return FCTabsConstants(STORYBOARD_ID: "FCNewsFeed", PATH_STRING: "news_feed", STARTING_KEY: "1", INITIAL_PAGE_SIZE: 5, PAGE_SIZE: 5)
+            case .gallery:
+                return FCTabsConstants(STORYBOARD_ID: "FCGallery", PATH_STRING: "gallery", STARTING_KEY: "1", INITIAL_PAGE_SIZE: 10, PAGE_SIZE: 5)
+            case .players:
+                return FCTabsConstants(STORYBOARD_ID: "FCPlayers", PATH_STRING: "players", STARTING_KEY: "1", INITIAL_PAGE_SIZE: 10, PAGE_SIZE: 5)
+            case .teams:
+                return FCTabsConstants(STORYBOARD_ID: "FCTeams", PATH_STRING: "teams", STARTING_KEY: "1", INITIAL_PAGE_SIZE: 10, PAGE_SIZE: 5)
+            }
+        }
     }
     
-    struct FCGalleryConstants {
-        let PATH_STRING         :String     = "gallery"
-        let STARTING_KEY        :String     = "1"
-        let INITIAL_PAGE_SIZE   :Int        = 10
-        let PAGE_SIZE           :Int        = 5
-        let CELL_ROW_COUNT      :Int        = 2
-    }
-    
-    struct FCPlayersConstants {
-        let PATH_STRING         :String     = "players"
-        let STARTING_KEY        :String     = "1"
-        let INITIAL_PAGE_SIZE   :Int        = 10
-        let PAGE_SIZE           :Int        = 5
-    }
-    
-    struct FCTeamsConstants {
-        let PATH_STRING         :String     = "teams"
-        let STARTING_KEY        :String     = "1"
-        let INITIAL_PAGE_SIZE   :Int        = 10
-        let PAGE_SIZE           :Int        = 5
+    struct FCTabsConstants {
+        let STORYBOARD_ID       :String
+        let PATH_STRING         :String
+        let STARTING_KEY        :String
+        let INITIAL_PAGE_SIZE   :Int
+        let PAGE_SIZE           :Int
     }
     
     struct FCCitiesLocationConstants {

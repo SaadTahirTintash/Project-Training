@@ -26,7 +26,9 @@ extension FCNewsFeedService {
                          success                : successType,
                          failure                : failureType) {
         
-        fetchData(pathString: FCConstants.NEWS_FEED_CONSTANTS.PATH_STRING, startingKey: id, pageSize: limit, success: success,failure: failure)
+        FCConstants.TAB_CONSTANTS       = .newsFeed
+        let NEWS_FEED_CONSTANTS         = FCConstants.TAB_CONSTANTS.getTabConstants()
+        fetchData(pathString: NEWS_FEED_CONSTANTS.PATH_STRING, startingKey: id, pageSize: limit, success: success,failure: failure)
         
     }
 }

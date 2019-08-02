@@ -26,6 +26,8 @@ extension FCTeamsService{
                      success                : successType,
                      failure                : failureType) {
         
-        fetchData(pathString: FCConstants.TEAMS_CONSTANTS.PATH_STRING, startingKey: id, pageSize: limit, success: success, failure: failure)
+        FCConstants.TAB_CONSTANTS       = .teams
+        let TEAMS_CONSTANTS             = FCConstants.TAB_CONSTANTS.getTabConstants()
+        fetchData(pathString: TEAMS_CONSTANTS.PATH_STRING, startingKey: id, pageSize: limit, success: success, failure: failure)
     }
 }

@@ -17,7 +17,8 @@ enum FCNewsFeedObjectType: Int{
 
 class FCNewsFeedVM: FCViewModelProtocol {
     
-    private var modelArray  : [FCNewsFeedModel]
+    private var modelArray          : [FCNewsFeedModel]
+    private var NEWS_FEED_CONSTANTS : FCConstants.FCTabsConstants
     
     var isFetchingData      : Bool              = false
     var initialDataFetched  : ((Bool) -> Void)?
@@ -27,7 +28,10 @@ class FCNewsFeedVM: FCViewModelProtocol {
     }
     
     init(_ modelArray: [FCNewsFeedModel]) {
-        self.modelArray = modelArray
+        self.modelArray                 = modelArray
+        FCConstants.TAB_CONSTANTS       = .newsFeed
+        NEWS_FEED_CONSTANTS             = FCConstants.TAB_CONSTANTS.getTabConstants()
+        
     }
 }
 
@@ -58,7 +62,7 @@ extension FCNewsFeedVM: FCNewsFeedService {
             var startingId = modelArray.endIndex
             if startingId != 0 {
                 startingId += 1
-                getNewsFeedData(startingKey: String(startingId), pageSize: FCConstants.NEWS_FEED_CONSTANTS.PAGE_SIZE, success: { [weak self](array) in
+                getNewsFeedData(startingKey: String(startingId), pageSize: NEWS_FEED_CONSTANTS.PAGE_SIZE, success: { [weak self](array) in
                     FCDataManager.shared.addNewsFeedData(item: array)
                     self?.modelArray.append(contentsOf: array)
                     self?.isFetchingData = false

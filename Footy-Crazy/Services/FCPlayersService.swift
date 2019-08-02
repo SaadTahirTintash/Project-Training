@@ -26,7 +26,10 @@ extension FCPlayersService {
                        success                  : successType,
                        failure                  : failureType) {
         
-        fetchData(pathString: FCConstants.PLAYERS_CONSTANTS.PATH_STRING, startingKey: id, pageSize: limit, success: success, failure: failure)
+        FCConstants.TAB_CONSTANTS     = .players
+        let PLAYERS_CONSTANTS           = FCConstants.TAB_CONSTANTS.getTabConstants()
+        
+        fetchData(pathString: PLAYERS_CONSTANTS.PATH_STRING, startingKey: id, pageSize: limit, success: success, failure: failure)
     }
     
 }

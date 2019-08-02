@@ -26,7 +26,10 @@ extension FCGalleryService {
                         success                 : successType,
                         failure                 : failureType) {
         
-        fetchData(pathString: FCConstants.GALLERY_CONSTANTS.PATH_STRING, startingKey: id, pageSize: limit, success: success, failure: failure)
+        FCConstants.TAB_CONSTANTS   = .gallery
+        let GALLERY_CONSTANTS       = FCConstants.TAB_CONSTANTS.getTabConstants()
+        
+        fetchData(pathString: GALLERY_CONSTANTS.PATH_STRING, startingKey: id, pageSize: limit, success: success, failure: failure)
     }
     
 }

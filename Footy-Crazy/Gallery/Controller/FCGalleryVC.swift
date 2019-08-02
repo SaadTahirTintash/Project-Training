@@ -104,7 +104,7 @@ extension FCGalleryVC: UICollectionViewDelegate {
 extension FCGalleryVC: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = collectionView.frame.width / CGFloat(FCConstants.GALLERY_CONSTANTS.CELL_ROW_COUNT) - 1
+        let width = collectionView.frame.width / CGFloat(FCConstants.GALLERY_CELL_ROW_COUNT) - 1
         return CGSize(width: width, height: width)
     }
     

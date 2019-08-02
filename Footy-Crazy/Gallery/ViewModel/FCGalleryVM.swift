@@ -10,7 +10,8 @@ import UIKit
 
 class FCGalleryVM: FCViewModelProtocol {
     
-    private var modelArray  : [FCGalleryModel]
+    private var modelArray          : [FCGalleryModel]
+    private var GALLERY_CONSTANTS   : FCConstants.FCTabsConstants
     
     var isFetchingData      : Bool = false
     var initialDataFetched  : ((Bool)->Void)?
@@ -20,7 +21,9 @@ class FCGalleryVM: FCViewModelProtocol {
     }
     
     init(_ modelArray: [FCGalleryModel]) {
-        self.modelArray = modelArray
+        self.modelArray                 = modelArray
+        FCConstants.TAB_CONSTANTS       = .gallery
+        GALLERY_CONSTANTS               = FCConstants.TAB_CONSTANTS.getTabConstants()
     }
 }
 
@@ -31,7 +34,7 @@ extension FCGalleryVM: FCGalleryService {
     }
     
     func getInitialData() {
-        getGalleryData(startingKey: FCConstants.GALLERY_CONSTANTS.STARTING_KEY, pageSize: FCConstants.GALLERY_CONSTANTS.INITIAL_PAGE_SIZE, success: { [weak self](array) in
+        getGalleryData(startingKey: GALLERY_CONSTANTS.STARTING_KEY, pageSize: GALLERY_CONSTANTS.INITIAL_PAGE_SIZE, success: { [weak self](array) in
             FCDataManager.shared.addGalleryData(item: array)
             self?.modelArray.append(contentsOf: array)
             self?.isFetchingData = false
@@ -49,7 +52,7 @@ extension FCGalleryVM: FCGalleryService {
             var startingId = modelArray.endIndex
             if startingId != 0 {
                 startingId += 1
-                getGalleryData(startingKey: String(startingId), pageSize: FCConstants.GALLERY_CONSTANTS.PAGE_SIZE, success: { [weak self](array) in
+                getGalleryData(startingKey: String(startingId), pageSize: GALLERY_CONSTANTS.PAGE_SIZE, success: { [weak self](array) in
                     FCDataManager.shared.addGalleryData(item: array)
                     self?.modelArray.append(contentsOf: array)
                     self?.isFetchingData = false
