@@ -13,7 +13,7 @@
         <!--Cities LocationVC-->
         <scene sceneID="omD-mP-9IP">
             <objects>
-                <viewController storyboardIdentifier="FCCitiesLocationVC" id="glK-t1-cmd" customClass="FCCitiesLocationVC" customModule="Footy_Crazy" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="glK-t1-cmd" customClass="FCCitiesLocationVC" customModule="Footy_Crazy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="84I-Ib-h9u">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

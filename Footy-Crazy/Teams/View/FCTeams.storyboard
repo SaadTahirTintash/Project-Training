@@ -177,7 +177,7 @@
         <!--Teams-->
         <scene sceneID="Wsc-lW-iKd">
             <objects>
-                <navigationController storyboardIdentifier="FCTeamsVC" automaticallyAdjustsScrollViewInsets="NO" id="YWW-h4-ZUh" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="YWW-h4-ZUh" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Teams" image="teams" id="We1-pa-rWK"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="CcI-IK-3Cb">

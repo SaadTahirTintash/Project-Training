@@ -13,7 +13,7 @@
         <!--News Feed-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="NewsFeedVC" id="BYZ-38-t0r" customClass="FCNewsFeedVC" customModule="Footy_Crazy" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FCNewsFeedVC" id="BYZ-38-t0r" customClass="FCNewsFeedVC" customModule="Footy_Crazy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -338,40 +338,40 @@
             </objects>
             <point key="canvasLocation" x="2794.202898550725" y="930.80357142857133"/>
         </scene>
-        <!--FCGalleryVC-->
+        <!--FCGallery-->
         <scene sceneID="s56-U6-1I3">
             <objects>
-                <viewControllerPlaceholder storyboardName="FCGallery" referencedIdentifier="FCGalleryVC" id="fqW-ob-EH5" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="FCGallery" id="fqW-ob-EH5" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Gallery" id="nIG-yE-NFZ"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ucc-3D-oYk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-266" y="640"/>
         </scene>
-        <!--FCTeamsVC-->
+        <!--FCTeams-->
         <scene sceneID="oEY-YQ-H9V">
             <objects>
-                <viewControllerPlaceholder storyboardName="FCTeams" referencedIdentifier="FCTeamsVC" id="GTl-C2-OS9" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="FCTeams" id="GTl-C2-OS9" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Teams" id="64t-4N-lSj"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uyG-VB-nT8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-36" y="638"/>
         </scene>
-        <!--FCPlayersVC-->
+        <!--FCPlayers-->
         <scene sceneID="ydg-P1-xk0">
             <objects>
-                <viewControllerPlaceholder storyboardName="FCPlayers" referencedIdentifier="FCPlayersVC" id="3Eo-rb-nuC" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="FCPlayers" id="3Eo-rb-nuC" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Players" id="fbt-sH-9YE"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LCm-2M-tiW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="245" y="633"/>
         </scene>
-        <!--FCAboutVC-->
+        <!--FCAbout-->
         <scene sceneID="Hus-Ew-r3E">
             <objects>
-                <viewControllerPlaceholder storyboardName="FCAbout" referencedIdentifier="FCAboutVC" id="Mlx-S5-bMz" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="FCAbout" id="Mlx-S5-bMz" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="About" id="254-iU-Zbg"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nRc-G8-Vlx" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -87,10 +87,10 @@
             </objects>
             <point key="canvasLocation" x="968.11594202898561" y="34.821428571428569"/>
         </scene>
-        <!--FCCitiesLocationVC-->
+        <!--FCCitiesLocation-->
         <scene sceneID="KoX-uJ-7LO">
             <objects>
-                <viewControllerPlaceholder storyboardName="FCCitiesLocation" referencedIdentifier="FCCitiesLocationVC" id="nwe-8Z-LbL" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="FCCitiesLocation" id="nwe-8Z-LbL" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3hn-Pq-ims" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1740" y="-97"/>
@@ -98,7 +98,7 @@
         <!--About-->
         <scene sceneID="7Sf-3v-DZ2">
             <objects>
-                <navigationController storyboardIdentifier="FCAboutVC" automaticallyAdjustsScrollViewInsets="NO" id="tzB-bX-N65" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="tzB-bX-N65" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="About" image="about_us" id="M6p-HV-oBU"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="uJd-OC-z1O">

@@ -124,7 +124,7 @@
         <!--Gallery-->
         <scene sceneID="07C-VD-qdY">
             <objects>
-                <navigationController storyboardIdentifier="FCGalleryVC" automaticallyAdjustsScrollViewInsets="NO" id="V76-Tu-CZx" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="V76-Tu-CZx" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Gallery" image="gallery" id="zy5-QV-vQu"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ueq-KH-ksX">

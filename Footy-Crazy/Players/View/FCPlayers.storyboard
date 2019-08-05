@@ -178,7 +178,7 @@
         <!--Players-->
         <scene sceneID="nrf-tB-dbN">
             <objects>
-                <navigationController storyboardIdentifier="FCPlayersVC" automaticallyAdjustsScrollViewInsets="NO" id="AcK-Uy-GJQ" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="AcK-Uy-GJQ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Players" image="players" id="QtW-Wg-yK4"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6lE-VW-vmh">
