@@ -7,6 +7,8 @@
 //
 
 import UIKit
+//Code Review: Added spaces between associatedtype, varaibles and methods
+
 protocol FCViewModelProtocol: class{
     associatedtype myType
     var isFetchingData      : Bool                          { get set }

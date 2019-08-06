@@ -26,9 +26,11 @@ extension FCGalleryDetailVC{
     @IBAction func share(_ sender: Any?){
         if let downloadedImage = img.image{
             let shareableImg = [downloadedImage]
+            //Code Review: instead of using Shared instance methode move this function in protocol extension
             FCUtilities.shared.shareContent(self, shareableImg)
         }
     }
+    //Code review:  move image loading functionality in protocol extension as same functionality is using in many places
     func loadImage(_ urlString: String){
         if let cache = FCCacheManager.shared.getImage(urlString){
             img.image = cache

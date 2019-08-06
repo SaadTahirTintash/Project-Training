@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+//Code review: Please add Mark to categories diffrent type extensions
 extension UITableViewCell {
     convenience init(_ bgColor: UIColor = .clear) {
         self.init()

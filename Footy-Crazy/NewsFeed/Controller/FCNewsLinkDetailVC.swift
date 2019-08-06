@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftLinkPreview
+//Code review: Use MARK in this class and move commmon method in protocl.
 class FCNewsLinkDetailVC: UIViewController {
     @IBOutlet weak var activityIndicator        : UIActivityIndicatorView!
     @IBOutlet weak var titleLabel               : UILabel!
@@ -36,6 +37,7 @@ extension FCNewsLinkDetailVC{
             FCUtilities.shared.openLinkInSafari(urlString, self.navigationController)
         }
     }
+    //Code review: you can move link loading work in protocol extension and call method only. as this method is also used in FCNewsLinkTableViewCell
     func loadLink(_ newsLink: String){
         if let response = FCCacheManager.shared.getNewsLink(newsLink){
             linkSuccess(response, newsLink)
@@ -61,6 +63,7 @@ extension FCNewsLinkDetailVC{
         imgView.image = FCConstants.EMPTY_IMAGE
         print(error.localizedDescription)
     }
+    //Code review:  move image loading functionality in protocol extension as same functionality is using in many places
     func loadImage(_ urlString: String){
         if let cache = FCCacheManager.shared.getImage(urlString){
             imgView.image = cache

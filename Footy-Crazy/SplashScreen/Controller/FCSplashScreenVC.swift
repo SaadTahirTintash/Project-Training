@@ -19,7 +19,9 @@ class FCSplashScreenVC: UIViewController, FCNewsFeedService {
     override func viewDidLoad() {
         super.viewDidLoad()
         getNewsFeedData(startingKey: FCConstants.NEWS_FEED_CONSTANTS.STARTING_KEY, pageSize: FCConstants.NEWS_FEED_CONSTANTS.INITIAL_PAGE_SIZE, success: {(array) in
+            //Code review: Intead of write newsFeedData property use its setter (which mention in the FCDataManager class)
             FCDataManager.shared.newsFeedData = array
+            //Code review: Add storyboard name in the constant file
             let storyboardID = UIStoryboard(name: "FCNewsFeed", bundle: nil)
             UIApplication.shared.delegate?.window??.rootViewController = storyboardID.instantiateInitialViewController()
         }) {(errorMsg) in

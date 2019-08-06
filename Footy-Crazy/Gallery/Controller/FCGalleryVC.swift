@@ -44,6 +44,7 @@ extension FCGalleryVC{
         collectionView.delegate = self
     }
     func registerCells(){
+        //Code Review add these strings in Constant files 
         collectionView.register(UINib(nibName: "FCGalleryCell", bundle: nil), forCellWithReuseIdentifier: "GalleryCell")        
     }
 }
@@ -54,8 +55,11 @@ extension FCGalleryVC: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         checkForMoreData(at: indexPath.row)
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GalleryCell", for: indexPath) as? FCGalleryCell else{
+            //Code review: Use Dequeue cell (with emptycell indentifier)instead of creating new.
             return UICollectionViewCell(.clear)
         }
+        //Code review:  move image loading functionality in protocol extension as same functionality is using in many places
+        //Code review: and call that method in cell configure method
         let cellVM = viewModel?.viewModelForDetail(at: indexPath.row)
         cell.viewModel = cellVM
         if let imageUrl = cellVM?.imageUrl{

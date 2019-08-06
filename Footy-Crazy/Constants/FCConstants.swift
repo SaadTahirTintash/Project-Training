@@ -33,6 +33,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 """
 }
 
+//Code Review
+// use enum for these and get properties values based on the enum type
 extension FCConstants{
     struct FCNewsFeedConstants {
         let PATH_STRING         :String     = "news_feed"

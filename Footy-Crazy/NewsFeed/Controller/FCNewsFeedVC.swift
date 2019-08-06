@@ -9,6 +9,7 @@
 import UIKit
 import SafariServices
 
+//Code review: Seperate table view methods, cell configuration methods and cells creation methods and add MARK for them (along with variables )
 class FCNewsFeedVC: UIViewController {
     @IBOutlet weak var tableView    : UITableView!
     var viewModel                   : FCNewsFeedVM?
@@ -49,6 +50,7 @@ extension FCNewsFeedVC{
         tableView.endUpdates()
     }
     func registerCells(){
+        //Code Review : Add nibName and Identifier strings in constant file(use diffrent struct for nib and indentifier instead of same struct)
         tableView.register(UINib(nibName: "FCVideoTableViewCell", bundle: nil), forCellReuseIdentifier: "VideoCell")
         tableView.register(UINib(nibName: "FCFactTableViewCell", bundle: nil), forCellReuseIdentifier: "FactCell")
         tableView.register(UINib(nibName: "FCNewsLinkTableViewCell", bundle: nil), forCellReuseIdentifier: "NewsLinkCell")
@@ -60,9 +62,12 @@ extension FCNewsFeedVC: UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let type = viewModel?.getType(of: indexPath.row) else{
+            //Code Review
+            // use deque cell (of emptyType) instead of creating UITableViewCell
             return UITableViewCell(.clear)
         }
         checkForMoreData(at: indexPath.row)
+        //Code Review: instead of using String proprty use the enum (in type enum in viewModel)
         switch type {
         case "video":
             return videoTableCell(at: indexPath)
@@ -83,6 +88,7 @@ extension FCNewsFeedVC: UITableViewDataSource{
         }
     }
     func videoTableCell(at indexPath: IndexPath)->UITableViewCell{
+        //Code Review : Add cell identifier strings in constant file.
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "VideoCell") as? FCVideoTableViewCell else{
             return UITableViewCell(.clear)
         }
@@ -92,6 +98,7 @@ extension FCNewsFeedVC: UITableViewDataSource{
         return cell
     }
     func newsLinkTableCell(at indexPath: IndexPath)->UITableViewCell{
+        //Code Review : Add cell identifier strings in constant file.
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "NewsLinkCell") as? FCNewsLinkTableViewCell else{
             return UITableViewCell(.clear)
         }
@@ -103,6 +110,7 @@ extension FCNewsFeedVC: UITableViewDataSource{
         return cell
     }
     func factTableCell(at indexPath: IndexPath)->UITableViewCell{
+        //Code Review : Add cell identifier strings in constant file.
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FactCell") as? FCFactTableViewCell else{
             return UITableViewCell(.clear)
         }
@@ -110,11 +118,15 @@ extension FCNewsFeedVC: UITableViewDataSource{
         cell.viewModel          = cellVM
         cell.shareBtnPressed    = {[weak self] (model) in self?.share(model)}
         cell.configure()
+        //Code review:  move image loading functionality in protocol extension as same functionality is using in many places
+        //Code review: and call that method in cell configure method
         if let imageUrl = cellVM?.url{
             cell.activityIndicator.startAnimating()
+            
             if let cache = FCCacheManager.shared.getImage(imageUrl){
                 cell.setImage(cache)
             }else {
+                
                 FCUtilities.shared.loadImage(from: imageUrl, success: { [weak self](downloadedImg) in
                     FCCacheManager.shared.setImage(imageUrl, downloadedImg)
                     if let updateCell = self?.tableView.cellForRow(at: indexPath) as? FCFactTableViewCell{
@@ -133,6 +145,8 @@ extension FCNewsFeedVC: UITableViewDataSource{
 extension FCNewsFeedVC: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let type = viewModel?.getType(of: indexPath.row){
+            //Code Review: instead of using String proprty use the enum (in type enum in viewModel as mention above)
+            //Code Review: use segue strings in contant file and use names like newsfeedToLinkDetailVC instead of FCNewsLinkDetailVC
             switch type {
             case "news_link":
                 performSegue(withIdentifier: "FCNewsLinkDetailVC", sender: indexPath.row)
@@ -160,6 +174,16 @@ extension FCNewsFeedVC{
 }
 extension FCNewsFeedVC{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //Code Review: As viewmodel of all these controller have same type so can set the viewmodel property at the end intead of each nested loop.
+        /* like this
+         let detailViewModel:FCNewsFeedDetailVM = nil
+         if let index = sender as? Int{
+         detailViewModel = viewModel?.viewModelForDetail(at: index)
+         }
+         if let vc = segue.destination as? FCFactDetailVC{
+         vc.viewModel = detailViewModel
+         }
+        */
         if let vc = segue.destination as? FCFactDetailVC{
             if let index = sender as? Int{
                 vc.viewModel = viewModel?.viewModelForDetail(at: index)

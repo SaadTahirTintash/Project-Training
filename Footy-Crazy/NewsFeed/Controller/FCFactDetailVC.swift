@@ -26,6 +26,7 @@ extension FCFactDetailVC{
             loadImage(urlString)
         }        
     }
+    //Code review:  move image loading functionality in protocol extension as same functionality is using in many places
     func loadImage(_ urlString: String){
         if let cache = FCCacheManager.shared.getImage(urlString){
             imgView.image = cache

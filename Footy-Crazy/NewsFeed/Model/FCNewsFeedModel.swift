@@ -13,4 +13,5 @@ struct FCNewsFeedModel: Decodable{
     var description:    String?
     var title:          String?
     var type:           String?
+    //Code Review: use Enum for the type and add all the casses in that enum
 }

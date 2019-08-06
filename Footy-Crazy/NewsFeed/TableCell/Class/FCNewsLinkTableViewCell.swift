@@ -8,6 +8,9 @@
 
 import UIKit
 import SwiftLinkPreview
+//Code Review-new
+//You can use the same UI of the FCFactTableViewCell. For this you can inhet this class from the FCFactTableViewCell(rename FCFactTableViewCell) and overide the configure method.
+
 class FCNewsLinkTableViewCell: UITableViewCell {
     @IBOutlet weak var activityIndicator    : UIActivityIndicatorView!
     @IBOutlet weak var titleLbl             : UILabel!
@@ -28,7 +31,8 @@ extension FCNewsLinkTableViewCell{
     }
     @IBAction func share(_ sender: Any) {
         shareBtnPressed?(viewModel)
-    }    
+    }
+    //Code review: you can move link loading work in protocol extension and call method only.
     func loadLink(_ newsLink: String){
         if let response = FCCacheManager.shared.getNewsLink(newsLink){
             print("News Link loaded from Cache")
@@ -52,6 +56,7 @@ extension FCNewsLinkTableViewCell{
             }
         }
     }
+    //Code review:  move image loading functionality in protocol extension as same functionality is using in many places
     func loadImage(_ urlString: String){
         if let cache = FCCacheManager.shared.getImage(urlString){
             newsImg.image = cache

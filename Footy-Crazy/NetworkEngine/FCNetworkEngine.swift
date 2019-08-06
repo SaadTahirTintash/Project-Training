@@ -55,6 +55,8 @@ extension FCNetworkEngine{
             }
         }
     }
+    //Code Review: For completion you can also use type alias (like success and failure)
+    //Code Review: Instead of write method in one line split into multiple lines to make it readable (like fetchData method).
     func fetchAPI<MODEL_TYPE>(pathString: String, query: String, completion: ((_ success: Bool,_ modelArray: [MODEL_TYPE]?)->Void)?) where MODEL_TYPE: Decodable{
         Alamofire.AF.request(pathString+query).responseJSON { (response) in
             switch response.result{
@@ -69,6 +71,7 @@ extension FCNetworkEngine{
                     let data = try decoder.decode([MODEL_TYPE].self, from: jsonData)
                     modelArray.append(contentsOf: data)
                 }catch{
+                    //Code Review: handle this case can send completion with nil
                     print(error.localizedDescription)
                 }
                 completion?(true,modelArray)

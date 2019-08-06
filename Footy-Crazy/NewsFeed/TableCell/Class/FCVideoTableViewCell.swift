@@ -26,8 +26,9 @@ class FCVideoTableViewCell: UITableViewCell {
 extension FCVideoTableViewCell{
     func configure(){
         titleLabel.text = viewModel?.title
-        if let urlString = viewModel?.url{            
-            videoView.load(withVideoId: urlString, playerVars:["playsinline":1])            
+        if let urlString = viewModel?.url{
+            //Code review: you need to call startAnimating method of activityIndicator (you can also startAnimating in prepareforReuse method of this cell)
+            videoView.load(withVideoId: urlString, playerVars:["playsinline":1])      
         }
     }
     @IBAction func share(_ sender: Any) {

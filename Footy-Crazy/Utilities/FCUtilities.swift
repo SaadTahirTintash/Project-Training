@@ -5,7 +5,8 @@
 //  Created by Tintash on 10/07/2019.
 //  Copyright © 2019 Tintash. All rights reserved.
 //
-
+//Code review 
+// there is no need to use shared instance to call these util functions. You can use add these in protocol extension.
 import SafariServices
 
 struct FCUtilities{

@@ -9,6 +9,7 @@ import UIKit
 import Foundation
 import SwiftLinkPreview
 
+//Code Review: make imageCache and newsLinkCache variable private as there getter/setter is already added
 struct FCCacheManager {
     static let shared   : FCCacheManager             = FCCacheManager()
     var imageCache      : NSCache<NSString,UIImage>  = NSCache<NSString,UIImage>()
