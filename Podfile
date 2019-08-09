@@ -8,14 +8,8 @@ target 'Footy-Crazy' do
   # Pods for Footy-Crazy
   pod ‘youtube-ios-player-helper’       , ‘~> 0.1’
   pod 'Firebase/Core'                   , '~> 6.3.0'
-  pod 'Firebase/RemoteConfig'
-  pod 'Firebase/Analytics'
   pod 'Firebase/Database'
   pod 'SwiftLinkPreview'		, '~> 3.0.1'
   pod 'Alamofire'			, '~> 5.0.0-beta.5'
-  pod 'SwiftyJSON'			, '~> 4.0'
-
-
-  
 
 end
